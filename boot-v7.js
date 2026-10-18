@@ -4,7 +4,7 @@ function relation(a,b){return WX.relation(a,b)}
 function damageMultiplier(a,b){return WX.damageMultiplier(a,b)}
 function itemElement(item){return WX.itemElement(item)}
 const finalStatsBeforeV7=stats;stats=function(i){return applyElementalStats7(finalStatsBeforeV7(i),i)};
-const petAttackBeforeGate7=petAbility;petAbility=function(i=S.active,manual=true){if(!S||menu||!owned(i))return false;const a=actors[i],target=nearestEnemy(a,manual?460:360);if(!canEngage(a,target,manual))return false;if(manual&&target)issueAttackOrder(i);const previous=damageElementContext7;damageElementContext7=WX.petElement(petOf(i)?.type);try{return petAttackBeforeGate7(i,manual)}finally{damageElementContext7=previous}};
+const petAttackBeforeGate7=petAbility;petAbility=function(i=S.active,manual=true){if(!S||menu||!owned(i))return false;const a=actors[i],target=nearestEnemy(a,manual?460:360);if(!canEngage(a,target,manual))return false;if(manual&&target)issueAttackOrder(i);const previous=damageElementContext7;damageElementContext7=petElement10(petOf(i));try{return petAttackBeforeGate7(i,manual)}finally{damageElementContext7=previous}};
 const updateBeforeFinal7=update;update=function(dt){if(S&&!menu&&(keys.has('KeyW')||keys.has('KeyA')||keys.has('KeyS')||keys.has('KeyD')||keys.has('ArrowUp')||keys.has('ArrowDown')||keys.has('ArrowLeft')||keys.has('ArrowRight')||Math.hypot(joystickVector.x,joystickVector.y)>.1))setPassiveOrder7([active()]);updateBeforeFinal7(dt)};
 
 const panelTargets7={};

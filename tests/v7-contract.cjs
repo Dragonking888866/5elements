@@ -1,1 +1,1 @@
-require('./v9-contract.cjs');
+require('./integration.cjs');

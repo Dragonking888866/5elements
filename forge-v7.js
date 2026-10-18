@@ -28,7 +28,7 @@ let forgeTab7='socket',gemSummons7=[];
 function forgeInventory7(changes){
  const bag=gemBag().map(g=>({...g}));
  for(const c of changes){let gem=bag.find(g=>g.type===c.type&&g.level===c.level);if(!gem){gem={type:c.type,level:c.level,count:0};bag.push(gem)}gem.count+=c.count;if(gem.count<0||gem.count>9999)return null}
- const result=bag.filter(g=>g.count>0);return result.length<=200?result:null;
+ const result=bag.filter(g=>g.count>0);return result.length<=RULES10.gem.bagStacks?result:null;
 }
 giveGem=function(type,level=1,count=1){if(!gemValid({type,level})||!Number.isInteger(count)||count<1||count>9999)return false;const next=forgeInventory7([{type,level,count}]);if(!next)return false;S.gems=next;return true};
 function forgeLuck7(i=S.active){return Math.min(80,Math.max(0,Number(stats(i).luck)||0))}

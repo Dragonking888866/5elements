@@ -31,4 +31,4 @@ v6Help=function(){panelContext7=null;showDialog(panelHead('轮回诸界 · V9 �
 const introBeforeVersion9=intro;intro=function(){introBeforeVersion9();const heading=$('#dialog').querySelector('h2');if(heading)heading.textContent='五行纪 · 轮回诸界 V9';const line=$('#dialog').querySelector('.intro-feature8');if(line)line.textContent='界外征程 · 1000灵宠包裹 · 无限转世 · 三击封印 · 灵光镶嵌'};
 $('#realmMenu').onclick=realmMenuPanel;$('#menuBtn').onclick=realmMenuPanel;$('#realmBag').onclick=bagPanel;$('#realmPets').onclick=()=>petsPanel();$('#realmForge').onclick=socketStudio9;$('#equipBtn').onclick=bagPanel;$('#bagBtn').onclick=bagPanel;$('#mountBtn').onclick=()=>petsPanel();$('#trainBtn').onclick=talentPanel;$('#helpBtn').onclick=v6Help;$('#worldBtn').onclick=worldPanel;$('#mobileWorld').onclick=worldPanel;$('#touchInteract').onclick=interact;
 document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{if(S)({talent:talentPanel,bag:bagPanel,pets:petsPanel,shop,pause:realmMenuPanel})[b.dataset.open]()});
-v3Ready=true;resizeWorld();intro();requestAnimationFrame(frame);
+// V10 bootstrap is in boot-v10.js.
