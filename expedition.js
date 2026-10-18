@@ -84,7 +84,7 @@ const oldSaveGame=saveGame;saveGame=function(announce=true){oldSaveGame(announce
 const oldExport=exportSave;exportSave=function(data=S){if(window.webkit?.messageHandlers?.game){window.webkit.messageHandlers.game.postMessage({action:'export',json:JSON.stringify(data,null,2)});return}oldExport(data)};
 window.receiveNativeSave=function(text){try{const data=JSON.parse(text);if(!validateSave(data))throw Error();if(S)localStorage.setItem(SAVE_KEY+'.backup',JSON.stringify(S));begin(data);closeDialog();logMessage('已导入存档。')}catch{logMessage('存档格式无效，当前进度未被替换。')}};
 if(location.protocol==='https:'&&'serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
-v3Ready=true;intro();requestAnimationFrame(frame);
+
 
 
 
