@@ -1,6 +1,6 @@
 # 五行纪 V6 · 铸星与灵契
 
-公开游戏：https://dragonking888866.github.io/5elements/?v=6.0.0
+公开游戏：https://dragonking888866.github.io/5elements/?v=6.0.1
 
 本次更新网页版。原生Android APK与iOS工程下载仍为V5。
 
