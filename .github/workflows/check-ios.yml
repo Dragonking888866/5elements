@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Unpack delivered project
-        run: unzip -q downloads/wuxing-ios-project.zip -d ios-check
+        run: python3 -c "import zipfile; zipfile.ZipFile('downloads/wuxing-ios-project.zip').extractall('ios-check')"
       - name: Compile for iOS Simulator without signing
         run: |
           set -o pipefail
