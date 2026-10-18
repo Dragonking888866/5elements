@@ -1,7 +1,7 @@
 'use strict';
 // 五行纪：独立浏览器单机 RPG，无网络依赖。
 const $=s=>document.querySelector(s), canvas=$('#world'),mini=$('#minimap'),mg=mini.getContext('2d');let g=canvas.getContext('2d');
-let VW=1280,VH=760;const WW=4800,WH=3200,SAVE_KEY='wuxing-chronicles-v6';
+let VW=1280,VH=760;const WW=4800,WH=3200,SAVE_KEY='wuxing-chronicles-v7';
 const HEROES=[
  {name:'凌锋',element:'金',title:'破阵剑卫',color:'#e7c980',icon:'⚔',main:'agi',base:[12,7,13],growth:[2.6,1.4,3],q:'裂金斩',e:'剑影突袭',r:'万剑归宗',desc:'近战爆发 · 敏捷主属性',skills:['135 范围扇形斩击，造成攻击 ×2.1 + 智力伤害。','向目标突进，短暂无敌，造成攻击 ×2.5。','3级解锁：剑雨连续打击周围敌人。']},
  {name:'青萝',element:'木',title:'灵藤游侠',color:'#91c995',icon:'❧',main:'agi',base:[8,11,13],growth:[1.7,2.5,2.8],q:'缠灵箭',e:'回春之种',r:'万木复苏',desc:'远程输出 · 治疗与定身',skills:['远程灵箭造成攻击 ×1.8 + 智力 ×2，定身3秒。','恢复全队 45 + 智力 ×3 生命。','3级解锁：恢复全队生命，击退并缠绕周围敌人。']},
@@ -52,7 +52,7 @@ function baseRefreshBars(){if(!S)return;$('#gold').textContent='◈ '+S.gold;$('
 function showDialog(html,type='panel'){menu=type;keys.clear();destination=null;$('#dialog').innerHTML=html;$('#curtain').classList.remove('hidden');$('#dialog').querySelectorAll('[data-close]').forEach(b=>b.onclick=closeDialog);}
 function closeDialog(){if(menu==='start')return;menu=null;$('#curtain').classList.add('hidden');keys.clear();canvas.focus({preventScroll:true});saveGame(false);refreshBars()}
 function saveGame(announce=true){if(!S)return;S.position={x:active().x,y:active().y};try{localStorage.setItem(SAVE_KEY,JSON.stringify(S));notice='已自动保存';if(announce)logMessage('进度已保存：角色、装备、骑宠与剧情。')}catch{notice='浏览器存储不可用，请导出存档';if(announce)logMessage(notice)}}
-function readSave(){try{let v=JSON.parse(localStorage.getItem(SAVE_KEY)||localStorage.getItem('wuxing-chronicles-v5')||localStorage.getItem('wuxing-chronicles-v4')||localStorage.getItem('wuxing-chronicles-v2')||localStorage.getItem('wuxing-chronicles-v1'));return validateSave(v)?v:null}catch{return null}}
+function readSave(){try{let v=JSON.parse(localStorage.getItem(SAVE_KEY)||localStorage.getItem('wuxing-chronicles-v6')||localStorage.getItem('wuxing-chronicles-v5')||localStorage.getItem('wuxing-chronicles-v4')||localStorage.getItem('wuxing-chronicles-v2')||localStorage.getItem('wuxing-chronicles-v1'));return validateSave(v)?v:null}catch{return null}}
 function validateSave(v){if(!v||![1,2].includes(v.version)||typeof v.name!=='string'||v.name.length>24||!Number.isInteger(v.active)||v.active<0||v.active>4)return false;
  const num=(n,min,max)=>typeof n==='number'&&Number.isFinite(n)&&n>=min&&n<=max;
  if(!num(v.gold,0,1e9)||!num(v.potions,0,1e5)||!Number.isInteger(v.chapter)||!num(v.chapter,0,4)||!num(v.nextItem,1,1e9)||!num(v.totalKills,0,1e8)||!num(v.death,0,1e7)||!num(v.played,0,1e10))return false;
@@ -63,7 +63,7 @@ function validateSave(v){if(!v||![1,2].includes(v.version)||typeof v.name!=='str
  if(v.heroes.some(h=>!h||typeof h.unlocked!=='boolean'||!Number.isInteger(h.lv)||!num(h.lv,1,150)||!num(h.xp,0,1e8)||!num(h.points,0,1e8)||!Array.isArray(h.bonus)||h.bonus.length!==3||h.bonus.some(n=>!Number.isInteger(n)||!num(n,0,1e6))||!Array.isArray(h.gear)||h.gear.length!==(v.version===1?3:6)||h.gear.some((it,k)=>!item(it)||(it&&it.slot!==k))||(h.pet!==null&&!v.pets.some(p=>p.id===h.pet))))return false;
  const assigned=v.heroes.map(h=>h.pet).filter(p=>p!==null);if(new Set(assigned).size!==assigned.length||!v.heroes[v.active].unlocked)return false;
  return Array.isArray(v.bag)&&v.bag.length<=80&&v.bag.every(i=>i&&item(i))&&v.position&&num(v.position.x,0,WW)&&num(v.position.y,0,WH)&&v.bosses.slice(0,v.chapter).every(Boolean)&&typeof v.won==='boolean'&&(!v.won||v.bosses.every(Boolean));}
-function baseIntro(){let prior=readSave();showDialog(`<div class="kicker">一支队伍 · 五种力量 · 一场远征</div><h2 style="margin-top:10px">五行纪：灵脉远征</h2><p>五行灵脉被「无相」吞噬，四位守护者陷入沉睡。长老递给你一张地图，又偷偷塞了四瓶药：“拯救世界之前，记得吃饭。”<br>选择第一位战士，救出伙伴，驯服灵兽，重建五行之力。</p><label for="nickname" class="muted">冒险者昵称（无需账号，存档留在当前浏览器）</label><input id="nickname" type="text" maxlength="16" placeholder="给远征队起个名字" value=""><div class="choices" id="heroChoices">${HEROES.map((h,i)=>`<button class="choice ${i===startChoice?'selected':''}" data-choice="${i}"><b style="color:${h.color}">${h.element}</b><strong>${h.name} · ${h.title.slice(-2)}</strong><small>${h.main==='int'?'法术':h.main==='str'?'坦克':'敏捷'}</small></button>`).join('')}</div><p id="choiceDesc">${HEROES[startChoice].desc}。${HEROES[startChoice].skills[0]}</p><div class="actions"><button id="newGame" class="primary">踏上远征 →</button>${prior?'<button id="continue">继续已有远征</button>':''}<button id="introImport">导入存档</button></div><p class="muted">WASD 移动 / 点地移动 · 自动普攻 · Q E R 技能 · F 互动<br>单人冒险，电脑队友跟随战斗；不用安装，也不用联网。</p>`,'start');if(prior)$('#nickname').value=prior.name;
+function baseIntro(){let prior=readSave();showDialog(`<div class="kicker">一支队伍 · 五种力量 · 一场远征</div><h2 style="margin-top:10px">五行纪：灵脉远征</h2><p>五行灵脉被「无相」吞噬，四位守护者陷入沉睡。长老递给你一张地图，又偷偷塞了四瓶药：“拯救世界之前，记得吃饭。”<br>选择第一位战士，救出伙伴，驯服灵兽，重建五行之力。</p><label for="nickname" class="muted">冒险者昵称（无需账号，存档留在当前浏览器）</label><input id="nickname" type="text" maxlength="16" placeholder="给远征队起个名字" value=""><div class="choices" id="heroChoices">${HEROES.map((h,i)=>`<button class="choice ${i===startChoice?'selected':''}" data-choice="${i}"><b style="color:${h.color}">${h.element}</b><strong>${h.name} · ${h.title.slice(-2)}</strong><small>${h.main==='int'?'法术':h.main==='str'?'坦克':'敏捷'}</small></button>`).join('')}</div><p id="choiceDesc">${HEROES[startChoice].desc}。${HEROES[startChoice].skills[0]}</p><div class="actions"><button id="newGame" class="primary">踏上远征 →</button>${prior?'<button id="continue">继续已有远征</button>':''}<button id="introImport">导入存档</button></div><p class="muted">WASD 移动 / 点地移动 · J 进攻 / 默认被动迎击 · Q E R 技能 · F 互动<br>单人冒险，电脑队友跟随战斗；不用安装，也不用联网。</p>`,'start');if(prior)$('#nickname').value=prior.name;
  $('#heroChoices').querySelectorAll('[data-choice]').forEach(b=>b.onclick=()=>{startChoice=+b.dataset.choice;$('#heroChoices').querySelectorAll('button').forEach(c=>c.classList.toggle('selected',c===b));$('#choiceDesc').textContent=HEROES[startChoice].desc+'。'+HEROES[startChoice].skills[0]});
  $('#newGame').onclick=()=>{const chosenName=$('#nickname').value.trim().slice(0,16)||'五行远征队';if(prior){showDialog('<h2>开始新的远征？</h2><p>当前浏览器已有存档。建议先导出备份；新远征开始后会覆盖自动存档。</p><div class="actions"><button id="backupOld">导出旧存档</button><button id="confirmNew" class="primary">确认开始新远征</button><button id="cancelNew">返回</button></div>','start');$('#backupOld').onclick=()=>exportSave(prior);$('#confirmNew').onclick=()=>begin(fresh(chosenName,startChoice));$('#cancelNew').onclick=intro}else begin(fresh($('#nickname').value.trim().slice(0,16)||'五行远征队',startChoice))};if(prior)$('#continue').onclick=()=>begin(prior);$('#introImport').onclick=importSave;}
 function baseBegin(data){S=data;makeActors();makeWorld();menu=null;$('#curtain').classList.add('hidden');log=[];logMessage('长老：林地就在营地东边，先练练身手，别急着挑战妖王。');refreshBars();saveGame(false);canvas.focus({preventScroll:true});}
@@ -188,7 +188,7 @@ function bagPanel(){if(!S)return;const i=S.active,h=S.heroes[i];showDialog(panel
  $('#dialog').querySelectorAll('[data-equip]').forEach(b=>b.onclick=()=>{equipItem(+b.dataset.equip,i);bagPanel()});$('#dialog').querySelectorAll('[data-sell]').forEach(b=>b.onclick=()=>{const idx=S.bag.findIndex(it=>it.id===+b.dataset.sell);if(idx<0)return;S.gold+=S.bag[idx].power*3;S.bag.splice(idx,1);saveGame(false);refreshBars();bagPanel()});$('#dialog').querySelectorAll('[data-unequip]').forEach(b=>b.onclick=()=>{let k=+b.dataset.unequip;if(S.bag.length>=60){logMessage('行囊已满，请先出售一些装备。');return}S.bag.push(h.gear[k]);h.gear[k]=null;actors[i].hp=Math.min(actors[i].hp,stats(i).hp);actors[i].mp=Math.min(actors[i].mp,stats(i).mp);saveGame(false);refreshBars();bagPanel()});$('#autoEquip').onclick=()=>{for(let k=0;k<6;k++){const best=S.bag.filter(it=>it.slot===k).sort((a,b)=>b.power-a.power)[0];if(best&&best.power>(h.gear[k]?.power||0))equipItem(best.id,i)}bagPanel()};}
 function attack(a,manual=false){if(a.guard>0||a.dodge>0||a.hp<=0||a.attack>0)return;const before=a.attack;const e=nearestEnemy(a,stats(a.i).range+15);baseAttack(a,manual);if(a.attack>before){a.anim='attack';a.animT=.44;a.animDir=e?Math.atan2(e.y-a.y,e.x-a.x):0;if(e)battleFx.push({type:stats(a.i).range>150?'missile':'sword',x:a.x,y:a.y-55,tx:e.x,ty:e.y-35,color:HEROES[a.i].color,t:.38,max:.38,element:a.i})}}
 function skill(i,slot,manual=false){const a=actors[i];if(a.guard>0||a.dodge>0)return false;const e=nearestEnemy(a,420),center=e?{x:e.x,y:e.y-20}:{x:a.x,y:a.y};const result=baseSkill(i,slot,manual);if(result){a.anim='cast';a.animT=slot===2?.85:.55;const support=i===1&&slot>0||i===2&&slot===1||i===4&&slot===1;battleFx.push({type:'element',element:i,slot,x:support?a.x:center.x,y:support?a.y:center.y,r:slot===2?260:slot===1?150:110,t:slot===2?1.3:.9,max:slot===2?1.3:.9,color:HEROES[i].color});if(slot===2){screenShake=Math.max(screenShake,5);tone(110,.25,'sawtooth')}}return result}
-function enemyDamage(e,amount,source,element,crit=false){if(e.dead||e.z>S.chapter&&!S.won||e.boss&&S.kills[e.z]<ZONES[e.z].need)return;const counter={金:'木',木:'土',土:'水',水:'火',火:'金'};let dmg=Math.max(1,Math.round(amount*(counter[HEROES[element].element]===HEROES[e.element].element?1.25:1)*(e.boss?.8:e.elite?.88:.96)*(e.guardT>0?.35:1)));if(e.shield>0){const absorb=Math.min(e.shield,dmg);e.shield-=absorb;dmg-=absorb;float(e.x,e.y-95,'屏障 −'+absorb,'#8bcfdb')}if(e.guardT>0){float(e.x,e.y-105,'招架','#d4e9d6');battleFx.push({type:'block',x:e.x,y:e.y-50,t:.3,max:.3,r:44,color:'#dac48c'})}e.hp-=dmg;e.aggro=6;e.hitT=.17;if(dmg)float(e.x+rng(-18,18),e.y-(e.boss?155:75),(crit?'暴击 ':'')+dmg,crit?'#ffec9b':HEROES[element].color);if(e.hp<=0)kill(e,source)}
+function enemyDamage(e,amount,source,element,crit=false){if(e.dead||e.z>S.chapter&&!S.won||e.boss&&S.kills[e.z]<ZONES[e.z].need)return;const counter={金:'木',木:'土',土:'水',水:'火',火:'金'};let dmg=Math.max(1,Math.round(amount*1*(e.boss?.8:e.elite?.88:.96)*(e.guardT>0?.35:1)));if(e.shield>0){const absorb=Math.min(e.shield,dmg);e.shield-=absorb;dmg-=absorb;float(e.x,e.y-95,'屏障 −'+absorb,'#8bcfdb')}if(e.guardT>0){float(e.x,e.y-105,'招架','#d4e9d6');battleFx.push({type:'block',x:e.x,y:e.y-50,t:.3,max:.3,r:44,color:'#dac48c'})}e.hp-=dmg;e.aggro=6;e.hitT=.17;if(dmg)float(e.x+rng(-18,18),e.y-(e.boss?155:75),(crit?'暴击 ':'')+dmg,crit?'#ffec9b':HEROES[element].color);if(e.hp<=0)kill(e,source)}
 function kill(e,source){if(e.boss){hazards=hazards.filter(h=>h.z!==e.z);for(let add of enemies)if(add.noRewards&&add.z===e.z){add.dead=true;add.deathT=.5}}e.deathT=.65;e.wind=null;e.strike=null;if(e.noRewards){e.dead=true;e.respawn=9999;return}if(e.elite){S.gold+=8+e.z*4;awardXp(12+e.z*4)}baseKill(e,source)}
 function guard(){if(!S||menu)return false;const a=active();if(a.guardCd>0||a.dodge>0||a.stamina<20||a.hp<=0)return false;a.guard=.95;a.guardCd=2.6;a.stamina-=20;a.anim='guard';a.animT=.95;destination=null;tone(260,.08,'triangle');return true}
 function dodge(){if(!S||menu)return false;const a=active();if(a.dodgeCd>0||a.stamina<25||a.hp<=0)return false;a.dodge=.25;a.dodgeCd=1.6;a.stamina-=25;a.inv=.32;a.anim='dodge';a.animT=.3;let dx=(keys.has('KeyD')?1:0)-(keys.has('KeyA')?1:0)+joystickVector.x,dy=(keys.has('KeyS')?1:0)-(keys.has('KeyW')?1:0)+joystickVector.y;if(Math.hypot(dx,dy)<.1){dx=destination?destination.x-a.x:a.face;dy=destination?destination.y-a.y:0}const len=Math.max(.01,Math.hypot(dx,dy));a.rollX=dx/len;a.rollY=dy/len;destination=null;tone(420,.06);return true}
@@ -197,7 +197,7 @@ function potion(){if(!S||menu)return;if(globalPotionCd>0){logMessage('恢复药�
 function move(a,dx,dy,speed,dt){if(a.guard>0)speed*=.3;if(a.slow>0)speed*=.58;if(a.dodge>0)return;baseMove(a,dx,dy,speed,dt)}
 function groundHit(shape,a){const d=dist(a,shape);if(shape.kind==='ring')return d<shape.r&&d>shape.inner;if(shape.kind==='cone'){const angle=Math.atan2(a.y-shape.y,a.x-shape.x),delta=Math.atan2(Math.sin(angle-shape.angle),Math.cos(angle-shape.angle));return d<shape.r&&Math.abs(delta)<.7}return d<shape.r}
 function createBossTell(e,target){e.pattern++;const z=e.z,phase=e.phase,cycle=e.pattern%3;let kind=z===2?'cone':z===3?'ring':'circle';if(z===4)kind=['circle','cone','ring'][cycle];const w={x:kind==='circle'?target.x:e.x,y:kind==='circle'?target.y:e.y,r:kind==='cone'?290:kind==='ring'?220:135+z*7,inner:kind==='ring'?85:0,kind,angle:Math.atan2(target.y-e.y,target.x-e.x),t:phase>=3?1.15:1.55,max:phase>=3?1.15:1.55,extras:[]};if(z===1||z===4&&cycle===0){for(let j=-1;j<=1;j++)w.extras.push({x:target.x+Math.cos(j*2.2)*115,y:target.y+Math.sin(j*2.2)*115,r:90,kind:'circle'})}if(z===0&&phase>=2){for(let a of actors)if(owned(a.i)&&a.hp>0&&a.i!==target.i)w.extras.push({x:a.x,y:a.y,r:65,kind:'circle'})}e.wind=w;e.animT=w.max;logMessage(ZONES[z].boss+'：'+TELL_NAMES[z]+'！'+(kind==='ring'?'靠近首领或退出外圈。':kind==='cone'?'避开正面的扇形吐息。':'离开红色预警区域。'));tone(170,.16,'triangle')}
-function resolveBossTell(e){const w=e.wind;if(!w)return;const shapes=[w,...w.extras];for(let a of actors)if(owned(a.i)&&a.hp>0&&shapes.some(s=>groundHit(s,a))){actorDamage(a,e.atk*(e.phase>=2?2.6:2.25),e);if(e.z===2)a.slow=3}battleFx.push({type:'element',element:e.element,slot:2,x:w.x,y:w.y,r:w.r,t:1,max:1,color:ZONES[e.z].accent});if(e.z===0||e.z===1||e.z===4){for(let shape of shapes)hazards.push({x:shape.x,y:shape.y,r:Math.min(90,shape.r),life:e.z===0?4:5,tick:.8,z:e.z,atk:e.atk*.48})}screenShake=Math.max(screenShake,5);e.wind=null;e.cast=e.phase>=3?3.5:e.phase===2?4.3:5.5}
+function resolveBossTell(e){const w=e.wind;if(!w)return;const shapes=[w,...w.extras];for(let a of actors)if(owned(a.i)&&a.hp>0&&shapes.some(s=>groundHit(s,a))){actorDamage(a,e.atk*(e.phase>=2?2.6:2.25),e);if(e.z===2)a.slow=3}battleFx.push({type:'element',element:e.element,slot:2,x:w.x,y:w.y,r:w.r,t:1,max:1,color:ZONES[e.z].accent});if(e.z===0||e.z===1||e.z===4){for(let shape of shapes)hazards.push({x:shape.x,y:shape.y,r:Math.min(90,shape.r),life:e.z===0?4:5,tick:.8,z:e.z,element:e.element,atk:e.atk*.48})}screenShake=Math.max(screenShake,5);e.wind=null;e.cast=e.phase>=3?3.5:e.phase===2?4.3:5.5}
 function summonAdds(e){for(let j=0;j<2;j++){const add=makeEnemy(e.z,false,e.x+Math.cos(j*3.14)*110,e.y+90,'add'+e.pattern+j);add.hp=add.max=Math.round(add.max*.7);add.atk*=.8;add.noRewards=true;add.aggro=8;enemies.push(add)}logMessage(ZONES[e.z].boss+' 召唤了两名护卫！')}
 function updateEnemies(dt){for(let e of enemies){e.hitT=Math.max(0,(e.hitT||0)-dt);e.animT=Math.max(0,(e.animT||0)-dt);if(e.dead){e.deathT=Math.max(0,(e.deathT||0)-dt);if(!e.boss&&!e.noRewards){e.respawn-=dt;if(e.respawn<=0&&dist(active(),e.home)>600)Object.assign(e,makeEnemy(e.z,false,e.home.x,e.home.y,e.id.split('-')[1]))}continue}if(e.z>S.chapter&&!S.won)continue;if(e.boss&&S.kills[e.z]<ZONES[e.z].need)continue;e.guardT=Math.max(0,(e.guardT||0)-dt);if(e.elite&&!e.guardUsed&&e.hp/e.max<.7){e.guardUsed=true;e.guardT=1.25}if(e.guardT>0)continue;e.attack-=dt;e.root=Math.max(0,Math.min(e.boss?.8:5,e.root)-dt);e.slow=Math.max(0,e.slow-dt);e.taunt=Math.max(0,e.taunt-dt);e.aggro=Math.max(0,e.aggro-dt);if(e.burn>0){e.burn-=dt;e.burnTick-=dt;if(e.burnTick<=0){e.burnTick=1;enemyDamage(e,e.burnPower,3,3);if(e.dead)continue}}
  const target=targetActor(e);if(!target)continue;const dd=dist(e,target),near=dd<340||e.aggro>0&&dd<600;if(dist(e,CAMP)<260){e.aggro=0;e.wind=null;e.strike=null;e.x+=(e.home.x-e.x)*dt;e.y+=(e.home.y-e.y)*dt;continue}
@@ -206,7 +206,7 @@ function updateEnemies(dt){for(let e of enemies){e.hitT=Math.max(0,(e.hitT||0)-d
  if(e.strike){e.strike.t-=dt;if(e.strike.t<=0){const a=actors[e.strike.target];if(a&&a.hp>0&&dist(e,a)<e.r+75)actorDamage(a,e.atk*(e.phase>=2?1.2:1),e);battleFx.push({type:'sword',x:e.x,y:e.y-45,tx:a?.x||e.x+60,ty:a?.y||e.y,color:e.boss?'#ffbd8a':'#d4b597',t:.3,max:.3,r:70});e.strike=null}continue}
  if(dd>e.r+44&&e.root<=0){let speed=(e.boss?77+(e.phase-1)*14:95+e.z*5)*(e.slow>0?.55:1);e.x+=(target.x-e.x)/dd*speed*dt;e.y+=(target.y-e.y)/dd*speed*dt}else if(dd<e.r+58&&e.attack<=0&&e.root<=0){e.strike={t:e.boss?.5:.34,target:target.i};e.animT=e.boss?.7:.5;e.attack=e.boss?(e.phase>=2?1.1:1.4):1.6}
  }else{e.strike=null;if(e.wind){e.wind=null;e.cast=3}e.x+=(e.home.x-e.x)*Math.min(1,dt*.7);e.y+=(e.home.y-e.y)*Math.min(1,dt*.7);if(e.boss&&dist(e,e.home)<40)e.hp=Math.min(e.max,e.hp+dt*e.max*.04)}}
- for(let h of hazards){h.life-=dt;h.tick-=dt;if(h.tick<=0){h.tick=.8;for(let a of actors)if(owned(a.i)&&a.hp>0&&dist(a,h)<h.r)actorDamage(a,h.atk)}}hazards=hazards.filter(h=>h.life>0);}
+ for(let h of hazards){h.life-=dt;h.tick-=dt;if(h.tick<=0){h.tick=.8;for(let a of actors)if(owned(a.i)&&a.hp>0&&dist(a,h)<h.r)actorDamage(a,h.atk,{element:h.element??ZONES[h.z].element,hazard:true})}}hazards=hazards.filter(h=>h.life>0);}
 function update(dt){if(!S||menu)return;globalPotionCd=Math.max(0,globalPotionCd-dt);for(let a of actors){if(a.animT===undefined)initAnim(a);a.animT=Math.max(0,a.animT-dt);a.hitT=Math.max(0,a.hitT-dt);a.guard=Math.max(0,a.guard-dt);a.guardCd=Math.max(0,a.guardCd-dt);a.dodgeCd=Math.max(0,a.dodgeCd-dt);a.slow=Math.max(0,a.slow-dt);a.stamina=Math.min(100,a.stamina+dt*19);if(a.dodge>0){a.dodge=Math.max(0,a.dodge-dt);a.x=clamp(a.x+(a.rollX||0)*540*dt,70,WW-70);a.y=clamp(a.y+(a.rollY||0)*540*dt,145,WH-35);const locked=ZONES.findIndex((z,i)=>i>S.chapter&&!S.won&&dist(a,z)<375);if(locked>=0){a.x-=(a.rollX||0)*540*dt;a.y-=(a.rollY||0)*540*dt;a.dodge=0}}if(a.i!==S.active&&owned(a.i)&&a.hp>0){const danger=enemies.find(e=>e.strike?.target===a.i&&e.strike.t<.25);if(danger&&a.guardCd<=0){a.guard=.7;a.guardCd=4;a.anim='guard';a.animT=.7}}}
  if(Math.hypot(joystickVector.x,joystickVector.y)>.1){destination=null;move(active(),joystickVector.x,joystickVector.y,stats(S.active).speed,dt)}baseUpdate(dt);screenShake=Math.max(0,screenShake-dt*18);damageFlash=Math.max(0,damageFlash-dt);for(let e of battleFx)e.t-=dt;battleFx=battleFx.filter(e=>e.t>0);
  if(S){const boss=enemies.find(e=>e.boss&&!e.dead&&dist(active(),e)<560&&e.z<=S.chapter);if(boss){$('#bossHud').classList.remove('hidden');$('#bossHud').innerHTML=`${ZONES[boss.z].boss} <small>Lv.${3+boss.z*2} · 阶段 ${boss.phase}/3</small><div class="bar"><b style="width:${clamp(boss.hp/boss.max*100,0,100)}%"></b></div><div class="boss-health">${Math.ceil(boss.hp)} / ${boss.max}${boss.shield>0?' · 屏障 '+Math.ceil(boss.shield):''}</div>`}}}
@@ -427,7 +427,7 @@ petsPanel=function(){if(!S)return;showDialog(panelHead('灵兽殿 · 十二种�
 baseUpdate=function(dt){if(!S||menu)return;time+=dt;S.played+=dt;const leader=active(),dx=(keys.has('KeyD')||keys.has('ArrowRight')?1:0)-(keys.has('KeyA')||keys.has('ArrowLeft')?1:0),dy=(keys.has('KeyS')||keys.has('ArrowDown')?1:0)-(keys.has('KeyW')||keys.has('ArrowUp')?1:0);
  if(dx||dy){leader.path=[];leader.order={kind:'hold'};destination=null;move(leader,dx,dy,stats(leader.i).speed,dt)}else if(destination){const target={...destination};destination=null;commandUnits(commandMode,target);commandMode='move'}
  for(const a of actors){if(!owned(a.i))continue;const h=S.heroes[a.i],st=stats(a.i);h.ascensionCd=Math.max(0,(h.ascensionCd||0)-dt);if(a.hp<=0){a.down-=dt;if(a.down<=0){a.hp=st.hp*.5;a.mp=st.mp*.5;a.inv=2}continue}a.inv=Math.max(0,a.inv-dt);a.attack=Math.max(0,a.attack-dt);a.cd=a.cd.map(v=>Math.max(0,v-dt));a.shieldTime=Math.max(0,a.shieldTime-dt);if(!a.shieldTime)a.shield=0;const safe=dist(a,CAMP)<275;a.hp=Math.min(st.hp,a.hp+dt*(safe?st.hp*.12:st.hp*.0008));a.mp=Math.min(st.mp,a.mp+dt*(safe?st.mp*.15:1.4+st.int*.085));a.planIn=Math.max(0,(a.planIn||0)-dt);a.order=a.order||{kind:'hold'};
- const threat=nearestEnemy(a,420),order=a.order;if(!(a.i===S.active&&(dx||dy||Math.hypot(joystickVector.x,joystickVector.y)>.1))){if(order.kind==='move'){if(!moveAlong(a,dt))a.order={kind:'hold'}}else if(order.kind==='attackmove'&&a.path?.length){if(threat&&dist(a,threat)<st.range)attack(a);else moveAlong(a,dt)}else if(order.kind==='follow'&&a.i!==S.active){const p=formationOffset(a.i,5),target={x:leader.x+p.x,y:leader.y+p.y};if(threat&&dist(threat,leader)<500){if(dist(a,threat)>st.range*.85){if(a.planIn<=0){a.path=findPath(a,threat);a.planIn=.8}moveAlong(a,dt)}}else if(dist(a,target)>95){if(a.planIn<=0){a.path=findPath(a,target);a.planIn=.6}moveAlong(a,dt)}}}
+ const threat=nearestEnemy(a,420),order=a.order;if(!(a.i===S.active&&(dx||dy||Math.hypot(joystickVector.x,joystickVector.y)>.1))){if(order.kind==='move'){if(!moveAlong(a,dt))a.order={kind:'hold'}}else if(order.kind==='attackmove'&&a.path?.length){if(threat&&dist(a,threat)<st.range)attack(a);else moveAlong(a,dt)}else if(order.kind==='follow'&&a.i!==S.active){const p=formationOffset(a.i,5),target={x:leader.x+p.x,y:leader.y+p.y};if(threat&&canEngage(a,threat)&&dist(threat,leader)<500){if(dist(a,threat)>st.range*.85){if(a.planIn<=0){a.path=findPath(a,threat);a.planIn=.8}moveAlong(a,dt)}}else if(dist(a,target)>95){if(a.planIn<=0){a.path=findPath(a,target);a.planIn=.6}moveAlong(a,dt)}}}
  const canFight=order.kind!=='move';if(canFight&&(a.i!==S.active||$('#autoAttack').checked||keys.has('KeyJ')))attack(a);if(a.i!==S.active&&canFight){if(threat&&dist(a,threat)<(a.i===0||a.i===4?140:340))skill(a.i,0);if(a.i===1&&actors.some(b=>owned(b.i)&&b.hp>0&&b.hp<stats(b.i).hp*.65))skill(a.i,1);if((a.i===2||a.i===4)&&threat&&a.hp<st.hp*.75)skill(a.i,1)}
  }
  if(menu)return;updateEnemies(dt);for(const list of [effects,numbers,loot])for(const o of list){o.t-=dt;if(list===numbers)o.y-=dt*25}effects=effects.filter(o=>o.t>0);numbers=numbers.filter(o=>o.t>0);loot=loot.filter(o=>o.t>0);cam.x+=(clamp(active().x-VW*.5,0,WW-VW)-cam.x)*Math.min(1,dt*6);cam.y+=(clamp(active().y-VH*.5,0,WH-VH)-cam.y)*Math.min(1,dt*6);hudTime-=dt;if(hudTime<=0){hudTime=.22;refreshBars()}if(time-lastAutoSave>15){lastAutoSave=time;saveGame(false)}};
@@ -488,22 +488,21 @@ const GEMS=[
 for(const [name,source,color,mult]of [['霜焰龙凰',12,'#83d9ff',1.35],['雷铠玄虎',13,'#e5c982',1.4],['星冕幻灵',14,'#bca6ff',1.4],['太初龙凰',12,'#ffd59a',1.7]]){
  const base=PETS[source];PETS.push({...base,name,color,hp:Math.round(base.hp*mult),atk:Math.round(base.atk*mult),int:Math.round(base.int*mult),armor:Math.round(base.armor*mult),bonus:'稀有变异 · 强化生命、攻击、智力与护甲',art:source});
 }
-const GEM_CAP=6;
-const gemValid=g=>g&&Number.isInteger(g.type)&&g.type>=0&&g.type<GEMS.length&&Number.isInteger(g.level)&&g.level>=1&&g.level<=GEM_CAP;
-const gemPower=g=>GEMS[g.type].unit*2**(g.level-1);
-const gemName=g=>GEMS[g.type].name+' · '+g.level+'阶';
+let GEM_CAP=10;
+let gemValid=g=>g&&Number.isInteger(g.type)&&g.type>=0&&g.type<GEMS.length&&Number.isInteger(g.level)&&g.level>=1&&g.level<=GEM_CAP;
+let gemPower=g=>GEMS[g.type].unit*2**(g.level-1);
+let gemName=g=>GEMS[g.type].name+' · '+g.level+'阶';
 function gemBag(){return S.gems||(S.gems=[])}
 function gemCount(type,level){return gemBag().find(g=>g.type===type&&g.level===level)?.count||0}
-function giveGem(type,level=1,count=1){if(!gemValid({type,level})||!Number.isInteger(count)||count<1||count>9999)return false;const found=gemBag().find(g=>g.type===type&&g.level===level);if(found){if(found.count+count>9999)return false;found.count+=count}else{if(gemBag().length>=24)return false;gemBag().push({type,level,count})}return true}
+function giveGem(type,level=1,count=1){if(!gemValid({type,level})||!Number.isInteger(count)||count<1||count>9999)return false;const found=gemBag().find(g=>g.type===type&&g.level===level);if(found){if(found.count+count>9999)return false;found.count+=count}else{if(gemBag().length>=200)return false;gemBag().push({type,level,count})}return true}
 function takeGem(type,level,count=1){const p=gemBag().find(g=>g.type===type&&g.level===level);if(!p||p.count<count)return false;p.count-=count;S.gems=S.gems.filter(g=>g.count>0);return true}
 function buyGem(type){if(!Number.isInteger(type)||!GEMS[type]||!atCamp()||S.gold<60||!giveGem(type))return false;S.gold-=60;saveGame(false);refreshBars();return true}
 function combineGem(type,level){const cost=40*level*level;if(!gemValid({type,level})||level>=6||gemCount(type,level)<3||S.gold<cost||gemCount(type,level+1)>=9999)return false;takeGem(type,level,3);giveGem(type,level+1);S.gold-=cost;saveGame(false);refreshBars();return true}
 function socketGem(hero,type,level,slot){const weapon=S.heroes[hero]?.gear[0];if(!Number.isInteger(hero)||hero<0||hero>4||!owned(hero)||!weapon||!gemValid({type,level})||![0,1].includes(slot)||gemCount(type,level)<1)return false;weapon.sockets??=[null,null];const old=weapon.sockets[slot];if(old&&gemCount(old.type,old.level)>=9999)return false;takeGem(type,level);if(old)giveGem(old.type,old.level);weapon.sockets[slot]={type,level};actors[hero].hp=Math.min(actors[hero].hp,stats(hero).hp);actors[hero].mp=Math.min(actors[hero].mp,stats(hero).mp);saveGame(false);refreshBars();return true}
 function unsocketGem(hero,slot){const weapon=S.heroes[hero]?.gear[0],gem=weapon?.sockets?.[slot];if(!gem||!giveGem(gem.type,gem.level))return false;weapon.sockets[slot]=null;const a=actors[hero];a.hp=Math.min(a.hp,stats(hero).hp);a.mp=Math.min(a.mp,stats(hero).mp);saveGame(false);refreshBars();return true}
 const statsBeforeGems=stats;stats=function(i){const st=statsBeforeGems(i);st.luck=0;for(const gem of S.heroes[i].gear[0]?.sockets||[]){if(!gem)continue;const value=gemPower(gem);if(gem.type===0)st.atk+=value;if(gem.type===1){st.int+=value;st.mp+=value*5;st.spell+=value*2}if(gem.type===2){st.hp+=value;st.armor+=Math.round(value/65)}if(gem.type===3)st.luck+=value}st.luck=Math.min(80,st.luck);return st};
-const validateBeforeGems=validateSave;validateSave=function(v){if(!validateBeforeGems(v))return false;const gems=v.gems;if(gems!==undefined&&(!Array.isArray(gems)||gems.length>24||gems.some(g=>!gemValid(g)||!Number.isInteger(g.count)||g.count<1||g.count>9999)||new Set(gems.map(g=>g.type+':'+g.level)).size!==gems.length))return false;const items=[...v.bag,...v.heroes.flatMap(h=>h.gear.filter(Boolean))];if(new Set(items.map(it=>it.id)).size!==items.length)return false;return !items.some(it=>it.sockets!==undefined&&(it.slot!==0||!Array.isArray(it.sockets)||it.sockets.length!==2||it.sockets.some(g=>g!==null&&!gemValid(g))))};
+const validateBeforeGems=validateSave;validateSave=function(v){if(!validateBeforeGems(v))return false;const gems=v.gems;if(gems!==undefined&&(!Array.isArray(gems)||gems.length>200||gems.some(g=>!gemValid(g)||!Number.isInteger(g.count)||g.count<1||g.count>9999)||new Set(gems.map(g=>g.type+':'+g.level)).size!==gems.length))return false;const items=[...v.bag,...v.heroes.flatMap(h=>h.gear.filter(Boolean))];if(new Set(items.map(it=>it.id)).size!==items.length)return false;return !items.some(it=>it.sockets!==undefined&&(it.slot!==0||!Array.isArray(it.sockets)||it.sockets.length!==2||it.sockets.some(g=>g!==null&&!gemValid(g))))};
 const beginBeforeSanctuary=begin;begin=function(data){const next=JSON.parse(JSON.stringify(data)),gift=next.gems===undefined;if(gift)next.gems=[{type:0,level:1,count:1},{type:3,level:1,count:1}];hudReady=false;lastOrderKey='';petFx=[];beginBeforeSanctuary(next);resizeWorld();refreshBars();if(gift)logMessage('铁匠赠礼：赤焰石与天运石已放入宝石包裹。武器可镶嵌两枚宝石。')};
-const damageBeforeGemDrops=enemyDamage;enemyDamage=function(e,...args){const alive=!e.dead,result=damageBeforeGemDrops(e,...args);if(alive&&e.dead&&!e.noRewards&&!e.gemDropped){e.gemDropped=true;if(e.boss||Math.random()<.22){const type=Math.floor(Math.random()*4),level=e.boss?2:1;if(giveGem(type,level)){logMessage('拾得 '+gemName({type,level})+'，已放入宝石包裹。');saveGame(false)}}}return result};
 const enemyBeforeGemDrops=makeEnemy;makeEnemy=function(...args){return {...enemyBeforeGemDrops(...args),gemDropped:false}};
 
 function gemArt(gem,cls=''){return `<span class="gem-icon ${cls}" style="--gem:${GEMS[gem.type].color};--level:${gem.level}"><i></i><b>${gem.level}</b></span>`}
@@ -564,7 +563,7 @@ refreshBars=function(){if(!S||!actors.length)return;initRealmHUD();const a=activ
 switchHero=function(i){if(!S||menu||!Number.isInteger(i)||i<0||i>4||!owned(i)||actors[i].hp<=0)return false;S.active=i;destination=null;selectUnits([i],false);cam.x=clamp(actors[i].x-VW/2,0,WW-VW);cam.y=clamp(actors[i].y-VH/2,0,WH-VH);refreshBars();tone(550,.045);return true};
 const selectBeforeSanctuary=selectUnits;selectUnits=function(ids,focus=true){selectBeforeSanctuary(ids,focus);if(S&&hudReady){refreshBars()}};
 const logBeforeSanctuary=logMessage;logMessage=function(text){logBeforeSanctuary(text);lastRealmToast=text;toastUntil=time+4.5;$('#realmToast').textContent=text;$('#realmToast').classList.add('visible')};
-function realmMenuPanel(){if(!S)return;showDialog(panelHead('行者手札')+'<small class="muted">V6 · 铸星与灵契</small>'+'<div class="realm-menu-grid">'+[['talent','♙','角色','属性与天赋'],['bag','⚔','装备','六部位行囊'],['pets','♞','灵兽','包裹与合体'],['gems','◇','宝石','镶嵌与合成'],['world','◎','地图','诸界传送'],['squad','⚑','编队','队伍与阵型'],['career','✧','转职','百级觉醒'],['journey','▤','任务','旅途与奖励'],['shop','◈','商店','补给与装备'],['settings','☷','设置存档','导出、音效与画质'],['guide','?','操作指南','快速上手']].map(([id,icon,name,desc])=>`<button data-realm="${id}"><i>${icon}</i><span><b>${name}</b><small>${desc}</small></span></button>`).join('')+'</div>');$('#dialog').querySelectorAll('[data-realm]').forEach(b=>b.onclick=()=>({talent:talentPanel,bag:bagPanel,pets:petsPanel,gems:forgePanel,world:worldPanel,squad:squadPanel,career:careerPanel,journey:journeyPanel,shop,settings:pausePanel,guide:v6Help})[b.dataset.realm]())}
+function realmMenuPanel(){if(!S)return;showDialog(panelHead('行者手札')+'<small class="muted">V7 · 山海五行</small>'+'<div class="realm-menu-grid">'+[['talent','♙','角色','属性与天赋'],['bag','⚔','装备','六部位行囊'],['pets','♞','灵兽','包裹与合体'],['gems','◇','宝石','镶嵌与合成'],['world','◎','地图','诸界传送'],['squad','⚑','编队','队伍与阵型'],['career','✧','转职','百级觉醒'],['journey','▤','任务','旅途与奖励'],['shop','◈','商店','补给与装备'],['settings','☷','设置存档','导出、音效与画质'],['guide','?','操作指南','快速上手']].map(([id,icon,name,desc])=>`<button data-realm="${id}"><i>${icon}</i><span><b>${name}</b><small>${desc}</small></span></button>`).join('')+'</div>');$('#dialog').querySelectorAll('[data-realm]').forEach(b=>b.onclick=()=>({talent:talentPanel,bag:bagPanel,pets:petsPanel,gems:forgePanel,world:worldPanel,squad:squadPanel,career:careerPanel,journey:journeyPanel,shop,settings:pausePanel,guide:v6Help})[b.dataset.realm]())}
 function v6Help(){showDialog(panelHead('行者指南')+'<p>点击左下英雄头像或1–5快速切换。WASD移动，点击地面命令移动；Shift多选，空地拖动框选，右键进攻移动。Ctrl+1/2/3保存编队，1/2/3召回已保存编队。</p><p>Q/E/R技能，J普攻，G防御，空格闪避，H药剂，F互动，T转职觉醒，V灵兽主动技能。屏幕技能图标可直接点击。菜单中管理角色、任务、队伍与传送。</p><p>装备→铸星坊：武器有两个宝石孔。基础宝石可在营地购买，妖兽22%掉落一阶，首领必掉二阶。三颗同种同阶+金币合成高一阶，最高六阶。取下或替换宝石免费。</p><p>灵兽包裹独立保存每只灵兽，手动分配给英雄骑乘。两只不同种类且10级以上灵兽+250金币尝试合体。成功随机诞生合体或稀有变异灵兽；失败消耗材料二，材料一保留并下降1级。武器镶嵌天运石增加幸运，面板显示当前概率。</p><p>存档保存在当前浏览器。菜单→设置存档可导出备份；不同玩家通过分享链接分别游玩。</p>')}
 $('#realmMenu').onclick=realmMenuPanel;$('#realmBag').onclick=()=>S&&bagPanel();$('#realmPets').onclick=()=>S&&petsPanel();$('#realmForge').onclick=()=>S&&forgePanel();$('#helpBtn').onclick=v6Help;$('#mountBtn').onclick=()=>petsPanel();$('#trainBtn').onclick=()=>talentPanel();
 const descriptionBeforeGems=itemDescription;itemDescription=function(it){return descriptionBeforeGems(it)+(it.sockets?.some(Boolean)?' · '+it.sockets.filter(Boolean).map(g=>gemName(g)+' '+gemEffect(g)).join(' / '):'')};
@@ -586,4 +585,440 @@ function drawPetEffect(p){const progress=1-p.t/p.max;g.save();g.globalAlpha=Math
 const drawBeforeSanctuary=draw;draw=function(){drawBeforeSanctuary();if(S){g.save();g.translate(-cam.x,-cam.y);for(const p of petFx)drawPetEffect(p);g.restore()}};
 resizeWorld=function(){const rect=canvas.getBoundingClientRect();if(!rect.width||!rect.height)return;VW=Math.round(Math.min(1600,Math.max(760,rect.width)));VH=Math.round(VW*rect.height/rect.width);if(canvas.width!==VW||canvas.height!==VH){canvas.width=VW;canvas.height=VH}};
 window.addEventListener('resize',resizeWorld);
+
+
+'use strict';
+// Shared five-phase rules; numbers below are game balance, not divination.
+const WX={
+ names:['金','木','水','火','土'],colors:['#eed18d','#8bdca8','#8fcff1','#ffa281','#d8b986'],
+ SHENG:[2,3,1,4,0],KE:[1,4,3,0,2],
+ stems:['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'],stemElements:[1,1,3,3,4,4,0,0,2,2],
+ branches:['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'],branchElements:[2,4,1,1,4,3,3,4,0,0,4,2],
+ trigrams:['乾','兑','离','震','巽','坎','艮','坤'],trigramElements:[0,0,3,1,1,2,4,4],
+ valid(n){return Number.isInteger(n)&&n>=0&&n<5},
+ relation(a,b){if(a===b)return 'same';return this.SHENG[a]===b||this.SHENG[b]===a?'sheng':'ke'},
+ damageMultiplier(a,b){if(a===b)return 1;if(this.KE[a]===b)return 1.3;if(this.KE[b]===a)return .65;return 1.12},
+ heroElement(i){return i},
+ petElement(type){return PETS[type]?.element??[4,0,2,1,3][type%5]},
+ gemElement(type){return GEMS[type]?.element??[3,2,1,4][type%4]},
+ itemElement(item){return this.valid(item?.element)?item.element:((item?.id||0)+(item?.slot||0)+(item?.tier||0))%5},
+ phase(){const day=Math.floor((S?.played||0)/180),stem=day%10,branch=day%12,gua=day%8;return {day,stem:this.stems[stem],branch:this.branches[branch],gua:this.trigrams[gua],element:this.stemElements[stem],branchElement:this.branchElements[branch],guaElement:this.trigramElements[gua]}},
+ label(a,b){const rel=this.relation(a,b);return rel==='same'?'同气共鸣':rel==='sheng'?'相生滋养':'五行相克'},
+ badge(element){return `<span class="wx-badge" style="--wx:${this.colors[element]}">${this.names[element]}</span>`}
+};
+let damageElementContext7=null,returnScrollBypass7=false,panelContext7=null;
+function canEngage(a,target,manual=false){if(!S||menu||!a||a.hp<=0||!owned(a.i))return false;if(manual)return true;if(a.combatOrder==='attack')return true;return !!target&&!target.dead&&target.map===currentMap()&&a.retaliateUntil>time&&a.retaliateId===target.id}
+function issueAttackOrder(i=S.active){if(!S||menu||!owned(i)||actors[i].hp<=0)return false;const group=selection.includes(i)?selectedActors():[actors[i]];for(const a of group){a.combatOrder='attack';if(a.order?.kind==='move'){a.order={kind:'hold'};a.path=[]}}$('#autoAttack').checked=true;refreshBars();return true}
+function setPassiveOrder7(list=selectedActors()){for(const a of list){a.combatOrder='passive';a.attackTargetId=null;a.retaliateUntil=0;a.retaliateId=null}}
+const nearestBeforeWuxing7=nearestEnemy;nearestEnemy=function(a,range,includeDormant=false){const id=a?.combatOrder==='attack'?a.attackTargetId:a?.retaliateUntil>time?a.retaliateId:null;if(id!==null&&id!==undefined){const e=enemies.find(e=>e.id===id&&e.map===currentMap()&&!e.dead&&dist(a,e)<range);if(e&&(!e.boss||e.rift||S.kills[e.z]>=ZONES[e.z].need))return e}return nearestBeforeWuxing7(a,range,includeDormant)};
+const damageBeforeWuxing7=enemyDamage;enemyDamage=function(e,amount,source,element,crit=false){if(!e||!S||e.map!==currentMap())return;const attackElement=damageElementContext7??(WX.valid(element)?element:WX.heroElement(Number.isInteger(source)?source:S.active)),factor=WX.damageMultiplier(attackElement,e.element);return damageBeforeWuxing7(e,amount*factor,source,attackElement,crit)};
+const actorDamageBeforeWuxing7=actorDamage;actorDamage=function(a,amount,from=null){if(!S||!a)return;const hp=a.hp,shieldBefore=a.shield,element=WX.valid(from?.element)?from.element:WX.valid(from?.z)?ZONES[from.z]?.element:null,factor=element===null?1:WX.damageMultiplier(element,WX.heroElement(a.i));actorDamageBeforeWuxing7(a,amount*factor,from);if(a.hp>0&&(a.hp<hp||a.shield<shieldBefore)&&from?.id!==undefined&&!from.dead&&from.map===currentMap()){a.retaliateId=from.id;a.retaliateUntil=time+10}};
+const attackBeforeWuxing7=attack;attack=function(a,manual=false){if(!S||menu)return false;if(manual)issueAttackOrder(a.i);const target=nearestEnemy(a,stats(a.i).range+15);if(!canEngage(a,target,manual))return false;const before=a.attack;attackBeforeWuxing7(a,manual);return a.attack>before};
+const skillBeforeWuxing7=skill;skill=function(i,slot,manual=false){if(!S||menu)return false;const a=actors[i],target=nearestEnemy(a,500);if(!manual&&!canEngage(a,target))return false;return skillBeforeWuxing7(i,slot,manual)};
+const commandBeforeWuxing7=commandUnits;commandUnits=function(kind,point=null){const list=selectedActors();if(kind==='attackmove')for(const a of list)a.combatOrder='attack';else if(['hold','move','follow'].includes(kind))setPassiveOrder7(list);return commandBeforeWuxing7(kind,point)};
+canvas.addEventListener('pointerup',e=>{if(!S||menu||!selectionDrag||dist(selectionDrag.start,selectionDrag.end)>24)return;const point=worldPoint(e),target=enemies.find(enemy=>enemy.map===currentMap()&&!enemy.dead&&dist(enemy,point)<Math.max(35,enemy.r+15));if(!target)return;e.stopImmediatePropagation();selectionDrag=null;issueAttackOrder();for(const a of selectedActors())a.attackTargetId=target.id;commandUnits('attackmove',point)},true);
+
+// Every route home requires a scroll; death recovery is the sole emergency exception.
+function buyReturnScroll(count=1){if(!S||!atCamp()||!Number.isInteger(count)||count<1||count>99||S.gold<count*80||(S.scrolls||0)+count>9999)return false;S.gold-=count*80;S.scrolls=(S.scrolls||0)+count;saveGame(false);refreshBars();return true}
+const enterBeforeScroll7=enterMap;enterMap=function(id,force=false){if(!S)return false;const need=id===0&&currentMap()!==0&&!returnScrollBypass7;if(need&&(S.scrolls||0)<1){logMessage('缺少回城卷轴。可在地图入口商店以80金币购买，或从妖兽身上获取。');return false}const result=enterBeforeScroll7(id,force);if(result&&need){S.scrolls--;saveGame(false);logMessage('消耗1张回城卷轴，全队返回青禾营地。')}return result};
+const returnBeforeScroll7=returnCamp;returnCamp=function(force=false){if(!S||currentMap()===0)return false;const dead=actors.filter(a=>owned(a.i)).every(a=>a.hp<=0);if(!dead&&(S.scrolls||0)<1){logMessage('回城需要1张卷轴，当前没有。');return false}if(!dead&&!force&&enemies.some(e=>e.map===currentMap()&&!e.dead&&e.aggro>0&&dist(e,active())<400)){logMessage('请先脱离战斗再使用回城卷轴。');return false}const old=currentMap();returnScrollBypass7=dead;try{returnBeforeScroll7(force||dead)}finally{returnScrollBypass7=false}return currentMap()===0&&old!==0};
+const beginBeforeWuxing7=begin;begin=function(data){const copy=JSON.parse(JSON.stringify(data));if(copy.scrolls===undefined)copy.scrolls=2;for(let i=0;i<copy.heroes.length;i++){copy.heroes[i].element=i;for(const item of copy.heroes[i].gear)if(item&&item.element===undefined)item.element=WX.itemElement(item)}for(const item of copy.bag)if(item.element===undefined)item.element=WX.itemElement(item);beginBeforeWuxing7(copy);for(const a of actors){a.combatOrder='passive';a.retaliateUntil=0;a.retaliateId=null;a.attackTargetId=null}panelContext7=null;saveGame(false)};
+const validateBeforeWuxing7=validateSave;validateSave=function(v){if(!validateBeforeWuxing7(v))return false;if(v.scrolls!==undefined&&(!Number.isInteger(v.scrolls)||v.scrolls<0||v.scrolls>9999))return false;if(v.heroes.some((h,i)=>h.element!==undefined&&h.element!==i))return false;return ![...v.bag,...v.heroes.flatMap(h=>h.gear.filter(Boolean))].some(it=>it.element!==undefined&&!WX.valid(it.element))};
+const addItemBeforeWuxing7=addItem;addItem=function(...args){const item=addItemBeforeWuxing7(...args);if(item)item.element=WX.itemElement(item);return item};
+const killBeforeWuxing7=kill;kill=function(e,source){const alive=!e.dead,result=killBeforeWuxing7(e,source);if(alive&&e.dead&&!e.noRewards){if(e.boss||Math.random()<.045){S.scrolls=Math.min(9999,(S.scrolls||0)+1);logMessage('获得回城卷轴 ×1。')}if(typeof V7_PET_START!=='undefined'&&(e.boss||Math.random()<.045)){const candidates=PETS.map((p,i)=>({p,i})).filter(x=>x.i>=V7_PET_START&&(x.p.element===e.element||x.p.biome===e.biome));if(candidates.length){const chosen=candidates[Math.floor(Math.random()*candidates.length)];addPet(chosen.i);logMessage('山海灵契：'+chosen.p.name+'愿意随行。')}}saveGame(false)}return result};
+
+function applyElementalStats7(st,i){const h=S.heroes[i],element=WX.heroElement(i);let harmony=0,discord=0;for(const item of h.gear)if(item){const relation=WX.relation(element,WX.itemElement(item));harmony+=relation==='same'?1:relation==='sheng'?1.5:0;discord+=relation==='ke'?1:0}for(const gem of h.gear[0]?.sockets||[])if(gem){const rel=WX.relation(element,WX.gemElement(gem.type));harmony+=rel==='sheng'?.5:rel==='same'?.25:0;discord+=rel==='ke'?.5:0}const pet=petOf(i);if(pet){const relation=WX.relation(element,WX.petElement(pet.type));harmony+=relation==='sheng'?2:relation==='same'?1:0;discord+=relation==='ke'?1:0}const resonance=clamp(1+harmony*.012-discord*.012,.9,1.16);const phase=WX.phase();st.phaseBonus=(phase.element===element?.02:0)+(phase.guaElement===element?.01:0);st.atk=Math.round(st.atk*resonance*(1+st.phaseBonus));st.hp=Math.round(st.hp*resonance*(1+st.phaseBonus));st.spell=Math.round(st.spell*resonance*(1+st.phaseBonus));st.resonance=resonance;st.element=element;st.attackRate=(st.attackRate||1)*(1+(h.gear[0]?.power||0)*.0008+(h.gear[5]?.power||0)*.0005);st.interval=Math.max(.18,st.interval/st.attackRate);return st}
+fusionOdds=function(a,b,i=S.active){const luck=stats(i).luck,relation=WX.relation(WX.petElement(a.type),WX.petElement(b.type)),stars=Math.min(a.fusion?.stars||0,b.fusion?.stars||0),phaseBonus=[WX.petElement(a.type),WX.petElement(b.type)].includes(WX.phase().element)?.015:0;return {luck,relation,phaseBonus,success:clamp(.5+phaseBonus+({same:.08,sheng:.2,ke:-.22}[relation])+luck*.0035+stars*.02,.12,.96),rare:clamp(.07+luck*.0035+(relation==='sheng'?.05:0),.05,.5)}};
+fusionPool=function(a,b){const elements=[WX.petElement(a.type),WX.petElement(b.type)];const newTypes=PETS.map((p,i)=>i>=19&&p.rarity>=2&&(elements.includes(p.element)||elements.some(el=>WX.SHENG[el]===p.element))?i:-1).filter(i=>i>=0);return [fusionResult(a,b),12,13,14,...newTypes]};
+rollFusion=function(a,b,rare){const pool=rare?PETS.map((p,i)=>i>=15&&(p.rarity>=3||i<19)?i:-1).filter(i=>i>=0):fusionPool(a,b);return pool[Math.floor(Math.random()*pool.length)]};
+petPurchase=function(type){if(!S||!PETS[type]||type>=12&&type<19||!atCamp()||S.pets.length>=100)return false;const p=PETS[type],chapter=type<12?(type>4?Math.min(4,type-5):0):p.rarity>=3?3:p.rarity>=2?1:0,cost=type<12?150+type*115:200+(p.rarity||1)*150+type*8;if(S.chapter<chapter||S.gold<cost)return false;const pet=addPet(type);if(!pet)return false;S.gold-=cost;saveGame(false);refreshBars();return pet};
+
+// Rich pet inventory and elemental fusion, keeping each individual contract.
+petsPanel=function(tab='bag'){if(!S)return;const shopTab=tab==='shop',codex=tab==='codex';showDialog(panelHead('山海灵契 · '+(shopTab?'契约商店':codex?'异兽图鉴':'灵兽包裹'))+`<div class="realm-tabs"><button id="petBagTab">我的灵兽 ${S.pets.length}/100</button><button id="petShopTab">契约商店</button><button id="petCodexTab">山海图鉴</button><button id="petFusionTab">五行合体</button></div><p>空中灵宠在飞行高度作战，陆地灵宠各有步态。五行相生提高合体成功率，相克降低成功率；当前英雄的幸运值同时生效。</p><div class="pet-grid" id="petGrid7"></div>`);
+ const rows=shopTab||codex?PETS.map((p,type)=>({p,type,pet:null})).filter(row=>codex||row.type<12||row.type>=19):S.pets.map(pet=>({p:PETS[pet.type],type:pet.type,pet}));
+ $('#petGrid7').innerHTML=rows.map(({p,type,pet})=>{const element=WX.petElement(type),owner=pet?S.heroes.findIndex(h=>h.pet===pet.id):-1,level=pet?.lv||1,cost=type<12?150+type*115:200+(p.rarity||1)*150+type*8,unlock=type<12?(type>4?Math.min(4,type-5):0):(p.rarity>=3?3:p.rarity>=2?1:0);return `<article class="${p.flight?'pet-flight':'pet-ground'}"><div class="pet-portrait pet-idle" style="${petCardStyle(type)}"></div><h3>${WX.badge(element)} ${p.name}</h3><small>${p.flight?'空中 · 飞行':'陆地 · '+({hop:'蹦跃',crawl:'爬行',gallop:'奔腾',prowl:'潜行',stomp:'踏地'}[p.move]||'行走')}</small><p>${p.story||p.desc||p.bonus}</p>${pet?`<p>Lv.${level} ${pet.fusion?'✦'.repeat(pet.fusion.stars):''} · ${owner>=0?HEROES[owner].name+'骑乘':'包裹待命'}</p><select data-assign7="${pet.id}" aria-label="分配${p.name}编号${pet.id}"><option value="-1" ${owner<0?'selected':''}>放入包裹</option>${HEROES.map((h,i)=>owned(i)?`<option value="${i}" ${owner===i?'selected':''}>${h.name}</option>`:'').join('')}</select>`:shopTab?`<button data-buy-pet7="${type}" ${!atCamp()||S.gold<cost||S.chapter<unlock||S.pets.length>=100?'disabled':''}>${S.chapter<unlock?'第'+(unlock+1)+'章开放':cost+'金币 · 契约'}</button>`:`<small>${S.pets.some(v=>v.type===type)?'已发现':'探索或合体发现'} · ${p.bonus}</small>`}</article>`}).join('')||'<p>包裹为空。探索、购买或随机合体发现你的第一位灵兽伙伴。</p>';
+ $('#petBagTab').onclick=()=>petsPanel();$('#petShopTab').onclick=()=>petsPanel('shop');$('#petCodexTab').onclick=()=>petsPanel('codex');$('#petFusionTab').onclick=fusionPanel;$('#dialog').querySelectorAll('[data-assign7]').forEach(b=>b.onchange=()=>{assignPet(+b.dataset.assign7,+b.value);petsPanel()});$('#dialog').querySelectorAll('[data-buy-pet7]').forEach(b=>b.onclick=()=>{if(petPurchase(+b.dataset.buyPet7))petsPanel('shop')});
+};
+fusionPanel=function(){if(!S)return;const ready=S.pets.filter(p=>p.lv>=10);showDialog(panelHead('五行灵契炉')+'<p>两只不同种类、10级以上灵兽 + 250金币。成功消耗双方并随机诞生新灵兽；失败消耗材料二，材料一保留并下降1级。相生易合，相克难合，幸运值来自当前英雄装备。</p><div class="fusion-select"><label>材料一<select id="fusionA">'+ready.map(p=>`<option value="${p.id}">${WX.names[WX.petElement(p.type)]} · ${PETS[p.type].name} Lv.${p.lv} #${p.id}</option>`).join('')+'</select></label><span>☯</span><label>材料二<select id="fusionB">'+ready.map(p=>`<option value="${p.id}">${WX.names[WX.petElement(p.type)]} · ${PETS[p.type].name} Lv.${p.lv} #${p.id}</option>`).join('')+'</select></label></div><div id="fusionOdds" class="fusion-odds"></div><div id="fusionRelation7"></div><button id="fusionPreview" class="primary" '+(ready.length<2?'disabled':'')+'>预览灵契</button>');if(ready.length>1)$('#fusionB').value=ready.find(p=>p.type!==ready[0].type)?.id||ready[1].id;
+ const chosen=()=>[S.pets.find(p=>p.id===+$('#fusionA').value),S.pets.find(p=>p.id===+$('#fusionB').value)];const drawOdds=()=>{const[a,b]=chosen();if(!a||!b||a.type===b.type){$('#fusionOdds').textContent='请选择两个不同种类。';return}const o=fusionOdds(a,b);$('#fusionOdds').innerHTML=`<div><small>幸运</small><b>${o.luck}</b></div><div><small>合体成功率</small><b>${Math.round(o.success*1000)/10}%</b></div><div><small>成功后稀有率</small><b>${Math.round(o.rare*1000)/10}%</b></div>`;$('#fusionRelation7').innerHTML=`<p>${WX.badge(WX.petElement(a.type))} + ${WX.badge(WX.petElement(b.type))} ${WX.label(WX.petElement(a.type),WX.petElement(b.type))} · 灵契存在意外变异，可能诞生飞行或陆地异兽。</p>`};$('#fusionA').onchange=$('#fusionB').onchange=drawOdds;drawOdds();$('#fusionPreview').onclick=()=>{const[a,b]=chosen();if(!a||!b||a.type===b.type)return;const o=fusionOdds(a,b);showDialog(panelHead('确认缔结五行灵契')+`<div class="fusion-orbit"><span>☯</span><b>${Math.round(o.success*1000)/10}<small>% 成功率</small></b><span>✦</span></div><p>${PETS[a.type].name} + ${PETS[b.type].name} · ${WX.label(WX.petElement(a.type),WX.petElement(b.type))}。成功随机诞生新灵兽，失败消耗材料二，材料一降1级。消耗250金币。</p><p>可能诞生：${[...new Set(fusionPool(a,b))].slice(0,9).map(type=>PETS[type].name).join('、')}，以及其他稀有变异。</p><button id="confirmFusion7" class="primary" ${S.gold<250?'disabled':''}>确认合体</button><button id="cancelFusion7">返回选择</button>`);$('#cancelFusion7').onclick=fusionPanel;$('#confirmFusion7').onclick=()=>{const outcome=fusePets(a.id,b.id);if(!outcome)return;showDialog(panelHead(outcome.success?'灵契异变 · 新生':'灵契未成')+(outcome.success?`<div class="fusion-result pet-idle" style="${petCardStyle(outcome.pet.type)}"></div><h3>${WX.badge(WX.petElement(outcome.pet.type))} ${PETS[outcome.pet.type].name} Lv.${outcome.pet.lv}</h3><p>${PETS[outcome.pet.type].story||PETS[outcome.pet.type].bonus}</p>`:`<p>材料一 ${PETS[a.type].name} 已保留，降至${a.lv}级；材料二与250金币已消耗。</p>`)+`<button id="fusionDone7">返回灵兽包裹</button>`);$('#fusionDone7').onclick=()=>petsPanel()}};
+};
+
+function wuxingPanel7(){const p=WX.phase();showDialog(panelHead('五行图谱 · 干支灵时')+`<p>当前灵时：${p.stem}${p.branch} · ${p.gua}卦 ${WX.badge(p.element)}。灵时每180秒前进一格，属于游戏内虚构时序。英雄与天干同属性获得2%生命与攻击增益，与卦象同属性再加1%；合成材料契合当令元素时成功率额外增加1.5%。</p><div class="wx-cycle">${WX.names.map((name,i)=>`<article>${WX.badge(i)}<h3>${name}</h3><p>生 ${WX.names[WX.SHENG[i]]} · 克 ${WX.names[WX.KE[i]]}</p></article>`).join('')}</div><p>战斗：我克敌造成130%基础伤害；敌克我造成65%；相生关系为112%；同属性100%。敌方攻击也按方向计算。首领护甲、格挡与护盾另行计算。</p><p>英雄、装备、灵宠、怪物和宝石均有五行。装备与骑宠相生或同气提升共鸣，冲克略降整体能力；属性面板显示共鸣与实际攻击间隔。</p><p>合成：相生成功率最高，同气其次，相克最低；幸运提高成功率。十天干、十二地支与八卦对应采用传统五行框架，伤害与概率为游戏设计。</p><p><a href="https://www.dpm.org.cn/lemmas/244166.html" target="_blank" rel="noopener">五行相生相克参考：故宫博物院</a></p>`)}
+
+'use strict';
+// V7: two-stone elemental forging. Existing gem IDs remain stable for old saves.
+GEM_CAP=10;
+Object.assign(GEMS[0],{element:3});Object.assign(GEMS[1],{element:2});Object.assign(GEMS[2],{element:1});Object.assign(GEMS[3],{element:4});
+GEMS.push(
+ {name:'鸡血石',color:'#ed6267',element:3,stat:'攻击 / 生命 / 汲取',unit:5},
+ {name:'田黄石',color:'#e1b257',element:4,stat:'生命 / 护甲',unit:1},
+ {name:'蓝金石',color:'#91bdde',element:0,stat:'攻击 / 护甲',unit:5},
+ {name:'月光石',color:'#b4d9ef',element:2,stat:'智力 / 法力 / 法术',unit:4},
+ {name:'贪狼',color:'#8fd490',element:1,stat:'攻击 / 敏捷 / 攻速',unit:3},
+ {name:'破军',color:'#f1d28c',element:0,stat:'攻击 / 暴击',unit:6},
+ {name:'七杀',color:'#e698b7',element:3,stat:'攻击 / 法术',unit:6},
+ {name:'天罡',color:'#d4b87f',element:4,stat:'生命 / 护甲',unit:42},
+ {name:'紫薇',color:'#c4a8ed',element:2,stat:'智力 / 幸运',unit:2},
+ {name:'青龙印',color:'#78deb9',element:1,stat:'攻击 / 生命',unit:4},
+ {name:'朱雀羽',color:'#ffb679',element:3,stat:'法术 / 智力',unit:6},
+ {name:'玄武玉',color:'#91c8d5',element:2,stat:'生命 / 护甲',unit:40},
+ {name:'白虎牙',color:'#ece3bb',element:0,stat:'攻击 / 攻速',unit:5},
+ {name:'麒麟珀',color:'#e1c87b',element:4,stat:'幸运 / 护甲',unit:2}
+);
+gemValid=gem=>!!gem&&Number.isInteger(gem.type)&&gem.type>=0&&gem.type<GEMS.length&&Number.isInteger(gem.level)&&gem.level>=1&&gem.level<=10;
+gemPower=gem=>gemValid(gem)?Math.round(GEMS[gem.type].unit*2**(gem.level-1)*10)/10:0;
+gemName=gem=>gemValid(gem)?GEMS[gem.type].name+' · '+gem.level+'级'+(gem.level===10?'【天极】':''):'未知宝石';
+const GEM_BEASTS7=['白虎','青龙','玄武','朱雀','麒麟'];
+const GEM_TIERS7=['凡晶','蕴灵','凝华','通玄','地煞','天罡','圣耀','太初','帝辉','天极'];
+let forgeTab7='socket',gemSummons7=[];
+
+function forgeInventory7(changes){
+ const bag=gemBag().map(g=>({...g}));
+ for(const c of changes){let gem=bag.find(g=>g.type===c.type&&g.level===c.level);if(!gem){gem={type:c.type,level:c.level,count:0};bag.push(gem)}gem.count+=c.count;if(gem.count<0||gem.count>9999)return null}
+ const result=bag.filter(g=>g.count>0);return result.length<=200?result:null;
+}
+giveGem=function(type,level=1,count=1){if(!gemValid({type,level})||!Number.isInteger(count)||count<1||count>9999)return false;const next=forgeInventory7([{type,level,count}]);if(!next)return false;S.gems=next;return true};
+function forgeLuck7(i=S.active){return Math.min(80,Math.max(0,Number(stats(i).luck)||0))}
+function gemFusionPool7(typeA,typeB){
+ if(typeA===typeB)return [typeA];
+ const a=GEMS[typeA].element,b=GEMS[typeB].element;
+ if(a===b)return GEMS.map((gem,i)=>gem.element===a?i:-1).filter(i=>i>=0);
+ // An elemental pairing can yield any rare stone belonging to either parent.
+ // Original IDs also remain possible: low-grade gems always have a use.
+ return GEMS.map((gem,i)=>gem.element===a||gem.element===b?i:-1).filter(i=>i>=0);
+}
+function gemSynthesisPreview(typeA,level,typeB,i=S.active){
+ if(!gemValid({type:typeA,level})||!gemValid({type:typeB,level})||level>=10)return {valid:false,reason:'请选择两枚同级的1至9级宝石。'};
+ const relation=WX.relation(GEMS[typeA].element,GEMS[typeB].element),luck=forgeLuck7(i),cost=(typeA===typeB?40:55)*level*level;
+ const phaseBonus=typeof WX.phase==='function'&&[GEMS[typeA].element,GEMS[typeB].element].includes(WX.phase().element)?.015:0;
+ const success=Math.min(.99,Math.max(.12,phaseBonus+({same:.94,sheng:.98,ke:.58}[relation]??.94)-.035*(level-1)+luck*.0015));
+ const result={valid:true,typeA,typeB,level:level+1,inputLevel:level,relation,luck,cost,success,phaseBonus,pool:gemFusionPool7(typeA,typeB)};
+ if(gemCount(typeA,level)<(typeA===typeB?2:1)||gemCount(typeB,level)<1){result.valid=false;result.reason='材料不足：需要两枚同级宝石。'}
+ else if(S.gold<cost){result.valid=false;result.reason='金币不足。'}
+ else if(!result.pool.every(type=>forgeInventory7([{type:typeA,level,count:-1},{type:typeB,level,count:-1},{type,level:level+1,count:1}]))){result.valid=false;result.reason='可能产物堆叠已满，请先腾出宝石包裹。'}
+ return result;
+}
+function combineGemPair(typeA,level,typeB,rng7=Math.random){
+ const preview=gemSynthesisPreview(typeA,level,typeB);if(!preview.valid||typeof rng7!=='function')return false;
+ const roll=Number(rng7());if(!Number.isFinite(roll)||roll<0||roll>=1)return false;
+ const success=roll<preview.success;let gem=null,changes=[{type:typeB,level,count:-1}];
+ if(success){const choice=Number(rng7());if(!Number.isFinite(choice)||choice<0||choice>=1)return false;gem={type:preview.pool[Math.floor(choice*preview.pool.length)],level:level+1};changes.push({type:typeA,level,count:-1},{...gem,count:1})}
+ const next=forgeInventory7(changes);if(!next)return false;
+ S.gems=next;S.gold-=preview.cost;saveGame(false);refreshBars();
+ logMessage(success?'熔炼成功：'+gemName(gem)+'！':'熔炼未成：材料一保留，材料二与'+preview.cost+'金币已消耗。');
+ return {success,gem,preview};
+}
+combineGem=function(type,level){return combineGemPair(type,level,type)};
+function gemShopPrice7(type,level){return (60+(type%4)*15)*(level===2?3.2:1)}
+buyGem=function(type,level=1){if(!gemValid({type,level})||![1,2].includes(level)||!atCamp())return false;const cost=Math.ceil(gemShopPrice7(type,level));if(S.gold<cost||!giveGem(type,level))return false;S.gold-=cost;saveGame(false);refreshBars();return true};
+socketGem=function(hero,type,level,slot){
+ if(!Number.isInteger(hero)||hero<0||hero>4||!owned(hero)||![0,1].includes(slot)||!gemValid({type,level}))return false;
+ const weapon=S.heroes[hero].gear[0];if(!weapon||gemCount(type,level)<1)return false;const old=weapon.sockets?.[slot];
+ const changes=[{type,level,count:-1}];if(old)changes.push({...old,count:1});const next=forgeInventory7(changes);if(!next)return false;
+ weapon.sockets??=[null,null];weapon.sockets[slot]={type,level};S.gems=next;actors[hero].hp=Math.min(actors[hero].hp,stats(hero).hp);actors[hero].mp=Math.min(actors[hero].mp,stats(hero).mp);saveGame(false);refreshBars();return true;
+};
+unsocketGem=function(hero,slot){if(!Number.isInteger(hero)||hero<0||hero>4||![0,1].includes(slot)||!owned(hero))return false;const weapon=S.heroes[hero].gear[0],gem=weapon?.sockets?.[slot];if(!gem||!giveGem(gem.type,gem.level))return false;weapon.sockets[slot]=null;actors[hero].hp=Math.min(actors[hero].hp,stats(hero).hp);actors[hero].mp=Math.min(actors[hero].mp,stats(hero).mp);saveGame(false);refreshBars();return true};
+
+function gemBonuses7(gem){
+ const v=gemPower(gem),l=gem.level;
+ switch(gem.type){
+ case 0:return {atk:v};case 1:return {int:v,mp:v*5,spell:v*2};case 2:return {hp:v,armor:Math.round(v/65)};case 3:return {luck:v};
+ case 4:return {atk:v,hp:v*5,gemLeech:Math.min(.15,.012*l)};
+ case 5:return {hp:v*38,armor:v*.12};case 6:return {atk:v,armor:v*.03};
+ case 7:return {int:v,mp:v*5,spell:v*2.4};
+ case 8:return {atk:v*.6,agi:v*.5,rate:Math.min(.4,l*.022+Math.sqrt(v)*.003)};
+ case 9:return {atk:v,crit:Math.min(.24,l*.015+v*.00001)};
+ case 10:return {atk:v*.6,spell:v*1.5};case 11:return {hp:v,armor:v/1000};
+ case 12:return {int:v*1.5,luck:Math.min(60,Math.sqrt(v)*1.7)};
+ case 13:return {atk:v,hp:v*4};case 14:return {spell:v*2,int:v*.7};
+ case 15:return {hp:v,armor:v/1600};case 16:return {atk:v,rate:Math.min(.55,l*.025+v*.0001)};
+ case 17:return {luck:Math.min(65,Math.sqrt(v)*2.2),armor:v*.07};default:return {};
+ }
+}
+const statsBeforeForge7=stats;stats=function(i){
+ const st=statsBeforeForge7(i);st.attackRate=st.attackRate||1;st.gemAttackRate=0;st.gemLeech=0;
+ for(const gem of S.heroes[i].gear[0]?.sockets||[]){if(!gemValid(gem))continue;const b=gemBonuses7(gem);if(gem.type>=4)for(const [key,value]of Object.entries(b)){if(key==='rate')st.gemAttackRate+=value;else st[key]=(st[key]||0)+value}}
+ st.attackRate=Math.min(2.2,st.attackRate+st.gemAttackRate);st.luck=Math.min(80,st.luck||0);st.crit=Math.min(.7,st.crit);st.gemLeech=Math.min(.22,st.gemLeech);st.atk=Math.round(st.atk);st.hp=Math.round(st.hp);st.mp=Math.round(st.mp);st.armor=Math.round(st.armor*10)/10;return st;
+};
+gemEffect=function(gem){if(!gemValid(gem))return '';const names={atk:'攻击',int:'智力',agi:'敏捷',hp:'生命',mp:'法力',spell:'法术',armor:'护甲',luck:'幸运',rate:'攻速',crit:'暴击',gemLeech:'汲取'},pct=['rate','crit','gemLeech'];return Object.entries(gemBonuses7(gem)).map(([key,value])=>names[key]+' +'+(pct.includes(key)?Math.round(value*1000)/10+'%':Math.round(value*10)/10)).join(' · ')+(gem.level===10?' · 召唤'+GEM_BEASTS7[GEMS[gem.type].element]+' Y':'')};
+gemArt=function(gem,cls=''){const d=GEMS[gem.type];return `<span class="gem-icon gem-v7 ${gem.level>=7?'gem-exalted':''} ${gem.level>=9?'gem-imperial':''} ${cls}" style="--gem:${d.color};--level:${gem.level}" aria-label="${gemName(gem)}"><i></i><b>${gem.level}</b><em>${WX.names[d.element]}</em></span>`};
+
+function awardGemDrop(e){if(!S||!e?.dead||e.noRewards||e.gemDropped)return false;e.gemDropped=true;const chance=e.boss?1:e.elite?.42:.2;if(Math.random()>=chance)return false;const element=Number.isInteger(e.element)?e.element:Math.floor(Math.random()*5),pool=GEMS.map((gem,i)=>gem.element===element?i:-1).filter(i=>i>=0);const type=Math.random()<.72?pool[Math.floor(Math.random()*pool.length)]:Math.floor(Math.random()*GEMS.length),level=e.boss||e.elite&&Math.random()<.08?2:1;if(!giveGem(type,level))return false;logMessage('拾得 '+gemName({type,level})+'（'+WX.names[GEMS[type].element]+'），已收入宝石包裹。');saveGame(false);return true}
+const damageBeforeForge7=enemyDamage;enemyDamage=function(e,amount,source,element,...rest){
+ const alive=!e.dead,hp=e.hp,result=damageBeforeForge7(e,amount,source,element,...rest);
+ if(alive&&e.hp<hp&&Number.isInteger(source)&&source>=0&&source<5&&owned(source)){const a=actors[source],st=stats(source);if(a.hp>0&&st.gemLeech>0)a.hp=Math.min(st.hp,a.hp+Math.max(0,hp-Math.max(0,e.hp))*st.gemLeech)}
+ if(alive&&e.dead)awardGemDrop(e);return result;
+};
+
+function equippedSupremeGem7(i){return (S?.heroes[i]?.gear[0]?.sockets||[]).find(gem=>gemValid(gem)&&gem.level===10)||null}
+function summonGemBeast(i=S.active,manual=true){
+ if(!S||menu||!Number.isInteger(i)||i<0||i>4||!owned(i))return false;const a=actors[i],gem=equippedSupremeGem7(i);
+ if(!gem){if(manual)logMessage('武器镶嵌10级天极宝石后可召唤神兽。');return false}
+ if(a.hp<=0||(a.gemSummonCd||0)>0||a.mp<60)return false;const targets=enemies.filter(e=>!e.dead&&e.map===currentMap()&&dist(e,a)<650);
+ if(!targets.length){if(manual)logMessage('神兽召唤需要650范围内有敌人。');return false}
+ const element=GEMS[gem.type].element,st=stats(i),power=st.atk*4+st.int*7+800;a.mp-=60;a.gemSummonCd=90;a.anim='cast';a.animT=1.3;
+ for(const e of targets)enemyDamage(e,power,i,element);
+ gemSummons7.push({i,element,map:currentMap(),x:a.x,y:a.y,t:12,max:12,pulse:3,power:power*.3});gemSummons7=gemSummons7.slice(-5);
+ novaFx.push({x:a.x,y:a.y,t:2,max:2,element,r:440,kind:'ultimate'});screenShake=Math.max(screenShake,7);tone(70,.45,'sawtooth');logMessage('天极神契：'+GEM_BEASTS7[element]+'降临，12秒内继续震击敌人！');refreshBars();return true;
+}
+const updateBeforeForge7=update;update=function(dt){
+ updateBeforeForge7(dt);if(!S||menu)return;
+ for(const a of actors)a.gemSummonCd=Math.max(0,(a.gemSummonCd||0)-dt);
+ for(const spirit of gemSummons7){spirit.t-=dt;spirit.pulse-=dt;if(spirit.pulse<=0&&spirit.t>0&&spirit.map===currentMap()&&equippedSupremeGem7(spirit.i)&&actors[spirit.i].hp>0){spirit.pulse+=3;const a=actors[spirit.i];spirit.x=a.x;spirit.y=a.y;for(const e of enemies)if(!e.dead&&e.map===spirit.map&&dist(e,spirit)<520)enemyDamage(e,spirit.power,spirit.i,spirit.element);novaFx.push({x:spirit.x,y:spirit.y,t:1,max:1,element:spirit.element,r:300,kind:'spell'})}}
+ gemSummons7=gemSummons7.filter(s=>s.t>0&&s.map===currentMap()&&equippedSupremeGem7(s.i)&&actors[s.i].hp>0);
+ const button=$('#gemBeast7');if(button){const a=active(),gem=equippedSupremeGem7(S.active);button.disabled=!gem||a.hp<=0||a.mp<60||(a.gemSummonCd||0)>0;button.textContent=gem?'神兽 Y '+((a.gemSummonCd||0)>0?Math.ceil(a.gemSummonCd)+'s':GEM_BEASTS7[GEMS[gem.type].element]):'神兽 Y · 天极宝石'}
+};
+window.addEventListener('keydown',e=>{if(e.code==='KeyY'&&!e.repeat&&!(e.target instanceof HTMLInputElement)&&!(e.target instanceof HTMLSelectElement)){e.preventDefault();summonGemBeast()}});
+const refreshBeforeForge7=refreshBars;refreshBars=function(){refreshBeforeForge7();if(!S)return;const holder=$('#realmSkills');if(holder&&!$('#gemBeast7')){holder.insertAdjacentHTML('beforeend','<button id="gemBeast7" class="gem-summon-button" aria-label="Y 召唤天极神兽">神兽 Y</button>');$('#gemBeast7').onclick=()=>summonGemBeast()}const b=$('#gemBeast7'),gem=equippedSupremeGem7(S.active);if(b){b.hidden=!gem;b.disabled=!gem||(active().gemSummonCd||0)>0;b.textContent='神兽 Y '+((active().gemSummonCd||0)>0?Math.ceil(active().gemSummonCd)+'s':gem?GEM_BEASTS7[GEMS[gem.type].element]:'')}};
+
+const warriorBeforeForge7=drawWarrior;drawWarrior=function(a,mounted=false){
+ const pose=warriorBeforeForge7(a,mounted),gems=(S?.heroes[a.i].gear[0]?.sockets||[]).filter(gemValid),level=Math.max(0,...gems.map(gem=>gem.level));if(level<7||a.hp<=0)return pose;
+ const gem=gems.find(gem=>gem.level===level),color=level>=9?'#ffe68d':GEMS[gem.type].color,high=S.fxQuality!=='low',cy=mounted?-52:-62;
+ g.save();g.globalCompositeOperation='lighter';g.globalAlpha=.45+.12*Math.sin(time*4);g.shadowColor=color;g.shadowBlur=high?24:8;
+ if(level>=9){const glow=g.createRadialGradient(0,cy,5,0,cy,80);glow.addColorStop(0,'#fff4b52c');glow.addColorStop(.65,'#ffd85d17');glow.addColorStop(1,'#ffc95c00');ellipse(0,cy,68,96,glow);for(let j=0;j<(high?12:6);j++){const p=(time*.65+j/12)%1,x=Math.sin(j*4.1+time)*26;line(x,cy+55-p*105,x+Math.sin(time*6+j)*5,cy+36-p*105,color,1.2+p*1.5)}g.strokeStyle=color;g.lineWidth=2;g.beginPath();g.ellipse(0,cy+24,48,14,0,time*2,time*2+5);g.stroke()}
+ const n=high?level+1:5;for(let j=0;j<n;j++){const p=time*(level>=9?2:1.4)+j*Math.PI*2/n,x=Math.cos(p)*(level>=9?38:24),y=cy+Math.sin(p)*50;ellipse(x,y,level===10?3:2,level===10?7:4,color)}
+ if(level===10){g.strokeStyle='#fff7d2';g.lineWidth=1.2;g.beginPath();for(let j=0;j<9;j++){const p=time*.4+j*Math.PI*2/8,x=Math.cos(p)*40,y=cy+Math.sin(p)*62;if(!j)g.moveTo(x,y);else g.lineTo(x,y)}g.stroke()}g.restore();return pose;
+};
+function drawGemSpirit7(s){
+ const c=WX.colors[s.element],a=actors[s.i],phase=time*2,high=S.fxQuality!=='low';g.save();g.translate(a.x,a.y-110);g.globalAlpha=Math.min(.6,s.t*.3);g.globalCompositeOperation='lighter';g.shadowColor=c;g.shadowBlur=high?20:0;
+ // A luminous creature silhouette is deliberately separate from the ridden pet.
+ const y=-56+Math.sin(phase)*8;ellipse(0,y+34,100,27,c+'22');
+ if(s.element===1){for(let j=0;j<12;j++){const u=j/11,x=-105+u*210,yy=y+Math.sin(u*6.5+phase)*26;ellipse(x,yy,17-u*5,12,c+'aa')}poly([[100,y],[120,y-22],[132,y-10],[143,y-17],[130,y+6],[111,y+15]],c);line(115,y-15,112,y-38,'#f1f7dc',2);line(125,y-13,132,y-33,'#f1f7dc',2)}
+ else if(s.element===3){for(const side of [-1,1])for(let j=0;j<7;j++){const x=side*(20+j*12),yy=y-20-j*3+Math.sin(phase+j*.3)*16;poly([[side*5,y+10],[x,yy-20],[x+side*13,yy+7]],j%2?c+'aa':'#ffe4a9aa')}ellipse(0,y,15,30,c);poly([[-10,y-17],[0,y-42],[12,y-15]],'#ffe5aa');for(let j=0;j<5;j++)line(0,y+20,Math.sin(phase+j)*25,y+75+j*5,c,3)}
+ else if(s.element===2){ellipse(0,y,62,37,c+'99');for(let j=0;j<7;j++){const ang=j*Math.PI/3;line(0,y,Math.cos(ang)*50,y+Math.sin(ang)*26,'#e9f6efaa',2)}ellipse(65,y+5,21,13,c);for(const side of [-1,1])for(let j=0;j<2;j++)ellipse(side*43,y+side*15+j*8,17,10,c)}
+ else{ellipse(-5,y,62,24,c+'aa');ellipse(62,y-13,25,24,c);for(let j=0;j<4;j++){const xx=-48+j*27;line(xx,y+13,xx+Math.sin(phase+j)*10,y+49,c,7)}poly([[44,y-28],[46,y-49],[62,y-33],[80,y-41],[79,y-15]],c);if(s.element===4){line(62,y-29,75,y-62,'#fff1b7',3);line(69,y-47,88,y-48,'#fff1b7',2)}else for(let j=0;j<5;j++)line(-40+j*17,y-19,-35+j*17,y+8,'#fff9d866',3);g.strokeStyle=c;g.lineWidth=5;g.beginPath();g.moveTo(-58,y);g.quadraticCurveTo(-102,y-40,-92,y-60+Math.sin(phase)*10);g.stroke()}
+ label(GEM_BEASTS7[s.element]+' · 天极神契',0,y-70,'#fff0bd',13);g.restore();
+}
+const drawBeforeForge7=draw;draw=function(){drawBeforeForge7();if(!S)return;g.save();g.translate(-cam.x,-cam.y);for(const spirit of gemSummons7)if(spirit.map===currentMap())drawGemSpirit7(spirit);g.restore()};
+
+function forgeRelationName7(relation){return ({same:'同气相融',sheng:'五行相生',ke:'五行相克'})[relation]||'同气相融'}
+function forgeStoneLabel7(gem){return `${GEMS[gem.type].name} · ${WX.names[GEMS[gem.type].element]} · ${gem.level}级 ×${gem.count}`}
+function forgePreviewMarkup7(p){if(!p.pool)return `<p>${p.reason}</p>`;return `<div class="forge7-odds relation-${p.relation}"><div><small>${forgeRelationName7(p.relation)}</small><strong>${Math.round(p.success*1000)/10}%</strong><span>成功率</span></div><div><small>当前幸运</small><b>${p.luck}</b><span>+${Math.round(p.luck*.15*10)/10}%成功率</span></div><div><small>熔炼费用</small><b>${p.cost}</b><span>金币</span></div></div><p><b>成功：</b>消耗两枚材料，随机获得一枚${p.level}级宝石。<b>失败：</b>材料一保留，失去材料二和全部费用。</p><p>可能诞生：${p.pool.map(type=>GEMS[type].name).join('、')}。</p>${p.valid?'':`<p class="forge7-warning">${p.reason}</p>`}`}
+forgePanel=function(tab=forgeTab7){
+ if(!S)return;forgeTab7=['socket','synthesis','buy','codex'].includes(tab)?tab:'socket';tab=forgeTab7;
+ const weapon=S.heroes[S.active].gear[0],luck=forgeLuck7(),gems=gemBag().slice().sort((a,b)=>b.level-a.level||a.type-b.type);
+ showDialog(panelHead('五行铸星坊')+`<div class="realm-tabs forge7-tabs">${[['socket','武器镶嵌'],['synthesis','两仪熔炼'],['buy','宝石商店'],['codex','宝石图鉴']].map(([key,label])=>`<button data-forgetab7="${key}" class="${tab===key?'selected':''}">${label}</button>`).join('')}</div><div class="forge-intro"><span>金币 <b>${S.gold}</b></span><span>${HEROES[S.active].name} · ${WX.names[WX.heroElement(S.active)]}</span><span>幸运 <b>${luck}</b></span><span>包裹 <b>${gems.length}/200</b></span></div><div id="forgeContent7"></div>`);
+ $('#dialog').querySelectorAll('[data-forgetab7]').forEach(b=>b.onclick=()=>forgePanel(b.dataset.forgetab7));const content=$('#forgeContent7');
+ if(tab==='socket'){
+  const best=weapon?.sockets?.filter(Boolean).sort((a,b)=>b.level-a.level)[0],level=best?.level||1;
+  content.innerHTML=`<div class="weapon-stage forge7-weapon ${level>=9?'imperial-weapon':''}" style="--gem:${best?GEMS[best.type].color:'#a8bac0'};--level:${level}"><div class="weapon-art item-art" style="${weapon?gearStyle(weapon):''}"></div><div><small>武器 · 双孔铭刻</small><h3>${weapon?itemName(weapon):'请先装备武器'}</h3><p>替换与取下免费，旧宝石返回包裹。7级起环绕流光，9级帝辉金焰，10级可按Y召唤神兽；取下后加成与神契消失。</p><div class="socket-row">${[0,1].map(slot=>{const gem=weapon?.sockets?.[slot];return `<div class="socket ${gem?'filled':''}">${gem?gemArt(gem):'<span>◇</span>'}<b>${gem?gemName(gem):'空镶孔 '+(slot+1)}</b>${gem?`<small>${gemEffect(gem)}</small><button data-unsocket7="${slot}">取下宝石</button>`:''}</div>`}).join('')}</div></div></div>${equippedSupremeGem7(S.active)?'<button id="forgeSummon7">召唤天极神兽 Y · 60法力 / 90秒冷却</button>':''}<h3>我的宝石</h3><div class="gem-grid forge7-grid">${gems.map(gem=>`<article>${gemArt(gem)}<h3>${gemName(gem)}</h3><small>${WX.names[GEMS[gem.type].element]} · ${GEM_TIERS7[gem.level-1]} · 持有${gem.count}</small><p>${gemEffect(gem)}</p><div class="actions">${[0,1].map(slot=>`<button data-socket7="${gem.type}:${gem.level}:${slot}" ${!weapon?'disabled':''}>镶孔${slot+1}</button>`).join('')}</div></article>`).join('')||'<p class="empty-state">尚无宝石。可在营地购买，或从妖兽身上收集。</p>'}</div>`;
+  $('#dialog').querySelectorAll('[data-socket7]').forEach(b=>b.onclick=()=>{const[t,l,slot]=b.dataset.socket7.split(':').map(Number);if(socketGem(S.active,t,l,slot))forgePanel('socket');else logMessage('镶嵌失败：请检查武器、材料和包裹空间。')});$('#dialog').querySelectorAll('[data-unsocket7]').forEach(b=>b.onclick=()=>{if(unsocketGem(S.active,+b.dataset.unsocket7))forgePanel('socket');else logMessage('宝石堆叠已满，无法取下。')});if($('#forgeSummon7'))$('#forgeSummon7').onclick=()=>{closeDialog();summonGemBeast()};
+ }else if(tab==='synthesis'){
+  const available=gems.filter(gem=>gem.level<10);content.innerHTML=`<p>两枚同级宝石 → 一枚高一级宝石，最高10级。同种保留名称，混合种类会随机蜕变。相生更易、相克更难，幸运提升成功率。10级理论最少需要512枚1级宝石，失败会提高实际消耗。</p>${available.length?`<div class="forge7-materials"><label>材料一<select id="forgeA7">${available.map(gem=>`<option value="${gem.type}:${gem.level}">${forgeStoneLabel7(gem)}</option>`).join('')}</select></label><span>☯</span><label>材料二 · 必须同级<select id="forgeB7"></select></label></div><div id="forgeOdds7"></div><button id="forgePreview7" class="primary">预览并确认熔炼</button>`:'<p class="empty-state">没有可合成的宝石，前往商店或挑战妖兽收集材料。</p>'}`;
+  if(!available.length)return;
+  const selectA=()=>$('#forgeA7').value.split(':').map(Number);const updateOdds=()=>{const[t,l]=selectA(),tb=+$('#forgeB7').value,p=gemSynthesisPreview(t,l,tb);$('#forgeOdds7').innerHTML=forgePreviewMarkup7(p);$('#forgePreview7').disabled=!p.valid};
+  const updateOptions=()=>{const[t,l]=selectA(),old=+$('#forgeB7').value;$('#forgeB7').innerHTML=gems.filter(gem=>gem.level===l&&(gem.type!==t||gem.count>=2)).map(gem=>`<option value="${gem.type}">${forgeStoneLabel7(gem)}</option>`).join('');if([...$('#forgeB7').options].some(o=>+o.value===old))$('#forgeB7').value=old;updateOdds()};
+  $('#forgeA7').onchange=updateOptions;$('#forgeB7').onchange=updateOdds;updateOptions();$('#forgePreview7').onclick=()=>{const[t,l]=selectA(),tb=+$('#forgeB7').value,p=gemSynthesisPreview(t,l,tb);if(!p.valid)return;showDialog(panelHead('两仪熔炼 · 消耗确认')+`<div class="forge7-pair">${gemArt({type:t,level:l})}<span>☯</span>${gemArt({type:tb,level:l})}</div><p>${gemName({type:t,level:l})} + ${gemName({type:tb,level:l})}</p>${forgePreviewMarkup7(p)}<button id="forgeConfirm7" class="primary">支付${p.cost}金币并熔炼</button><button id="forgeCancel7">返回选择</button>`);$('#forgeCancel7').onclick=()=>forgePanel('synthesis');$('#forgeConfirm7').onclick=()=>{const button=$('#forgeConfirm7');button.disabled=true;const result=combineGemPair(t,l,tb);if(!result){forgePanel('synthesis');return}showDialog(panelHead(result.success?'星辉凝成':'熔炼未成')+(result.success?`<div class="forge7-result">${gemArt(result.gem)}</div><h3>${gemName(result.gem)}</h3><p>${gemEffect(result.gem)}</p><p>新宝石已收入包裹。${result.gem.level===10?'天极神契已觉醒：镶嵌后可按Y召唤'+GEM_BEASTS7[GEMS[result.gem.type].element]+'！':''}</p>`:`<div class="forge7-result failed">◇</div><p>材料一 ${gemName({type:t,level:l})} 已保留。材料二和${p.cost}金币已消耗，实际成功率${Math.round(p.success*1000)/10}%。</p>`)+`<button id="forgeDone7">返回两仪熔炼</button>`);$('#forgeDone7').onclick=()=>forgePanel('synthesis')}};
+ }else if(tab==='buy'){
+  content.innerHTML=`<p>驿站只售1级和2级宝石，3至10级必须熔炼获得。妖兽随机掉落1级、首领必掉2级，不会直接掉落天极宝石。</p>${!atCamp()?'<p class="forge7-warning">请抵达营地或地图入口驿站后交易；回城需要卷轴。</p>':''}<div class="gem-grid forge7-grid">${GEMS.map((gem,type)=>`<article>${gemArt({type,level:1})}<h3>${gem.name}</h3><small>${WX.names[gem.element]}属性</small><p>${gemEffect({type,level:1})}</p><div class="actions">${[1,2].map(level=>{const price=Math.ceil(gemShopPrice7(type,level));return `<button data-gembuy7="${type}:${level}" ${!atCamp()||S.gold<price?'disabled':''}>${level}级 · ${price}金</button>`}).join('')}</div></article>`).join('')}</div>`;
+  $('#dialog').querySelectorAll('[data-gembuy7]').forEach(b=>b.onclick=()=>{const[t,l]=b.dataset.gembuy7.split(':').map(Number);if(buyGem(t,l))forgePanel('buy')});
+ }else{
+  content.innerHTML='<p>五行相生：木→火→土→金→水→木；相克：木→土→水→火→金→木。熔炼以材料双方关系计算，战斗遵循进攻方向。当前为游戏平衡规则。</p><div class="forge7-tierline">'+GEM_TIERS7.map((name,i)=>`<span class="${i>=8?'exalted':''}"><b>${i+1}</b>${name}</span>`).join('')+'</div><div class="gem-grid forge7-grid">'+GEMS.map((gem,type)=>`<article>${gemArt({type,level:10})}<h3>${gem.name}</h3><small>${WX.names[gem.element]} · 天极神兽 ${GEM_BEASTS7[gem.element]}</small><p>1级：${gemEffect({type,level:1})}</p><p>10级：${gemEffect({type,level:10})}</p></article>`).join('')+'</div>';
+ }
+};
+// Rebind the persistent HUD control, whose V6 closure is otherwise already correct.
+if($('#realmForge'))$('#realmForge').onclick=()=>S&&forgePanel();
+
+'use strict';
+// Original bestiary: painted atlas cells, articulated air/ground motion, and depth cues.
+// Species ids 0..18 are preserved so existing pet contracts remain valid.
+const V7_BEASTS=[
+ {name:'赤羽毕方',element:3,flight:true,move:'wing',biome:'lava',ability:'breath',rarity:2,saddle:[-4,-65],story:'只在赤焰中落脚的独足灵鸟，开口便是一线流火。'},
+ {name:'通明泽兽',element:0,flight:false,move:'trot',biome:'forest',ability:'pulse',rarity:2,saddle:[-12,-69],story:'通晓山川灵语的白角兽，最喜欢替旅人辨认宝物。'},
+ {name:'青丘九尾',element:1,flight:false,move:'prowl',biome:'forest',ability:'pulse',rarity:2,saddle:[-13,-56],story:'九条尾巴各藏着一个鬼点子，幻术比爪子更危险。'},
+ {name:'沧海龙马',element:2,flight:false,move:'gallop',biome:'frost',ability:'pulse',rarity:2,saddle:[-10,-72],story:'踏浪而来的鳞甲龙马，四蹄所过皆有水纹。'},
+ {name:'雷泽夔牛',element:0,flight:false,move:'hop',biome:'stone',ability:'pulse',rarity:2,saddle:[-9,-71],story:'独足震地如鼓，吼声可惊散山谷中的雷云。'},
+ {name:'逐日天马',element:0,flight:true,move:'wing',biome:'astral',ability:'pounce',rarity:2,saddle:[-13,-65],story:'越过云海的双翼骏马，落地之前总要先绕营地一圈。'},
+ {name:'太阴玉兔',element:2,flight:false,move:'hop',biome:'frost',ability:'pulse',rarity:1,saddle:[-8,-52],story:'捣药的小灵兔抱着月光入梦，蹦跃时会洒下星屑。'},
+ {name:'幽水旋龟',element:2,flight:false,move:'crawl',biome:'frost',ability:'pulse',rarity:2,saddle:[-9,-53],story:'龟背有流动的水纹，长尾像一条警觉的小蛇。'},
+ {name:'鎏金翼狮',element:0,flight:true,move:'wing',biome:'stone',ability:'pounce',rarity:2,saddle:[-10,-66],story:'西境遗迹的守门者，以金翼遮风，以利爪护主。'},
+ {name:'烬鳞古龙',element:3,flight:true,move:'wing',biome:'lava',ability:'breath',rarity:3,saddle:[-8,-65],story:'沉睡于火山的古老龙裔，醒来时先打一声喷嚏。'},
+ {name:'虹翎羽蛇',element:1,flight:true,move:'glide',biome:'forest',ability:'breath',rarity:2,saddle:[-3,-60],story:'羽翼与鳞片同生的异兽，能在风中游出彩虹。'},
+ {name:'霜啸灵狼',element:2,flight:false,move:'prowl',biome:'frost',ability:'breath',rarity:1,saddle:[-13,-62],story:'雪原中的守望者，寒息与低伏的扑击一样迅疾。'},
+ {name:'搬山山魈',element:4,flight:false,move:'stomp',biome:'stone',ability:'pounce',rarity:2,saddle:[-9,-76],story:'生着石甲的山中巨猿，捡到石头总想先举起来。'},
+ {name:'幻梦蝶',element:1,flight:true,move:'wing',biome:'forest',ability:'pulse',rarity:2,saddle:[-2,-56],story:'蝶翼的斑纹像一场没做完的梦，振翅能扰乱妖气。'},
+ {name:'紫霄麒麟',element:4,flight:false,move:'gallop',biome:'astral',ability:'pulse',rarity:3,saddle:[-10,-72],story:'额角映出紫霄星图，蹄下地脉随着心跳共鸣。'},
+ {name:'玄角驳兽',element:0,flight:false,move:'gallop',biome:'void',ability:'pounce',rarity:2,saddle:[-10,-68],story:'白身黑尾的独角猛兽，外表温顺，冲锋时气势惊人。'},
+ {name:'琥珀灵鼋',element:4,flight:false,move:'crawl',biome:'stone',ability:'pulse',rarity:1,saddle:[-8,-50],story:'壳中封着远古树脂，阳光一照便显出金色纹路。'},
+ {name:'双首狱龙',element:3,flight:true,move:'wing',biome:'void',ability:'breath',rarity:3,saddle:[-6,-67],story:'两个脑袋经常拌嘴，喷息时却意外地合拍。'},
+ {name:'九曜金凰',element:3,flight:true,move:'wing',biome:'astral',ability:'breath',rarity:3,saddle:[-2,-67],story:'金羽拖着九道光焰，飞过之处像落下一场流星雨。'},
+ {name:'巡天星鲸',element:2,flight:true,move:'swim',biome:'astral',ability:'pulse',rarity:3,saddle:[-12,-54],story:'在云层中缓缓游弋的星海巨鲸，把夜空当作海洋。'}
+];
+const V7_PET_START=19;
+// Pivot positions measured against the final 5 x 4 painted atlas (world units).
+// Seated hero sprites place their hips roughly 33 px above their drawing origin.
+const V7_SADDLE_PIVOTS=[[-4,-65],[-9,-69],[18,-54],[-4,-62],[-8,-88],[6,-59],[0,-54],[4,-68],[4,-56],[1,-59],[-8,-58],[-8,-71],[-7,-82],[24,-54],[-6,-67],[-12,-77],[-10,-86],[1,-66],[10,-60],[-10,-80]];
+V7_BEASTS.forEach((p,i)=>{p.saddle=V7_SADDLE_PIVOTS[i]});
+const V7_ELEMENT_COLORS=['#efd08a','#8cdda4','#8fd8fa','#ffa276','#d9bd82'];
+const V7_ELEMENT_NAMES=['金','木','水','火','土'];
+const legacyPetElements=[4,0,2,1,3,2,4,0,1,1,0,3,3,4,2,2,0,1,3];
+for(let type=0;type<PETS.length;type++){
+ const p=PETS[type];p.element=legacyPetElements[type]??type%5;
+ p.flight=[3,4,7,11,12,14,15,17,18].includes(type);
+ p.move=p.flight?([3,14,17].includes(type)?'glide':'wing'):type===2?'crawl':'trot';
+ p.biome=['forest','stone','frost','forest','lava'][p.element];
+ p.ability=[3,4,11,12,15,18].includes(type)?'breath':[8,9,10,14,17].includes(type)?'pulse':'pounce';
+}
+V7_BEASTS.forEach((p,cell)=>{
+ const rarity=p.rarity,hp=30+rarity*45+(p.element===4?55:0),atk=5+rarity*4+(p.element===0?4:0),int=2+rarity*4+(p.element===1||p.element===2?5:0),armor=1+rarity*2+(p.element===4?3:0);
+ PETS.push({...p,atlasCell:cell,icon:p.flight?'✧':'♞',color:V7_ELEMENT_COLORS[p.element],hp,atk,int,armor,speed:p.flight?39+rarity*2:p.move==='crawl'?16:28+rarity*3,desc:p.story,bonus:`${V7_ELEMENT_NAMES[p.element]}行 · ${p.flight?'空中灵兽':'陆地灵兽'} · 生命 +${hp} · 攻击 +${atk} · 智力 +${int}`});
+});
+const V7_MONSTERS=[
+ {name:'枯脉树妖',element:1,flight:false,move:'stomp',biome:'forest',kind:'spirit'},
+ {name:'锈刃骸卫',element:0,flight:false,move:'trot',biome:'void',kind:'undead'},
+ {name:'熔心火魈',element:3,flight:false,move:'hop',biome:'lava',kind:'demon'},
+ {name:'寒潭水虺',element:2,flight:false,move:'slither',biome:'frost',kind:'serpent'},
+ {name:'裂岩石傀',element:4,flight:false,move:'stomp',biome:'stone',kind:'construct'},
+ {name:'夺宝邪修',element:0,flight:false,move:'trot',biome:'forest',kind:'cultivator'},
+ {name:'霜灯怨灵',element:2,flight:true,move:'glide',biome:'frost',kind:'undead'},
+ {name:'赤砂毒蝎',element:4,flight:false,move:'crawl',biome:'lava',kind:'insect'},
+ {name:'断翼石像鬼',element:0,flight:true,move:'wing',biome:'stone',kind:'construct'},
+ {name:'蚀心妖僧',element:1,flight:false,move:'trot',biome:'void',kind:'cultivator'},
+ {name:'九首渊蛇',element:2,flight:false,move:'slither',biome:'void',kind:'serpent'},
+ {name:'铁角食人魔',element:4,flight:false,move:'stomp',biome:'stone',kind:'ogre'},
+ {name:'焚翼魔裔',element:3,flight:true,move:'wing',biome:'lava',kind:'demon'},
+ {name:'幽烬骨龙',element:0,flight:true,move:'wing',biome:'void',kind:'undead'},
+ {name:'翡翠镰螳',element:1,flight:false,move:'crawl',biome:'forest',kind:'insect'},
+ {name:'负碑龙龟',element:2,flight:false,move:'stomp',biome:'forest',kind:'boss'},
+ {name:'焚山火麟',element:3,flight:false,move:'gallop',biome:'lava',kind:'boss'},
+ {name:'雷翎苍鹏',element:0,flight:true,move:'wing',biome:'frost',kind:'boss'},
+ {name:'太古岳神',element:4,flight:false,move:'stomp',biome:'stone',kind:'boss'},
+ {name:'无相渊魔',element:1,flight:true,move:'glide',biome:'void',kind:'boss'}
+];
+const V7_MONSTER_POOLS=[[0,5,9,14,3,1],[2,7,12,4,11,5],[3,6,10,1,8,14],[4,8,11,5,7,0],[1,9,10,12,13,6]];
+const beastAtlasV7=new Image(),monsterAtlasV7=new Image();
+beastAtlasV7.src='assets/beasts-v7.png';monsterAtlasV7.src='assets/monsters-v7.png';
+document.documentElement.style.setProperty('--beast-atlas-v7','url("assets/beasts-v7.png")');
+document.documentElement.style.setProperty('--monster-atlas-v7','url("assets/monsters-v7.png")');
+function v7PetInfo(type){return PETS[type]||PETS[0]}
+function v7SpeciesHash(id){let h=0;for(const c of String(id))h=(Math.imul(h,31)+c.charCodeAt(0))>>>0;return h}
+function v7MonsterInfo(e){return V7_MONSTERS[e.v7Species]||V7_MONSTERS[e.boss?15+e.z:V7_MONSTER_POOLS[e.z||0][0]]}
+function v7AssignMonster(e,id=e.id){const n=e.boss?15+e.z:V7_MONSTER_POOLS[e.z][v7SpeciesHash(id)%V7_MONSTER_POOLS[e.z].length],p=V7_MONSTERS[n];Object.assign(e,{v7Species:n,speciesName:p.name,element:p.element,flight:p.flight,movement:p.move,biome:p.biome});return e}
+const makeEnemyBeforeBestiaryV7=makeEnemy;
+makeEnemy=function(z,boss,x,y,id){return v7AssignMonster(makeEnemyBeforeBestiaryV7(z,boss,x,y,id),id)};
+const worldBeforeBestiaryV7=makeWorld;
+makeWorld=function(){worldBeforeBestiaryV7();for(const e of enemies){v7AssignMonster(e);if(e.rift&&e.boss){e.v7Species=19;e.speciesName='星渊 · 无相渊魔';e.element=V7_MONSTERS[19].element;e.flight=true;e.movement='glide';e.biome='void'}}};
+const petCardBeforeBestiaryV7=petCardStyle;
+petCardStyle=function(type){const cell=PETS[type]?.atlasCell;if(cell===undefined)return petCardBeforeBestiaryV7(type);return `background-image:var(--beast-atlas-v7);background-size:500% 400%;background-position:${cell%5*25}% ${Math.floor(cell/5)*100/3}%`};
+function v7CellRect(image,cell,columns=5,rows=4){const sw=image.naturalWidth/columns,sh=image.naturalHeight/rows;return{x:cell%columns*sw,y:Math.floor(cell/columns)*sh,sw,sh}}
+// This function crops sprite layers at draw time. No generated source art is modified.
+function v7SpritePiece(image,rect,part,x,y,w,h){const [u,v,uw,vh]=part;g.drawImage(image,rect.x+rect.sw*u,rect.y+rect.sh*v,rect.sw*uw,rect.sh*vh,x,y,w,h)}
+function v7WingLayer(image,rect,w,h,phase){
+ const flap=Math.sin(phase);
+ // The atlases face right: the visible wing occupies the upper-left. The head
+ // remains in the body layer, rather than being accidentally included in a wing crop.
+ g.save();g.translate(-w*.05,-h*.58);g.rotate(-.04-flap*.11);g.scale(1,.82+flap*.22);
+ v7SpritePiece(image,rect,[.0,.03,.60,.60],-w*.45,-h*.39,w*.60,h*.60);g.restore();
+}
+function v7DrawCreature(image,cell,height,pose,foreground=false,columns=5,rows=4){
+ const rect=v7CellRect(image,cell,columns,rows),w=height*rect.sw/rect.sh,h=height,flight=pose.flight,phase=pose.phase||0;
+ if(foreground){g.save();g.beginPath();g.rect(w*.17,-h,w*.34,h);g.clip();v7SpritePiece(image,rect,[0,0,1,1],-w/2,-h,w,h);g.restore();return}
+ if(flight&&pose.move==='wing')v7WingLayer(image,rect,w,h,phase*1.45);
+ // Body bends around its saddle; leg strips plant on alternating beats.
+ const split=flight?.86:.75;
+ g.save();g.rotate(pose.pitch||0);
+ if(flight&&pose.move==='wing'){
+  g.beginPath();for(const [j,point]of [[.40,.22],[.70,.07],[1,.03],[1,1],[0,1],[0,.69],[.35,.60]].entries()){const x=(point[0]-.5)*w,y=(point[1]-1)*h;if(j===0)g.moveTo(x,y);else g.lineTo(x,y)}g.closePath();g.clip();
+ }
+ v7SpritePiece(image,rect,[0,0,1,split],-w/2,-h,w,h*split);g.restore();
+ const legs=pose.move==='hop'?2:4;
+ for(let j=0;j<legs;j++){const stride=phase+(j%2?Math.PI:0)+(j<2?.4:0),step=pose.moving?Math.sin(stride):0,lift=pose.moving?Math.max(0,Math.cos(stride))*4:0;g.save();g.translate((j+.5)*w/legs-w/2,-h*(1-split));g.rotate(pose.moving?step*.07:0);v7SpritePiece(image,rect,[j/legs,split,1/legs,1-split],-w/legs/2+step*3,-lift,w/legs,h*(1-split));g.restore()}
+ if(flight&&['glide','swim'].includes(pose.move)){const tail=Math.sin(phase*.7)*.08;g.save();g.translate(-w*.26,-h*.42);g.rotate(tail);v7SpritePiece(image,rect,[0,.35,.31,.4],-w*.24,-h*.23,w*.31,h*.4);g.restore()}
+}
+function v7MountState(type,a){const p=v7PetInfo(type),clock=typeof renderClock==='number'?renderClock:time,moving=(a.motion||0)>.5,phase=(a.gait||0)+clock*(p.flight?3.8:.35),anim=a.petAnim||0,pulse=anim>0?Math.sin(clamp(1-anim/1.25,0,1)*Math.PI):0;
+ const elevation=p.flight?21+Math.sin(clock*2.4+a.i)*4:0,hop=p.move==='hop'&&moving?-Math.abs(Math.sin(phase))*8:0;
+ return{phase,moving,flight:p.flight,move:p.move,elevation,bob:(p.flight?Math.sin(phase*.5)*2:moving?-Math.abs(Math.sin(phase))*3:Math.sin(clock*1.8)*.8)-elevation+hop-(a.petMode==='roar'?pulse*7:0),pitch:(moving?Math.sin(phase*2)*.025:0)+(a.petMode==='pounce'?pulse*.06:a.petMode==='roar'?-pulse*.06:0),saddleX:p.saddle?.[0]??-8,saddleY:p.saddle?.[1]??-60,lunge:a.petMode==='pounce'?pulse*19:0,pulse};
+}
+const mountBeforeBestiaryV7=drawMount;
+drawMount=function(type,a,foreground=false){const pet=v7PetInfo(type),p=v7MountState(type,a),isNew=pet.atlasCell!==undefined;
+ if(!foreground&&pet.flight){g.save();g.globalAlpha=.32;ellipse(0,6,51-p.elevation*.28,12,'#000b17');g.globalAlpha=.35;line(-20,3,20,3,pet.color,1);g.restore()}
+ if(!isNew&&!pet.flight)return mountBeforeBestiaryV7(type,a,foreground);
+ const mapped=pet.art??type,legacyArt=petArtType(mapped),image=isNew?beastAtlasV7:mapped>=12?fusionAtlas:petAtlas,columns=isNew?5:mapped>=12?3:4,rows=isNew?4:mapped>=12?1:3,cell=isNew?pet.atlasCell:mapped>=12?mapped-12:legacyArt;
+ if(!isNew){p.saddleX=SADDLES[legacyArt][0];p.saddleY=SADDLES[legacyArt][1]}
+ if(!image.complete||!image.naturalWidth){g.save();g.translate(0,-p.elevation);const fallback=isNew?(pet.element===2?2:pet.element===3?4:0):type,out=mountBeforeBestiaryV7(fallback,a,foreground);g.restore();out.bob-=p.elevation;return out}
+ g.save();g.translate(p.lunge,p.bob);g.rotate(p.pitch);const h=isNew?(pet.move==='swim'?120:pet.flight?135:126):118;
+ v7DrawCreature(image,cell,h,{...p,pitch:0},foreground,columns,rows);
+ if(!foreground){
+  g.strokeStyle='#927451';g.lineWidth=3;g.beginPath();g.ellipse(p.saddleX,p.saddleY+4,15,5,0,0,7);g.stroke();
+  if(p.pulse>.04){g.save();g.globalCompositeOperation='lighter';g.globalAlpha=p.pulse*.75;const mouthX=43,mouthY=-h*.59;
+   if(a.petMode==='roar'){for(let n=0;n<3;n++){g.strokeStyle=pet.color;g.lineWidth=2;g.beginPath();g.arc(mouthX,mouthY,14+n*11+p.pulse*12,-.85,.85);g.stroke()}}
+   else if(a.petMode==='breath'){for(let n=0;n<10;n++){const q=(time*1.8+n/10)%1;ellipse(mouthX+q*75,mouthY+Math.sin(q*6+n)*q*14,5+q*7,3+q*5,n%3?pet.color:'#fff1bb')}}
+   else if(a.petMode==='pounce'){for(let n=0;n<3;n++)line(35+n*9,-30,55+n*9+p.pulse*12,-58,pet.color,2)}else circle(43,-65,18+p.pulse*20,pet.color,2);g.restore()}
+  if(pet.rarity>=3){g.save();g.globalAlpha=.55;g.globalCompositeOperation='lighter';for(let j=0;j<6;j++){const q=time*2+j;ellipse(Math.cos(q)*47,-40+Math.sin(q)*18,1.5,3,pet.color)}g.restore()}
+ }
+ g.restore();const sx=p.saddleX,sy=p.saddleY;p.saddleX=sx*Math.cos(p.pitch)-sy*Math.sin(p.pitch)+p.lunge;p.saddleY=sy*Math.cos(p.pitch)+sx*Math.sin(p.pitch);return p;
+};
+// Keep the player's existing skill and gem effects, while this pet-specific skill selection
+// gives new species their correct breath / claw / spirit attacks.
+const petAbilityBeforeBestiaryV7=petAbility;
+petAbility=function(i=S?.active,manual=true){const pet=S&&petOf(i),pd=pet&&v7PetInfo(pet.type);if(!pd||pet.type<V7_PET_START)return petAbilityBeforeBestiaryV7(i,manual);
+ if(!S||menu||!owned(i))return false;const a=actors[i];if(a.hp<=0||a.petCd>0)return false;
+ const target=nearestEnemy(a,manual?470:330);if(!target){if(manual){a.petMode='roar';a.petAnim=1.25;a.petCd=2;petFx.push({kind:'roar',x:a.x,y:a.y-65-(pd.flight?22:0),color:pd.color,t:1.1,max:1.1})}return false}
+ const kind=pd.ability,power=stats(i).atk*.75+pet.lv*5+(pet.fusion?.stars||0)*35;a.petCd=manual?8:11;a.petMode=kind;a.petAnim=1.25;a.face=target.x>=a.x?1:-1;
+ petFx.push({kind,x:a.x+a.face*47,y:a.y-70-(pd.flight?22:0),tx:target.x,ty:target.y-35,color:pd.color,t:1.8,max:1.8,seed:pet.id});
+ const radius=kind==='breath'?105:kind==='pulse'?135:0,targets=enemies.filter(e=>e.map===currentMap()&&!e.dead&&(e===target||dist(e,target)<radius));for(const e of targets)enemyDamage(e,power*(kind==='pulse'?.7:kind==='breath'?.85:1.1),i,pd.element);tone(kind==='breath'?95:220,.15,'triangle');return true;
+};
+$('#petAction').onclick=()=>{petAbility();refreshBars()};
+const enemyDrawBeforeBestiaryV7=drawEnemy;
+drawEnemy=function(e){if(!S||e.map!==currentMap()||e.dead&&e.deathT<=0)return;if(!monsterAtlasV7.complete||!monsterAtlasV7.naturalWidth){enemyDrawBeforeBestiaryV7(e);return}
+ const spec=v7MonsterInfo(e),height=e.boss?220:e.elite?112:91,phase=(e.gait||0)+renderClock*(spec.flight?3.3:.8),moving=Math.hypot(e.dx||0,e.dy||0)>.2,strike=e.strike?Math.sin(clamp(1-e.strike.t/(e.boss?.5:.34),0,1)*Math.PI):0,hover=spec.flight?17+Math.sin(renderClock*2.2+e.x)*5:0;
+ g.save();g.translate(e.x,e.y);ellipse(0,7,e.boss?70:spec.flight?25:27,e.boss?23:9,'#03101899');if(e.dead){g.globalAlpha=clamp(e.deathT/.65,0,1);g.rotate((1-e.deathT/.65)*.85)}
+ const col=V7_ELEMENT_COLORS[e.element];g.save();g.translate((e.hitT>0?Math.sin(e.hitT*100)*4:0)+(e.x<active().x?1:-1)*strike*(e.boss?15:10),-hover+(moving?Math.sin(phase)*2:Math.sin(phase)*.8));g.scale(e.x<active().x?1:-1,1);
+ if(e.wind){g.globalAlpha=.6;circle(0,-height*.42,e.boss?85:35,col+'77',2);g.globalAlpha=1}
+ v7DrawCreature(monsterAtlasV7,e.v7Species??(e.boss?15+e.z:0),height,{phase,moving,flight:spec.flight,move:spec.move,pitch:-strike*.06});
+ if(e.strike){g.globalAlpha=strike*.7;g.strokeStyle=col;g.lineWidth=e.boss?4:2;g.beginPath();g.arc(30,-height*.4,height*.35,-1.5,1.2);g.stroke();g.globalAlpha=1}g.restore();
+ if(!e.dead){const y=-height-hover-15;label((e.elite&&!e.boss?'精英 · ':'')+(e.speciesName||spec.name)+' Lv.'+e.level,0,y,e.boss?'#f7d7a1':'#d7d7c4',e.boss?14:10);label(V7_ELEMENT_NAMES[e.element]+'行'+(spec.flight?' · 飞行':''),0,y-16,col,e.boss?11:9);rr(-30,y+7,60,4,2,'#102828');rr(-30,y+7,60*clamp(e.hp/e.max,0,1),4,2,'#e79578');
+ if(e.boss&&!e.rift&&S.kills[e.z]<ZONES[e.z].need){circle(0,-height*.45,100,'#a5d8e366',2);label('灵脉屏障',0,y-33,'#b4d7d5',10)}if(e.shield>0)circle(0,-height*.45,e.boss?100:44,'#badcffaa',2);if(e.guardT>0)label('招架',0,y-32,'#edd4a3',11);
+ if(e.root>0){for(let j=0;j<3;j++)line(-24+j*23,4,-16+j*18,-24,'#90bc88',3)}if(e.slow>0)ellipse(0,5,e.r+10,(e.r+10)*.4,'#93d6ff44');if(e.burn>0)for(let j=0;j<5;j++)ellipse(Math.sin(time*5+j)*22,-18-j*10,3,8,'#ffae6488')}
+ g.restore();
+};
+const mapDrawBeforeBestiaryV7=drawMap;
+drawMap=function(){mapDrawBeforeBestiaryV7();if(!S)return;const id=currentMap();
+ // Raised ruin plinths, contact shadows and vertically lit prisms provide 2.5D relief.
+ if(id)for(let j=0;j<9;j++){const x=950+(j*473+id*97)%3500,y=550+(j*317+id*151)%2300;if(x<cam.x-120||x>cam.x+VW+120||y<cam.y-80||y>cam.y+VH+120||!walkable(x,y,60))continue;const h=28+j%3*17,c=MAPS[id].accent;ellipse(x+11,y+9,36,12,'#07121d77');poly([[x-19,y],[x+18,y-7],[x+18,y-h-7],[x-19,y-h]],id===2?'#57312a':'#38474c');poly([[x+18,y-7],[x+32,y-17],[x+32,y-h-17],[x+18,y-h-7]],'#182a32');poly([[x-19,y-h],[x+18,y-h-7],[x+32,y-h-17],[x-4,y-h-11]],c+'77');line(x-17,y-h+1,x+17,y-h-6,c+'88',1)}
+};
+const drawBeforeBestiaryV7=draw;
+draw=function(){drawBeforeBestiaryV7();if(!S)return;g.save();const fog=g.createLinearGradient(0,0,0,VH);fog.addColorStop(0,'#0a182a24');fog.addColorStop(.30,'#00000000');fog.addColorStop(.8,'#00000000');fog.addColorStop(1,'#040b181c');g.fillStyle=fog;g.fillRect(0,0,VW,VH);g.restore()};
+
+'use strict';
+// Final composition layer: all modules loaded before the only initializer.
+function relation(a,b){return WX.relation(a,b)}
+function damageMultiplier(a,b){return WX.damageMultiplier(a,b)}
+function itemElement(item){return WX.itemElement(item)}
+const finalStatsBeforeV7=stats;stats=function(i){return applyElementalStats7(finalStatsBeforeV7(i),i)};
+const petAttackBeforeGate7=petAbility;petAbility=function(i=S.active,manual=true){if(!S||menu||!owned(i))return false;const a=actors[i],target=nearestEnemy(a,manual?460:360);if(!canEngage(a,target,manual))return false;if(manual&&target)issueAttackOrder(i);const previous=damageElementContext7;damageElementContext7=WX.petElement(petOf(i)?.type);try{return petAttackBeforeGate7(i,manual)}finally{damageElementContext7=previous}};
+const updateBeforeFinal7=update;update=function(dt){if(S&&!menu&&(keys.has('KeyW')||keys.has('KeyA')||keys.has('KeyS')||keys.has('KeyD')||keys.has('ArrowUp')||keys.has('ArrowDown')||keys.has('ArrowLeft')||keys.has('ArrowRight')||Math.hypot(joystickVector.x,joystickVector.y)>.1))setPassiveOrder7([active()]);updateBeforeFinal7(dt)};
+
+const panelTargets7={};
+function switchPanelHero(i){if(!S||!panelContext7||!Number.isInteger(i)||i<0||i>4||!owned(i))return false;const context={key:panelContext7.key,args:[...panelContext7.args]};S.active=i;destination=null;selection=[i];panelTargets7[context.key](...context.args);refreshBars();return true}
+const showBeforeHeroTabs7=showDialog;showDialog=function(html,type='panel'){showBeforeHeroTabs7(html,type);if(!S||type==='start'||!panelContext7)return;$('#dialog').insertAdjacentHTML('afterbegin','<nav class="panel-heroes7" aria-label="面板内切换角色"><span>角色</span>'+HEROES.map((h,i)=>`<button data-panel-hero="${i}" class="${S.active===i?'selected':''}" ${owned(i)?'':'disabled'} style="--hero:${h.color}"><i>${h.element}</i><b>${h.name}</b></button>`).join('')+'</nav>');$('#dialog').querySelectorAll('[data-panel-hero]').forEach(b=>b.onclick=()=>switchPanelHero(+b.dataset.panelHero))};
+function wrapCharacterPanel7(key,fn){const wrapped=function(...args){panelContext7={key,args};return fn(...args)};panelTargets7[key]=wrapped;return wrapped}
+talentPanel=wrapCharacterPanel7('talent',talentPanel);bagPanel=wrapCharacterPanel7('bag',bagPanel);petsPanel=wrapCharacterPanel7('pets',petsPanel);forgePanel=wrapCharacterPanel7('forge',forgePanel);fusionPanel=wrapCharacterPanel7('fusion',fusionPanel);careerPanel=wrapCharacterPanel7('career',careerPanel);
+const closeBeforeHeroTabs7=closeDialog;closeDialog=function(){if(menu==='start')return;panelContext7=null;closeBeforeHeroTabs7()};
+const switchBeforeHeroTabs7=switchHero;switchHero=function(i){if(menu&&panelContext7)return switchPanelHero(i);return switchBeforeHeroTabs7(i)};
+const talentBeforeDetails7=talentPanel;talentPanel=function(...args){talentBeforeDetails7(...args);const i=S.active,st=stats(i),pet=petOf(i);$('#dialog').insertAdjacentHTML('beforeend',`<div class="wx-character7"><h3>${WX.badge(i)} ${HEROES[i].name} · 五行共鸣</h3><p>攻击 ${st.atk} · 护甲 ${Math.round(st.armor*10)/10} · 幸运 ${st.luck} · 普攻间隔 ${st.interval.toFixed(2)}秒<br>装备、灵宠与宝石共鸣 ${Math.round((st.resonance-1)*1000)/10}% · 灵时增益 ${Math.round(st.phaseBonus*100)}% · 当前指令 ${active().combatOrder==='attack'?'主动进攻':'被动迎击'}<br>${pet?'骑乘 '+PETS[pet.type].name+' · '+WX.names[WX.petElement(pet.type)]+'行 · '+(PETS[pet.type].flight?'飞行':'地面'):'未骑乘灵宠'}</p></div>`)};panelTargets7.talent=talentPanel;
+const descriptionBeforeWuxing7=itemDescription;itemDescription=function(item){const element=WX.itemElement(item);return WX.names[element]+'行 · '+descriptionBeforeWuxing7(item)+(S?' · '+WX.label(WX.heroElement(S.active),element):'')};
+
+function requestReturn7(){if(!S)return;panelContext7=null;showDialog(panelHead('回城卷轴')+`<p>拥有 ${(S.scrolls||0)} 张。每次返回青禾营地消耗1张，地图菜单与实地回城门同样需要卷轴。全队战败时由长老救援。</p><p>卷轴在各地图入口商店以80金币购买，也可通过战斗获得。当前金币 ${S.gold}。</p><div id="returnStatus7"></div><div class="actions"><button id="useReturn7" class="primary" ${currentMap()===0||!(S.scrolls>0)?'disabled':''}>消耗1张 · 返回青禾</button><button id="buyReturn7" ${!atCamp()||S.gold<80?'disabled':''}>购买卷轴 · 80金</button></div>`);$('#useReturn7').onclick=()=>{if(returnCamp())closeDialog();else $('#returnStatus7').textContent='无法回城，请检查卷轴并脱离战斗。'};$('#buyReturn7').onclick=()=>{if(buyReturnScroll())requestReturn7()}}
+const shopBeforeScrollPanel7=shop;shop=function(){panelContext7=null;shopBeforeScrollPanel7();if(S&&atCamp()&&menu){$('#dialog').insertAdjacentHTML('afterbegin',`<div class="scroll-shop7"><b>回城卷轴 ×${S.scrolls||0}</b><button id="shopScroll7" ${S.gold<80?'disabled':''}>购买一张 · 80金币</button></div>`);$('#shopScroll7').onclick=()=>{if(buyReturnScroll())shop()}}};
+const menuBeforeWuxing7=realmMenuPanel;realmMenuPanel=function(){panelContext7=null;menuBeforeWuxing7();$('#dialog').insertAdjacentHTML('beforeend','<div class="actions"><button id="menuWuxing7">☯ 五行图谱 / 干支灵时</button><button id="menuReturn7">回城卷轴 ×'+(S.scrolls||0)+'</button><button id="menuStop7">停止进攻 · 被动迎击</button></div>');$('#menuWuxing7').onclick=()=>{panelContext7=null;wuxingPanel7()};$('#menuReturn7').onclick=requestReturn7;$('#menuStop7').onclick=()=>{setPassiveOrder7();closeDialog();logMessage('选中成员转为被动迎击，受到攻击后才会还击。')}};
+const worldBeforeScrollPanel7=worldPanel;worldPanel=function(){panelContext7=null;worldBeforeScrollPanel7();$('#dialog').insertAdjacentHTML('afterbegin','<p class="scroll-notice7">返回青禾营地消耗1张回城卷轴 · 当前 '+(S.scrolls||0)+' 张</p>')};
+const pauseBeforePanels7=pausePanel;pausePanel=function(){panelContext7=null;pauseBeforePanels7()};
+const journeyBeforePanels7=journeyPanel;journeyPanel=function(){panelContext7=null;journeyBeforePanels7()};
+v6Help=function(){panelContext7=null;showDialog(panelHead('山海五行 · V7 操作指南')+'<p>开始时所有角色处于被动迎击，靠近敌人不会主动出手；受到攻击后才向攻击者还击。点击「进攻」/J、敌人或右键进攻移动开始主动攻击。驻守、跟随、移动和手动跑步会停止主动进攻。普攻有攻击间隔，装备和攻速宝石可以缩短。</p><p>Q/E/R技能，G防御，空格闪避，H药剂，F互动，V灵宠技，T转职觉醒。十级宝石镶嵌在武器后按Y召唤神兽，手机可使用独立神兽按钮。</p><p>属性、装备、灵宠、宝石等面板顶部可直接切换已招募角色，不必退出。右上菜单管理传送、编队、剧情与设置存档。</p><p>武器双孔镶嵌，宝石共18类、十级成长；两枚同级合为一枚高一级。相生提高成功率，相克降低，失败损失会在确认页面列清。十级至少需要512枚基础材料，随机失败会增加成本。</p><p>灵宠包裹最多100只，可收集39种灵宠。两只不同种类、10级以上灵宠可尝试五行合体，关系与当前英雄幸运共同影响概率。相生配对更容易，意外变异可能得到飞行或地面奇兽。</p><p>回城需要卷轴，每次1张；80金币可在地图入口购买，战斗也可能掉落。全队战败救援保留原有10%金币损失。</p><p>画面采用手绘立体图集、深度遮挡、飞行高度、动态阴影与分层动作，属于2.5D表现。存档在当前浏览器，菜单可导出备份。</p>')};
+$('#realmMenu').onclick=realmMenuPanel;$('#realmBag').onclick=()=>S&&bagPanel();$('#realmPets').onclick=()=>S&&petsPanel();$('#realmForge').onclick=()=>S&&forgePanel();$('#campBtn').onclick=requestReturn7;$('#equipBtn').onclick=bagPanel;$('#bagBtn').onclick=bagPanel;$('#mountBtn').onclick=petsPanel;$('#trainBtn').onclick=talentPanel;$('#shopBtn').onclick=shop;$('#helpBtn').onclick=v6Help;$('#menuBtn').onclick=realmMenuPanel;
+$('#worldBtn').onclick=worldPanel;$('#mobileWorld').onclick=worldPanel;$('#careerBtn').onclick=careerPanel;
+document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{if(S)({talent:talentPanel,bag:bagPanel,pets:petsPanel,shop,pause:realmMenuPanel})[b.dataset.open]()});
+const refreshBeforeFinal7=refreshBars;refreshBars=function(){refreshBeforeFinal7();if(!S||!actors.length)return;const a=active(),stance=a.combatOrder==='attack'?'进攻':a.retaliateUntil>time?'迎击':'被动';$('#label6-attack').textContent=stance==='被动'?'进攻':stance;$('#action6-attack').setAttribute?.('aria-label','进攻');$('#statusLevel').textContent='Lv.'+S.heroes[S.active].lv+' · '+WX.names[S.active]+' · '+stance;
+ if(!$('#scrollReturn7')){$('.world-wrap').insertAdjacentHTML('beforeend','<button id="scrollReturn7" class="scroll-return7">回城卷轴</button><button id="supremeTouch7" class="supreme-touch7" hidden>神兽 Y</button>');$('#scrollReturn7').onclick=requestReturn7;$('#supremeTouch7').onclick=()=>summonGemBeast()}
+ $('#scrollReturn7').textContent='卷轴回城 '+(S.scrolls||0);const supreme=$('#supremeTouch7'),gem=equippedSupremeGem7(S.active);supreme.hidden=!gem;supreme.disabled=!gem||a.mp<60||(a.gemSummonCd||0)>0;supreme.textContent=gem?'神兽 '+((a.gemSummonCd||0)>0?Math.ceil(a.gemSummonCd)+'s':'Y'):'';
+ const boss=enemies.find(e=>e.map===currentMap()&&e.boss&&!e.dead&&dist(a,e)<540);if(boss)$('#bossHud').innerHTML=`${WX.badge(boss.element)} ${boss.speciesName||ZONES[boss.z].boss} <small>Lv.${boss.level} · 阶段 ${boss.phase}/3</small><div class="bar"><b style="width:${clamp(boss.hp/boss.max*100,0,100)}%"></b></div>`;
+ if($('#statusOpen'))$('#statusOpen').onclick=talentPanel;
+};
+// Reset transient summons on load; save compatibility keeps earlier versions intact.
+const beginBeforeBoot7=begin;begin=function(data){gemSummons7=[];beginBeforeBoot7(data);$('#touchAttack').textContent='⚔ 进攻';$('#touchAttack').onclick=()=>{if(S&&!menu){issueAttackOrder();attack(active(),true);refreshBars()}};$('#action6-attack').onclick=()=>{if(S&&!menu){issueAttackOrder();attack(active(),true);refreshBars()}};refreshBars()};
+help=v6Help;v5Help=v6Help;
+const introBeforeVersion7=intro;intro=function(){introBeforeVersion7();const heading=$('#dialog').querySelector('h2');if(heading)heading.textContent='五行纪 · 山海五行 V7'};
+ZONES.forEach((zone,i)=>zone.boss=V7_MONSTERS[15+i].name);
+MAPS[1].desc='渡过溪谷，穿过废弃神殿，挑战负碑龙龟。';
 v3Ready=true;resizeWorld();intro();requestAnimationFrame(frame);

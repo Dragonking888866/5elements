@@ -1,0 +1,15 @@
+:root{--beast-atlas-v7:url('assets/beasts-v7.png');--monster-atlas-v7:url('assets/monsters-v7.png')}
+.pet-portrait,.fusion-result{isolation:isolate;filter:drop-shadow(0 8px 7px #0009)}
+.pet-grid article{background:radial-gradient(ellipse at 50% 18%,#41645b26,transparent 64%),linear-gradient(145deg,#202924,#101a1b);border-color:#78674765}
+.pet-grid article h3{letter-spacing:.08em;color:#efd8a4}
+.pet-grid article p{line-height:1.65}
+.pet-flight .pet-portrait{animation:v7AirPortrait 2.2s ease-in-out infinite}
+.pet-ground .pet-portrait{animation:v7GroundPortrait 3s ease-in-out infinite}
+.pet-element-tag{display:inline-flex;gap:5px;align-items:center;border:1px solid currentColor;border-radius:20px;padding:2px 9px;font-size:11px;opacity:.9}
+.bestiary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.bestiary-card{border:1px solid #7e704b66;border-radius:9px;padding:13px;background:linear-gradient(160deg,#28332d,#111d20)}
+.bestiary-card .pet-portrait{height:140px;background-repeat:no-repeat}
+.bestiary-card small{color:#a6c0bd}
+@keyframes v7AirPortrait{0%,100%{transform:translateY(3px) rotate(-1deg);filter:drop-shadow(0 11px 8px #0007)}50%{transform:translateY(-7px) rotate(1deg);filter:drop-shadow(0 20px 12px #0004)}}
+@keyframes v7GroundPortrait{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-2px) scale(1.025)}}
+@media(prefers-reduced-motion:reduce){.pet-flight .pet-portrait,.pet-ground .pet-portrait{animation:none}}
