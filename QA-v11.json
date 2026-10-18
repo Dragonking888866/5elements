@@ -1,0 +1,102 @@
+{
+  "version": "11.0.0",
+  "checkedAt": "2026-10-18T19:59:59.836890+00:00",
+  "checks": 119,
+  "passed": 119,
+  "fusionSimulation": {
+    "petTrials": 10000,
+    "petExpected": 0.378,
+    "petObserved": 0.3809,
+    "gemTrials": 10000,
+    "gemExpected": 0.22,
+    "gemObserved": 0.221
+  },
+  "stability": {
+    "simulatedSeconds": 600,
+    "ticks": 36000,
+    "wallMs": 111489,
+    "peaks": {
+      "particles": 86,
+      "impacts": 3,
+      "numbers": 32,
+      "effects": 6
+    },
+    "kills": 174,
+    "bag": 48,
+    "petCount": 19,
+    "saveValid": true
+  },
+  "browserPerformance": {
+    "quality": "low",
+    "fps": 30,
+    "renderMs": 6.816666668405135,
+    "samples": 240,
+    "enemies": 60,
+    "particles": 8,
+    "pooled": 28,
+    "queue": 0,
+    "canvas": [
+      1280,
+      720
+    ]
+  },
+  "performanceLimit": "Embedded desktop browser sample, not physical Android/iOS hardware or a proven 60 FPS result. Canvas values are logical dimensions.",
+  "precacheReferences": 33,
+  "assets": [
+    {
+      "path": "web/assets/camp-npcs-v11.png",
+      "bytes": 2289352,
+      "width": 1774,
+      "height": 887,
+      "pngColorType": 6,
+      "sha256": "f83ee3c6a2d746720c34446918b7c3f5c591da39b31a71f85679c0977a541205"
+    },
+    {
+      "path": "web/assets/camp-props-v11.png",
+      "bytes": 2517863,
+      "width": 1774,
+      "height": 887,
+      "pngColorType": 6,
+      "sha256": "a99adcc7e5b4e53f3f468ea1a9cb60195cb9713192acbebe505a9365aaee6f5c"
+    },
+    {
+      "path": "web/assets/items-v11.png",
+      "bytes": 2340559,
+      "width": 1448,
+      "height": 1086,
+      "pngColorType": 2,
+      "sha256": "29242799cdb7ceff980e54ea888b0d4a1da1c0e2fefb6686cb70fccab8c04191"
+    }
+  ],
+  "changedFiles": [
+    "ART-v11.md",
+    "README-v11.md",
+    "README.md",
+    "build.cjs",
+    "tests/integration.cjs",
+    "tests/regression-v10.cjs",
+    "tests/stability-v11.cjs",
+    "tests/systems-v10.cjs",
+    "tests/v10-harness.cjs",
+    "tests/visual-v11.cjs",
+    "web/assets/camp-npcs-v11.png",
+    "web/assets/camp-props-v11.png",
+    "web/assets/items-v11.png",
+    "web/boot-v10.js",
+    "web/boot-v11.js",
+    "web/companions-v11.js",
+    "web/downloads.html",
+    "web/frontier-v8.js",
+    "web/game.js",
+    "web/index.html",
+    "web/market-v11.js",
+    "web/motion-v11.js",
+    "web/performance-v11.js",
+    "web/render-v11.js",
+    "web/runtime.js",
+    "web/sanctuary.js",
+    "web/scenes-v11.js",
+    "web/sw.js",
+    "web/visual-v11.css"
+  ]
+}

@@ -1,7 +1,7 @@
 const {run,test}=require('./v10-harness.cjs');
 require('./fixtures-v10.cjs');
 test('新游戏可立即保存读取，装备元数据和五阶字段完整',()=>run(`
- begin(fresh('新远征',0));assert(validateSave(S));assert(readSave());assert.equal(SAVE_KEY,'wuxing-chronicles-v10');assert.equal(S.heroes[0].gear[0].baseLevel10,5);assert.equal(heroCount10(S.heroes[0]),0);assert.equal(levelCap10(0),150);
+ begin(fresh('新远征',0));assert(validateSave(S));assert(readSave());assert.equal(SAVE_KEY,'wuxing-chronicles-v11');assert.equal(S.heroes[0].gear[0].baseLevel10,5);assert.equal(heroCount10(S.heroes[0]),0);assert.equal(levelCap10(0),150);
 `));
 test('全体幸运包含未出战和未招募的有效角色，并即时影响两个融合系统',()=>run(`
  reset10();const a=addPet(0,false,3),b=addPet(1,false,3);giveGem(0,8,2);const p0=petFusionPreview10(a,b).success,g0=gemFusionPreview10([{type:0,level:8},{type:0,level:8}]).success;S.heroes[4].unlocked=false;S.heroes[4].innateLuck10=100;invalidateLuck10();const luck=sharedLuck10();assert.equal(luck.count,5);assert.equal(luck.total,100);assert.equal(sharedLuck10(),luck);assert(petFusionPreview10(a,b).success>p0);assert(gemFusionPreview10([{type:0,level:8},{type:0,level:8}]).success>g0);S.heroes[4].test10=true;invalidateLuck10();assert.equal(sharedLuck10().total,0);delete S.heroes[4].test10;S.heroes[4].deleted10=true;invalidateLuck10();assert.equal(sharedLuck10().total,0);
