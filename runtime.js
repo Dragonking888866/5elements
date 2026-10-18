@@ -1,6 +1,6 @@
 'use strict';
 // 五行纪：独立浏览器单机 RPG，无网络依赖。
-const $=s=>document.querySelector(s), canvas=$('#world'),g=canvas.getContext('2d'),mini=$('#minimap'),mg=mini.getContext('2d');
+const $=s=>document.querySelector(s), canvas=$('#world'),mini=$('#minimap'),mg=mini.getContext('2d');let g=canvas.getContext('2d');
 let VW=1280,VH=760;const WW=3300,WH=2100,SAVE_KEY='wuxing-chronicles-v4';
 const HEROES=[
  {name:'凌锋',element:'金',title:'破阵剑卫',color:'#e7c980',icon:'⚔',main:'agi',base:[12,7,13],growth:[2.6,1.4,3],q:'裂金斩',e:'剑影突袭',r:'万剑归宗',desc:'近战爆发 · 敏捷主属性',skills:['135 范围扇形斩击，造成攻击 ×2.1 + 智力伤害。','向目标突进，短暂无敌，造成攻击 ×2.5。','3级解锁：剑雨连续打击周围敌人。']},
@@ -335,7 +335,7 @@ function galleryPanel(){if(!S)return;showDialog(panelHead('演武场 · 动作�
 function renderGallery(){const c=$('#rigPreview');if(!c||!c.getContext)return;const ctx=c.getContext('2d');galleryClock+=1/60;const i=galleryState.i,a={i,x:0,y:0,face:1,gait:galleryClock*9,motion:galleryState.mode==='run'||galleryState.mode==='ride'?100:0,hp:100,guard:galleryState.mode==='guard'?1:0,anim:galleryState.mode==='ride'?'run':galleryState.mode,animT:.44-(galleryClock% .44),hitT:0};
  // Render joints into the dedicated preview context; the world remains untouched.
  const worldContext=g;g=ctx;try{g.save();g.setTransform(1,0,0,1,0,0);g.fillStyle='#183238';g.fillRect(0,0,760,400);for(let j=0;j<20;j++)line(j*70-(galleryClock*60)%70,342,j*70+30-(galleryClock*60)%70,342,'#61766c',2);g.translate(370,342);g.scale(1.7,1.7);if(galleryState.mode==='ride'){const p=drawMount(galleryState.pet,a);g.save();g.translate(-3,p.saddleY+p.bob+30);drawWarrior(a,true);g.restore();drawMount(galleryState.pet,a,true)}else drawWarrior(a);g.restore();}finally{g=worldContext}}
-$('#journeyBtn').onclick=journeyPanel;$('#galleryBtn').onclick=galleryPanel;
+$('#journeyBtn').onclick=journeyPanel;$('#galleryBtn').onclick=galleryPanel;$('#mobileJourney').onclick=journeyPanel;$('#mobileGallery').onclick=galleryPanel;
 $('#shareBtn').onclick=async()=>{if(!/^https?:$/.test(location.protocol)){logMessage('分享需要先发布到网站；本地文件链接不能发给其他人直接玩。');return}try{if(navigator.share)await navigator.share({title:'五行纪 · 行者之约',url:location.href});else{await navigator.clipboard.writeText(location.href);logMessage('网址已复制，发给朋友即可游玩。')}}catch{logMessage('当前浏览器无法分享，请复制地址栏网址。')}};
 const oldSaveGame=saveGame;saveGame=function(announce=true){oldSaveGame(announce);if(S&&window.webkit?.messageHandlers?.game)window.webkit.messageHandlers.game.postMessage({action:'persist',json:JSON.stringify(S)})};
 const oldExport=exportSave;exportSave=function(data=S){if(window.webkit?.messageHandlers?.game){window.webkit.messageHandlers.game.postMessage({action:'export',json:JSON.stringify(data,null,2)});return}oldExport(data)};

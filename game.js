@@ -1,6 +1,6 @@
 'use strict';
 // 五行纪：独立浏览器单机 RPG，无网络依赖。
-const $=s=>document.querySelector(s), canvas=$('#world'),g=canvas.getContext('2d'),mini=$('#minimap'),mg=mini.getContext('2d');
+const $=s=>document.querySelector(s), canvas=$('#world'),mini=$('#minimap'),mg=mini.getContext('2d');let g=canvas.getContext('2d');
 let VW=1280,VH=760;const WW=3300,WH=2100,SAVE_KEY='wuxing-chronicles-v4';
 const HEROES=[
  {name:'凌锋',element:'金',title:'破阵剑卫',color:'#e7c980',icon:'⚔',main:'agi',base:[12,7,13],growth:[2.6,1.4,3],q:'裂金斩',e:'剑影突袭',r:'万剑归宗',desc:'近战爆发 · 敏捷主属性',skills:['135 范围扇形斩击，造成攻击 ×2.1 + 智力伤害。','向目标突进，短暂无敌，造成攻击 ×2.5。','3级解锁：剑雨连续打击周围敌人。']},
