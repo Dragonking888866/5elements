@@ -1,0 +1,70 @@
+{
+  "version": "12.0.0",
+  "checkedAt": "2026-10-18T20:35:49.622329+00:00",
+  "checks": 127,
+  "passed": 127,
+  "fusionSimulation": {
+    "petTrials": 10000,
+    "petExpected": 0.378,
+    "petObserved": 0.3809,
+    "gemTrials": 10000,
+    "gemExpected": 0.22,
+    "gemObserved": 0.221
+  },
+  "stability": {
+    "simulatedSeconds": 600,
+    "ticks": 36000,
+    "wallMs": 119402,
+    "peaks": {
+      "particles": 86,
+      "impacts": 3,
+      "numbers": 32,
+      "effects": 6
+    },
+    "kills": 174,
+    "bag": 48,
+    "petCount": 19,
+    "saveValid": true
+  },
+  "browserPerformance": {
+    "quality": "low",
+    "fps": 31,
+    "renderMs": 6.337499999875823,
+    "samples": 240,
+    "enemies": 57,
+    "particles": 22,
+    "pooled": 14,
+    "queue": 0,
+    "canvas": [
+      1280,
+      720
+    ]
+  },
+  "limits": [
+    "Canvas 2.5D sprite layers, no true 3D models",
+    "390px iframe layout check, not physical Android/iPhone hardware",
+    "No multiplayer networking",
+    "Native APK/iOS packages remain V5"
+  ],
+  "precacheReferences": 35,
+  "newAsset": {
+    "path": "web/assets/woodland-v12.png",
+    "bytes": 2631713,
+    "width": 1774,
+    "height": 887,
+    "pngColorType": 6,
+    "sha256": "a901bc40ebd7882a31e3619e365d74bfbb3f6afe2b8087265cfa0d7d0ff77518"
+  },
+  "browserChecks": [
+    "Fresh title and continue save render correctly",
+    "Desktop select weapons / halberd preview / actual purchase 1000000 → 999855, inventory 0 → 1",
+    "390px phone-size actual sword purchase 1000000 → 999890, inventory 0 → 1",
+    "Rendered camp forest, cliffs, paths, portal arch and shop furniture",
+    "Pet attack facing and combat effects render without console errors"
+  ],
+  "fixedDuringQA": [
+    "Guard shop furniture and companion queue before a save exists",
+    "Crop neighboring item art from large shop previews",
+    "Move mobile purchase receipt below buy button"
+  ]
+}
