@@ -7,7 +7,7 @@ source+=`\nconst WX={names:['金','木','水','火','土'],colors:['#e6c87e','#7
 source+='\nfunction canEngage(){return true}\n';
 source+=fs.readFileSync(path.join(project,'web/forge-v7.js'),'utf8');
 source+=`\nconst finalStatsForge7=stats;stats=function(i){const s=finalStatsForge7(i);s.interval=Math.max(.18,s.interval/(s.attackRate||1));return s};`;
-let harness=fs.readFileSync(path.join(project,'tests/v7-harness.cjs'),'utf8').replace("const source=path.join(__dirname,'../web/runtime.js');vm.runInContext(fs.readFileSync(source,'utf8'),sandbox",'const source="forge-module-smoke";vm.runInContext('+JSON.stringify(source)+',sandbox');
+let harness=fs.readFileSync(path.join(project,'tests/v7-harness.cjs'),'utf8').replace("const source=path.join(__dirname,'../runtime.js');vm.runInContext(fs.readFileSync(source,'utf8'),sandbox",'const source="forge-module-smoke";vm.runInContext('+JSON.stringify(source)+',sandbox');
 const mod=new Module(__filename);mod.filename=__filename;mod.paths=module.paths;mod._compile(harness,__filename);
 const {run,test,finish}=mod.exports;
 test('18 gem types and ten tiers',()=>run(`assert.equal(GEMS.length,18);assert.equal(GEM_CAP,10);assert.equal(gemValid({type:17,level:10}),true);assert.equal(gemValid({type:18,level:1}),false);assert.equal(gemValid({type:0,level:11}),false)`));

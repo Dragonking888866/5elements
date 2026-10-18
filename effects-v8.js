@@ -40,4 +40,4 @@ $('#realmMenu').onclick=realmMenuPanel;$('#menuBtn').onclick=realmMenuPanel;$('#
 document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{if(S)({talent:talentPanel,bag:bagPanel,pets:petsPanel,shop,pause:realmMenuPanel})[b.dataset.open]()});
 const updateBeforeCampHint8=update;update=function(dt){updateBeforeCampHint8(dt);if(S&&!menu&&currentMap()===0){const near=CAMP_SHOPS8.find(s=>dist(s,active())<140);$('#hint').textContent=near?'F 进入 · '+near.name:'营地南侧百工街 · 宝石商店 / 冶金铺 / 合成铺'}};
 const enterBeforePetCleanup8=enterMap;enterMap=function(...args){const before=currentMap(),result=enterBeforePetCleanup8(...args);if(result&&before!==currentMap())petFx=[];return result};
-v3Ready=true;resizeWorld();intro();requestAnimationFrame(frame);
+// Initializer moved to journey-ui-v9.js.
