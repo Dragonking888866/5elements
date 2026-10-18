@@ -126,4 +126,4 @@ const summonV4=summonAdds;summonAdds=function(e){const count=enemies.length;summ
 const terrainAtlas=new Image();terrainAtlas.src='assets/terrain-v5.png';const terrainPatterns=new Map();
 const drawMapV5=drawMap;drawMap=function(){drawMapV5()};
 function paintTerrain(){if(!terrainAtlas.complete||!terrainAtlas.naturalWidth)return;const id=Math.max(0,currentMap()-1);if(!terrainPatterns.has(id)){const tile=document.createElement('canvas');tile.width=256;tile.height=256;const ctx=tile.getContext?.('2d');if(!ctx)return;ctx.drawImage(terrainAtlas,id%3*terrainAtlas.naturalWidth/3,Math.floor(id/3)*terrainAtlas.naturalHeight/2,terrainAtlas.naturalWidth/3,terrainAtlas.naturalHeight/2,0,0,256,256);terrainPatterns.set(id,g.createPattern(tile,'repeat'))}g.save();g.globalAlpha=.38;g.fillStyle=terrainPatterns.get(id);g.fillRect(cam.x,cam.y,VW,VH);g.restore()}
-v3Ready=true;intro();requestAnimationFrame(frame);
+

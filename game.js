@@ -1,7 +1,7 @@
 'use strict';
 // 五行纪：独立浏览器单机 RPG，无网络依赖。
 const $=s=>document.querySelector(s), canvas=$('#world'),mini=$('#minimap'),mg=mini.getContext('2d');let g=canvas.getContext('2d');
-let VW=1280,VH=760;const WW=4800,WH=3200,SAVE_KEY='wuxing-chronicles-v5';
+let VW=1280,VH=760;const WW=4800,WH=3200,SAVE_KEY='wuxing-chronicles-v6';
 const HEROES=[
  {name:'凌锋',element:'金',title:'破阵剑卫',color:'#e7c980',icon:'⚔',main:'agi',base:[12,7,13],growth:[2.6,1.4,3],q:'裂金斩',e:'剑影突袭',r:'万剑归宗',desc:'近战爆发 · 敏捷主属性',skills:['135 范围扇形斩击，造成攻击 ×2.1 + 智力伤害。','向目标突进，短暂无敌，造成攻击 ×2.5。','3级解锁：剑雨连续打击周围敌人。']},
  {name:'青萝',element:'木',title:'灵藤游侠',color:'#91c995',icon:'❧',main:'agi',base:[8,11,13],growth:[1.7,2.5,2.8],q:'缠灵箭',e:'回春之种',r:'万木复苏',desc:'远程输出 · 治疗与定身',skills:['远程灵箭造成攻击 ×1.8 + 智力 ×2，定身3秒。','恢复全队 45 + 智力 ×3 生命。','3级解锁：恢复全队生命，击退并缠绕周围敌人。']},
@@ -52,7 +52,7 @@ function baseRefreshBars(){if(!S)return;$('#gold').textContent='◈ '+S.gold;$('
 function showDialog(html,type='panel'){menu=type;keys.clear();destination=null;$('#dialog').innerHTML=html;$('#curtain').classList.remove('hidden');$('#dialog').querySelectorAll('[data-close]').forEach(b=>b.onclick=closeDialog);}
 function closeDialog(){if(menu==='start')return;menu=null;$('#curtain').classList.add('hidden');keys.clear();canvas.focus({preventScroll:true});saveGame(false);refreshBars()}
 function saveGame(announce=true){if(!S)return;S.position={x:active().x,y:active().y};try{localStorage.setItem(SAVE_KEY,JSON.stringify(S));notice='已自动保存';if(announce)logMessage('进度已保存：角色、装备、骑宠与剧情。')}catch{notice='浏览器存储不可用，请导出存档';if(announce)logMessage(notice)}}
-function readSave(){try{let v=JSON.parse(localStorage.getItem(SAVE_KEY)||localStorage.getItem('wuxing-chronicles-v4')||localStorage.getItem('wuxing-chronicles-v2')||localStorage.getItem('wuxing-chronicles-v1'));return validateSave(v)?v:null}catch{return null}}
+function readSave(){try{let v=JSON.parse(localStorage.getItem(SAVE_KEY)||localStorage.getItem('wuxing-chronicles-v5')||localStorage.getItem('wuxing-chronicles-v4')||localStorage.getItem('wuxing-chronicles-v2')||localStorage.getItem('wuxing-chronicles-v1'));return validateSave(v)?v:null}catch{return null}}
 function validateSave(v){if(!v||![1,2].includes(v.version)||typeof v.name!=='string'||v.name.length>24||!Number.isInteger(v.active)||v.active<0||v.active>4)return false;
  const num=(n,min,max)=>typeof n==='number'&&Number.isFinite(n)&&n>=min&&n<=max;
  if(!num(v.gold,0,1e9)||!num(v.potions,0,1e5)||!Number.isInteger(v.chapter)||!num(v.chapter,0,4)||!num(v.nextItem,1,1e9)||!num(v.totalKills,0,1e8)||!num(v.death,0,1e7)||!num(v.played,0,1e10))return false;
