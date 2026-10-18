@@ -1,0 +1,27 @@
+name: Check iOS project
+on:
+  push:
+    paths:
+      - downloads/wuxing-ios-project.zip
+      - .github/workflows/check-ios.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compile:
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unpack delivered project
+        run: unzip -q downloads/wuxing-ios-project.zip -d ios-check
+      - name: Compile for iOS Simulator without signing
+        run: |
+          set -o pipefail
+          xcodebuild -project ios-check/wuxing-ios/Wuxing.xcodeproj -scheme Wuxing -sdk iphonesimulator -configuration Debug -destination 'generic/platform=iOS Simulator' -derivedDataPath ios-check/build CODE_SIGNING_ALLOWED=NO build | tee ios-check/xcodebuild.log
+      - name: Save compiler log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-build-log
+          path: ios-check/xcodebuild.log
