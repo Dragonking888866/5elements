@@ -11,7 +11,7 @@ test('五行相生相克覆盖全部25对，合成关系双向一致',()=>run(`
  for(let a=0;a<5;a++){assert.equal(WX.damageMultiplier(a,a),1);assert.equal(WX.damageMultiplier(a,ke[a]),1.3);assert.equal(WX.damageMultiplier(ke[a],a),.65)}
 `));
 test('英雄、怪物、灵兽、装备和宝石全部具有合法五行归属',()=>run(`
- begin(fresh('五行底层',0));assert.equal(SAVE_KEY,'wuxing-chronicles-v13');
+ begin(fresh('五行底层',0));assert.equal(SAVE_KEY,'wuxing-chronicles-v14');
  for(let i=0;i<5;i++)assert.equal(S.heroes[i].element,i);
  for(const e of enemies)assert(Number.isInteger(e.element)&&e.element>=0&&e.element<5);
  for(const p of PETS)assert(Number.isInteger(p.element)&&p.element>=0&&p.element<5);
@@ -100,7 +100,7 @@ test('空地灵兽全种类动作和新怪物绘制均无非法画布坐标',()=
  enterMap(1);for(const e of enemies.filter(e=>e.map===1))drawEnemy(e);draw();assert(validateSave(S));
 `));
 test('旧地图权限、桥梁寻路和驻守命令保留',()=>run(`
- begin(fresh('远征回归',0));assert.equal(MAPS.length,11);assert(enterMap(1));assert(!mapUnlocked(2));assert(!walkable(1660,600));assert(walkable(1660,1370));const path=findPath({x:1100,y:800},{x:2200,y:800});assert(path.length>5);assert(path.every(p=>walkable(p.x,p.y)));assert(path.some(p=>p.y>=1180&&p.y<=1560));
+ begin(fresh('远征回归',0));assert.equal(MAPS.length,12);assert(enterMap(1));assert(!mapUnlocked(2));assert(!walkable(1660,600));assert(walkable(1660,1370));const path=findPath({x:1100,y:800},{x:2200,y:800});assert(path.length>5);assert(path.every(p=>walkable(p.x,p.y)));assert(path.some(p=>p.y>=1180&&p.y<=1560));
  S.heroes[1].unlocked=true;actors[1].hp=stats(1).hp;actors[1].x=700;actors[1].y=600;selectUnits([1]);commandUnits('hold');const x=actors[1].x,y=actors[1].y;S.active=0;active().x=2200;active().y=1200;for(let n=0;n<60;n++)update(1/60);assert.equal(actors[1].x,x);assert.equal(actors[1].y,y);saveGame(false);begin(readSave());assert.equal(actors[1].x,x);assert.equal(actors[1].order.kind,'hold');
 `));
 test('五英雄十五种手动技能仍有消耗与冷却',()=>run(`
@@ -188,11 +188,11 @@ test('新地图怪物比旧区强且所有出生点避开河流城墙',()=>run(`
 test('新地图首领直接可战，不受旧章节屏障影响且不重复主线奖励',()=>run(`
  prepareTeam9(120);S.kills=[0,0,0,0,0];enterMap(7);const b=enemies.find(e=>e.map===7&&e.boss),chapter=S.chapter,recruited=S.heroes.filter(h=>h.unlocked).length;enemyDamage(b,1000,0,0);assert(b.hp<b.max);enemyDamage(b,1e14,0,0);assert(b.dead);assert.equal(S.chapter,chapter);assert.equal(S.heroes.filter(h=>h.unlocked).length,recruited);assert(S.journey9.includes(7));assert(validateSave(S));
 `));
-test('断命预警足够明显、位置固定，离开区域可以完全躲过',()=>run(`
- prepareTeam9();enterMap(7);const b=enemies.find(e=>e.map===7&&e.boss),a=active();a.x=b.x-200;a.y=b.y;createBossTell(b,a);const w=b.wind;assert(w.lethal9);assert(w.t>=2.3);assert.equal(w.kind,'circle');const origin=w.x;a.x=w.x+w.r+100;const hp=a.hp;assert.equal(w.x,origin);resolveBossTell(b);assert.equal(a.hp,hp);assert(!b.wind);
+test('新版重击预警位置固定，离开区域可以完全躲过',()=>run(`
+ prepareTeam9();enterMap(7);const b=enemies.find(e=>e.map===7&&e.boss),a=active();a.x=b.x-200;a.y=b.y;createBossTell(b,a);const w=b.wind;assert(w.heavy14&&!w.lethal9);assert(w.t>=3.2);assert.equal(w.kind,'circle');const origin=w.x;a.x=w.x+w.r+100;const hp=a.hp;assert.equal(w.x,origin);resolveBossTell(b);assert.equal(a.hp,hp);assert(!b.wind);
 `));
-test('命中秒杀技能会击倒角色，护甲护盾和普通防御不能挡住',()=>run(`
- prepareTeam9();enterMap(7);const b=enemies.find(e=>e.map===7&&e.boss),a=actors[0];a.x=b.x-200;a.y=b.y;a.inv=0;a.dodge=0;a.guard=1;a.shield=1e8;for(const v of actors.slice(1)){v.x=360;v.y=440}createBossTell(b,a);resolveBossTell(b);assert.equal(a.hp,0);assert.equal(a.shield,0);assert(actors[1].hp>0);assert(currentMap()===7);
+test('重击不再绕过护盾和防御清空生命',()=>run(`
+ prepareTeam9();enterMap(7);const b=enemies.find(e=>e.map===7&&e.boss),a=actors[0];a.x=b.x-200;a.y=b.y;a.inv=0;a.dodge=0;a.guard=1;a.shield=1e8;for(const v of actors.slice(1)){v.x=360;v.y=440}createBossTell(b,a);resolveBossTell(b);assert(a.hp>0);assert(a.shield>0&&a.shield<1e8);assert(actors[1].hp>0);assert(currentMap()===7);
 `));
 test('闪避无敌可以抵挡致命命中，三种技能形状都可解析',()=>run(`
  prepareTeam9();enterMap(9,true);assert.equal(currentMap(),0);S.journey9=[7,8];enterMap(9);const b=enemies.find(e=>e.map===9&&e.boss),a=active();a.x=b.x-200;a.y=b.y;const kinds=new Set();for(let n=0;n<3;n++){a.hp=stats(a.i).hp;a.dodge=.5;a.inv=.3;createBossTell(b,a);kinds.add(b.wind.kind);const hp=a.hp;resolveBossTell(b);assert.equal(a.hp,hp)}assert.equal(kinds.size,3);

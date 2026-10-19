@@ -32,7 +32,7 @@ function makeExpEnemy9(map,index,boss=false){const spec=EXPEDITIONS9[map-7],z=sp
  if(boss){e.v7Species=spec.species;e.speciesName=spec.boss;e.element=spec.element;e.hidden9=map===10;e.flight=map>=9}
  setupEncounter8(e,rank);return applyWave9(e);
 }
-const worldBeforeJourney9=makeWorld;makeWorld=function(){worldBeforeJourney9();for(const e of enemies)applyWave9(e);for(let map=7;map<MAPS.length;map++){for(let j=0;j<(map===10?24:40);j++)enemies.push(makeExpEnemy9(map,j));enemies.push(makeExpEnemy9(map,99,true))}
+const worldBeforeJourney9=makeWorld;makeWorld=function(){worldBeforeJourney9();for(const e of enemies)applyWave9(e);for(let map=7;map<=10;map++){for(let j=0;j<(map===10?24:40);j++)enemies.push(makeExpEnemy9(map,j));enemies.push(makeExpEnemy9(map,99,true))}
  for(const e of enemies){if(e.noRewards||e.sealed9)continue;const due=S.respawns8[enemyKey8(e)];if(due!==undefined&&due>S.played){e.dead=true;e.deathT=0;e.due8=due}}
 };
 function rebuildEncounter9(old){if(old.exp9)return makeExpEnemy9(old.map,old.boss?99:Number(old.id.split('-').pop()),old.boss);

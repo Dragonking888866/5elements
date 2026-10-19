@@ -1,7 +1,7 @@
 'use strict';
 // 五行纪：独立浏览器单机 RPG，无网络依赖。
 const $=s=>document.querySelector(s), canvas=$('#world'),mini=$('#minimap'),mg=mini.getContext('2d');let g=canvas.getContext('2d');
-let VW=1280,VH=760;const WW=4800,WH=3200,SAVE_KEY='wuxing-chronicles-v13';
+let VW=1280,VH=760;const WW=4800,WH=3200,SAVE_KEY='wuxing-chronicles-v14';
 const HEROES=[
  {name:'凌锋',element:'金',title:'破阵剑卫',color:'#e7c980',icon:'⚔',main:'agi',base:[12,7,13],growth:[2.6,1.4,3],q:'裂金斩',e:'剑影突袭',r:'万剑归宗',desc:'近战爆发 · 敏捷主属性',skills:['135 范围扇形斩击，造成攻击 ×2.1 + 智力伤害。','向目标突进，短暂无敌，造成攻击 ×2.5。','3级解锁：剑雨连续打击周围敌人。']},
  {name:'青萝',element:'木',title:'灵藤游侠',color:'#91c995',icon:'❧',main:'agi',base:[8,11,13],growth:[1.7,2.5,2.8],q:'缠灵箭',e:'回春之种',r:'万木复苏',desc:'远程输出 · 治疗与定身',skills:['远程灵箭造成攻击 ×1.8 + 智力 ×2，定身3秒。','恢复全队 45 + 智力 ×3 生命。','3级解锁：恢复全队生命，击退并缠绕周围敌人。']},
@@ -52,7 +52,7 @@ function baseRefreshBars(){if(!S)return;$('#gold').textContent='◈ '+S.gold;$('
 function showDialog(html,type='panel'){menu=type;keys.clear();destination=null;$('#dialog').innerHTML=html;$('#curtain').classList.remove('hidden');$('#dialog').querySelectorAll('[data-close]').forEach(b=>b.onclick=closeDialog);}
 function closeDialog(){if(menu==='start')return;menu=null;$('#curtain').classList.add('hidden');keys.clear();canvas.focus({preventScroll:true});saveGame(false);refreshBars()}
 function saveGame(announce=true){if(!S)return;S.position={x:active().x,y:active().y};try{localStorage.setItem(SAVE_KEY,JSON.stringify(S));notice='已自动保存';if(announce)logMessage('进度已保存：角色、装备、骑宠与剧情。')}catch{notice='浏览器存储不可用，请导出存档';if(announce)logMessage(notice)}}
-function readSave(){try{let v=JSON.parse(localStorage.getItem(SAVE_KEY)||localStorage.getItem('wuxing-chronicles-v12')||localStorage.getItem('wuxing-chronicles-v11')||localStorage.getItem('wuxing-chronicles-v10')||localStorage.getItem('wuxing-chronicles-v9')||localStorage.getItem('wuxing-chronicles-v8')||localStorage.getItem('wuxing-chronicles-v7')||localStorage.getItem('wuxing-chronicles-v6')||localStorage.getItem('wuxing-chronicles-v5')||localStorage.getItem('wuxing-chronicles-v4')||localStorage.getItem('wuxing-chronicles-v2')||localStorage.getItem('wuxing-chronicles-v1'));return validateSave(v)?v:null}catch{return null}}
+function readSave(){try{let v=JSON.parse(localStorage.getItem(SAVE_KEY)||localStorage.getItem('wuxing-chronicles-v13')||localStorage.getItem('wuxing-chronicles-v12')||localStorage.getItem('wuxing-chronicles-v11')||localStorage.getItem('wuxing-chronicles-v10')||localStorage.getItem('wuxing-chronicles-v9')||localStorage.getItem('wuxing-chronicles-v8')||localStorage.getItem('wuxing-chronicles-v7')||localStorage.getItem('wuxing-chronicles-v6')||localStorage.getItem('wuxing-chronicles-v5')||localStorage.getItem('wuxing-chronicles-v4')||localStorage.getItem('wuxing-chronicles-v2')||localStorage.getItem('wuxing-chronicles-v1'));return validateSave(v)?v:null}catch{return null}}
 function validateSave(v){if(!v||![1,2].includes(v.version)||typeof v.name!=='string'||v.name.length>24||!Number.isInteger(v.active)||v.active<0||v.active>4)return false;
  const num=(n,min,max)=>typeof n==='number'&&Number.isFinite(n)&&n>=min&&n<=max;
  if(!num(v.gold,0,1e9)||!num(v.potions,0,1e5)||!Number.isInteger(v.chapter)||!num(v.chapter,0,4)||!num(v.nextItem,1,1e9)||!num(v.totalKills,0,1e8)||!num(v.death,0,1e7)||!num(v.played,0,1e10))return false;
@@ -207,7 +207,7 @@ function updateEnemies(dt){for(let e of enemies){e.hitT=Math.max(0,(e.hitT||0)-d
  if(dd>e.r+44&&e.root<=0){let speed=(e.boss?77+(e.phase-1)*14:95+e.z*5)*(e.slow>0?.55:1);e.x+=(target.x-e.x)/dd*speed*dt;e.y+=(target.y-e.y)/dd*speed*dt}else if(dd<e.r+58&&e.attack<=0&&e.root<=0){e.strike={t:e.boss?.5:.34,target:target.i};e.animT=e.boss?.7:.5;e.attack=e.boss?(e.phase>=2?1.1:1.4):1.6}
  }else{e.strike=null;if(e.wind){e.wind=null;e.cast=3}e.x+=(e.home.x-e.x)*Math.min(1,dt*.7);e.y+=(e.home.y-e.y)*Math.min(1,dt*.7);if(e.boss&&dist(e,e.home)<40)e.hp=Math.min(e.max,e.hp+dt*e.max*.04)}}
  for(let h of hazards){h.life-=dt;h.tick-=dt;if(h.tick<=0){h.tick=.8;for(let a of actors)if(owned(a.i)&&a.hp>0&&dist(a,h)<h.r)actorDamage(a,h.atk,{element:h.element??ZONES[h.z].element,hazard:true})}}hazards=hazards.filter(h=>h.life>0);}
-function update(dt){if(!S||menu)return;globalPotionCd=Math.max(0,globalPotionCd-dt);for(let a of actors){if(a.animT===undefined)initAnim(a);a.animT=Math.max(0,a.animT-dt);a.hitT=Math.max(0,a.hitT-dt);a.guard=Math.max(0,a.guard-dt);a.guardCd=Math.max(0,a.guardCd-dt);a.dodgeCd=Math.max(0,a.dodgeCd-dt);a.slow=Math.max(0,a.slow-dt);a.stamina=Math.min(100,a.stamina+dt*19);if(a.dodge>0){a.dodge=Math.max(0,a.dodge-dt);a.x=clamp(a.x+(a.rollX||0)*540*dt,70,WW-70);a.y=clamp(a.y+(a.rollY||0)*540*dt,145,WH-35);const locked=ZONES.findIndex((z,i)=>i>S.chapter&&!S.won&&dist(a,z)<375);if(locked>=0){a.x-=(a.rollX||0)*540*dt;a.y-=(a.rollY||0)*540*dt;a.dodge=0}}if(a.i!==S.active&&owned(a.i)&&a.hp>0){const danger=enemies.find(e=>e.strike?.target===a.i&&e.strike.t<.25);if(danger&&a.guardCd<=0){a.guard=.7;a.guardCd=4;a.anim='guard';a.animT=.7}}}
+function update(dt){if(!S||menu)return;globalPotionCd=Math.max(0,globalPotionCd-dt);for(let a of actors){if(a.animT===undefined)initAnim(a);a.animT=Math.max(0,a.animT-dt);a.hitT=Math.max(0,a.hitT-dt);a.guard=Math.max(0,a.guard-dt);a.guardCd=Math.max(0,a.guardCd-dt);a.dodgeCd=Math.max(0,a.dodgeCd-dt);a.slow=Math.max(0,a.slow-dt);a.stamina=Math.min(100,a.stamina+dt*19);if(a.dodge>0){a.dodge=Math.max(0,a.dodge-dt);a.x=clamp(a.x+(a.rollX||0)*540*dt,70,WW-70);a.y=clamp(a.y+(a.rollY||0)*540*dt,145,WH-35);const locked=ZONES.findIndex((z,i)=>i>S.chapter&&!S.won&&(typeof currentMap!=='function'||currentMap()===i+1)&&dist(a,z)<375);if(locked>=0){a.x-=(a.rollX||0)*540*dt;a.y-=(a.rollY||0)*540*dt;a.dodge=0}}if(a.i!==S.active&&owned(a.i)&&a.hp>0){const danger=enemies.find(e=>e.strike?.target===a.i&&e.strike.t<.25);if(danger&&a.guardCd<=0){a.guard=.7;a.guardCd=4;a.anim='guard';a.animT=.7}}}
  if(Math.hypot(joystickVector.x,joystickVector.y)>.1){destination=null;move(active(),joystickVector.x,joystickVector.y,stats(S.active).speed,dt)}baseUpdate(dt);screenShake=Math.max(0,screenShake-dt*18);damageFlash=Math.max(0,damageFlash-dt);for(let e of battleFx)e.t-=dt;battleFx=battleFx.filter(e=>e.t>0);
  if(S){const boss=enemies.find(e=>e.boss&&!e.dead&&dist(active(),e)<560&&e.z<=S.chapter);if(boss){$('#bossHud').classList.remove('hidden');$('#bossHud').innerHTML=`${ZONES[boss.z].boss} <small>Lv.${3+boss.z*2} · 阶段 ${boss.phase}/3</small><div class="bar"><b style="width:${clamp(boss.hp/boss.max*100,0,100)}%"></b></div><div class="boss-health">${Math.ceil(boss.hp)} / ${boss.max}${boss.shield>0?' · 屏障 '+Math.ceil(boss.shield):''}</div>`}}}
 
@@ -1116,7 +1116,7 @@ const gemArtBeforeQuality8=gemArt;gemArt=function(gem,cls=''){return gemArtBefor
 const validateBeforeQuality8=validateSave;validateSave=function(v){if(!validateBeforeQuality8(v))return false;const all=[...v.pets,...v.bag,...v.heroes.flatMap(h=>h.gear.filter(Boolean))];if(all.some(p=>p.quality!==undefined&&(!Number.isInteger(p.quality)||p.quality<0||p.quality>6)))return false;
  if(v.ingots!==undefined&&(!Number.isInteger(v.ingots)||v.ingots<0||v.ingots>1e8))return false;
  if(v.discoveredPets!==undefined&&(!Array.isArray(v.discoveredPets)||v.discoveredPets.length>PETS.length||new Set(v.discoveredPets).size!==v.discoveredPets.length||v.discoveredPets.some(t=>!Number.isInteger(t)||!PETS[t])))return false;
- if(v.respawns8!==undefined&&(!v.respawns8||Array.isArray(v.respawns8)||typeof v.respawns8!=='object'||Object.keys(v.respawns8).length>1200||Object.entries(v.respawns8).some(([k,n])=>!/^(?:[0-9]|10):[\w-]{1,60}$/.test(k)||typeof n!=='number'||!Number.isFinite(n)||n<0||n>1e10)))return false;return true};
+ if(v.respawns8!==undefined&&(!v.respawns8||Array.isArray(v.respawns8)||typeof v.respawns8!=='object'||Object.keys(v.respawns8).length>1200||Object.entries(v.respawns8).some(([k,n])=>!/^(?:[0-9]|10|11):[\w-]{1,60}$/.test(k)||typeof n!=='number'||!Number.isFinite(n)||n<0||n>1e10)))return false;return true};
 const beginBeforeQuality8=begin;begin=function(data){const next=JSON.parse(JSON.stringify(data));next.ingots??=0;next.respawns8??={};next.discoveredPets=[...new Set([...(next.discoveredPets||[]),...next.pets.map(p=>p.type)])];for(const p of next.pets)p.quality??=PETS[p.type].minQuality||0;for(const it of [...next.bag,...next.heroes.flatMap(h=>h.gear.filter(Boolean))])it.quality??=it.tier;beginBeforeQuality8(next);for(const h of S.heroes)for(const it of h.gear)if(it)it.quality??=it.tier;saveGame(false)};
 function rememberPets8(){if(S)S.discoveredPets=[...new Set([...(S.discoveredPets||[]),...S.pets.map(p=>p.type)])]}
 const addPetBeforeDiscovery8=addPet;addPet=function(...args){const p=addPetBeforeDiscovery8(...args);if(p)rememberPets8();return p};
@@ -1266,7 +1266,7 @@ function makeExpEnemy9(map,index,boss=false){const spec=EXPEDITIONS9[map-7],z=sp
  if(boss){e.v7Species=spec.species;e.speciesName=spec.boss;e.element=spec.element;e.hidden9=map===10;e.flight=map>=9}
  setupEncounter8(e,rank);return applyWave9(e);
 }
-const worldBeforeJourney9=makeWorld;makeWorld=function(){worldBeforeJourney9();for(const e of enemies)applyWave9(e);for(let map=7;map<MAPS.length;map++){for(let j=0;j<(map===10?24:40);j++)enemies.push(makeExpEnemy9(map,j));enemies.push(makeExpEnemy9(map,99,true))}
+const worldBeforeJourney9=makeWorld;makeWorld=function(){worldBeforeJourney9();for(const e of enemies)applyWave9(e);for(let map=7;map<=10;map++){for(let j=0;j<(map===10?24:40);j++)enemies.push(makeExpEnemy9(map,j));enemies.push(makeExpEnemy9(map,99,true))}
  for(const e of enemies){if(e.noRewards||e.sealed9)continue;const due=S.respawns8[enemyKey8(e)];if(due!==undefined&&due>S.played){e.dead=true;e.deathT=0;e.due8=due}}
 };
 function rebuildEncounter9(old){if(old.exp9)return makeExpEnemy9(old.map,old.boss?99:Number(old.id.split('-').pop()),old.boss);
@@ -1309,7 +1309,7 @@ const validateBeforeProgress9=validateSave;validateSave=function(v){if(!validate
  if(v.secretBossWins9!==undefined&&!integer(v.secretBossWins9))return false;
  if(v.secretClaims9!==undefined&&(!Array.isArray(v.secretClaims9)||v.secretClaims9.length>2||new Set(v.secretClaims9).size!==v.secretClaims9.length||v.secretClaims9.some(n=>!['sigils','star'].includes(n))))return false;
  if(v.encounters9!==undefined&&(!v.encounters9||typeof v.encounters9!=='object'||Array.isArray(v.encounters9)||Object.keys(v.encounters9).length>1200||Object.entries(v.encounters9).some(([key,r])=>!/^(?:[0-9]|10):[\w-]{1,60}$/.test(key)||!r||!integer(r.kills)||!integer(r.level,1e6))))return false;
- if(v.map>=7){if(!v.heroes.every(h=>h.unlocked))return false;if(v.map===8&&!v.journey9?.includes(7)||v.map===9&&!v.journey9?.includes(8)||v.map===10&&(!v.journey9?.includes(9)||v.sigils9?.length!==3))return false}return true;
+ if(v.map>=7&&v.map<=10){if(!v.heroes.every(h=>h.unlocked))return false;if(v.map===8&&!v.journey9?.includes(7)||v.map===9&&!v.journey9?.includes(8)||v.map===10&&(!v.journey9?.includes(9)||v.sigils9?.length!==3))return false}return true;
 };
 const beginBeforeProgress9=begin;begin=function(data){const next=JSON.parse(JSON.stringify(data)),migrating=next.encounters9===undefined;next.encounters9??={};if(migrating)for(let z=0;z<4;z++)if(next.bosses[z])next.encounters9[(z+1)+':'+z+'-99']={kills:1,level:0};next.journey9??=[];next.sigils9??=[];next.secretClaims9??=[];next.secretBossWins9??=0;for(const h of next.heroes)h.rebirths9??=0;lastSocket9=null;beginBeforeProgress9(next);saveGame(false)};
 // Innate luck is independent of the equipment's bounded luck bonus.
@@ -1371,12 +1371,12 @@ huntPanel8=function(){if(!S)return;panelContext7=null;showDialog(panelHead('首�
 const menuBeforeJourney9=realmMenuPanel;realmMenuPanel=function(){menuBeforeJourney9();$('#dialog').insertAdjacentHTML('afterbegin',`<div class="actions"><button id="journeyMenu9">✧ 界外征程 ${allHeroes9()?'已开启':'五人解封后开启'}</button><button id="rebirthMenu9">☯ 轮回星坛</button><button id="socketMenu9">✦ 可视化镶嵌</button></div>`);$('#journeyMenu9').onclick=journeyPanel9;$('#rebirthMenu9').onclick=rebirthPanel9;$('#socketMenu9').onclick=socketStudio9};
 const talentBeforeInnate9=talentPanel;talentPanel=function(...args){talentBeforeInnate9(...args);panelContext7={key:'talent9',args};const h=S.heroes[S.active],r=h.rebirths9||0;$('#dialog').insertAdjacentHTML('beforeend',`<div class="wx-character7"><h3>轮回天赋 · 第${r}世</h3><p>先天幸运 +${r*3} · 力量/智力/敏捷各 +${r*4} · 装备之外永久保留。</p><button id="talentRebirth9">查看转世</button></div>`);$('#talentRebirth9').onclick=rebirthPanel9};panelTargets7.talent9=talentPanel;
 const refreshBeforeJourney9=refreshBars;refreshBars=function(){refreshBeforeJourney9();if(!S)return;if(!$('#newJourney9')){$('.world-wrap').insertAdjacentHTML('beforeend','<button id="newJourney9" class="new-journey-button9">界外征程</button>');$('#newJourney9').onclick=journeyPanel9}$('#newJourney9').hidden=!allHeroes9();if(currentMap()>=7){$('#zoneName').textContent=MAPS[currentMap()].name;const boss=enemies.find(e=>e.map===currentMap()&&e.boss&&!e.dead&&dist(active(),e)<700);if(boss){$('#bossHud').classList.remove('hidden');$('#bossHud').innerHTML=`☠ ${boss.speciesName}<small> Lv.${boss.level} · 第${(boss.wave9||0)+1}轮${boss.wind?.lethal9?' · 断命蓄力！':''}</small><div class="bar"><b style="width:${clamp(boss.hp/boss.max*100,0,100)}%"></b></div>`}}};
-const updateBeforeJourneyNotice9=update;update=function(dt){updateBeforeJourneyNotice9(dt);if(!S||menu)return;if(allHeroes9()&&!S.journeyAnnounced9){S.journeyAnnounced9=true;logMessage('五行齐聚！归墟浮陆已开启，点击「界外征程」踏上新旅程。');saveGame(false)}if(currentMap()>=7){const p=mapPortals().find(p=>dist(p,active())<115),sigil=SIGILS9.find(s=>s.map===currentMap()&&!S.sigils9.includes(s.map)&&dist(s,active())<115);$('#hint').textContent=p?'F 进入 · '+MAPS[p.to].name:sigil?'F 触碰 · '+sigil.name:'界外征程 · 躲避致命预警，击败界主，寻找三印'}};
+const updateBeforeJourneyNotice9=update;update=function(dt){updateBeforeJourneyNotice9(dt);if(!S||menu)return;if(allHeroes9()&&!S.journeyAnnounced9){S.journeyAnnounced9=true;logMessage('五行齐聚！归墟浮陆已开启，点击「界外征程」踏上新旅程。');saveGame(false)}if(currentMap()>=7){const p=mapPortals().find(p=>dist(p,active())<115),sigil=SIGILS9.find(s=>s.map===currentMap()&&!S.sigils9.includes(s.map)&&dist(s,active())<115);$('#hint').textContent=p?'F 进入 · '+MAPS[p.to].name:sigil?'F 触碰 · '+sigil.name:'界外征程 · 躲避预警并防御重击，击败界主，寻找三印'}};
 // Older combat updates also paint this HUD; restore realm metadata after each simulation tick.
 function realmBossHud9(){if(!S||currentMap()<7)return;const boss=enemies.find(e=>e.map===currentMap()&&e.boss&&!e.dead&&dist(active(),e)<700);$('#bossHud').classList.toggle('hidden',!boss);if(boss)$('#bossHud').innerHTML=`☠ ${boss.speciesName}<small> Lv.${boss.level} · 第${(boss.wave9||0)+1}轮${boss.wind?.lethal9?' · 断命蓄力！':''}</small><div class="bar"><b style="width:${clamp(boss.hp/boss.max*100,0,100)}%"></b></div><small>${Math.ceil(boss.hp)} / ${boss.max}</small>`}
 const updateBeforeRealmHud9=update;update=function(dt){updateBeforeRealmHud9(dt);realmBossHud9()};
 const drawBeforeSeals9=draw;draw=function(){drawBeforeSeals9();if(!S)return;g.save();g.translate(-cam.x,-cam.y);for(const e of enemies)if(e.sealed9&&e.map===currentMap()&&e.home.x>cam.x-150&&e.home.x<cam.x+VW+150&&e.home.y>cam.y-80&&e.home.y<cam.y+VH+200){ellipse(e.home.x,e.home.y,55,18,'#98d9ca22');g.strokeStyle='#94d8ca';g.lineWidth=2;g.beginPath();g.ellipse(e.home.x,e.home.y-36,23,38,0,0,7);g.stroke();label('三击封印 · 不再降临',e.home.x,e.home.y-84,'#b6e5d7',12)}g.restore()};
-v6Help=function(){panelContext7=null;showDialog(panelHead('轮回诸界 · V9 玩法')+'<p>五位战士全部解封后，界外征程开启：归墟浮陆→九幽炼狱→太初神庭。首领拥有断命陨星、裁决裂光与归零劫环。预警固定在释放前位置，走位、绕后或闪避可躲，护甲与护盾不能抵挡。</p><p>大首领按出生点累计击败3次后永久封印。普通、小首领与终极首领会持续刷新并逐轮增强，记录随存档保留，转世和切图不清零。</p><p>每位英雄150级后可在青禾营地转世，消耗金币和灵铁，回到1级，职业和本世加点重置。每次永久增加3先天幸运、力量/智力/敏捷天赋各4，并获12点自由属性。装备、灵宠、宝石与世界进度保留。</p><p>灵宠包裹最多1000只。一级即可合体，但双方必须同品质，可以同种不同个体；成功提升一档品质。主宠升品保留材料一种类与等级；随机合体诞生新物种。失败材料一完整保留，消耗材料二与金币。最高品质后可提升等级，上限150。</p><p>两枚同品质、同级宝石合成高一级，品质由宝石等级决定，最高10级。武器与其他五部位均可镶嵌两枚宝石；武器100%效果，其他部位50%。镶嵌台可选择具体装备、宝石与孔位，先预览再确认。音效开关可试听，成功有灵光流入与宝石闪烁。</p><p>包裹默认按品质或等级排序，可点排序按钮切换。三座新地图藏着印记；先击败当地第一位小首领，再靠近印记按F。集齐印记并击败神皇，能开启隐世界门与隐藏灵契。</p><p>J进攻，WASD/摇杆移动，Q/E/R技能，G防御，空格闪避，H药剂，V灵宠技，T觉醒，Y天极神兽，F互动。默认被动迎击。回城需要卷轴。存档在本浏览器，菜单可导出；画面为2.5D，分享链接后各自游玩。</p>')};help=v6Help;v5Help=v6Help;
+v6Help=function(){panelContext7=null;showDialog(panelHead('轮回诸界 · V9 玩法')+'<p>五位战士全部解封后，界外征程开启：归墟浮陆→九幽炼狱→太初神庭。首领拥有陨星重击、裂光吐息与震界环击。预警固定在释放前位置，走位、绕后或闪避可躲；护甲、防御与护盾能够减伤，满血不会被单次重击清空。终极重击只在最终阶段低频出现。</p><p>大首领按出生点累计击败3次后永久封印。普通、小首领与终极首领会持续刷新并逐轮增强，记录随存档保留，转世和切图不清零。</p><p>每位英雄150级后可在青禾营地转世，消耗金币和灵铁，回到1级，职业和本世加点重置。每次永久增加3先天幸运、力量/智力/敏捷天赋各4，并获12点自由属性。装备、灵宠、宝石与世界进度保留。</p><p>灵宠包裹最多1000只。一级即可合体，但双方必须同品质，可以同种不同个体；成功提升一档品质。主宠升品保留材料一种类与等级；随机合体诞生新物种。失败材料一完整保留，消耗材料二与金币。最高品质后可提升等级，上限150。</p><p>两枚同品质、同级宝石合成高一级，品质由宝石等级决定，最高10级。武器与其他五部位均可镶嵌两枚宝石；武器100%效果，其他部位50%。镶嵌台可选择具体装备、宝石与孔位，先预览再确认。音效开关可试听，成功有灵光流入与宝石闪烁。</p><p>包裹默认按品质或等级排序，可点排序按钮切换。三座新地图藏着印记；先击败当地第一位小首领，再靠近印记按F。集齐印记并击败神皇，能开启隐世界门与隐藏灵契。</p><p>J进攻，WASD/摇杆移动，Q/E/R技能，G防御，空格闪避，H药剂，V灵宠技，T觉醒，Y天极神兽，F互动。默认被动迎击。回城需要卷轴。存档在本浏览器，菜单可导出；画面为2.5D，分享链接后各自游玩。</p>')};help=v6Help;v5Help=v6Help;
 const introBeforeVersion9=intro;intro=function(){introBeforeVersion9();const heading=$('#dialog').querySelector('h2');if(heading)heading.textContent='五行纪 · 轮回诸界 V9';const line=$('#dialog').querySelector('.intro-feature8');if(line)line.textContent='界外征程 · 1000灵宠包裹 · 无限转世 · 三击封印 · 灵光镶嵌'};
 $('#realmMenu').onclick=realmMenuPanel;$('#menuBtn').onclick=realmMenuPanel;$('#realmBag').onclick=bagPanel;$('#realmPets').onclick=()=>petsPanel();$('#realmForge').onclick=socketStudio9;$('#equipBtn').onclick=bagPanel;$('#bagBtn').onclick=bagPanel;$('#mountBtn').onclick=()=>petsPanel();$('#trainBtn').onclick=talentPanel;$('#helpBtn').onclick=v6Help;$('#worldBtn').onclick=worldPanel;$('#mobileWorld').onclick=worldPanel;$('#touchInteract').onclick=interact;
 document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{if(S)({talent:talentPanel,bag:bagPanel,pets:petsPanel,shop,pause:realmMenuPanel})[b.dataset.open]()});
@@ -1939,5 +1939,156 @@ window.addEventListener('resize',reflowMobile13);window.addEventListener('orient
 initMobile13();applyLayout13();
 
 $('#realmMenu').onclick=realmMenuPanel;$('#menuBtn').onclick=realmMenuPanel;
+
+'use strict';
+// Append-only world ID. Resource enemies deliberately do not use the endless-wave loot pipeline.
+const FARM_MAP14=11;
+const FARM_SITES14=[
+ {name:'金砂旧矿',x:1130,y:720,color:'#e3c473',gold:42,iron:1,gem:false},
+ {name:'灵铁采场',x:2200,y:1480,color:'#9dc2bc',gold:30,iron:3,gem:false},
+ {name:'碎晶花园',x:3500,y:2240,color:'#a9a0ed',gold:32,iron:1,gem:true}
+];
+MAPS.push({name:'青禾资源谷',color:'#344538',accent:'#d7c58d',level:1,desc:'金砂、灵铁与一级宝石。固定低强度，20秒刷新，不随击杀变强。'});
+const unlockedBefore14=mapUnlocked;
+mapUnlocked=function(id){return id===FARM_MAP14?!!S:unlockedBefore14(id)};
+const obstaclesBefore14=mapObstacles;
+mapObstacles=function(id=currentMap()){return id===FARM_MAP14?[]:obstaclesBefore14(id)};
+const portalsBefore14=mapPortals;
+mapPortals=function(){if(currentMap()===FARM_MAP14)return[{x:500,y:650,to:0}];const ps=portalsBefore14();return currentMap()===0?[...ps,{x:995,y:1030,to:FARM_MAP14}]:ps};
+
+function syncStory14(v){
+ let changed=false,prefix=0;
+ while(prefix<5&&v.bosses[prefix])prefix++;
+ const chapter=Math.min(4,prefix);
+ if(v.chapter<chapter){v.chapter=chapter;changed=true}
+ const expected=Math.min(5,1+v.bosses.filter(Boolean).length);
+ let missing=expected-v.heroes.filter(h=>h.unlocked).length;
+ const level=Math.max(1,Math.round(v.heroes.filter(h=>h.unlocked).reduce((n,h)=>n+h.lv,0)/Math.max(1,v.heroes.filter(h=>h.unlocked).length)));
+ for(const h of v.heroes){if(missing<=0)break;if(h.unlocked)continue;h.unlocked=true;h.lv=Math.min(level,150+(h.rebirthCount10||0)*20);h.points=Math.max(h.points,(h.lv-1)*3);h.skillsKept10=h.skillsKept10||h.lv>=3;missing--;changed=true}
+ if(v.bosses[4]&&!v.won){v.won=true;changed=true}
+ return changed;
+}
+const beginBefore14=begin;
+begin=function(data){const next=clone10(data),repaired=syncStory14(next);const result=beginBefore14(next);if(repaired){logMessage('已按守护者通关记录修复章节与伙伴，原装备、灵宠、宝石和金币保留。');saveGame(false)}return result};
+const rewardBefore14=bossReward;
+bossReward=function(z){const result=rewardBefore14(z);syncStory14(S);refreshBars();return result};
+
+// All five chapters remain visible, including locked chapters. Selecting a tab never teleports.
+let worldTab14='main',selectedChapter14=0;
+const sideJourney14=journeyPanel;
+function chapterHelp14(z){if(S.bosses[z])return'守护者已击败，可返回探索。';if(mapUnlocked(z+1))return'清理妖兽 '+Math.min(S.kills[z],ZONES[z].need)+' / '+ZONES[z].need+'，再挑战'+ZONES[z].boss+'。';return'先击败第'+z+'章守护者「'+ZONES[z-1].boss+'」。'}
+function nextCompanion14(){const i=S.heroes.findIndex(h=>!h.unlocked);return i>=0?HEROES[i].name+' · '+HEROES[i].element+'行':'五行战士已齐聚'}
+worldPanel=function(tab='main',chapter=null){
+ if(!S)return;panelContext7=null;worldTab14=['main','farm','beyond'].includes(tab)?tab:'main';
+ if(chapter!==null)selectedChapter14=clamp(chapter,0,4);else if(worldTab14==='main')selectedChapter14=currentMap()>=1&&currentMap()<=5?currentMap()-1:Math.min(4,S.chapter);
+ let content='';
+ if(worldTab14==='main'){
+  const z=selectedChapter14,m=MAPS[z+1];
+  content='<p class="story-summary14">守护者 '+S.bosses.filter(Boolean).length+'/5 · 队伍 '+S.heroes.filter(h=>h.unlocked).length+'/5 · 待解救：'+nextCompanion14()+'</p><nav class="chapter-tabs14" aria-label="五章主线">'+ZONES.map((n,i)=>`<button data-chapter14="${i}" aria-pressed="${i===z}"><b>${['一','二','三','四','五'][i]}</b><small>${S.bosses[i]?'已通关':mapUnlocked(i+1)?'可进入':'待开启'}</small></button>`).join('')+'</nav>'+
+   `<article class="chapter-card14" style="--map:${m.accent}"><small>第${z+1}章 · ${S.bosses[z]?'已通关':mapUnlocked(z+1)?'已开放':'尚未开放'}</small><h3>${m.name}</h3><p>${ZONES[z].story}</p><p class="chapter-goal14">${chapterHelp14(z)}</p><div class="actions"><button data-map9="${z+1}" ${mapUnlocked(z+1)?'':'disabled'}>进入第${z+1}章</button><button id="chapterTrack14" ${currentMap()===z+1?'':'disabled'}>追踪守护者</button><button id="chapterSide14" ${currentMap()===S.chapter+1&&!S.won?'':'disabled'}>当前场景支线</button></div></article><p class="story-foot14">第三章救出下一位伙伴，第四章后可集齐五行。五位战士全部解封后开启界外征程。章节按钮只切换查看，点击「进入」才传送。</p>`;
+ }else if(worldTab14==='farm'){
+  content='<p class="story-summary14">所有角色1级可进 · 固定低强度 · 20秒刷新 · 不累计变强</p><div class="farm-sites14">'+FARM_SITES14.map((s,i)=>`<article style="--map:${s.color}"><h3>${s.name}</h3><p>每只 ${s.gold}金币 / ${s.iron}灵铁${s.gem?' / 1级基础宝石':''}</p><button data-farm14="${i}">${currentMap()===FARM_MAP14?'追踪矿区':'进入资源谷'}</button></article>`).join('')+'</div><p>击败资源妖兽才能领取掉落，没有挂机结算。刷新计时按游玩时间，站在出生点120范围内会延后刷新；不会刷新首领，不掉高级宝石。</p><p>灵铁用于冶金和转职，一级宝石可镶嵌或合成。回营仍需1张回城卷轴；入口可打开商会补给。</p>';
+ }else{
+  content='<p class="story-summary14">'+(allHeroes9()?'五行齐聚，新的征程已经开启。':'需解救全部五行战士；请先完成主线章节。')+'</p><div class="realm-list14">'+[6,7,8,9,...(mapUnlocked(10)?[10]:[])].map(i=>`<article><div><h3>${MAPS[i].name}</h3><small>建议 Lv.${MAPS[i].level} · ${mapUnlocked(i)?'已开放':i===6?'任一角色30级或主线完成':'五行齐聚并通关前一界'}</small></div><button data-map9="${i}" ${mapUnlocked(i)?'':'disabled'}>前往</button></article>`).join('')+'</div><button id="beyondClues14">征程与隐藏线索</button>';
+ }
+ showDialog(panelHead('灵脉旅图')+'<nav class="world-tabs14"><button data-world14="main" aria-pressed="'+(worldTab14==='main')+'">主线 · 五章</button><button data-world14="farm" aria-pressed="'+(worldTab14==='farm')+'">金币与材料</button><button data-world14="beyond" aria-pressed="'+(worldTab14==='beyond')+'">界外征程</button></nav>'+content+'<div class="actions"><button data-map9="0">回青禾营地 · 卷轴 '+(S.scrolls||0)+'</button></div>');
+ $('#dialog').querySelectorAll('[data-world14]').forEach(b=>b.onclick=()=>worldPanel(b.dataset.world14));
+ $('#dialog').querySelectorAll('[data-chapter14]').forEach(b=>b.onclick=()=>worldPanel('main',+b.dataset.chapter14));
+ $('#dialog').querySelectorAll('[data-map9]').forEach(b=>b.onclick=()=>{if(enterMap(+b.dataset.map9))closeDialog()});
+ $('#dialog').querySelectorAll('[data-farm14]').forEach(b=>b.onclick=()=>{const i=+b.dataset.farm14;if(currentMap()!==FARM_MAP14&&!enterMap(FARM_MAP14))return;closeDialog();commandUnits('move',{x:FARM_SITES14[i].x-150,y:FARM_SITES14[i].y-90});logMessage('前往'+FARM_SITES14[i].name+'；点击进攻开始采猎。')});
+ if($('#chapterTrack14'))$('#chapterTrack14').onclick=()=>{const p=ZONES[selectedChapter14];closeDialog();commandUnits('move',{x:p.x-160,y:p.y-80});logMessage('已追踪'+p.boss+'，沿道路前进，先清理妖兽解除屏障。')};
+ if($('#chapterSide14'))$('#chapterSide14').onclick=sideJourney14;
+ if($('#beyondClues14'))$('#beyondClues14').onclick=journeyPanel9;
+};
+journeyPanel=function(){worldPanel('main')};
+
+function makeFarmEnemy14(n){
+ const site=Math.floor(n/8),j=n%8,s=FARM_SITES14[site],x=s.x+(j%4-1.5)*115,y=s.y+(Math.floor(j/4)-.5)*180;
+ const e=makeEnemy(0,false,x,y,'supply'+n);
+ Object.assign(e,{id:'supply14-'+n,map:FARM_MAP14,farm14:n,site14:site,level:3+site*2,hp:115+site*55,max:115+site*55,atk:5+site*2,boss:false,elite:false,rank8:0,r:22,v8Managed:false,v7Species:[3,9,12][site],speciesName:['窃金砂鼠','铁背小妖','碎晶灵'][site],element:[4,0,2][site],respawn:1e9,attack:1.8});
+ const due=S.respawns8[enemyKey8(e)];if(due>S.played){e.dead=true;e.deathT=0;e.due8=due}return e;
+}
+const makeWorldBefore14=makeWorld;
+makeWorld=function(){makeWorldBefore14();for(let n=0;n<24;n++)enemies.push(makeFarmEnemy14(n))};
+const killBefore14=kill;
+kill=function(e,source){
+ if(e?.farm14===undefined)return killBefore14(e,source);if(e.dead||e.map!==currentMap())return false;
+ const s=FARM_SITES14[e.site14];e.dead=true;e.hp=0;e.deathT=.65;e.wind=null;e.strike=null;e.due8=S.played+20;e.respawn=1e9;S.respawns8[enemyKey8(e)]=e.due8;
+ creditGold10(s.gold);S.ingots=Math.min(1e8,(S.ingots||0)+s.iron);S.totalKills=Math.min(1e8,S.totalKills+1);awardXp(12);
+ if(s.gem&&!giveGem(e.farm14%18,1))creditGold10(10);
+ loot.push({x:e.x,y:e.y,t:2,color:s.color});burst11(e.x,e.y-30,e.element,12,'hit');float(e.x,e.y-75,'+'+s.gold+'金 / '+s.iron+'灵铁',s.color);
+ logMessage(s.name+'：金币 +'+s.gold+'，灵铁 +'+s.iron+(s.gem?'，一级基础宝石 +1':'')+'。');saveGame(false);refreshBars();return true;
+};
+const tickBefore14=tickRespawns8;
+tickRespawns8=function(){const all=enemies;enemies=all.filter(e=>e.farm14===undefined);try{tickBefore14()}finally{enemies=all}for(const e of all){if(e.farm14===undefined||!e.dead||e.due8>S.played)continue;if(currentMap()===FARM_MAP14&&actors.some(a=>owned(a.i)&&a.hp>0&&dist(a,e.home)<120))continue;Object.assign(e,makeFarmEnemy14(e.farm14),{dead:false,due8:undefined});delete S.respawns8[enemyKey8(e)]}};
+const loadDecorBefore14=loadMapDecor;
+loadMapDecor=function(){loadDecorBefore14();if(currentMap()===FARM_MAP14){const keep=decor.filter(d=>d.x>420&&FARM_SITES14.every(s=>dist(s,d)>330)&&!(d.x<1200&&d.y<1150));decor.splice(0,decor.length,...keep)}};
+const drawMapBefore14=drawMap;
+const terrainBefore14=paintTerrain;
+paintTerrain=function(){if(currentMap()!==FARM_MAP14)return terrainBefore14();if(!terrainAtlas.complete||!terrainAtlas.naturalWidth)return;const key='resource-grass14';if(!terrainPatterns.has(key)){const tile=document.createElement('canvas');tile.width=tile.height=256;const ctx=tile.getContext('2d');ctx.drawImage(terrainAtlas,0,0,terrainAtlas.naturalWidth/3,terrainAtlas.naturalHeight/2,0,0,256,256);terrainPatterns.set(key,g.createPattern(tile,'repeat'))}g.save();g.globalAlpha=.32;g.fillStyle=terrainPatterns.get(key);g.fillRect(cam.x,cam.y,VW,VH);g.restore()};
+drawMap=function(){
+ if(currentMap()!==FARM_MAP14)return drawMapBefore14();g.fillStyle='#334738';g.fillRect(cam.x,cam.y,VW,VH);paintTerrain();
+ road11([[360,440],[1130,720],[2200,1480],[3500,2240]]);
+ for(const [i,s]of FARM_SITES14.entries()){
+  if(!seen11(s,550))continue;const grad=g.createRadialGradient(s.x,s.y,30,s.x,s.y,450);grad.addColorStop(0,s.color+'30');grad.addColorStop(1,s.color+'00');ellipse(s.x,s.y,440,300,grad);
+  for(let j=0;j<9;j++){const x=s.x-260+j%3*240,y=s.y-260+Math.floor(j/3)*235;if(i===2){poly([[x-16,y],[x-22,y-32],[x,y-70],[x+22,y-32],[x+16,y]],['#89c9de','#b5a4ec','#b3ddc0'][j%3]);glow11(x,y-25,50,s.color,.14)}else{rock(x,y,1.2+j%3*.2,i?'#738b8e':'#8a8063');for(let k=0;k<4;k++)line(x-12+k*7,y-24,x-7+k*6,y-30,i?'#aad2d1':'#e8c575',3)}}
+  label(s.name,s.x,s.y-335,s.color,22);label('固定低强度 · 20秒刷新',s.x,s.y-310,'#c7d4bf',12);
+ }
+ drawCamp();for(const p of mapPortals()){floorRing11(p.x,p.y,42,'#e4d399');label('回营 · 消耗卷轴',p.x,p.y-95,'#eee0b9',13)}
+};
+const miniBefore14=drawMini;
+drawMini=function(){miniBefore14();if(currentMap()!==FARM_MAP14)return;for(const s of FARM_SITES14){mg.fillStyle=s.color;mg.fillRect(s.x/WW*190-3,s.y/WH*120-3,6,6)}};
+
+// Replace unconditional executions with mitigated damage. Boss burst has an upper bound before shielding.
+const damageBefore14=actorDamage;
+actorDamage=function(a,amount,from){
+ const boss=from?.boss||from?.rank8>=1,hazard=from?.hazard;
+ if(boss||hazard){const st=stats(a.i),cap=from?.ultimateHit14?.65:from?.skillHit14?.42:hazard?.16:.24;
+  amount=Math.min(amount,st.hp*cap*(1+.055*st.armor)/1.3);
+ }
+ const hp=a.hp,shield=a.shield;const result=damageBefore14(a,amount,from);
+ if(from?.skillHit14&&a.hp>0&&(a.hp<hp||a.shield<shield))a.inv=Math.max(a.inv,.9);
+ return result;
+};
+function heavyHit14(a,e,ultimate=false){
+ if(!a||a.hp<=0||a.dodge>0||a.inv>0)return false;
+ const hp=a.hp,shield=a.shield;e.skillHit14=true;e.ultimateHit14=ultimate;
+ try{actorDamage(a,e.atk*(ultimate?4:2.4)+stats(a.i).hp*(ultimate?1.8:.9),e)}finally{delete e.skillHit14;delete e.ultimateHit14}
+ return a.hp<hp||a.shield<shield;
+}
+fatalHit9=function(a,e){return heavyHit14(a,e,true)};
+const tellBefore14=createBossTell;
+createBossTell=function(e,target){
+ if(!e.exp9||!e.boss){tellBefore14(e,target);if(e.wind){e.wind.t=e.wind.max=Math.max(2.4,e.wind.max);e.animT=e.wind.max}return}
+ e.pattern++;const kind=['circle','cone','ring'][(e.pattern-1)%3],ultimate=e.phase===3&&(e.rank8===3||e.hidden9)&&e.pattern%4===0&&time>=(e.ultimateNext14||0),seconds=ultimate?4.4:3.2;
+ if(ultimate)e.ultimateNext14=time+45;
+ e.wind={kind,x:kind==='circle'?target.x:e.x,y:kind==='circle'?target.y:e.y,r:kind==='circle'?145:kind==='cone'?540:350,inner:kind==='ring'?145:0,angle:Math.atan2(target.y-e.y,target.x-e.x),t:seconds,max:seconds,extras:[],heavy14:true,ultimate14:ultimate,name14:ultimate?'五劫重陨':kind==='circle'?'陨星重击':kind==='cone'?'裂光吐息':'震界环击'};
+ e.animT=seconds;logMessage((ultimate?'终极重击':'首领预警')+' · '+e.wind.name14+'：'+(kind==='circle'?'离开红圈':kind==='cone'?'绕到侧后':'进入内圈或退出外圈')+'，可用防御或闪避。');tone(150,.2,'triangle');
+};
+const resolveBefore14=resolveBossTell;
+resolveBossTell=function(e){
+ const w=e.wind;if(!w)return;
+ if(!w.heavy14){e.skillHit14=true;try{resolveBefore14(e)}finally{delete e.skillHit14}e.cast=Math.max(e.cast,e.phase===3?9:11);return}
+ for(const a of actors)if(owned(a.i)&&a.hp>0&&groundHit(w,a))heavyHit14(a,e,w.ultimate14);
+ novaFx.push({x:w.x,y:w.y,r:w.r,t:1.4,max:1.4,element:e.element,kind:'ultimate'});e.wind=null;e.cast=w.ultimate14?14:e.phase===3?10:12;screenShake=4;tone(80,.22,'sawtooth');
+};
+const enemiesBefore14=updateEnemies;
+updateEnemies=function(dt){const states=new Map(enemies.filter(e=>e.boss&&!e.dead).map(e=>[e,{phase:e.phase,strike:e.strike}]));enemiesBefore14(dt);for(const[e,old]of states){if(e.dead)continue;if(e.phase>old.phase)e.cast=Math.max(e.cast,6);if(!old.strike&&e.strike)e.attack=Math.max(e.attack,1.8)}};
+
+// Landscape gets a wider, sharper world view rather than oversized sprites on a narrow field.
+const resizeBefore14=resizeWorld;
+resizeWorld=function(){resizeBefore14();if(!mobileViewport13())return;const r=canvas.getBoundingClientRect();if(!r.width||!r.height)return;if(r.width>r.height){VW=Math.round(clamp(r.width*1.62,1000,1800));VH=Math.round(VW*r.height/r.width)}const dpi=S?.fxQuality==='low'?1:S?.fxQuality==='high'?2:1.5;renderScale11=Math.min(dpi,Math.sqrt(2200000/(r.width*r.height)))*r.width/VW;canvas.width=Math.round(VW*renderScale11);canvas.height=Math.round(VH*renderScale11);g.imageSmoothingEnabled=true;g.imageSmoothingQuality='high'};
+function refreshRealm14(){
+ if(!S)return;const e=enemies.find(e=>e.map===currentMap()&&e.boss&&!e.dead&&e.wind&&dist(e,active())<850);
+ if(e?.wind){const w=e.wind;let el=$('#bossWarning14');if(!el){$('.world-wrap').insertAdjacentHTML('beforeend','<div id="bossWarning14" role="status"></div>');el=$('#bossWarning14')}el.textContent=(w.name14||TELL_NAMES[e.z])+' '+Math.max(0,w.t).toFixed(1)+'s · '+(w.kind==='ring'?'内圈安全':w.kind==='cone'?'绕到侧后':'离开红圈');el.hidden=false}
+ else if($('#bossWarning14'))$('#bossWarning14').hidden=true;
+ if(currentMap()===FARM_MAP14){$('#zoneName').textContent='青禾资源谷 · 金砂 / 灵铁 / 碎晶';$('#objective').textContent='固定低强度采猎区；击败妖兽获得金币、灵铁和基础宝石。';$('#bossHud').classList.add('hidden');if($('#mobileContext13'))$('#mobileContext13').textContent='资源谷 · 金币 '+S.gold+' · 灵铁 '+(S.ingots||0)}
+}
+const refreshBefore14=refreshBars;refreshBars=function(){refreshBefore14();refreshRealm14()};
+const updateBefore14=update;update=function(dt){updateBefore14(dt);refreshRealm14()};
+const helpBefore14=v6Help;v6Help=function(){helpBefore14();$('#dialog').insertAdjacentHTML('afterbegin','<section class="chapter-card14"><h3>V14 主线与补给</h3><p>菜单「任务」或「传送」打开五章主线，五个章节按钮始终可见。金币与材料页进入青禾资源谷；金砂鼠掉金币，铁背妖掉灵铁，碎晶灵掉一级宝石，20秒刷新且不会变强。回营仍需卷轴。</p><p>后期首领改为3.2秒固定位置预警；重击间隔至少10秒。终极重击只在最终阶段每四轮出现一次，至少间隔45秒，预警4.4秒。所有首领技能受护甲、五行、防御与护盾影响，满血不会被单次技能直接清空，残血仍需躲避。</p></section>')};help=v5Help=v6Help;
+const introBefore14=intro;intro=function(){introBefore14();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行纪 · 灵脉复苏 V14';const f=$('#dialog').querySelector('.intro-feature8');if(f)f.textContent='五章主线直达 · 资源谷采猎 · 首领公平预警 · 横屏广角高清'};
+for(const id of ['worldBtn','mobileWorld','journeyBtn','mobileJourney'])$('#'+id).onclick=()=>worldPanel('main');
+$('#helpBtn').onclick=v6Help;
 
 v3Ready=true;resizeWorld();intro();requestAnimationFrame(frame);
