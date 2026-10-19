@@ -145,6 +145,6 @@ function refreshRealm14(){
 const refreshBefore14=refreshBars;refreshBars=function(){refreshBefore14();refreshRealm14()};
 const updateBefore14=update;update=function(dt){updateBefore14(dt);refreshRealm14()};
 const helpBefore14=v6Help;v6Help=function(){helpBefore14();$('#dialog').insertAdjacentHTML('afterbegin','<section class="chapter-card14"><h3>V14 主线与补给</h3><p>菜单「任务」或「传送」打开五章主线，五个章节按钮始终可见。金币与材料页进入青禾资源谷；金砂鼠掉金币，铁背妖掉灵铁，碎晶灵掉一级宝石，20秒刷新且不会变强。回营仍需卷轴。</p><p>后期首领改为3.2秒固定位置预警；重击间隔至少10秒。终极重击只在最终阶段每四轮出现一次，至少间隔45秒，预警4.4秒。所有首领技能受护甲、五行、防御与护盾影响，满血不会被单次技能直接清空，残血仍需躲避。</p></section>')};help=v5Help=v6Help;
-const introBefore14=intro;intro=function(){introBefore14();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行纪 · 灵脉复苏 V14';const f=$('#dialog').querySelector('.intro-feature8');if(f)f.textContent='五章主线直达 · 资源谷采猎 · 首领公平预警 · 横屏广角高清'};
+const introBefore14=intro;intro=function(){introBefore14();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 灵脉复苏 V14';const f=$('#dialog').querySelector('.intro-feature8');if(f)f.textContent='五章主线直达 · 资源谷采猎 · 首领公平预警 · 横屏广角高清'};
 for(const id of ['worldBtn','mobileWorld','journeyBtn','mobileJourney'])$('#'+id).onclick=()=>worldPanel('main');
 $('#helpBtn').onclick=v6Help;

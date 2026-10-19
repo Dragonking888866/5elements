@@ -27,7 +27,7 @@ const SCENES11={
   {id:'keeper',name:'灵兽师 · 阿苓',x:365,y:650,cell:5,kind:'pets',mark:'契',color:'#8cd5ac'},
   {id:'gems',name:'凝光宝石工匠',x:205,y:760,cell:3,kind:'gems',mark:'晶',color:'#8bdbec'},
   {id:'smith',name:'铁匠 · 赤锤',x:475,y:800,cell:2,kind:'smith',mark:'铸',color:'#edac76'},
-  {id:'synthesis',name:'两仪炼星师',x:770,y:850,cell:4,kind:'synthesis',mark:'炼',color:'#c6a5ef'},
+  {id:'synthesis',name:'熔炼殿炼星师',x:770,y:850,cell:4,kind:'synthesis',mark:'炼',color:'#c6a5ef'},
   {id:'mentor',name:'五行转职导师',x:720,y:1045,cell:6,kind:'advance',mark:'阶',color:'#e5d08b'},
   {id:'trainer',name:'巡林教官 · 红绫',x:1040,y:900,cell:7,kind:'quest',mark:'!',color:'#e7b79d'}
  ],

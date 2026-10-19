@@ -20,7 +20,7 @@ function recordCode16(command,text){const history=S.codes16?.history||[];S.codes
 function freeCodes16(){return codeState16.enabled&&codeState16.infiniteResources}
 function virtualWallet16(fn){if(!freeCodes16())return fn();const old={gold:S.gold,goldReserve10:S.goldReserve10,ingots:S.ingots};codeState16.virtualDepth++;S.gold=RULES10.inventory.goldCap;S.goldReserve10=0;S.ingots=1e8;try{return fn()}finally{Object.assign(S,old);codeState16.virtualDepth--}}
 const spendBeforeCodes16=spendGold10;spendGold10=function(n){return freeCodes16()?int10(n,0,1e9):spendBeforeCodes16(n)};
-const countBeforeCodes16=gemCount;gemCount=function(type,level){return freeCodes16()&&gemValid({type,level})?9999:countBeforeCodes16(type,level)};
+const countBeforeCodes16=gemCount;gemCount=function(type,level,quality){return freeCodes16()&&gemValid({type,level})?9999:countBeforeCodes16(type,level,quality)};
 const inventoryBeforeCodes16=forgeInventory7;forgeInventory7=function(changes){if(!freeCodes16())return inventoryBeforeCodes16(changes);if(!Array.isArray(changes)||changes.some(c=>!gemValid(c)||!Number.isInteger(c.count)||Math.abs(c.count)>9999))return null;return inventoryBeforeCodes16(changes.filter(c=>c.count>0))};
 const probabilityBeforeCodes16=probability10;probability10=function(...args){const p=probabilityBeforeCodes16(...args);return codeState16.enabled&&codeState16.fusion100?{...p,success:1,cap:1}:p};
 const petPreviewBeforeCodes16=petFusionPreview10;petFusionPreview10=function(...args){return virtualWallet16(()=>petPreviewBeforeCodes16(...args))};fusionOdds=petFusionPreview10;
@@ -93,6 +93,6 @@ function codePanel16(){panelContext7=null;characterSheet13=false;if(!S){showDial
 }
 const menuBeforeCodes16=realmMenuPanel;
 realmMenuPanel=function(){menuBeforeCodes16();const host=$('#dialog').querySelector('.mobile-menu13')||$('#dialog');host.insertAdjacentHTML('afterbegin','<button id="codeMenu16" class="code-entry16"><b>⌨ 单机口令</b><small>输入口令 / 快捷开关</small></button>');$('#codeMenu16').onclick=codePanel16};
-const introBeforeCodes16=intro;intro=function(){introBeforeCodes16();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行纪 · 口令远征 V16';$('#dialog').insertAdjacentHTML('beforeend','<button id="introCodes16" class="code-entry16">查看正式单人游戏口令</button>');$('#introCodes16').onclick=codePanel16};
+const introBeforeCodes16=intro;intro=function(){introBeforeCodes16();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 五行熔天 V17';$('#dialog').insertAdjacentHTML('beforeend','<button id="introCodes16" class="code-entry16">查看正式单人游戏口令</button>');$('#introCodes16').onclick=codePanel16};
 window.addEventListener('keydown',e=>{if(!S||e.repeat||e.isComposing||e.target instanceof HTMLInputElement||e.target instanceof HTMLSelectElement||e.target?.isContentEditable)return;if(e.code==='Enter'||e.code==='Backquote'){e.preventDefault();e.stopImmediatePropagation?.();if(menu==='codes16')closeDialog();else codePanel16()}if(e.code==='Escape'&&menu==='codes16'){e.preventDefault();e.stopImmediatePropagation?.();closeDialog()}},true);
 $('#realmMenu').onclick=realmMenuPanel;$('#menuBtn').onclick=realmMenuPanel;

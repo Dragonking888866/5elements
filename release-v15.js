@@ -4,7 +4,7 @@ function sandboxData15(v){if(!v||typeof v!=='object')return false;const arr=x=>A
 const validateBeforeSeal15=validateSave;
 validateSave=function(v){return !sandboxData15(v)&&validateBeforeSeal15(v)};
 const menuBeforeRelease15=realmMenuPanel;
-realmMenuPanel=function(){menuBeforeRelease15();if(SANDBOX_AVAILABLE15)$('#dialog').insertAdjacentHTML('beforeend','<div class="sandbox-entry15"><a href="sandbox.html?v=16.0.0" target="_blank" rel="noopener">开发者体验沙盒 ↗</a><small>独立测试存档 · 无限资源与高级灵宠 · 不改变正式远征</small></div>')};
+realmMenuPanel=function(){menuBeforeRelease15();if(SANDBOX_AVAILABLE15)$('#dialog').insertAdjacentHTML('beforeend','<div class="sandbox-entry15"><a href="sandbox.html?v=17.0.0" target="_blank" rel="noopener">开发者体验沙盒 ↗</a><small>独立测试存档 · 无限资源与高级灵宠 · 不改变正式远征</small></div>')};
 const introBeforeRelease15=intro;
-intro=function(){introBeforeRelease15();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行纪 · 万灵觉醒 V15';const f=$('#dialog').querySelector('.intro-feature8');if(f)f.textContent='七阶灵宠演出 · 巨型龙焰 · 雷暴冰霜 · 独立体验沙盒';if(SANDBOX_AVAILABLE15)$('#dialog').insertAdjacentHTML('beforeend','<div class="sandbox-entry15"><a href="sandbox.html?v=16.0.0" target="_blank" rel="noopener">高级灵宠与无限资源体验 ↗</a><small>测试进度与正式远征隔离</small></div>')};
+intro=function(){introBeforeRelease15();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 五行熔天 V17';const f=$('#dialog').querySelector('.intro-feature8');if(f)f.textContent='三石熔炼 · 五行神炉 · 元素附魔 · 独立口令档';if(SANDBOX_AVAILABLE15)$('#dialog').insertAdjacentHTML('beforeend','<div class="sandbox-entry15"><a href="sandbox.html?v=17.0.0" target="_blank" rel="noopener">高级灵宠与无限资源体验 ↗</a><small>测试进度与正式远征隔离</small></div>')};
 $('#realmMenu').onclick=realmMenuPanel;$('#menuBtn').onclick=realmMenuPanel;

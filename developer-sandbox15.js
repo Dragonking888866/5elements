@@ -28,7 +28,7 @@ function labLog15(command,text){lab15.log.push({at:Date.now(),command,text:Strin
 function freeLab15(){return lab15.enabled&&lab15.infiniteResources}
 function virtualWallet15(fn){if(!freeLab15())return fn();const old={gold:S.gold,goldReserve10:S.goldReserve10,ingots:S.ingots};lab15.virtualDepth++;S.gold=RULES10.inventory.goldCap;S.goldReserve10=0;S.ingots=1e8;try{return fn()}finally{S.gold=old.gold;S.goldReserve10=old.goldReserve10;S.ingots=old.ingots;lab15.virtualDepth--}}
 const spendBeforeLab15=spendGold10;spendGold10=function(n){return freeLab15()?int10(n,0,1e9):spendBeforeLab15(n)};
-const countBeforeLab15=gemCount;gemCount=function(type,level){return freeLab15()&&gemValid({type,level})?9999:countBeforeLab15(type,level)};
+const countBeforeLab15=gemCount;gemCount=function(type,level,quality){return freeLab15()&&gemValid({type,level})?9999:countBeforeLab15(type,level,quality)};
 const inventoryBeforeLab15=forgeInventory7;forgeInventory7=function(changes){if(!freeLab15())return inventoryBeforeLab15(changes);if(!Array.isArray(changes)||changes.some(c=>!gemValid(c)||!Number.isInteger(c.count)||Math.abs(c.count)>9999))return null;return inventoryBeforeLab15(changes.filter(c=>c.count>0))};
 const probabilityBeforeLab15=probability10;probability10=function(...args){const p=probabilityBeforeLab15(...args);return lab15.enabled&&lab15.fusion100?{...p,success:1,cap:1,testOverride15:true}:p};
 const petPreviewBeforeLab15=petFusionPreview10;petFusionPreview10=function(...args){return virtualWallet15(()=>petPreviewBeforeLab15(...args))};fusionOdds=petFusionPreview10;

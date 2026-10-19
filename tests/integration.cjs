@@ -1,1 +1,2 @@
-require('./regression-v10.cjs');require('./systems-v10.cjs');require('./visual-v11.cjs');require('./visual-v12.cjs');require('./mobile-v13.cjs');require('./renewal-v14.cjs');require('./effects-sandbox-v15.cjs');require('./single-player-v16.cjs');require('./v10-harness.cjs').finish();
+// V17 replaces the dual-stone/legacy-quality contracts with the current release suite.
+require('./release-v17.cjs');

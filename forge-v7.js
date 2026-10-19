@@ -150,7 +150,7 @@ function forgePreviewMarkup7(p){if(!p.pool)return `<p>${p.reason}</p>`;return `<
 forgePanel=function(tab=forgeTab7){
  if(!S)return;forgeTab7=['socket','synthesis','buy','codex'].includes(tab)?tab:'socket';tab=forgeTab7;
  const weapon=S.heroes[S.active].gear[0],luck=forgeLuck7(),gems=gemBag().slice().sort(compareGems9);
- showDialog(panelHead('五行铸星坊')+`<div class="realm-tabs forge7-tabs">${[['socket','武器镶嵌'],['synthesis','两仪熔炼'],['buy','宝石商店'],['codex','宝石图鉴']].map(([key,label])=>`<button data-forgetab7="${key}" class="${tab===key?'selected':''}">${label}</button>`).join('')}</div><div class="forge-intro"><span>金币 <b>${S.gold}</b></span><span>${HEROES[S.active].name} · ${WX.names[WX.heroElement(S.active)]}</span><span>幸运 <b>${luck}</b></span><span>包裹 <b>${gems.length}/200</b></span></div><div id="forgeContent7"></div>`);
+ showDialog(panelHead('五行铸星坊')+`<div class="realm-tabs forge7-tabs">${[['socket','武器镶嵌'],['synthesis','两仪熔炼'],['buy','五行宝石阁'],['codex','宝石图鉴']].map(([key,label])=>`<button data-forgetab7="${key}" class="${tab===key?'selected':''}">${label}</button>`).join('')}</div><div class="forge-intro"><span>金币 <b>${S.gold}</b></span><span>${HEROES[S.active].name} · ${WX.names[WX.heroElement(S.active)]}</span><span>幸运 <b>${luck}</b></span><span>包裹 <b>${gems.length}/200</b></span></div><div id="forgeContent7"></div>`);
  $('#dialog').querySelectorAll('[data-forgetab7]').forEach(b=>b.onclick=()=>forgePanel(b.dataset.forgetab7));const content=$('#forgeContent7');
  if(tab==='socket'){
   const best=weapon?.sockets?.filter(Boolean).sort((a,b)=>b.level-a.level)[0],level=best?.level||1;

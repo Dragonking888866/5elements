@@ -36,7 +36,7 @@ const refreshBeforeFinal7=refreshBars;refreshBars=function(){refreshBeforeFinal7
 // Reset transient summons on load; save compatibility keeps earlier versions intact.
 const beginBeforeBoot7=begin;begin=function(data){gemSummons7=[];beginBeforeBoot7(data);$('#touchAttack').textContent='⚔ 进攻';$('#touchAttack').onclick=()=>{if(S&&!menu){issueAttackOrder();attack(active(),true);refreshBars()}};$('#action6-attack').onclick=()=>{if(S&&!menu){issueAttackOrder();attack(active(),true);refreshBars()}};refreshBars()};
 help=v6Help;v5Help=v6Help;
-const introBeforeVersion7=intro;intro=function(){introBeforeVersion7();const heading=$('#dialog').querySelector('h2');if(heading)heading.textContent='五行纪 · 山海五行 V7'};
+const introBeforeVersion7=intro;intro=function(){introBeforeVersion7();const heading=$('#dialog').querySelector('h2');if(heading)heading.textContent='五行战记 · 山海五行 V7'};
 ZONES.forEach((zone,i)=>zone.boss=V7_MONSTERS[15+i].name);
 MAPS[1].desc='渡过溪谷，穿过废弃神殿，挑战负碑龙龟。';
 // Initializer moved to effects-v8.js.
