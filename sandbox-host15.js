@@ -11,5 +11,5 @@
  });
  document.getElementById('tools15').onclick=()=>send('lab-control15',{action:'panel'});
  document.getElementById('reset15').onclick=()=>send('lab-control15',{action:'reset-panel'});
- frame.src='sandbox-frame.html?v=15.0.0#'+encodeURIComponent(nonce);
+ frame.src='sandbox-frame.html?v=16.0.0#'+encodeURIComponent(nonce);
 })();
