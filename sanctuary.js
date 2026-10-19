@@ -92,7 +92,7 @@ const bagBeforeSanctuary=bagPanel;bagPanel=function(){bagBeforeSanctuary();$('#d
 $('#equipBtn').onclick=bagPanel;$('#bagBtn').onclick=bagPanel;
 // Act on pointer-down for discrete buttons; suppress only the matching native click.
 let pressedButton=null,pressedAt=0;
-document.addEventListener('pointerdown',e=>{const b=e.target.closest?.('button');if(!b||b.disabled||e.button!==0)return;pressedButton=b;pressedAt=Date.now();e.preventDefault();b.click()},true);
+document.addEventListener('pointerdown',e=>{const b=e.target.closest?.('button');if(!b||b.disabled||e.button!==0||typeof mobileViewport13==='function'&&mobileViewport13())return;pressedButton=b;pressedAt=Date.now();e.preventDefault();b.click()},true);
 document.addEventListener('click',e=>{if(e.isTrusted&&pressedButton&&Date.now()-pressedAt<900&&e.target.closest?.('button')===pressedButton){e.preventDefault();e.stopImmediatePropagation();pressedButton=null}},true);
 
 // Pet attacks have damage, distinct animation states and their own cooldown.

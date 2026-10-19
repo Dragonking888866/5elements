@@ -1,0 +1,1139 @@
+{
+  "version": "13.0.0",
+  "checkedAt": "2026-10-19T00:19:33.176499+00:00",
+  "checks": 138,
+  "passed": 138,
+  "newMobileChecks": 11,
+  "fusionSimulation": {
+    "petTrials": 10000,
+    "petExpected": 0.378,
+    "petObserved": 0.3809,
+    "gemTrials": 10000,
+    "gemExpected": 0.22,
+    "gemObserved": 0.221
+  },
+  "precacheReferences": 36,
+  "viewportMeasurements": [
+    {
+      "classes": "mobile13 has-game13 combat13",
+      "clipped": [],
+      "controls": [
+        {
+          "h": 44,
+          "hit": true,
+          "id": "statusOpen",
+          "w": 144,
+          "x": 8,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileRoster13",
+          "w": 44,
+          "x": 158,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileMap13",
+          "w": 44,
+          "x": 742,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "realmMenu",
+          "w": 44,
+          "x": 792,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileAll13",
+          "w": 44,
+          "x": 646,
+          "y": 222
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileSingle13",
+          "w": 44,
+          "x": 694,
+          "y": 222
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileRetreat13",
+          "w": 44,
+          "x": 742,
+          "y": 222
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileMore13",
+          "w": 44,
+          "x": 792,
+          "y": 222
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchQ",
+          "w": 44,
+          "x": 676,
+          "y": 272
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchE",
+          "w": 44,
+          "x": 726,
+          "y": 272
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchR",
+          "w": 44,
+          "x": 792,
+          "y": 272
+        },
+        {
+          "h": 60,
+          "hit": true,
+          "id": "touchAttack",
+          "w": 60,
+          "x": 776,
+          "y": 322
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchGuard",
+          "w": 44,
+          "x": 676,
+          "y": 330
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchDodge",
+          "w": 44,
+          "x": 726,
+          "y": 330
+        }
+      ],
+      "overflow": false,
+      "overlap": [],
+      "small": [],
+      "viewport": [
+        844,
+        390
+      ]
+    },
+    {
+      "classes": "mobile13 has-game13 combat13",
+      "clipped": [],
+      "controls": [
+        {
+          "h": 44,
+          "hit": true,
+          "id": "statusOpen",
+          "w": 144,
+          "x": 8,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileRoster13",
+          "w": 44,
+          "x": 158,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileMap13",
+          "w": 44,
+          "x": 565.3333740234375,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "realmMenu",
+          "w": 44,
+          "x": 615.3333740234375,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileAll13",
+          "w": 44,
+          "x": 469.3333435058594,
+          "y": 207.33334350585935
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileSingle13",
+          "w": 44,
+          "x": 517.3333740234375,
+          "y": 207.33334350585935
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileRetreat13",
+          "w": 44,
+          "x": 565.3333740234375,
+          "y": 207.33334350585935
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileMore13",
+          "w": 44,
+          "x": 615.3333740234375,
+          "y": 207.33334350585935
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchQ",
+          "w": 44,
+          "x": 499.3333435058594,
+          "y": 257.3333435058594
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchE",
+          "w": 44,
+          "x": 549.3333740234375,
+          "y": 257.3333435058594
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchR",
+          "w": 44,
+          "x": 615.3333740234375,
+          "y": 257.3333435058594
+        },
+        {
+          "h": 60,
+          "hit": true,
+          "id": "touchAttack",
+          "w": 60,
+          "x": 599.3333740234375,
+          "y": 307.3333435058594
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchGuard",
+          "w": 44,
+          "x": 499.3333435058594,
+          "y": 315.3333435058594
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchDodge",
+          "w": 44,
+          "x": 549.3333740234375,
+          "y": 315.3333435058594
+        }
+      ],
+      "overflow": false,
+      "overlap": [],
+      "small": [],
+      "viewport": [
+        667,
+        375
+      ]
+    },
+    {
+      "classes": "mobile13 has-game13 combat13",
+      "clipped": [],
+      "controls": [
+        {
+          "h": 44,
+          "hit": true,
+          "id": "statusOpen",
+          "w": 144,
+          "x": 8,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileRoster13",
+          "w": 44,
+          "x": 158,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileMap13",
+          "w": 44,
+          "x": 466,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "realmMenu",
+          "w": 44,
+          "x": 516,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileAll13",
+          "w": 44,
+          "x": 370,
+          "y": 152
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileSingle13",
+          "w": 44,
+          "x": 418,
+          "y": 152
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileRetreat13",
+          "w": 44,
+          "x": 466,
+          "y": 152
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileMore13",
+          "w": 44,
+          "x": 516,
+          "y": 152
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchQ",
+          "w": 44,
+          "x": 400,
+          "y": 202
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchE",
+          "w": 44,
+          "x": 450,
+          "y": 202
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchR",
+          "w": 44,
+          "x": 516,
+          "y": 202
+        },
+        {
+          "h": 60,
+          "hit": true,
+          "id": "touchAttack",
+          "w": 60,
+          "x": 500,
+          "y": 252
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchGuard",
+          "w": 44,
+          "x": 400,
+          "y": 260
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchDodge",
+          "w": 44,
+          "x": 450,
+          "y": 260
+        }
+      ],
+      "overflow": false,
+      "overlap": [],
+      "small": [],
+      "viewport": [
+        568,
+        320
+      ]
+    },
+    {
+      "classes": "mobile13 has-game13 combat13",
+      "clipped": [],
+      "controls": [
+        {
+          "h": 44,
+          "hit": true,
+          "id": "statusOpen",
+          "w": 144,
+          "x": 8,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileRoster13",
+          "w": 44,
+          "x": 158,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileMap13",
+          "w": 44,
+          "x": 288,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "realmMenu",
+          "w": 44,
+          "x": 338,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileAll13",
+          "w": 44,
+          "x": 192,
+          "y": 676
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileSingle13",
+          "w": 44,
+          "x": 240,
+          "y": 676
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileRetreat13",
+          "w": 44,
+          "x": 288,
+          "y": 676
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileMore13",
+          "w": 44,
+          "x": 338,
+          "y": 676
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchQ",
+          "w": 44,
+          "x": 222,
+          "y": 726
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchE",
+          "w": 44,
+          "x": 272,
+          "y": 726
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchR",
+          "w": 44,
+          "x": 338,
+          "y": 726
+        },
+        {
+          "h": 60,
+          "hit": true,
+          "id": "touchAttack",
+          "w": 60,
+          "x": 322,
+          "y": 776
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchGuard",
+          "w": 44,
+          "x": 222,
+          "y": 784
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchDodge",
+          "w": 44,
+          "x": 272,
+          "y": 784
+        }
+      ],
+      "overflow": false,
+      "overlap": [],
+      "small": [],
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "classes": "mobile13 has-game13 combat13",
+      "clipped": [],
+      "controls": [
+        {
+          "h": 44,
+          "hit": true,
+          "id": "statusOpen",
+          "w": 144,
+          "x": 8,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileRoster13",
+          "w": 44,
+          "x": 158,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileMap13",
+          "w": 44,
+          "x": 258,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "realmMenu",
+          "w": 44,
+          "x": 308,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileAll13",
+          "w": 44,
+          "x": 162,
+          "y": 472
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileSingle13",
+          "w": 44,
+          "x": 210,
+          "y": 472
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileRetreat13",
+          "w": 44,
+          "x": 258,
+          "y": 472
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileMore13",
+          "w": 44,
+          "x": 308,
+          "y": 472
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchQ",
+          "w": 44,
+          "x": 192,
+          "y": 522
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchE",
+          "w": 44,
+          "x": 242,
+          "y": 522
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchR",
+          "w": 44,
+          "x": 308,
+          "y": 522
+        },
+        {
+          "h": 60,
+          "hit": true,
+          "id": "touchAttack",
+          "w": 60,
+          "x": 292,
+          "y": 572
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchGuard",
+          "w": 44,
+          "x": 192,
+          "y": 580
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchDodge",
+          "w": 44,
+          "x": 242,
+          "y": 580
+        }
+      ],
+      "overflow": false,
+      "overlap": [],
+      "small": [],
+      "viewport": [
+        360,
+        640
+      ]
+    },
+    {
+      "classes": "mobile13 has-game13 combat13",
+      "clipped": [],
+      "controls": [
+        {
+          "h": 44,
+          "hit": true,
+          "id": "statusOpen",
+          "w": 144,
+          "x": 8,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileRoster13",
+          "w": 44,
+          "x": 158,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileMap13",
+          "w": 44,
+          "x": 218,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "realmMenu",
+          "w": 44,
+          "x": 268,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileAll13",
+          "w": 44,
+          "x": 122,
+          "y": 400
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileSingle13",
+          "w": 44,
+          "x": 170,
+          "y": 400
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileRetreat13",
+          "w": 44,
+          "x": 218,
+          "y": 400
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "mobileMore13",
+          "w": 44,
+          "x": 268,
+          "y": 400
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchQ",
+          "w": 44,
+          "x": 152,
+          "y": 450
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchE",
+          "w": 44,
+          "x": 202,
+          "y": 450
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchR",
+          "w": 44,
+          "x": 268,
+          "y": 450
+        },
+        {
+          "h": 60,
+          "hit": true,
+          "id": "touchAttack",
+          "w": 60,
+          "x": 252,
+          "y": 500
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchGuard",
+          "w": 44,
+          "x": 152,
+          "y": 508
+        },
+        {
+          "h": 44,
+          "hit": true,
+          "id": "touchDodge",
+          "w": 44,
+          "x": 202,
+          "y": 508
+        }
+      ],
+      "overflow": false,
+      "overlap": [],
+      "small": [],
+      "viewport": [
+        320,
+        568
+      ]
+    }
+  ],
+  "statusPanelComparison": {
+    "before": [
+      172,
+      93.6667
+    ],
+    "after": [
+      144,
+      44
+    ],
+    "areaReductionPercent": 60.67,
+    "minimal": [
+      76,
+      44
+    ]
+  },
+  "browserConsoleErrorsObserved": 0,
+  "testMethod": {
+    "viewport": "Actual IAB browser viewport override, not iframe",
+    "nativeInput": "Browser clicks and keyboard through CUA",
+    "touch": "Synthetic PointerEvent touch through self-authored local QA page; no trusted hardware multitouch",
+    "safeArea": "CSS inset injection, not a physical notched phone"
+  },
+  "limitations": [
+    "No physical Android / iPhone / Safari verification",
+    "Camera clamps at world edges; scattered companions may leave safe focus",
+    "No independent screenshot pixel-diff runner",
+    "V12 600-second stability test not rerun for V13",
+    "Native APK / iOS packages unchanged"
+  ],
+  "nativeClicks": [
+    {
+      "name": "头像展开",
+      "visible": true,
+      "expanded": "true"
+    },
+    {
+      "name": "再次点击收起",
+      "visible": false
+    },
+    {
+      "name": "bag",
+      "visible": true,
+      "title": "远征装备库 · 凌锋"
+    },
+    {
+      "name": "bag关闭恢复",
+      "controls": true,
+      "closed": true
+    },
+    {
+      "name": "pets",
+      "visible": true,
+      "title": "灵宠包裹"
+    },
+    {
+      "name": "pets关闭恢复",
+      "controls": true,
+      "closed": true
+    },
+    {
+      "name": "gems",
+      "visible": true,
+      "title": "两仪熔炼 · 星辉炉"
+    },
+    {
+      "name": "gems关闭恢复",
+      "controls": true,
+      "closed": true
+    },
+    {
+      "name": "socket",
+      "visible": true,
+      "title": "灵光镶嵌台 · 凌锋"
+    },
+    {
+      "name": "socket关闭恢复",
+      "controls": true,
+      "closed": true
+    },
+    {
+      "name": "career",
+      "visible": true,
+      "title": "五阶转职 · 凌锋"
+    },
+    {
+      "name": "career关闭恢复",
+      "controls": true,
+      "closed": true
+    },
+    {
+      "name": "save",
+      "visible": true,
+      "title": "远征暂停"
+    },
+    {
+      "name": "save关闭恢复",
+      "controls": true,
+      "closed": true
+    }
+  ],
+  "touch": {
+    "kind": "synthetic PointerEvent touch + native click handler",
+    "selected": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "beforeRelease": "passive",
+    "afterRelease": "attack",
+    "afterMoving": "passive",
+    "multiStick": true,
+    "moved": [
+      72.46666666666442,
+      71.66666666666515,
+      71.66666666666515,
+      71.66666666666515,
+      71.66666666666515
+    ],
+    "cleared": true,
+    "pass": true
+  },
+  "dynamicJoystick": {
+    "kind": "synthetic dynamic PointerEvent touch",
+    "during": {
+      "x": 22,
+      "y": 560.125,
+      "width": 112,
+      "height": 112,
+      "top": 560.125,
+      "right": 134,
+      "bottom": 672.125,
+      "left": 22
+    },
+    "vector": {
+      "x": 0.7440476190476191,
+      "y": -0.00014880952380938846
+    },
+    "activeDynamic": true,
+    "groundOrder": null,
+    "cleared": true,
+    "pass": true
+  },
+  "safeArea": {
+    "attack": {
+      "bottom": 401,
+      "height": 60,
+      "left": 844,
+      "right": 904,
+      "top": 341,
+      "width": 60,
+      "x": 844,
+      "y": 341
+    },
+    "boss": {
+      "bottom": 108.66666793823242,
+      "height": 48.66666793823242,
+      "left": 574,
+      "right": 904,
+      "top": 60,
+      "width": 330,
+      "x": 574,
+      "y": 60
+    },
+    "joystick": {
+      "bottom": 401,
+      "height": 112,
+      "left": 52,
+      "right": 164,
+      "top": 289,
+      "width": 112,
+      "x": 52,
+      "y": 289
+    },
+    "roster": {
+      "bottom": 113.33333587646484,
+      "height": 53.33333587646485,
+      "left": 52,
+      "right": 297.3333435058594,
+      "top": 60,
+      "width": 245.33334350585935,
+      "x": 52,
+      "y": 60
+    },
+    "rosterBossOverlap": 0,
+    "safe": {
+      "bottom": "21px",
+      "left": "44px",
+      "right": "20px"
+    },
+    "status": {
+      "bottom": 52,
+      "height": 44,
+      "left": 52,
+      "right": 196,
+      "top": 8,
+      "width": 144,
+      "x": 52,
+      "y": 8
+    },
+    "viewport": [
+      932,
+      430
+    ]
+  },
+  "chestClick": {
+    "viewport": [
+      667,
+      375
+    ],
+    "action": "Native canvas click on visible chest at 285,104",
+    "goldBefore": 1000000,
+    "goldAfter": 1000035,
+    "notice": "宝箱已开启：金币 +35，获得宝石和药剂。",
+    "pass": true
+  },
+  "desktop": {
+    "viewport": [
+      1280,
+      720
+    ],
+    "bagHeading": [
+      "远征装备库 · 沧澜"
+    ],
+    "afterQ": "Q\n✦\n寒潮\n6",
+    "mobileClass": false,
+    "modalVisible": false,
+    "legacySkillBarVisible": true,
+    "shortcutSelection": "Digit3 selects 沧澜, B opens 远征装备库 · 沧澜, Escape restores game, Q triggers cooldown"
+  },
+  "automatedChecks": [
+    "PASS 五行相生相克覆盖全部25对，合成关系双向一致",
+    "PASS 英雄、怪物、灵兽、装备和宝石全部具有合法五行归属",
+    "PASS 克制伤害仅计算一次，反向受克降低伤害且异图完全隔离",
+    "PASS 怪物进攻也受到五行相克影响，防御护甲依然生效",
+    "PASS 没有回城卷轴时，按钮、地图菜单和实地传送门不能免费回城",
+    "PASS 回城正常消耗一张，战斗中或已在城内不会误扣",
+    "PASS 卷轴必须花金币购买，仅营地交易；救援保留独立免费通道",
+    "PASS 首领奖励界面的回城按钮同样消耗卷轴",
+    "PASS 站立、跟随与普通移动不会主动普攻或释放灵兽攻击",
+    "PASS 点击进攻立即响应，攻击间隔防止连续点击加速",
+    "PASS 受到敌人攻击后可以被动反击",
+    "PASS 异种宝石相生合成优于相克，幸运提高概率",
+    "PASS 宝石合成失败仅失材料二，非法或满输出不扣任何材料",
+    "PASS 神兽召唤要求十阶已镶嵌宝石，施放消耗与冷却限制有效",
+    "PASS 攻速宝石实际缩短普攻间隔且卸下后恢复",
+    "PASS 属性装备灵兽和宝石面板内点击头像可直接切换角色",
+    "PASS 空地灵兽全种类动作和新怪物绘制均无非法画布坐标",
+    "PASS 旧地图权限、桥梁寻路和驻守命令保留",
+    "PASS 五英雄十五种手动技能仍有消耗与冷却",
+    "PASS 首领屏障与三阶段、召唤护卫仍生效且归属当前地图",
+    "PASS 干支卦象灵时实际提供小幅角色增益，改变时序不改动装备",
+    "PASS 干支灵时匹配材料时提高宝石与灵兽合成实际成功率",
+    "PASS 100种不重名灵宠及全部图集元数据、指定神话灵宠齐全",
+    "PASS 七档品质按指定次序并实际增强灵宠战力、独立保存",
+    "PASS 灵宠包裹可保存1000独立个体且图鉴不因消耗材料而遗忘",
+    "PASS 一级合体成功使用两只不同个体并按真实成本扣款",
+    "PASS 合体缺钱、异品质、重复个体、非法随机值不会扣费或消耗材料",
+    "PASS 四级怪物存在且每个地图都含小首领，强度与冷却分档",
+    "PASS 所有档位怪物掉落合法战利品且首领保证高阶宝石及装备",
+    "PASS 品质掉落权重递减且极其稀有只能从大首领或终极首领低概率出现",
+    "PASS 怪物重复击杀不会重复掉落或重复计时",
+    "PASS 普通怪和首领按冷却刷新，近距离延期，重新载入保留冷却",
+    "PASS 大首领复活保留任务奖励去重并能再次正常掉落",
+    "PASS 分解装备返还镶嵌宝石并只允许分解行囊物品",
+    "PASS 指定五行装备打造、品质淬炼保留宝石与属性且扣费原子",
+    "PASS 高阶淬炼成本指数递增且极其稀有封顶",
+    "PASS 营地全部店铺可实际交互，离开安全区不可购买打造",
+    "PASS 火冰五行喷息、咆哮扑击及全部营地建筑可绘制，无非法坐标",
+    "PASS 切图清理灵宠特效，失败传送不会清空，图鉴地址保持有效HTML",
+    "PASS 五人全部解封才开放新征程，后续地图按真实破关解锁",
+    "PASS 新地图怪物比旧区强且所有出生点避开河流城墙",
+    "PASS 新地图首领直接可战，不受旧章节屏障影响且不重复主线奖励",
+    "PASS 断命预警足够明显、位置固定，离开区域可以完全躲过",
+    "PASS 命中秒杀技能会击倒角色，护甲护盾和普通防御不能挡住",
+    "PASS 闪避无敌可以抵挡致命命中，三种技能形状都可解析",
+    "PASS 新首领召唤的护卫只属于当前地图且不产生奖励和刷新记录",
+    "PASS 每个大首领最多三次击杀，封印跨冷却、切图、读档保留",
+    "PASS 普通、小首领和终极首领可超过三轮刷新且逐轮增强",
+    "PASS 六个装备部位都能双孔镶嵌，非武器宝石实际增强能力并可读档",
+    "PASS 镶嵌替换返还旧宝石；容量不足与非法孔位不丢材料",
+    "PASS 镶嵌音效在打开音效后产生四段音符，关闭时不播放",
+    "PASS 新整备面板都可直接切换角色，未解锁角色不能越权",
+    "PASS 隐藏灵宠默认不泄露到图鉴、商店或普通掉落池",
+    "PASS 三印需击败守卫并亲自触碰，破关后开启隐藏地图和奖励",
+    "PASS 隐藏首领奖励只发一次，特殊同品质灵契可发现第三只隐藏宠",
+    "PASS 满1000只时隐藏奖励暂存，腾出空间后可领取",
+    "PASS 新地图、隐藏宠与致命预警绘制没有非有限画布坐标",
+    "PASS 连续战斗帧仍显示新界主真实名称等级，离开后隐藏首领栏",
+    "PASS 新游戏可立即保存读取，装备元数据和五阶字段完整",
+    "PASS 全体幸运包含未出战和未招募的有效角色，并即时影响两个融合系统",
+    "PASS 幸运算法有边际递减，异常幸运不参与，高阶概率永远低于100%",
+    "PASS 灵宠品质逐阶成功率递减，异品质和最高品质不消耗物资",
+    "PASS 成功升品保留主宠身份元素与等级，属性继承取最大值不会反复相加",
+    "PASS 失败保护保留主宠全部培养与骑乘，副宠费用消耗且有上限",
+    "PASS 传说及以上灵宠被动实际提供护主减伤、疾风攻速和灵汲",
+    "PASS 11级宝石真实成长与存档往返，12级拒绝",
+    "PASS 同级两石升一级，低级明确保证，高级基础概率逐级下降",
+    "PASS 异级融合允许且按等级差降概率，补能成本防止廉价冲级",
+    "PASS 三枚同种同级强化提高概率但不超过阶段上限，数量不足不能利用同堆叠",
+    "PASS 双石与三石配方无序匹配，条件不足不能退化为普通融合",
+    "PASS 太初配方需要三阶，成功后获得11级专属宝石并登记图鉴",
+    "PASS 三石融合失败只保留主石，不影响装备和其他材料",
+    "PASS 宝石输出满额、非法随机数和缺钱均不丢主石、金币或其他道具",
+    "PASS 复合宝石只经配方获得，五行词条和百分比属性有上限",
+    "PASS 镶嵌即时提高装备等级评分属性，拆卸恢复且不改变穿戴需求",
+    "PASS 镶嵌预览纯计算不消费或永久叠加，重复确认只结算一次",
+    "PASS 装备库真实999容量，满库保留更优装备并精确出售最低价值装备",
+    "PASS 满库低价值新增装备直接售出，保护中的库存与角色装备不会误售",
+    "PASS 锁定收藏绑定任务禁止出售及镶嵌保护覆盖自动回收，全保护时安全暂存",
+    "PASS 关闭自动出售后满库装备暂存，领取和出售重复请求不复制金币物品",
+    "PASS 金币现金满额时自动出售收入转入储备，不静默丢失且可用于融合",
+    "PASS 手动出售镶嵌装备返还宝石，锁定装备无法通过旧API分解",
+    "PASS 满库换装采用交换不会溢出，卸下已装备物品不会偷偷出售",
+    "PASS 转职保留纯基础成长与加点职业技能，装备临时效果不计入永久账本",
+    "PASS 五次转职各增加20级一个真实灵台槽并解锁觉醒，第六次拒绝",
+    "PASS 新增等级真正可达，角色转职后已解锁R技能在1级仍可释放",
+    "PASS 灵台每阶只多一个槽，六件装备仍各双孔，镶嵌拆卸影响真实属性",
+    "PASS 五阶觉醒有不同实际效果，技能共用冷却并保留旧职业分支",
+    "PASS V9历史轮回超过五次仍保留全部幸运天赋，不允许继续转职",
+    "PASS 存档拒绝重复装备、非法槽位、负数金币、超过五阶和伪造玩家ID",
+    "PASS 融合和转职重复请求在保存恢复后仍不会重复扣费发奖，旧预览过期安全拒绝",
+    "PASS 所有新核心界面可操作、切换角色，暂停不会推进怪物计时",
+    "PASS 镶嵌界面能预览确认并产生成功动画，具体孔位与等级对比正确",
+    "PASS 安全随机源提供范围正确的随机数，事务异常回滚不遗留资源变动",
+    "PASS 过期标签页不能提交物资操作或覆盖磁盘上的最新存档",
+    "PASS 固定种子实际融合模拟：灵宠10000次与宝石10000次符合预览概率",
+    "PASS V10存档迁移保留角色装备宝石和成长，增加的探索字段可往返保存",
+    "PASS 营地新增18只真实怪物含3只独特精英，等级分区且避开营地和建筑",
+    "PASS 八位NPC与全部营地宝箱可寻路到达，建筑有真实碰撞且池塘留桥",
+    "PASS 其他十张地图的新宝箱位置合法且不阻挡已有传送与主线",
+    "PASS 安全区受到营地野怪攻击不掉血，野怪不能追入营地建筑群",
+    "PASS 低级怪有追逐前摇命中和死亡，掉落不会推进原地图主线杀怪数",
+    "PASS 营地怪刷新冷却可保存，玩家离开后复活并变强且保留自身种类",
+    "PASS 宝箱实际发金币宝石药剂，重复点击或读档不能重复领奖",
+    "PASS 远处和异图无法隔空开箱，隐秘宝箱发现后也只结算一次",
+    "PASS 巡林委托要求实际击杀和开箱，奖励一次领取并有灵宠容量保护",
+    "PASS 商会购买药剂卷轴武器按实际价格扣款，完整展示不同图标与属性",
+    "PASS 商店购买重复请求和满库均不会重复扣款，非法名字无法进入存档",
+    "PASS 八位NPC均打开真实功能页，异图驿站商人也能实际交易",
+    "PASS 灵宠前摇和弹道结束前无伤害，命中时只结算一次并触发打击粒子",
+    "PASS 灵宠攻击在主人倒下或换宠时取消，成功切图清空待命中事件",
+    "PASS 地面与飞行宠物攻击模式不同，三档画质不改变实际命中伤害",
+    "PASS 随行灵宠独立寻路跟随主人，切换骑乘不改属性和契约",
+    "PASS 五阶外观使用不同层次且保留原宝石特效与装备统计，动作状态齐全",
+    "PASS 粒子池有硬上限并回收，低画质限制粒子数量，全部新画面坐标合法",
+    "PASS 新探索存档拒绝重复宝箱、非法画质和负数记录，旧存档仍可载入",
+    "PASS 同帧属性缓存保持升级灵宠成长攻速到期和灵时变化正确，帧外预览不缓存",
+    "PASS 宝箱宝石满堆和任务灵宠满库不会吞奖励或提前标记领取",
+    "PASS 营地怪物遇到溪水障碍会规划绕行路径，不会在岸边无限直撞",
+    "PASS 标题页无角色存档时也能绘制陈列场景，不中断动画循环",
+    "PASS V12读取V11存档后保留灵宠宝石装备与交易版本",
+    "PASS 北侧六座灵门目标保留、位置不重叠且均可真实寻路",
+    "PASS 新陈列武器架与晶柜点击命中实际工匠，八位NPC路线仍可达",
+    "PASS 商会大图分类与原交易一致，预览不扣钱，单击购买只扣一次",
+    "PASS 宠物弹道实际命中事件关联目标新位置，前摇期间不产生命中特效",
+    "PASS 主人倒下与目标死亡均清除关联弹道，取消攻击没有命中爆发",
+    "PASS 三档画质五行弹道蓄力命中与地图渲染不改变任何装备资源数值",
+    "PASS 动态摇杆让出人物商店宝箱灵门英雄和怪物的可交互画面",
+    "PASS 手机断点区分横屏竖屏触摸设备与桌面",
+    "PASS 界面偏好只接受合法枚举与范围，不污染游戏存档",
+    "PASS 手机全选摇杆移动五个选中成员，取消后不再自动移动",
+    "PASS 单选摇杆不移动未选中驻守成员，不改变金币与回城卷轴",
+    "PASS 战术撤退设置真实移动路径与被动指令，不提供免费回城或治疗",
+    "PASS 角色抽屉所有分类能打开且一键关闭恢复战场",
+    "PASS 手机统一菜单保留装备灵宠宝石融合转职商店与原有系统入口",
+    "PASS 固定摇杆只响应自己的指针，第二根手指和取消不会造成残留移动",
+    "PASS 打开菜单会清除移动向量并暂停模拟，关闭后技能仍能使用",
+    "PASS 手机镜头安全焦点考虑方向和刘海边界，桌面镜头逻辑保持原样"
+  ]
+}
