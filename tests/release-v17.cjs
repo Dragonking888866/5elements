@@ -68,6 +68,10 @@ test('独立沙盒仍能加载、使用无限三石熔炼，并被正式存档�
 test('切换管理面板会暂停批量，不能在商店背后继续扣材料',()=>run(`setup17();add17(0,1,0,300);startBatch17({count:100,target:2});stepBatch17(()=>0);gemShop17();assert(!batchRun17.running);const before=stateItems10();stepBatch17(()=>0);assert.equal(stateItems10(),before);closeDialog();`));
 test('手机技能详情与英雄切换都保留对应的实际技能插画',()=>run(`setup17();window.innerWidth=390;window.innerHeight=844;openCharacter13('skills');assert($('#dialog').innerHTML.includes('skills-v17.svg#metal-q'));switchPanelHero(1);assert($('#dialog').innerHTML.includes('skills-v17.svg#wood-q'));assert(!$('#dialog').innerHTML.includes('skills-v17.svg#metal-q'));closeDialog();window.innerWidth=1280;window.innerHeight=720;`));
 
+
+test('批量恢复重新校验次数和累计字段，非法导入不能绕过上限',()=>run(`setup17();add17(0,1,0,30);startBatch17({count:10,target:2});stepBatch17(()=>0);stopBatch17();const valid=clone10(S);assert(validateSave(valid));for(const change of [v=>v.batch17.config.count=100000000,v=>v.batch17.config.reserve=-1,v=>v.batch17.successes=999,v=>v.batch17.hero=12,v=>v.batch17.results={bad:-1}]){const v=clone10(valid);change(v);assert(!validateSave(v))}batchRun17=null;S.batch17.config.count=1e9;const before=stateItems10();assert(!resumeBatch17());assert.equal(stateItems10(),before);`));
+test('导入附魔总阶数超过20或单元素超过10时拒绝',()=>run(`setup17();for(const levels of [[10,10,10,0,0],[11,0,0,0,0]]){const v=clone10(S);v.heroes[0].gear[0].enchant17=levels;assert(!validateSave(v))}S.heroes[0].gear[0].enchant17=[4,4,4,4,4];assert(validateSave(S));`));
+
 // Existing progression, resource valley, mobile HUD and combat telegraph regression suites.
 require('./renewal-v14.cjs');
 require('./mobile-v13.cjs');
