@@ -11,7 +11,7 @@ test('五行相生相克覆盖全部25对，合成关系双向一致',()=>run(`
  for(let a=0;a<5;a++){assert.equal(WX.damageMultiplier(a,a),1);assert.equal(WX.damageMultiplier(a,ke[a]),1.3);assert.equal(WX.damageMultiplier(ke[a],a),.65)}
 `));
 test('英雄、怪物、灵兽、装备和宝石全部具有合法五行归属',()=>run(`
- begin(fresh('五行底层',0));assert.equal(SAVE_KEY,'wuxing-chronicles-v14');
+ begin(fresh('五行底层',0));assert.equal(SAVE_KEY,'wuxing-chronicles-v15');
  for(let i=0;i<5;i++)assert.equal(S.heroes[i].element,i);
  for(const e of enemies)assert(Number.isInteger(e.element)&&e.element>=0&&e.element<5);
  for(const p of PETS)assert(Number.isInteger(p.element)&&p.element>=0&&p.element<5);
