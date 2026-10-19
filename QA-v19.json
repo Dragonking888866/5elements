@@ -1,0 +1,863 @@
+{
+  "version": "19.0.0",
+  "checkedAt": "2026-10-19T23:20:31.414192+00:00",
+  "checks": 185,
+  "passed": 185,
+  "tests": [
+    {
+      "name": "七品质顺序、颜色与倍率严格递增",
+      "pass": true
+    },
+    {
+      "name": "旧史诗与稀有按名称迁移，ID和基础威力保持",
+      "pass": true
+    },
+    {
+      "name": "等级和品质独立，同种同级不同品质堆叠均可保存",
+      "pass": true
+    },
+    {
+      "name": "无效品质、附魔数组、催化材料和伪造神石被校验拒绝",
+      "pass": true
+    },
+    {
+      "name": "普通熔炉必须恰好三石，旧双石入口不能扣材料",
+      "pass": true
+    },
+    {
+      "name": "三枚同类同级合成一枚高一级，品质不变",
+      "pass": true
+    },
+    {
+      "name": "三石失败保留第一槽，仅消耗另两石和预览费用",
+      "pass": true
+    },
+    {
+      "name": "不同品质材料拒绝，重复堆叠必须足三枚",
+      "pass": true
+    },
+    {
+      "name": "混等级能量补偿为三进制，高级夹带低级不便宜",
+      "pass": true
+    },
+    {
+      "name": "公开配方产物确定，与材料顺序无关",
+      "pass": true
+    },
+    {
+      "name": "五行相生材料优于相克，未命中配方时保持主石类型",
+      "pass": true
+    },
+    {
+      "name": "幸运包括本存档五位有效角色，剔除测试或删除角色",
+      "pass": true
+    },
+    {
+      "name": "锁定、收藏与绑定材料在直接调用、自动批量中全部受保护",
+      "pass": true
+    },
+    {
+      "name": "已镶嵌的宝石不能被当作包裹材料熔炼",
+      "pass": true
+    },
+    {
+      "name": "新镶嵌保留品质与神石来源，拆卸完整返还",
+      "pass": true
+    },
+    {
+      "name": "重复请求、过期版本和跨标签页交易不会重复扣费或复制产物",
+      "pass": true
+    },
+    {
+      "name": "保存空间写入失败时三石交易回滚金币、材料和产物",
+      "pass": true
+    },
+    {
+      "name": "非法随机数、溢出产物或金币不足时全部原子拒绝",
+      "pass": true
+    },
+    {
+      "name": "批量10次逐次结算真实材料、独立收据与正确汇总",
+      "pass": true
+    },
+    {
+      "name": "批量100次可处理数百材料且每片最多五次",
+      "pass": true
+    },
+    {
+      "name": "自动连续升级到目标，保留数量和筛选得到遵守",
+      "pass": true
+    },
+    {
+      "name": "批量失败正确保留主石并显示实际失败计数",
+      "pass": true
+    },
+    {
+      "name": "高阶批量必须界面确认，非法次数不会启动",
+      "pass": true
+    },
+    {
+      "name": "批量暂停、关闭面板与切换角色不消耗额外材料",
+      "pass": true
+    },
+    {
+      "name": "神炉五槽必须五行各一、单元素且最高等级",
+      "pass": true
+    },
+    {
+      "name": "神炉没有真实进度或进阶时拒绝，进入地图不构成解锁",
+      "pass": true
+    },
+    {
+      "name": "神炉失败保留五石，消耗催化材料并提高下次成本",
+      "pass": true
+    },
+    {
+      "name": "神炉成功仅产一枚神石、消耗五石，普通授予和商店不能产出",
+      "pass": true
+    },
+    {
+      "name": "神石五行属性、最高品质与独立美术完整",
+      "pass": true
+    },
+    {
+      "name": "神石属性重复装备不叠加，附近友军光环不叠加",
+      "pass": true
+    },
+    {
+      "name": "神石实际伤害汲取10%并产生周期护盾",
+      "pass": true
+    },
+    {
+      "name": "神石只对当前装备且存活持有者的高阶合成提供70%保底",
+      "pass": true
+    },
+    {
+      "name": "神石不会降低原本高于70%的概率，也不改变淬炼神炉概率",
+      "pass": true
+    },
+    {
+      "name": "同品质灵宠升阶保留主宠ID、种族、训练、技能与骑乘归属",
+      "pass": true
+    },
+    {
+      "name": "一级宠可融合，异品质被拒绝，失败主宠完整保留",
+      "pass": true
+    },
+    {
+      "name": "高品质宠神石保底只作用传说以上，普通宠不被强制",
+      "pass": true
+    },
+    {
+      "name": "实际装备附魔提升实战属性，附魔不替换装备与镶孔",
+      "pass": true
+    },
+    {
+      "name": "附魔费用随阶段非线性增长，元素材料等级和保护受检",
+      "pass": true
+    },
+    {
+      "name": "六次淬炼概率固定递减，成功逐档升品并保留原数据",
+      "pass": true
+    },
+    {
+      "name": "淬炼失败装备逐字段原样，费用与材料正确消耗",
+      "pass": true
+    },
+    {
+      "name": "三级商店必须真实首领战绩，进入高阶地图不会解锁",
+      "pass": true
+    },
+    {
+      "name": "三级宝石、全槽装备与三级灵宠实际发货且价格高于基础",
+      "pass": true
+    },
+    {
+      "name": "每日库存与重复购买收据防止无限领取，缺金币不扣库存",
+      "pass": true
+    },
+    {
+      "name": "金币灵焰星核掉落遵守首领奖励与noRewards隔离",
+      "pass": true
+    },
+    {
+      "name": "口令资源写入独立档，正常存档金币道具保持原值",
+      "pass": true
+    },
+    {
+      "name": "未知或错误口令不会修改正常档、口令标记或修订号",
+      "pass": true
+    },
+    {
+      "name": "正常档再次分叉不会覆盖已有口令档，重载仍选择对应档",
+      "pass": true
+    },
+    {
+      "name": "无限资源三石与附魔保留有限钱包且不能绕过材料品质保护",
+      "pass": true
+    },
+    {
+      "name": "正常正式档仍拒绝沙盒测试根标记和物品标记",
+      "pass": true
+    },
+    {
+      "name": "全体新面板可打开、直接切换角色且保持所有操作入口",
+      "pass": true
+    },
+    {
+      "name": "技能图标每英雄QER不同，详情与快捷栏使用同一资源",
+      "pass": true
+    },
+    {
+      "name": "神石与附魔装配后战斗绘图坐标有效，保存读回保留所有字段",
+      "pass": true
+    },
+    {
+      "name": "固定种子50000次模拟：普通融合与神石70%实际分布吻合",
+      "pass": true
+    },
+    {
+      "name": "固定种子50000次神炉模拟封顶15%，装备淬炼仍15%",
+      "pass": true
+    },
+    {
+      "name": "宝石品质提升实际能力，同等级的七档品质不混淆",
+      "pass": true
+    },
+    {
+      "name": "千次批量处理三千材料，收据队列有界且不会冻结为单次结算",
+      "pass": true
+    },
+    {
+      "name": "暂停的批量任务可原地或读档后续跑，次数与结果不重复",
+      "pass": true
+    },
+    {
+      "name": "从口令档返回标题，默认继续指向正常档且资源不串档",
+      "pass": true
+    },
+    {
+      "name": "分解与异变合体旧入口继续存在，神石不进入普通材料池",
+      "pass": true
+    },
+    {
+      "name": "独立沙盒仍能加载、使用无限三石熔炼，并被正式存档导入拒绝",
+      "pass": true
+    },
+    {
+      "name": "切换管理面板会暂停批量，不能在商店背后继续扣材料",
+      "pass": true
+    },
+    {
+      "name": "手机技能详情与英雄切换都保留对应的实际技能插画",
+      "pass": true
+    },
+    {
+      "name": "批量恢复重新校验次数和累计字段，非法导入不能绕过上限",
+      "pass": true
+    },
+    {
+      "name": "导入附魔总阶数超过20或单元素超过10时拒绝",
+      "pass": true
+    },
+    {
+      "name": "第三章闪避不再被第四章的同坐标封印区域误打断",
+      "pass": true
+    },
+    {
+      "name": "五种初始英雄均可逐章救齐五人，火土与界外征程不会卡住",
+      "pass": true
+    },
+    {
+      "name": "已通关但漏招募的旧存档只修复伙伴章节，不重复金币装备宠物奖励",
+      "pass": true
+    },
+    {
+      "name": "没有守护者记录时不会凭等级或新地图ID免费招募英雄",
+      "pass": true
+    },
+    {
+      "name": "五章导航始终显示五个入口，第四第五章锁定原因可见且可切换查看",
+      "pass": true
+    },
+    {
+      "name": "资源谷从1级开放且不解锁终局，24只固定普通怪没有首领",
+      "pass": true
+    },
+    {
+      "name": "三类采猎实际增加金币灵铁与基础宝石，不改主线击杀章节与首领记录",
+      "pass": true
+    },
+    {
+      "name": "资源怪20秒刷新，多轮不变强，读档和切图不提前刷新",
+      "pass": true
+    },
+    {
+      "name": "资源谷回营仍需卷轴，缺卷轴可在入口购买，传送菜单没有免费绕过",
+      "pass": true
+    },
+    {
+      "name": "后期重击满血不秒杀，护盾格挡有效，残血仍可能倒下",
+      "pass": true
+    },
+    {
+      "name": "终极技能只在最终阶段低频出现，45秒限制与4.4秒预警生效",
+      "pass": true
+    },
+    {
+      "name": "闪避可完全躲过重击，命中后的保护时间阻止追加伤害",
+      "pass": true
+    },
+    {
+      "name": "普通首领攻击同样有伤害上限，阶段切换不连续压缩重击冷却",
+      "pass": true
+    },
+    {
+      "name": "横屏扩大世界视野并提高画布采样，桌面不更改旧分辨率公式",
+      "pass": true
+    },
+    {
+      "name": "资源地图绘制菜单与刷怪记录能保存，不读取不存在的界外地图配置",
+      "pass": true
+    },
+    {
+      "name": "动态摇杆让出人物商店宝箱灵门英雄和怪物的可交互画面",
+      "pass": true
+    },
+    {
+      "name": "手机断点区分横屏竖屏触摸设备与桌面",
+      "pass": true
+    },
+    {
+      "name": "界面偏好只接受合法枚举与范围，不污染游戏存档",
+      "pass": true
+    },
+    {
+      "name": "手机全选摇杆移动五个选中成员，取消后不再自动移动",
+      "pass": true
+    },
+    {
+      "name": "单选摇杆不移动未选中驻守成员，不改变金币与回城卷轴",
+      "pass": true
+    },
+    {
+      "name": "战术撤退设置真实移动路径与被动指令，不提供免费回城或治疗",
+      "pass": true
+    },
+    {
+      "name": "角色抽屉所有分类能打开且一键关闭恢复战场",
+      "pass": true
+    },
+    {
+      "name": "手机统一菜单保留装备灵宠宝石融合转职商店与原有系统入口",
+      "pass": true
+    },
+    {
+      "name": "固定摇杆只响应自己的指针，第二根手指和取消不会造成残留移动",
+      "pass": true
+    },
+    {
+      "name": "打开菜单会清除移动向量并暂停模拟，关闭后技能仍能使用",
+      "pass": true
+    },
+    {
+      "name": "手机镜头安全焦点考虑方向和刘海边界，桌面镜头逻辑保持原样",
+      "pass": true
+    },
+    {
+      "name": "V18-01: 500属性点批量预览、取消与一次确认",
+      "pass": true
+    },
+    {
+      "name": "V18-02: MAX推荐永不超出；拒绝负数、越界、NaN与重复提交",
+      "pass": true
+    },
+    {
+      "name": "V18-03: 重置自由属性返还点数，保留转职永久天赋与成长",
+      "pass": true
+    },
+    {
+      "name": "V18-04: 五系六节点名称与职业方向各不相同，真实被动生效",
+      "pass": true
+    },
+    {
+      "name": "V18-05: 专精按转职解锁；旧天赋点保留；不能超阶",
+      "pass": true
+    },
+    {
+      "name": "V18-06: QER、五系觉醒与11类药剂均引用不同原创图像",
+      "pass": true
+    },
+    {
+      "name": "V18-07: 材料一次购买10与100份；准确结算金币库存",
+      "pass": true
+    },
+    {
+      "name": "V18-08: 批量宝石、药剂、灵宠与装备遵守容量及库存",
+      "pass": true
+    },
+    {
+      "name": "V18-09: 余额、非整数数量和容量不足不允许部分扣款",
+      "pass": true
+    },
+    {
+      "name": "V18-10: 批量出售准确计价，旧请求不能重复加钱",
+      "pass": true
+    },
+    {
+      "name": "V18-11: 已装备、锁定、收藏、任务、绑定、至尊、神石与镶孔默认保护",
+      "pass": true
+    },
+    {
+      "name": "V18-12: 重复装备规则保留最佳并可按等级评分品质筛选",
+      "pass": true
+    },
+    {
+      "name": "V18-13: 主线/材料/融合/首领任务招募不同成员且只领一次",
+      "pass": true
+    },
+    {
+      "name": "V18-14: 永恒裂隙真实伤害击杀触发通关和可用成员救援",
+      "pass": true
+    },
+    {
+      "name": "V18-15: 两支援位已满，救援进入候补，仍可在营地换人上阵",
+      "pass": true
+    },
+    {
+      "name": "V18-16: 重复首领击杀/读档不复制成员，主将死亡后其余英雄仍能救援",
+      "pass": true
+    },
+    {
+      "name": "V18-17: 旧档有裂隙首领战绩时修复，单纯访问地图绝不误发",
+      "pass": true
+    },
+    {
+      "name": "V18-18: 支援真实移动、出招和伤害；被动待机不主动进攻",
+      "pass": true
+    },
+    {
+      "name": "V18-19: 60秒大招10%词条变54秒；高级水宝石真实减少冷却",
+      "pass": true
+    },
+    {
+      "name": "V18-20: 装备宝石CDR合并封顶40%，遵守技能最短冷却",
+      "pass": true
+    },
+    {
+      "name": "V18-21: 装备穿脱按剩余比例调整，反复切换不会刷新大招",
+      "pass": true
+    },
+    {
+      "name": "V18-22: 技能伤害+30%只应用一次，汲取按实际有效损血计算",
+      "pass": true
+    },
+    {
+      "name": "V18-23: 近距光环不无限叠加，离开范围解除",
+      "pass": true
+    },
+    {
+      "name": "V18-24: 三件/全套奖励可激活解除，重复穿脱不累积永久属性",
+      "pass": true
+    },
+    {
+      "name": "V18-25: 五系大招的真实效果不同：剑阵/治疗/冰封/火域/护盾嘲讽",
+      "pass": true
+    },
+    {
+      "name": "V18-26: 持续领域按游戏tick伤害/治疗、离图消失，不跨地图打怪",
+      "pass": true
+    },
+    {
+      "name": "V18-27: 五行神石仍有原始数值和70%高阶融合保底",
+      "pass": true
+    },
+    {
+      "name": "V18-28: 同威力神器有伤害/冷却两种真实构筑可选",
+      "pass": true
+    },
+    {
+      "name": "V18-29: 药剂真实回血、回蓝、强化到期撤销与五行匹配限制",
+      "pass": true
+    },
+    {
+      "name": "V18-30: 巡猎需要新增30击杀、明确限100轮，无日期依赖",
+      "pass": true
+    },
+    {
+      "name": "V18-31: 所有新面板支持面板内切英雄与一键返回，手机无键盘依赖",
+      "pass": true
+    },
+    {
+      "name": "V18-32: 旧档迁移不改变基础属性/永久天赋/装备与灵宠且幂等",
+      "pass": true
+    },
+    {
+      "name": "V18-33: 新存档拒绝重复招募、超额支援和非法装备词条",
+      "pass": true
+    },
+    {
+      "name": "V18-34: 属性界面按钮+1/+5/+10/+100/MAX均可点并只提交一次",
+      "pass": true
+    },
+    {
+      "name": "V18-35: 长按连续处理，松开后的click不会额外加一次",
+      "pass": true
+    },
+    {
+      "name": "V18-36: 存储失败完整回滚属性和药剂的运行时治疗",
+      "pass": true
+    },
+    {
+      "name": "V18-37: 觉醒选择保留、五次转职使用各自专属技能描述",
+      "pass": true
+    },
+    {
+      "name": "V18-38: 装备库999满额仍安全自动卖低价值，至尊不会被自动卖",
+      "pass": true
+    },
+    {
+      "name": "V18-39: 木治疗领域确实治疗附近队友，土护盾词条与抗性确实减伤",
+      "pass": true
+    },
+    {
+      "name": "V18-40: 百级旧职业分支尚未转世也保留可用觉醒",
+      "pass": true
+    },
+    {
+      "name": "V18-41: 实际镶嵌与拆下高级水宝石后冷却属性立即移除",
+      "pass": true
+    },
+    {
+      "name": "V18-42: 实际释放觉醒按54秒起算，技能伤害与冷却均进入战斗",
+      "pass": true
+    },
+    {
+      "name": "19-A1 初始仅主线第一关、营地与资源谷开放，250级不能越级",
+      "pass": true
+    },
+    {
+      "name": "19-A2 全部九关实际清怪/击杀首领，准确逐关开放与继续按钮",
+      "pass": true
+    },
+    {
+      "name": "19-A3 第一至第四关出口目标分别为2/3/4/5，不共用第五关",
+      "pass": true
+    },
+    {
+      "name": "19-A4 所有普通入口、强制参数和篡改按钮均经过同一个权限检查",
+      "pass": true
+    },
+    {
+      "name": "19-A5 五行英雄齐聚仍须通关第五关和永恒裂隙才开归墟",
+      "pass": true
+    },
+    {
+      "name": "19-A6 隐藏地图需第九关与三枚印记，资源谷不推主线",
+      "pass": true
+    },
+    {
+      "name": "19-A7 实际通关记录保存/重载后保持，同一死亡事件不重复首通奖励",
+      "pass": true
+    },
+    {
+      "name": "19-A8 污染章节旧档即使原校验拒绝也可安全迁移，物品角色不丢失",
+      "pass": true
+    },
+    {
+      "name": "19-A9 旧档高阶真实战绩保留，有前置缺口时只收紧权限不删除奖励",
+      "pass": true
+    },
+    {
+      "name": "19-A10 后续图持续燃烧击杀不再临时篡改或持久化章节/清怪计数",
+      "pass": true
+    },
+    {
+      "name": "19-A11 一名队员倒下不重置首领，其余存活队员可完成通关",
+      "pass": true
+    },
+    {
+      "name": "19-A12 全队离开未通关图首领恢复满血且阶段缩放不累乘",
+      "pass": true
+    },
+    {
+      "name": "19-A13 同图连续传送不重复加载/扣卷轴，不存在地图ID拒绝",
+      "pass": true
+    },
+    {
+      "name": "19-A14 百组随机缺口权限始终只开放连续前缀加下一关",
+      "pass": true
+    },
+    {
+      "name": "19-B1 总STR/INT/AGI与权威stats相同，来源逐项相加完全一致",
+      "pass": true
+    },
+    {
+      "name": "19-B2 加点、靴子、智力宝石与有效灵宠的来源分别真实改变",
+      "pass": true
+    },
+    {
+      "name": "19-B3 神石重复镶嵌仅计一次核心属性80，拆卸后移除",
+      "pass": true
+    },
+    {
+      "name": "19-B4 永久核心不因装备、宝石、宠物或临时药剂改变，重复查看无叠加",
+      "pass": true
+    },
+    {
+      "name": "19-B5 属性面板及预览仍保留十五个快捷加点与MAX，不把投入点当总值",
+      "pass": true
+    },
+    {
+      "name": "19-C1 Esc覆盖属性、装备、熔炉、灵宠、商店、任务、转职和设置",
+      "pass": true
+    },
+    {
+      "name": "19-C2 嵌套宝石详情第一次Esc回货架、第二次回战场",
+      "pass": true
+    },
+    {
+      "name": "19-C3 输入框内Esc仍关闭顶层，确认窗口取消不扣款",
+      "pass": true
+    },
+    {
+      "name": "19-C4 没有窗口时Esc打开暂停，不退出页面；长按repeat不穿透多层",
+      "pass": true
+    },
+    {
+      "name": "19-C5 手机X走同一个逐层关闭函数，恢复后保留筛选状态",
+      "pass": true
+    },
+    {
+      "name": "19-C6 层内购买后返回父面板重渲染，金额库存与事件仍可操作",
+      "pass": true
+    },
+    {
+      "name": "19-C7 同面板刷新/切英雄不累积窗口，导航栈最多12层",
+      "pass": true
+    },
+    {
+      "name": "19-C8 关闭与返回上层都会暂停批量任务，不继续扣材料",
+      "pass": true
+    },
+    {
+      "name": "19-D1 金币/灵铁紧凑栏与准确资源面板实时展示实际值",
+      "pass": true
+    },
+    {
+      "name": "19-D2 买100份材料、熔炼与出售后资源栏立即同步",
+      "pass": true
+    },
+    {
+      "name": "19-D3 资源谷金币灵铁奖励同一结算内刷新，无需重新登录",
+      "pass": true
+    },
+    {
+      "name": "19-D4 失败交易回滚后资源显示也回滚，包含星核灵焰储备及卷轴",
+      "pass": true
+    },
+    {
+      "name": "19-E1 六类支援拥有独立外观与兵器，绘制不调用英雄模型或装备",
+      "pass": true
+    },
+    {
+      "name": "19-E2 支援选择不占英雄ID，支持支援单控移动且英雄不动",
+      "pass": true
+    },
+    {
+      "name": "19-E3 支援进攻与驻守按选择执行，不会调用英雄觉醒",
+      "pass": true
+    },
+    {
+      "name": "19-E4 混合编队同时下达移动、进攻与撤退，主英雄编队仍可单独选",
+      "pass": true
+    },
+    {
+      "name": "19-E5 支援摇杆只移动支援，英雄单选摇杆不改变既有操控规则",
+      "pass": true
+    },
+    {
+      "name": "19-E6 伙伴继续治疗、护盾、回蓝，生命与防护分担仍生效",
+      "pass": true
+    },
+    {
+      "name": "19-E7 死亡并留营英雄不被集体传送、受伤或治疗到异图",
+      "pass": true
+    },
+    {
+      "name": "19-F1 宝石商品为多卡片货架，没有商品选择下拉，五行图像各异",
+      "pass": true
+    },
+    {
+      "name": "19-F2 五行/品质/名称筛选、价格排序和分页都真实作用于商品",
+      "pass": true
+    },
+    {
+      "name": "19-F3 卡片直接购买10枚、详情自定义5枚，入库/金币/库存准确",
+      "pass": true
+    },
+    {
+      "name": "19-F4 三级宝石只认第1—4关真实通关，伪造章节/地图/全英雄无效",
+      "pass": true
+    },
+    {
+      "name": "19-F5 缺金币、超过库存、负数或小数购买给明确提示且不扣款",
+      "pass": true
+    },
+    {
+      "name": "19-F6 详情收益是未镶嵌预览，不会免费改变英雄或装备",
+      "pass": true
+    },
+    {
+      "name": "19-G1 旧档首领战绩可修复缺失通关标记，不补发金币或物品",
+      "pass": true
+    },
+    {
+      "name": "19-G2 缺失前界的真实后界战绩仍保留，补齐前置才开放后续",
+      "pass": true
+    },
+    {
+      "name": "19-G3 非法进度和旧档结构被拒绝，不抛异常或生成解锁",
+      "pass": true
+    },
+    {
+      "name": "19-G4 点击全部英雄明确清除支援选择，保留独立跟随AI",
+      "pass": true
+    },
+    {
+      "name": "19-G5 点击锁定的营地传送门被拒绝，不产生移动或传送请求",
+      "pass": true
+    },
+    {
+      "name": "19-G6 点击已解锁界门自动走近并进入对应下一关",
+      "pass": true
+    },
+    {
+      "name": "19-G7 点击远处宝箱自动寻路开启并仅结算一次奖励",
+      "pass": true
+    },
+    {
+      "name": "19-G8 自动接近可被驻守或角色切换取消，不远程开启宝箱",
+      "pass": true
+    },
+    {
+      "name": "19-G9 旧救援剧情的继续远征主按钮也传送到真实下一关",
+      "pass": true
+    }
+  ],
+  "stability": {
+    "simulatedSeconds": 600,
+    "ticks": 36000,
+    "wallMs": 336423,
+    "peaks": {
+      "particles": 89,
+      "impacts": 3,
+      "numbers": 27,
+      "effects": 7,
+      "zones": 1,
+      "recruits": 2
+    },
+    "kills": 183,
+    "bag": 50,
+    "petCount": 13,
+    "saveValid": true
+  },
+  "browser": {
+    "viewports": [
+      [
+        1366,
+        900
+      ],
+      [
+        844,
+        390
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        568,
+        320
+      ]
+    ],
+    "actualBrowserFlows": [
+      "fresh game; all higher main stages locked",
+      "local isolated rich save import",
+      "STR399 to499 after confirming100 allocated points;400points remain",
+      "switch within attribute panel to water hero; INT526 versus permanent506;pet20.4 and rounding-0.4",
+      "buy10 Lv1 fire gems for600 gold; held10;stock40",
+      "browser Back from gem detail to shelf with fresh balance and stock",
+      "Escape while gem-search input focused; then mobile X to battle",
+      "support-only click-to-move; five heroes stay in place",
+      "click distant camp chest; automatic approach and opening",
+      "local high-damage code fixture defeats actual first boss; rescue story and correct next-stage button",
+      "both appended continuation and original story primary button lead to stage2; stage3 remains locked",
+      "final fresh-cache small landscape shelf has3columns,44x44close and no horizontal overflow",
+      "desktop4columns,portrait2columns; orientation transitions"
+    ],
+    "measured": {
+      "mobileHeroInfo": [
+        144,
+        44
+      ],
+      "mobileResourceBar": [
+        136.4375,
+        32
+      ],
+      "mobileResourceHitExtension": "6px vertical pseudo-element extension",
+      "portraitDialog": [
+        374,
+        776
+      ],
+      "smallLandscapeDialog": [
+        552,
+        258
+      ],
+      "smallLandscapeClose": [
+        44,
+        44
+      ],
+      "smallLandscapeColumns": 3,
+      "landscapeDialogNoHorizontalOverflow": true,
+      "portraitDialogNoHorizontalOverflow": true,
+      "smallLandscapeDialogNoHorizontalOverflow": true
+    },
+    "consoleErrorsInFinalFreshCacheTab": [],
+    "scope": "Owned local QA tabs only; no online player save changed. Viewport and mouse interactions plus VM pointer/joystick tests, not a physical phone or native Safari touch test."
+  },
+  "rootCauses": [
+    "Old early field exits all targeted map6 rather than configured next main stage",
+    "Rift level gate and five-hero gate opened later maps without all preceding boss clears",
+    "Temporary chapter4/kill-counter promotion during late-map combat could be serialized on damage-over-time kills"
+  ],
+  "mainProgression": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "independentMaps": [
+    0,
+    11
+  ],
+  "hiddenMap": {
+    "id": 10,
+    "requires": "Main1-9 cleared, all five heroes, sigils7/8/9"
+  },
+  "normalSaveKey": "wuxing-chronicles-v19",
+  "migration": "Proven clears kept, gaps gated, inaccessible saved location relocated to camp; existing heroes/items/rewards kept",
+  "stageTestScope": "Extremely high damage in isolated functional tests; no claim of a complete normal-equipment balance playthrough",
+  "limits": [
+    "Single-player local browser save; no trusted multiplayer server",
+    "2.5D, not full3D",
+    "Five main heroes plus two support slots; original stored hero groups retain hero IDs only",
+    "Support models are independent code-drawn animations, not high-resolution3D models",
+    "Physical Android/iPhone and native Safari gesture validation pending"
+  ]
+}

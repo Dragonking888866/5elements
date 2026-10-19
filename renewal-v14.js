@@ -18,12 +18,12 @@ function syncStory14(v){
  let changed=false,prefix=0;
  while(prefix<5&&v.bosses[prefix])prefix++;
  const chapter=Math.min(4,prefix);
- if(v.chapter<chapter){v.chapter=chapter;changed=true}
- const expected=Math.min(5,1+v.bosses.filter(Boolean).length);
+ if(v.chapter!==chapter){v.chapter=chapter;changed=true}
+ const expected=Math.min(5,1+prefix);
  let missing=expected-v.heroes.filter(h=>h.unlocked).length;
  const level=Math.max(1,Math.round(v.heroes.filter(h=>h.unlocked).reduce((n,h)=>n+h.lv,0)/Math.max(1,v.heroes.filter(h=>h.unlocked).length)));
  for(const h of v.heroes){if(missing<=0)break;if(h.unlocked)continue;h.unlocked=true;h.lv=Math.min(level,150+(h.rebirthCount10||0)*20);h.points=Math.max(h.points,(h.lv-1)*3);h.skillsKept10=h.skillsKept10||h.lv>=3;missing--;changed=true}
- if(v.bosses[4]&&!v.won){v.won=true;changed=true}
+ if(v.won!==(prefix===5)){v.won=prefix===5;changed=true}
  return changed;
 }
 const beginBefore14=begin;

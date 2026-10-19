@@ -10,7 +10,7 @@ function claimSecretRewards9(){if(!S)return false;let gained=false;S.secretClaim
 const validateBeforeProgress9=validateSave;validateSave=function(v){if(!validateBeforeProgress9(v))return false;const integer=(n,max=1e8)=>Number.isInteger(n)&&n>=0&&n<=max;
  if(v.heroes.some(h=>h.rebirths9!==undefined&&!integer(h.rebirths9,1e6)))return false;
  if(v.journey9!==undefined&&(!Array.isArray(v.journey9)||v.journey9.length>4||new Set(v.journey9).size!==v.journey9.length||v.journey9.some(m=>!Number.isInteger(m)||m<7||m>10)))return false;
- if(v.journey9?.some(m=>m>7&&!v.journey9.includes(m-1)))return false;
+ if(v.systems19!==1&&v.journey9?.some(m=>m>7&&!v.journey9.includes(m-1)))return false;
  if(v.sigils9!==undefined&&(!Array.isArray(v.sigils9)||v.sigils9.length>3||new Set(v.sigils9).size!==v.sigils9.length||v.sigils9.some(m=>![7,8,9].includes(m))))return false;
  if(v.secretBossWins9!==undefined&&!integer(v.secretBossWins9))return false;
  if(v.secretClaims9!==undefined&&(!Array.isArray(v.secretClaims9)||v.secretClaims9.length>2||new Set(v.secretClaims9).size!==v.secretClaims9.length||v.secretClaims9.some(n=>!['sigils','star'].includes(n))))return false;

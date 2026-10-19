@@ -2,15 +2,15 @@ const {run,test}=require('./v10-harness.cjs');
 test('第三章闪避不再被第四章的同坐标封印区域误打断',()=>run(`const v=fresh('跨图闪避',0);v.bosses=[true,true,false,false,false];v.chapter=2;v.heroes[1].unlocked=v.heroes[2].unlocked=true;begin(v);enterMap(3);enemies=[];const a=active();a.x=3500;a.y=2530;a.face=1;a.order={kind:'hold'};const x=a.x;assert(dodge());update(.05);assert(a.dodge>0);assert(a.x>x+20);assert.equal(currentMap(),3);assert.equal(S.chapter,2);`));
 test('五种初始英雄均可逐章救齐五人，火土与界外征程不会卡住',()=>run(`
  for(let starter=0;starter<5;starter++){
-  begin(fresh('五章验收',starter));closeDialog();
-  for(let z=0;z<4;z++){
+  begin(fresh('五章验收',starter));closeAllWindows19();
+  for(let z=0;z<5;z++){
    assert(mapUnlocked(z+1));assert(enterMap(z+1,true));
    const mobs=enemies.filter(e=>e.map===z+1&&!e.boss&&!e.elite).slice(0,ZONES[z].need);
    for(const e of mobs)enemyDamage(e,1e14,starter,starter);
-   assert(S.kills[z]>=ZONES[z].need);const b=enemies.find(e=>e.map===z+1&&e.boss);enemyDamage(b,1e14,starter,starter);closeDialog();
+   assert(S.kills[z]>=ZONES[z].need);const b=enemies.find(e=>e.map===z+1&&e.boss);enemyDamage(b,1e14,starter,starter);closeAllWindows19();
    assert(S.bosses[z]);assert.equal(S.heroes.filter(h=>h.unlocked).length,Math.min(5,z+2));assert(mapUnlocked(z+2));
   }
-  assert(S.heroes[3].unlocked&&S.heroes[4].unlocked);assert(mapUnlocked(7));assert(enterMap(7,true));assert(validateSave(S));
+  assert(S.heroes[3].unlocked&&S.heroes[4].unlocked);assert(!mapUnlocked(7));assert(enterMap(6,true));const rift=enemies.find(e=>e.map===6&&e.boss);enemyDamage(rift,1e14,starter,starter);closeAllWindows19();assert(mapUnlocked(7));assert(enterMap(7,true));assert(validateSave(S));
  }
 `,30000));
 test('已通关但漏招募的旧存档只修复伙伴章节，不重复金币装备宠物奖励',()=>run(`
@@ -19,7 +19,7 @@ test('已通关但漏招募的旧存档只修复伙伴章节，不重复金币�
 `));
 test('没有守护者记录时不会凭等级或新地图ID免费招募英雄',()=>run(`begin(fresh('未通关',0));S.heroes[0].lv=150;const v=clone10(S);assert(!syncStory14(v));assert.equal(v.heroes.filter(h=>h.unlocked).length,1);assert.equal(v.chapter,0);assert(!mapUnlocked(4));`));
 test('五章导航始终显示五个入口，第四第五章锁定原因可见且可切换查看',()=>run(`
- begin(fresh('导航',0));window.innerWidth=844;window.innerHeight=390;worldPanel();assert.equal($('#dialog').querySelectorAll('[data-chapter14]').length,5);$('#dialog').querySelectorAll('[data-chapter14]').find(b=>b.dataset.chapter14==='3').click();assert($('#dialog').innerHTML.includes('沉岳古城'));assert($('#dialog').innerHTML.includes('先击败第3章'));const b=$('#dialog').querySelectorAll('[data-map9]').find(b=>b.dataset.map9==='4');assert(b.disabled);assert.equal(currentMap(),0);closeDialog();window.innerWidth=1280;window.innerHeight=720;
+ begin(fresh('导航',0));window.innerWidth=844;window.innerHeight=390;worldPanel();assert.equal($('#dialog').querySelectorAll('[data-stage19]').length,9);assert($('#dialog').innerHTML.includes('沉岳古城'));assert($('#dialog').innerHTML.includes('先通关第1关'));const b=$('#dialog').querySelectorAll('[data-stage19]').find(b=>b.dataset.stage19==='4');assert(b.disabled);assert.equal(currentMap(),0);closeAllWindows19();window.innerWidth=1280;window.innerHeight=720;
 `));
 test('资源谷从1级开放且不解锁终局，24只固定普通怪没有首领',()=>run(`begin(fresh('资源入口',0));assert(mapUnlocked(FARM_MAP14));assert(!mapUnlocked(7));assert(enterMap(FARM_MAP14));const list=enemies.filter(e=>e.map===FARM_MAP14);assert.equal(list.length,24);assert(list.every(e=>!e.boss&&!e.elite&&e.level<=7&&walkable(e.home.x,e.home.y)));assert(validateSave(S));`));
 test('三类采猎实际增加金币灵铁与基础宝石，不改主线击杀章节与首领记录',()=>run(`
@@ -47,4 +47,4 @@ test('普通首领攻击同样有伤害上限，阶段切换不连续压缩重�
 test('横屏扩大世界视野并提高画布采样，桌面不更改旧分辨率公式',()=>run(`
  const rect=canvas.getBoundingClientRect;canvas.getBoundingClientRect=()=>({width:844,height:390,left:0,top:0});window.innerWidth=844;window.innerHeight=390;resizeWorld();assert(VW>=1360&&VH>=630);assert.equal(canvas.width,1266);assert.equal(canvas.height,585);assert.equal(g.imageSmoothingQuality,'high');canvas.getBoundingClientRect=()=>({width:1280,height:720,left:0,top:0});window.innerWidth=1280;window.innerHeight=720;resizeWorld();assert.equal(VW,1280);assert.equal(VH,720);canvas.getBoundingClientRect=rect;
 `));
-test('资源地图绘制菜单与刷怪记录能保存，不读取不存在的界外地图配置',()=>run(`begin(fresh('资源渲染',0));enterMap(FARM_MAP14);drawMap();drawMini();baseDraw();worldPanel('farm');assert($('#dialog').innerHTML.includes('金砂旧矿'));assert.equal($('#dialog').querySelectorAll('[data-farm14]').length,3);closeDialog();saveGame(false);assert(validateSave(readSave()));`));
+test('资源地图绘制菜单与刷怪记录能保存，不读取不存在的界外地图配置',()=>run(`begin(fresh('资源渲染',0));enterMap(FARM_MAP14);drawMap();drawMini();baseDraw();worldPanel('farm');assert($('#dialog').innerHTML.includes('金砂旧矿'));assert.equal($('#dialog').querySelectorAll('[data-farm19]').length,3);closeAllWindows19();saveGame(false);assert(validateSave(readSave()));`));
