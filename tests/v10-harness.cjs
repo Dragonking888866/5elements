@@ -12,5 +12,5 @@ vm.createContext(sandbox);sandbox.assert=assert;
 const source=path.join(__dirname,'../runtime.js');vm.runInContext(fs.readFileSync(source,'utf8'),sandbox,{filename:source,timeout:20000});
 const run=(s,timeout=15000)=>vm.runInContext('{'+s+'}',sandbox,{timeout}),tests=[];let failures=0;
 function test(name,fn){try{fn();tests.push({name,pass:true});console.log('PASS',name)}catch(error){failures++;tests.push({name,pass:false,message:error.message});console.error('FAIL',name,'\n ',error.stack)}}
-function finish(){console.log(`\n${tests.length-failures}/${tests.length} V17 checks passed.`);if(failures)process.exitCode=1;return{tests,failures}}
+function finish(){console.log(`\n${tests.length-failures}/${tests.length} V18 checks passed.`);if(failures)process.exitCode=1;return{tests,failures}}
 module.exports={run,test,sandbox,elements,listeners,tests,finish};
