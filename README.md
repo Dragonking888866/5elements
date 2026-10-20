@@ -61,10 +61,10 @@ V23 统一通过 `initializeSession23(NEW_GAME / CONTINUE_GAME / LOAD_GAME)`：�
 - `web/windows-v19.js`：修复父窗口实际绘制版本，避免恢复过期库存和禁用按钮。
 - `web/game.js`、`renewal-v14.js`、`rescue-v18.js`：救援与招募从1级初始化，保留历史英雄。
 - `web/atelier-v9.js`：旧隐藏地图验证与统一关卡权限一致。
-- `web/growth-ui-v22.js`、`recovery-v22.js`、`growth-v10.js`、`boot-v10.js`、`panels-v10.js`：成长说明、账本兼容和新重置按钮的Web Lock保护。
+- `web/growth-ui-v22.js`、`recovery-v22.js`、`growth-v10.js`、`boot-v10.js`：成长说明、账本兼容和新重置按钮的Web Lock保护。
 - `web/single-player-v16.js`：口令在内部校验前同步成长，技能口令使用新状态。
 - `web/balance-v17.js`、`economy-v17.js`：V23独立档键及旧分支兼容。
-- `web/growth-v23.css`、`index.html`、`manifest.webmanifest`、`sw.js`、`release-v15.js`、`sandbox-shell15.html`：锁定样式、版本、缓存与入口。
+- `web/growth-v23.css`、`index.html`、`sw.js`、`release-v15.js`、`sandbox-shell15.html`：锁定样式、版本、缓存与入口。
 - `build.cjs`：在正式/沙盒扩展后安装同一个V23会话模块，再执行唯一启动器。
 - `tests/release-v23.cjs`：35项新验收；原回归套件继续运行，必要的旧技能门槛断言和夹具更新为新规则，没有跳过这280项检查。
 
