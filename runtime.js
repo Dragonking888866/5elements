@@ -1,7 +1,7 @@
 'use strict';
 // 五行战记：独立浏览器单机 RPG，无网络依赖。
 const $=s=>document.querySelector(s), canvas=$('#world'),mini=$('#minimap'),mg=mini.getContext('2d');let g=canvas.getContext('2d');
-let VW=1280,VH=760;const WW=4800,WH=3200;let SAVE_KEY='wuxing-chronicles-v23';
+let VW=1280,VH=760;const WW=4800,WH=3200;let SAVE_KEY='wuxing-chronicles-v24';
 const HEROES=[
  {name:'凌锋',element:'金',title:'破阵剑卫',color:'#e7c980',icon:'⚔',main:'agi',base:[12,7,13],growth:[2.6,1.4,3],q:'裂金斩',e:'剑影突袭',r:'万剑归宗',desc:'近战爆发 · 敏捷主属性',skills:['135 范围扇形斩击，造成攻击 ×2.1 + 智力伤害。','向目标突进，短暂无敌，造成攻击 ×2.5。','3级解锁：剑雨连续打击周围敌人。']},
  {name:'青萝',element:'木',title:'灵藤游侠',color:'#91c995',icon:'❧',main:'agi',base:[8,11,13],growth:[1.7,2.5,2.8],q:'缠灵箭',e:'回春之种',r:'万木复苏',desc:'远程输出 · 治疗与定身',skills:['远程灵箭造成攻击 ×1.8 + 智力 ×2，定身3秒。','恢复全队 45 + 智力 ×3 生命。','3级解锁：恢复全队生命，击退并缠绕周围敌人。']},
@@ -52,7 +52,7 @@ function baseRefreshBars(){if(!S)return;$('#gold').textContent='◈ '+S.gold;$('
 function showDialog(html,type='panel'){menu=type;keys.clear();destination=null;$('#dialog').innerHTML=html;$('#curtain').classList.remove('hidden');$('#dialog').querySelectorAll('[data-close]').forEach(b=>b.onclick=closeDialog);}
 function closeDialog(){if(menu==='start')return;menu=null;$('#curtain').classList.add('hidden');keys.clear();canvas.focus({preventScroll:true});saveGame(false);refreshBars()}
 function saveGame(announce=true){if(!S)return false;S.position={x:active().x,y:active().y};return persistSave22(announce)}
-function readSave(){try{let v=JSON.parse(localStorage.getItem(SAVE_KEY)||localStorage.getItem('wuxing-chronicles-v22')||localStorage.getItem('wuxing-chronicles-v21')||localStorage.getItem('wuxing-chronicles-v20')||localStorage.getItem('wuxing-chronicles-v19')||localStorage.getItem('wuxing-chronicles-v18')||localStorage.getItem('wuxing-chronicles-v17')||localStorage.getItem('wuxing-chronicles-v16')||localStorage.getItem('wuxing-chronicles-v15')||localStorage.getItem('wuxing-chronicles-v14')||localStorage.getItem('wuxing-chronicles-v13')||localStorage.getItem('wuxing-chronicles-v12')||localStorage.getItem('wuxing-chronicles-v11')||localStorage.getItem('wuxing-chronicles-v10')||localStorage.getItem('wuxing-chronicles-v9')||localStorage.getItem('wuxing-chronicles-v8')||localStorage.getItem('wuxing-chronicles-v7')||localStorage.getItem('wuxing-chronicles-v6')||localStorage.getItem('wuxing-chronicles-v5')||localStorage.getItem('wuxing-chronicles-v4')||localStorage.getItem('wuxing-chronicles-v2')||localStorage.getItem('wuxing-chronicles-v1'));return validateSave(v)?v:null}catch{return null}}
+function readSave(){try{let v=JSON.parse(localStorage.getItem(SAVE_KEY)||localStorage.getItem('wuxing-chronicles-v23')||localStorage.getItem('wuxing-chronicles-v22')||localStorage.getItem('wuxing-chronicles-v21')||localStorage.getItem('wuxing-chronicles-v20')||localStorage.getItem('wuxing-chronicles-v19')||localStorage.getItem('wuxing-chronicles-v18')||localStorage.getItem('wuxing-chronicles-v17')||localStorage.getItem('wuxing-chronicles-v16')||localStorage.getItem('wuxing-chronicles-v15')||localStorage.getItem('wuxing-chronicles-v14')||localStorage.getItem('wuxing-chronicles-v13')||localStorage.getItem('wuxing-chronicles-v12')||localStorage.getItem('wuxing-chronicles-v11')||localStorage.getItem('wuxing-chronicles-v10')||localStorage.getItem('wuxing-chronicles-v9')||localStorage.getItem('wuxing-chronicles-v8')||localStorage.getItem('wuxing-chronicles-v7')||localStorage.getItem('wuxing-chronicles-v6')||localStorage.getItem('wuxing-chronicles-v5')||localStorage.getItem('wuxing-chronicles-v4')||localStorage.getItem('wuxing-chronicles-v2')||localStorage.getItem('wuxing-chronicles-v1'));return validateSave(v)?v:null}catch{return null}}
 function validateSave(v){if(!v||![1,2].includes(v.version)||typeof v.name!=='string'||v.name.length>24||!Number.isInteger(v.active)||v.active<0||v.active>4)return false;
  const num=(n,min,max)=>typeof n==='number'&&Number.isFinite(n)&&n>=min&&n<=max;
  if(!num(v.gold,0,1e9)||!num(v.potions,0,1e5)||!Number.isInteger(v.chapter)||!num(v.chapter,0,4)||!num(v.nextItem,1,1e9)||!num(v.totalKills,0,1e8)||!num(v.death,0,1e7)||!num(v.played,0,1e10))return false;
@@ -1455,7 +1455,7 @@ function normalizeEquipment10(){if(!S)return;for(const item of [...S.bag,...(S.p
 function persistedSystems10(){try{const text=localStorage.getItem(SAVE_KEY);return text?JSON.parse(text):null}catch{return null}}
 let diskMatches10=function(){if(loading10||!S)return true;const disk=persistedSystems10();return !disk||disk.worldId10===S.worldId10&&disk.revision10===S.revision10};
 function staleMessage10(){staleSave10=true;notice='另一标签页已更新存档。请从菜单返回标题，再继续最新远征。';logMessage(notice)}
-const saveBeforeSystems10=saveGame;saveGame=function(...args){invalidateLuck10();normalizeEquipment10();if(S&&!loading10){const disk=persistedSystems10();if(disk&&(disk.worldId10!==S.worldId10||disk.revision10>S.revision10)){if(!staleSave10)staleMessage10();return false}}if(S&&S.goldReserve10>0){const gain=Math.min(S.goldReserve10,RULES10.inventory.goldCap-S.gold);if(gain>0){S.gold+=gain;S.goldReserve10-=gain}}if(S)S.revision10=(S.revision10||0)+1;return saveBeforeSystems10(...args)};
+const saveBeforeSystems10=saveGame;saveGame=function(...args){invalidateLuck10();normalizeEquipment10();if(S&&!loading10){if(!diskMatches10()){if(!staleSave10)staleMessage10();return false}}if(S&&S.goldReserve10>0){const gain=Math.min(S.goldReserve10,RULES10.inventory.goldCap-S.gold);if(gain>0){S.gold+=gain;S.goldReserve10-=gain}}if(S)S.revision10=(S.revision10||0)+1;return saveBeforeSystems10(...args)};
 const beginBeforeSystems10=begin;begin=function(data){invalidateLuck10();const next=migrateSystems10(data);if(!validateSave(next))throw Error('存档校验失败，请保留原文件。');loading10=true;staleSave10=false;try{beginBeforeSystems10(next)}finally{loading10=false}invalidateLuck10()};
 function cryptoRoll10(){if(!globalThis.crypto?.getRandomValues)throw Error('当前浏览器无法提供安全随机数，请使用新版浏览器。');const data=new Uint32Array(1);crypto.getRandomValues(data);return data[0]/4294967296}
 function rolls10(source,count){const values=Array.from({length:count},()=>source());return values.every(n=>finite10(n,0,1)&&n<1)?values:null}
@@ -2180,9 +2180,9 @@ function sandboxData15(v){if(!v||typeof v!=='object')return false;const arr=x=>A
 const validateBeforeSeal15=validateSave;
 validateSave=function(v){return !sandboxData15(v)&&validateBeforeSeal15(v)};
 const menuBeforeRelease15=realmMenuPanel;
-realmMenuPanel=function(){menuBeforeRelease15();if(SANDBOX_AVAILABLE15)$('#dialog').insertAdjacentHTML('beforeend','<div class="sandbox-entry15"><a href="sandbox.html?v=23.0.0" target="_blank" rel="noopener">开发者体验沙盒 ↗</a><small>独立测试存档 · 无限资源与高级灵宠 · 不改变正式远征</small></div>')};
+realmMenuPanel=function(){menuBeforeRelease15();if(SANDBOX_AVAILABLE15)$('#dialog').insertAdjacentHTML('beforeend','<div class="sandbox-entry15"><a href="sandbox.html?v=24.0.0" target="_blank" rel="noopener">开发者体验沙盒 ↗</a><small>独立测试存档 · 无限资源与高级灵宠 · 不改变正式远征</small></div>')};
 const introBeforeRelease15=intro;
-intro=function(){introBeforeRelease15();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 七星铸魂 V23';const f=$('#dialog').querySelector('.intro-feature8');if(f)f.textContent='五行专精 · 星盟救援 · 秘器套装 · 批量交易';if(SANDBOX_AVAILABLE15)$('#dialog').insertAdjacentHTML('beforeend','<div class="sandbox-entry15"><a href="sandbox.html?v=23.0.0" target="_blank" rel="noopener">高级灵宠与无限资源体验 ↗</a><small>测试进度与正式远征隔离</small></div>')};
+intro=function(){introBeforeRelease15();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 七星铸魂 V24';const f=$('#dialog').querySelector('.intro-feature8');if(f)f.textContent='五行专精 · 星盟救援 · 秘器套装 · 批量交易';if(SANDBOX_AVAILABLE15)$('#dialog').insertAdjacentHTML('beforeend','<div class="sandbox-entry15"><a href="sandbox.html?v=24.0.0" target="_blank" rel="noopener">高级灵宠与无限资源体验 ↗</a><small>测试进度与正式远征隔离</small></div>')};
 $('#realmMenu').onclick=realmMenuPanel;$('#menuBtn').onclick=realmMenuPanel;
 
 'use strict';
@@ -2212,7 +2212,7 @@ function migrate17(data){const v=clone10(data);if(v.systems17!==1){const remap=q
  v.materials17??={embers:0,cores:0};v.divineForge17??={attempts:0,readyAt:0};v.stock17??={day:0,bought:{}};v.batch17??=null;if(v.batch17?.status==='running'){v.batch17.status='paused';v.batch17.reason='重新载入后已暂停，已结算结果保留'}return v;
 }
 const validateBefore17=validateSave;
-validateSave=function(v){if(!validateBefore17(v))return false;if(v.systems17===undefined)return true;if(v.branchStorage17!==undefined&&(typeof v.branchStorage17!=='string'||!/^wuxing-codes-v(?:1[789]|2[0123]):/.test(v.branchStorage17)||v.branchStorage17.length>250))return false;if(v.systems17!==1||!v.materials17||!int10(v.materials17.embers,0,1e8)||!int10(v.materials17.cores,0,1e8)||!v.divineForge17||!int10(v.divineForge17.attempts,0,1e6)||!finite10(v.divineForge17.readyAt,0,1e14))return false;
+validateSave=function(v){if(!validateBefore17(v))return false;if(v.systems17===undefined)return true;if(v.branchStorage17!==undefined&&(typeof v.branchStorage17!=='string'||!/^wuxing-codes-v(?:1[789]|2[01234]):/.test(v.branchStorage17)||v.branchStorage17.length>250))return false;if(v.systems17!==1||!v.materials17||!int10(v.materials17.embers,0,1e8)||!int10(v.materials17.cores,0,1e8)||!v.divineForge17||!int10(v.divineForge17.attempts,0,1e6)||!finite10(v.divineForge17.readyAt,0,1e14))return false;
  const gems=[...(v.gems||[]),...v.heroes.flatMap(h=>[...(h.altar10||[]),...h.gear.filter(Boolean).flatMap(it=>it.sockets||[])]).filter(Boolean)];if(gems.some(g=>!int10(g.quality,0,6)||['locked10','favorite10','bound10'].some(k=>g[k]!==undefined&&typeof g[k]!=='boolean')))return false;
  if([...v.bag,...(v.pendingGear10||[]),...v.heroes.flatMap(h=>h.gear.filter(Boolean))].some(it=>it.enchant17!==undefined&&(!Array.isArray(it.enchant17)||it.enchant17.length!==5||it.enchant17.some(n=>!int10(n,0,RULES17.enchant.cap))||it.enchant17.reduce((a,b)=>a+b,0)>20)))return false;
  if(v.batch17!==null&&v.batch17!==undefined){const b=v.batch17;if(!['running','paused'].includes(b.status)||!batchConfigValid17(b.config)||!int10(b.attempts,0,b.config.count)||!int10(b.successes,0,b.attempts)||!int10(b.failures,0,b.attempts)||b.successes+b.failures!==b.attempts||!int10(b.gold,0,1e12)||!int10(b.iron,0,1e12)||b.world!==v.worldId10||!int10(b.hero,0,4)||!b.results||typeof b.results!=='object'||Array.isArray(b.results)||Object.entries(b.results).some(([k,n])=>k.length>180||!int10(n,1,10000)))return false;}
@@ -3419,7 +3419,7 @@ $('#realmMenu').onclick=realmMenuPanel;$('#menuBtn').onclick=realmMenuPanel;
 const fusePetChecked22=fusePets;fusePets=function(a,b,source=cryptoRoll10,mode='upgrade',request){const p=petFusionPreview10(S.pets.find(p=>p.id===a),S.pets.find(p=>p.id===b),mode);if(!p.valid){error22('condition','pet-fusion',p.reason);return null}return fusePetChecked22(a,b,source,mode,request)};
 const fuseGemChecked22=fuseGems10;fuseGems10=function(materials,source=cryptoRoll10,request){const p=gemFusionPreview10(materials);if(!p.valid)return error22('condition','gem-fusion',p.reason);return fuseGemChecked22(materials,source,request)};
 const divineChecked22=refineDivine17;refineDivine17=function(materials,source=cryptoRoll10,request){const p=divinePreview17(materials);if(!p.valid)return error22('condition','divine-forge21',p.reason);return divineChecked22(materials,source,request)};
-const introRecoveryBefore22=intro;intro=function(){introRecoveryBefore22();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 星途初醒 V23';const resume=$('#continue');if(resume)resume.onclick=()=>{const previous=SAVE_KEY;let latest;try{if(typeof executeCode16==='function')SAVE_KEY='wuxing-chronicles-v23';latest=readSave()}finally{SAVE_KEY=previous}if(latest)begin(latest);else logMessage('未找到可核验的存档，请保留原文件并使用导入或备份恢复。')}};
+const introRecoveryBefore22=intro;intro=function(){introRecoveryBefore22();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 星途初醒 V24';const resume=$('#continue');if(resume)resume.onclick=()=>{const previous=SAVE_KEY;let latest;try{if(typeof executeCode16==='function')SAVE_KEY='wuxing-chronicles-v24';latest=readSave()}finally{SAVE_KEY=previous}if(latest)begin(latest);else logMessage('未找到可核验的存档，请保留原文件并使用导入或备份恢复。')}};
 // New UI controls must join the same cross-tab Web Lock as legacy equipment controls.
 document.addEventListener('click',event=>{if(replayLockedClick10||!navigator.locks?.request)return;const b=event.target?.closest?.('button');if(!b)return;const ids=['fusionBegin20','gemForgeBegin21','divineBegin21','socketCommit21','socketRemove21','smithDo17','recommend22','resetPoints22','resetTalents23','gemBuy21','repeatQuest18'];const targeted=ids.includes(b.id)||['point22','talent22','gemBuy19','deploy18','buy18','quest18','difficulty22'].some(k=>b.dataset[k]!==undefined);if(!targeted)return;event.preventDefault();event.stopImmediatePropagation();navigator.locks.request('wuxing-v10-save',{mode:'exclusive'},()=>{if(!b.isConnected)return;if(!diskMatches10()){error22('stale','ui-lock22');logMessage(operationMessage22());let line=$('#dialog').querySelector('#operationNotice22');if(!line){line=document.createElement('p');line.id='operationNotice22';line.className='diagnostic-status22';line.setAttribute('role','status');$('#dialog').appendChild(line)}line.textContent=operationMessage22();return}replayLockedClick10=true;try{b.click()}finally{replayLockedClick10=false}}).catch(e=>{error22('storage','ui-lock22',e.name);logMessage(operationMessage22())})},true);
 
@@ -3604,13 +3604,13 @@ function codePanel16(){panelContext7=null;characterSheet13=false;if(!S){showDial
  const quick=[['金币补满','/gold max'],['最高火龙','/pet supreme'],['满级','/level max'],['五次转职','/rebirth max'],['全部宝石','/gems all'],['装备套装','/equipment all'],['终极灵宠技','/pet skill ultimate'],['关闭口令','/dev off']];
  showDialog(panelHead('正式远征 · 单机口令')+'<div class="code-form16"><input id="codeInput16" aria-label="正式游戏口令" placeholder="greedisgood 1000000 或 /help" maxlength="120" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send"><button type="button" id="codeSubmit16">执行口令</button></div><p class="code-note16">口令直接作用于当前正式远征。首次使用前自动备份；关闭开关会保留已获得物品，恢复备份可回到原进度。</p><div class="codes-toggles16">'+[['无限资源','infiniteResources','/resources infinite ',false],['无敌','god','/god ',false],['无限法力','mana','/mana ',false],['无冷却','noCooldown','/cooldown ',true],['融合100%','fusion100','/fusion ',false]].map(([name,key,prefix,inverse])=>`<button data-code-toggle16="${key}" aria-pressed="${codeState16[key]}">${name} ${codeState16[key]?'开':'关'}</button>`).join('')+'</div><div class="codes-quick16">'+quick.map(([t,c])=>`<button data-code16="${c}">${t}</button>`).join('')+'</div><p id="codeReply16" role="status">'+(S.codes16?.used?'本远征已使用口令。':'当前为正常远征，尚未使用口令。')+'</p><div class="actions"><button id="codeHelp16">全部口令</button><button id="codeBackup16" '+(readCodeBackup16()?'':'disabled')+'>恢复口令前进度</button></div><details class="codes-history16"><summary>口令记录</summary>'+((S.codes16?.history||[]).slice(-10).reverse().map(x=>'<p>'+escapeHTML(x.command)+' · '+escapeHTML(x.text)+'</p>').join('')||'<p>暂无口令记录</p>')+'</details>','codes16');
  function submit(c,close=true){c=String(c).trim().toLowerCase().replace(/\s+/g,' ');const scene=/^\/pet skill /.test(c);if(scene)closeDialog();const result=executeCode16(c);if(result.ok&&(close||scene)&&c!=='/help'&&c!=='/status'){closeDialog();canvas.focus?.();return}codePanel16();$('#codeReply16').textContent=result.text;if(c==='/help')$('#codeReply16').classList.add('code-help-reply16')}
- $('#codeSubmit16').onclick=()=>submit($('#codeInput16').value);$('#codeInput16').onkeydown=e=>{if(e.isComposing)return;if(e.key==='Enter'){e.preventDefault();e.stopPropagation?.();submit($('#codeInput16').value)}};
+ $('#codeSubmit16').onclick=()=>submit($('#codeInput16').value);$('#codeInput16').onkeydown=e=>{if(e.isComposing)return;if(e.key==='Enter'){e.preventDefault();e.stopPropagation?.();$('#codeSubmit16').click()}};
  $('#dialog').querySelectorAll('[data-code16]').forEach(b=>b.onclick=()=>submit(b.dataset.code16,false));$('#dialog').querySelectorAll('[data-code-toggle16]').forEach(b=>b.onclick=()=>{const k=b.dataset.codeToggle16,c=k==='fusion100'?(codeState16[k]?'/fusion reset':'/fusion chance 100'):(k==='infiniteResources'?'/resources infinite ':k==='noCooldown'?'/cooldown ':'/'+k+' ')+(k==='noCooldown'?(codeState16[k]?'on':'off'):(codeState16[k]?'off':'on'));submit(c,false)});
  $('#codeHelp16').onclick=()=>{$('#codeReply16').textContent=executeCode16('/help').text;$('#codeReply16').classList.add('code-help-reply16')};$('#codeBackup16').onclick=codeRestorePanel16;if(!mobileViewport13())$('#codeInput16').focus?.();
 }
 const menuBeforeCodes16=realmMenuPanel;
 realmMenuPanel=function(){menuBeforeCodes16();const host=$('#dialog').querySelector('.mobile-menu13')||$('#dialog');host.insertAdjacentHTML('afterbegin','<button id="codeMenu16" class="code-entry16"><b>⌨ 单机口令</b><small>输入口令 / 快捷开关</small></button>');$('#codeMenu16').onclick=codePanel16};
-const introBeforeCodes16=intro;intro=function(){introBeforeCodes16();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 星途初醒 V23';$('#dialog').insertAdjacentHTML('beforeend','<button id="introCodes16" class="code-entry16">查看正式单人游戏口令</button>');$('#introCodes16').onclick=codePanel16};
+const introBeforeCodes16=intro;intro=function(){introBeforeCodes16();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 星途初醒 V24';$('#dialog').insertAdjacentHTML('beforeend','<button id="introCodes16" class="code-entry16">查看正式单人游戏口令</button>');$('#introCodes16').onclick=codePanel16};
 window.addEventListener('keydown',e=>{if(!S||e.repeat||e.isComposing||e.target instanceof HTMLInputElement||e.target instanceof HTMLSelectElement||e.target?.isContentEditable)return;if(e.code==='Enter'||e.code==='Backquote'){e.preventDefault();e.stopImmediatePropagation?.();if(menu==='codes16')closeDialog();else codePanel16()}},true);
 $('#realmMenu').onclick=realmMenuPanel;$('#menuBtn').onclick=realmMenuPanel;
 
@@ -3618,17 +3618,17 @@ $('#realmMenu').onclick=realmMenuPanel;$('#menuBtn').onclick=realmMenuPanel;
 'use strict';
 // Cheats remain accessible in the main game, but write only to a separate per-world branch.
 if(typeof executeCode16==='function'){
- const normalKey17='wuxing-chronicles-v23',branchKey17=id=>'wuxing-codes-v23:'+encodeURIComponent(id),pointer17='wuxing-last-codes-v23';
- const beginEconomy17=begin;begin=function(data){const previous=SAVE_KEY;if(data?.codes16?.used&&data.branchStorage17)data={...data,branchStorage17:data.branchStorage17.replace(/^wuxing-codes-v(?:1[789]|2[0123]):/,'wuxing-codes-v23:')};SAVE_KEY=data?.codes16?.used?(data.branchStorage17||branchKey17(data.worldId10)):normalKey17;try{const r=beginEconomy17(data);if(data?.codes16?.used)localStorage.setItem(pointer17,SAVE_KEY);return r}catch(e){SAVE_KEY=previous;throw e}};
- const executeEconomy17=executeCode16;executeCode16=function(raw){const c=String(raw).trim().toLowerCase().replace(/\s+/g,' ');if(!S||['/help','help','帮助','/status'].includes(c))return executeEconomy17(raw);const previous=SAVE_KEY,normal=clone10(S);if(!S.codes16?.used){if(!diskMatches10())return {ok:false,text:'正常存档已在其他标签页更新，请重新载入。'};SAVE_KEY=branchKey17(S.worldId10);if(localStorage.getItem(SAVE_KEY))SAVE_KEY+=':fork:'+session10+'-'+(++quoteSeq10);S.branchStorage17=SAVE_KEY;}let result;try{result=executeEconomy17(raw)}catch(e){SAVE_KEY=previous;throw e}if(result.ok&&S.codes16?.used){if(!normal.codes16?.used){normal.position={x:active().x,y:active().y};try{localStorage.setItem(normalKey17,JSON.stringify(normal))}catch{}}localStorage.setItem(pointer17,SAVE_KEY);result.text+='（已保存至独立口令档）'}else{SAVE_KEY=previous;if(!normal.codes16?.used){S=normal;invalidateLuck10()}}return result};
+ const normalKey17='wuxing-chronicles-v24',branchKey17=id=>'wuxing-codes-v24:'+encodeURIComponent(id),pointer17='wuxing-last-codes-v24';
+ const beginEconomy17=begin;begin=function(data){const previous=SAVE_KEY;if(data?.codes16?.used&&data.branchStorage17)data={...data,branchStorage17:data.branchStorage17.replace(/^wuxing-codes-v(?:1[789]|2[01234]):/,'wuxing-codes-v24:')};SAVE_KEY=data?.codes16?.used?(data.branchStorage17||branchKey17(data.worldId10)):normalKey17;try{const r=beginEconomy17(data);if(data?.codes16?.used)localStorage.setItem(pointer17,SAVE_KEY);return r}catch(e){SAVE_KEY=previous;throw e}};
+ const executeEconomy17=executeCode16;executeCode16=function(raw){const c=String(raw).trim().toLowerCase().replace(/\s+/g,' ');if(!S||['/help','help','帮助','/status'].includes(c))return executeEconomy17(raw);const previous=SAVE_KEY,normal=clone10(S);if(!S.codes16?.used){if(!diskMatches10())return {ok:false,text:'正常存档已在其他标签页更新，请重新载入。'};SAVE_KEY=branchKey17(S.worldId10);if(localStorage.getItem(SAVE_KEY))SAVE_KEY+=':fork:'+session10+'-'+(++quoteSeq10);S.branchStorage17=SAVE_KEY;}let result;try{result=executeEconomy17(raw)}catch(e){if(typeof discardBranch24==='function')discardBranch24(SAVE_KEY,previous);SAVE_KEY=previous;throw e}if(result.ok&&S.codes16?.used){if(!normal.codes16?.used){normal.position={x:active().x,y:active().y};try{localStorage.setItem(normalKey17,JSON.stringify(normal))}catch{}}localStorage.setItem(pointer17,SAVE_KEY);result.text+='（已保存至独立口令档）'}else{if(typeof discardBranch24==='function')discardBranch24(SAVE_KEY,previous);SAVE_KEY=previous;if(!normal.codes16?.used){S=normal;invalidateLuck10()}}return result};
  const restoreEconomy17=restoreCodeBackup16;restoreCodeBackup16=function(){if(SAVE_KEY===normalKey17)return restoreEconomy17();if(!diskMatches10())return false;let data;try{data=JSON.parse(localStorage.getItem(normalKey17))}catch{}if(!data||data.worldId10!==S.worldId10)data=readCodeBackup16()?.save;if(!data||data.codes16?.used||!validateSave(data))return false;saveGame(false);begin(data);logMessage('已返回正常远征；口令资源仍保留在独立口令档。');return true};
- const introEconomy17=intro;intro=function(){const current=SAVE_KEY;let prior;SAVE_KEY=normalKey17;try{prior=readSave();introEconomy17()}finally{SAVE_KEY=current}if($('#continue'))$('#continue').textContent=prior?.codes16?.used?'迁移旧版口令档':'继续正常远征';const key=(localStorage.getItem(pointer17)||localStorage.getItem('wuxing-last-codes-v22')||localStorage.getItem('wuxing-last-codes-v21')||localStorage.getItem('wuxing-last-codes-v20')||localStorage.getItem('wuxing-last-codes-v19')||localStorage.getItem('wuxing-last-codes-v18')||localStorage.getItem('wuxing-last-codes-v17'));if(/^wuxing-codes-v(?:1[789]|2[0123]):/.test(key||'')){$('#dialog').insertAdjacentHTML('beforeend','<button id="continueCodes17">继续独立口令档</button>');$('#continueCodes17').onclick=()=>{try{const data=JSON.parse(localStorage.getItem(key));if(data?.codes16?.used&&validateSave(data))begin(data);else logMessage('口令档无法校验，请保留导出文件。')}catch{}}}};
+ const introEconomy17=intro;intro=function(){const current=SAVE_KEY;let prior;SAVE_KEY=normalKey17;try{prior=readSave();introEconomy17()}finally{SAVE_KEY=current}if($('#continue'))$('#continue').textContent=prior?.codes16?.used?'迁移旧版口令档':'继续正常远征';const key=(localStorage.getItem(pointer17)||localStorage.getItem('wuxing-last-codes-v23')||localStorage.getItem('wuxing-last-codes-v22')||localStorage.getItem('wuxing-last-codes-v21')||localStorage.getItem('wuxing-last-codes-v20')||localStorage.getItem('wuxing-last-codes-v19')||localStorage.getItem('wuxing-last-codes-v18')||localStorage.getItem('wuxing-last-codes-v17'));if(/^wuxing-codes-v(?:1[789]|2[01234]):/.test(key||'')){$('#dialog').insertAdjacentHTML('beforeend','<button id="continueCodes17">继续独立口令档</button>');$('#continueCodes17').onclick=()=>{try{const data=JSON.parse(localStorage.getItem(key));if(data?.codes16?.used&&validateSave(data))begin(data);else logMessage('口令档无法校验，请保留导出文件。')}catch{}}}};
  const codePanelEconomy17=codePanel16;codePanel16=function(){codePanelEconomy17();const n=$('#dialog').querySelector('.code-note16');if(n)n.textContent='首次执行资源口令会分出独立口令档。原正常存档不会收到口令金币、宝石或灵宠；可从标题继续口令档，或返回正常远征。';};
  const resourcesEconomy17=executeCode16;executeCode16=function(raw){const r=resourcesEconomy17(raw);if(r.ok&&/^\/(resources|materials) max$/i.test(String(raw).trim())){S.materials17={embers:100000,cores:10000};saveGame(false)}return r};
 }
 
 'use strict';
-// V23: authoritative growth rules and a single durable session publication boundary.
+// V24: authoritative growth rules and a single durable session publication boundary.
 const GROWTH_RULES23=Object.freeze({version:1,talentEvery:5,talentLifetime:40,rebirthBonus:1,storyMaps:[5,9],skillLevels:[1,5,50],talentLevels:[5,5,15,30,1,50],talentStages:[0,0,0,1,1,0],prerequisites:[null,null,1,1,3,2]});
 const session23={phase:'idle',ready:false,mode:null,error:null};
 function talentCount23(h){return (h.tree18||[]).reduce((a,b)=>a+b,0)}
@@ -3662,7 +3662,7 @@ function initializeSession23(mode,data){
  if(initDepth23)return false;session23.phase='loading';session23.ready=false;session23.mode=mode;session23.error=null;
  const prior={state:S,actors,enemies,key:SAVE_KEY},requested=data;let targetKey=SAVE_KEY,raw;
  try{
-  if(typeof executeCode16==='function')targetKey=data?.codes16?.used?(data.branchStorage17?.replace(/^wuxing-codes-v(?:1[789]|2[012]):/,'wuxing-codes-v23:')||'wuxing-codes-v23:'+encodeURIComponent(data.worldId10)):'wuxing-chronicles-v23';
+  if(typeof executeCode16==='function')targetKey=data?.codes16?.used?(data.branchStorage17?.replace(/^wuxing-codes-v(?:1[789]|2[0123]):/,'wuxing-codes-v24:')||'wuxing-codes-v24:'+encodeURIComponent(data.worldId10)):'wuxing-chronicles-v24';
   raw=localStorage.getItem(targetKey);
   // A title/continue snapshot is never allowed to replace a newer version of the same world.
   if(raw&&mode==='CONTINUE_GAME'){const disk=JSON.parse(raw);if(disk.worldId10===data?.worldId10&&disk.revision10>data.revision10&&validateSave(disk))data=disk}
@@ -3687,6 +3687,111 @@ const killBefore23=kill;kill=function(e,source){if(!e?.boss||e.noRewards)return 
 const panelBefore23=talentPanel;talentPanel=function(tab='attributes'){panelBefore23(tab);if(tab==='tree'){const h=S.heroes[S.active],t=h.talent23;$('#dialog').insertAdjacentHTML('beforeend',`<section class="ledger23"><h3>成长账本</h3><p>累计获得 ${t.earned} = 已投入 ${talentCount23(h)} + 可用 ${t.earned-talentCount23(h)}</p><p>每5级1点 · 每次转职1点 · 第5/9关限定首通各1点 · 新成长终身上限40点。历史已获预算保留。</p><button id="resetTalents23">重置天赋 · 100金币</button></section>`);$('#resetTalents23').onclick=()=>{resetTalents23(S.active,quote10());talentPanel('tree')}}};
 for(const key of ['talent','talent9','talent10','talent18'])panelTargets7[key]=talentPanel;panelTargets7.skills17=()=>talentPanel('tree');$('#trainBtn').onclick=()=>talentPanel();
 const refreshBefore23=refreshBars;refreshBars=function(){const r=refreshBefore23();if(!S||!S.systems23||!actors.length)return r;for(const [id,slot]of [['touchQ',0],['touchE',1],['touchR',2],['action6-0',0],['action6-1',1],['action6-2',2],['action6-ascend',3]]){const b=$('#'+id);if(!b)continue;const reason=skillUnlockReason23(S.active,slot);if(id.startsWith('action6-')&&(slot===2||slot===3)){const cd=$('#cd6-'+(slot===3?'ascend':slot));if(reason&&cd)cd.textContent=''}b.disabled=!!reason;b.classList.toggle('skill-locked23',!!reason);b.setAttribute('aria-disabled',String(!!reason));b.title=reason||'已解锁 · '+(slot===3?CLASSES18[S.active].nodes[4]:HEROES[S.active][['q','e','r'][slot]]);if(reason)b.setAttribute('data-lock23',slot===3?'一转解锁':GROWTH_RULES23.skillLevels[slot]+'级解锁');else b.removeAttribute('data-lock23')}if($('#statusOpen'))$('#statusOpen').onclick=()=>talentPanel();return r};
-const introBefore23=intro;intro=function(){session23.ready=false;session23.phase='title';const r=introBefore23();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 星途初醒 V23';return r};
+const introBefore23=intro;intro=function(){session23.ready=false;session23.phase='title';const r=introBefore23();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 星途初醒 V24';return r};
+
+'use strict';
+// A save has one active page. Compare against the last durable snapshot, never
+// against the live revision (transactions advance it before they reach storage).
+const checkpoints24=new Map();
+let lockDepth24=0,paused24=false,initializing24=false,queuedTick24=false,tickTime24=0,queuedSave24=false,branchCreating24=false;
+const isolated24=typeof initSandbox15==='function';
+const ownerKey24=key=>'wuxing-owner24:'+key;
+function owner24(key=SAVE_KEY){try{return JSON.parse(localStorage.getItem(ownerKey24(key))||'null')}catch{return null}}
+function owns24(key=SAVE_KEY){if(isolated24)return true;if(branchCreating24&&key===SAVE_KEY&&!localStorage.getItem(key)&&!owner24(key)){localStorage.setItem(ownerKey24(key),JSON.stringify({session:session10,world:S.worldId10,at:Date.now()}));checkpoints24.set(key,null)}return owner24(key)?.session===session10}
+function held24(){return lockDepth24>0||replayLockedClick10}
+function locked24(fn){if(isolated24||held24()||!navigator.locks?.request){lockDepth24++;try{return fn()}finally{lockDepth24--}}return navigator.locks.request('wuxing-v10-save',{mode:'exclusive'},()=>{lockDepth24++;try{return fn()}finally{lockDepth24--}})}
+function current24(key,world){return !!S&&SAVE_KEY===key&&S.worldId10===world&&owns24(key)&&!paused24}
+const matchesBefore24=diskMatches10;
+diskMatches10=function(){if(loading10||!S||isolated24)return true;if(!owns24())return false;try{const raw=localStorage.getItem(SAVE_KEY);return checkpoints24.has(SAVE_KEY)?raw===checkpoints24.get(SAVE_KEY):!raw||matchesBefore24()}catch{return false}};
+function pauseConflict24(){
+ if(!S||initializing24||isolated24)return;staleSave10=true;keys.clear();joystickVector.x=0;joystickVector.y=0;paused24=true;
+ notice=owns24()?'保存内容已变化，此页已暂停。可直接在此页载入最新进度。':'此页已暂停：另一页面正在使用此存档。';
+ if(menu==='ownership24')return;
+ showDialog('<h2>远征已安全暂停</h2><p role="alert">'+notice+'</p><p>暂停页面不会继续自动保存，也不会扣除本次操作的资源。点击下方按钮即可在这里接续最新保存，无需返回标题。</p><div class="actions"><button id="resumeHere24" class="primary">在此页继续最新进度</button><button id="exportPaused24">导出此页进度</button></div><p>同一存档同时由一个页面操作；正常远征和独立口令档分别管理。</p>','ownership24');
+ $('#resumeHere24').onclick=()=>locked24(()=>{try{const raw=localStorage.getItem(SAVE_KEY),data=raw&&JSON.parse(raw);if(!data||!validateSave(data))throw Error('最新保存无法校验，请先导出进度。');return begin(data)}catch(e){notice=e.message;logMessage(notice);return false}});
+ $('#exportPaused24').onclick=()=>exportSave(S);
+}
+staleMessage10=pauseConflict24;
+ERRORS22.stale='存档已在另一页面更新，此页已暂停。请点击「在此页继续最新进度」，无需返回标题。';
+// This final persistence boundary also protects menu/autosaves, not just trades.
+const persistBefore24=persistSave22;
+persistSave22=function(...args){
+ if(isolated24)return persistBefore24(...args);
+ if(!initializing24&&!owns24()){persistFailure22='stale';error22('stale','save','inactive page');pauseConflict24();return false}
+ const key=SAVE_KEY,previous=persistExpectation22;
+ if(!previous&&checkpoints24.has(key))persistExpectation22={key,raw:checkpoints24.get(key)};
+ try{const result=persistBefore24(...args);if(result)checkpoints24.set(key,localStorage.getItem(key));return result}finally{persistExpectation22=previous}
+};
+const initializeBefore24=initializeSession23;
+initializeSession23=function(mode,data){
+ if(!isolated24&&!held24()&&navigator.locks?.request)return locked24(()=>initializeSession23(mode,data));
+ let key=SAVE_KEY;if(typeof executeCode16==='function')key=data?.codes16?.used?(data.branchStorage17?.replace(/^wuxing-codes-v(?:1[789]|2[0123]):/,'wuxing-codes-v24:')||'wuxing-codes-v24:'+encodeURIComponent(data.worldId10)):'wuxing-chronicles-v24';
+ let oldOwner,oldCheckpoint,claimed=false;
+ try{
+  oldOwner=localStorage.getItem(ownerKey24(key));oldCheckpoint=checkpoints24.get(key);
+  const raw=localStorage.getItem(key);
+  // Continue reads under the write lock, even when the title was opened earlier.
+  if(mode==='CONTINUE_GAME'&&raw){const latest=JSON.parse(raw);if(validateSave(latest))data=latest}
+  if(!isolated24){localStorage.setItem(ownerKey24(key),JSON.stringify({session:session10,world:data?.worldId10,at:Date.now()}));claimed=true}
+  checkpoints24.set(key,raw);initializing24=true;paused24=false;
+  const ok=initializeBefore24(mode,data);
+  if(!ok)throw Error(session23.error||'初始化未完成');
+  return true;
+ }catch(e){
+  paused24=false;
+  if(claimed&&owns24(key)){try{if(oldOwner)localStorage.setItem(ownerKey24(key),oldOwner);else localStorage.removeItem(ownerKey24(key))}catch{}}
+  if(oldCheckpoint===undefined)checkpoints24.delete(key);else checkpoints24.set(key,oldCheckpoint);
+  if(session23.phase!=='failed'){session23.ready=false;session23.phase='failed';session23.error=e.message;showDialog('<h2>未能接续远征</h2><p>'+escapeHTML(e.message)+'</p><button id="retrySession23">重新初始化本次远征</button>','initialization23');$('#retrySession23').onclick=()=>initializeSession23(mode,data)}
+  return false;
+ }finally{initializing24=false}
+};
+const saveBefore24=saveGame;
+saveGame=function(...args){
+ if(isolated24||initializing24||initDepth23||rewardDepth23)return saveBefore24(...args);
+ if(!S||!owns24()||paused24){if(S&&session23.ready)pauseConflict24();return false}
+ if(!held24()&&!busy10&&navigator.locks?.request){
+  const key=SAVE_KEY,world=S.worldId10;if(!queuedSave24){queuedSave24=true;locked24(()=>{queuedSave24=false;if(current24(key,world))saveGame(...args)}).catch(e=>{queuedSave24=false;error22('storage','queued-save24',e.name)})}
+  return false;
+ }
+ return saveBefore24(...args);
+};
+const atomicBefore24=atomicOperation22;
+atomicOperation22=function(...args){if(!isolated24&&(!owns24()||paused24)){pauseConflict24();return error22('stale',args[0],'inactive page')}return atomicBefore24(...args)};
+// New command branches start empty, while the original normal snapshot remains
+// untouched. Register each branch independently instead of sharing a page lockout.
+if(typeof executeCode16==='function'){
+ const codeBefore24=executeCode16;executeCode16=function(raw){
+  const command=String(raw).trim().toLowerCase();if(!['help','/help','帮助','/status'].includes(command)&&(!owns24()||paused24))return {ok:false,text:'此页已暂停，请先在此页继续最新进度。'};
+  const originalKey=SAVE_KEY,before=localStorage.getItem(originalKey);let r;
+  try{branchCreating24=true;r=codeBefore24(raw);return r}finally{branchCreating24=false;if(SAVE_KEY!==originalKey){if(!localStorage.getItem(ownerKey24(SAVE_KEY)))localStorage.setItem(ownerKey24(SAVE_KEY),JSON.stringify({session:session10,world:S.worldId10,at:Date.now()}));checkpoints24.set(SAVE_KEY,localStorage.getItem(SAVE_KEY));if(localStorage.getItem(originalKey)!==before)checkpoints24.set(originalKey,localStorage.getItem(originalKey))}}
+ };
+}
+// The economy code can create a new branch within a transaction. Only an empty,
+// new branch may be claimed here; existing saves always require explicit Continue.
+function discardBranch24(key,previous){if(key!==previous&&!localStorage.getItem(key)&&owner24(key)?.session===session10){localStorage.removeItem(ownerKey24(key));checkpoints24.delete(key)}}
+const matchOwned24=diskMatches10;
+diskMatches10=function(){if(!isolated24&&S?.codes16?.used&&!owns24()&&!localStorage.getItem(SAVE_KEY)&&!owner24()){localStorage.setItem(ownerKey24(SAVE_KEY),JSON.stringify({session:session10,world:S.worldId10,at:Date.now()}));checkpoints24.set(SAVE_KEY,null)}return matchOwned24()};
+// Run simulation mutations/rewards under the same lock as menu transactions.
+// Rendering remains on requestAnimationFrame; coalesce a delayed tick to 100ms.
+const updateBefore24=update;
+update=function(dt){
+ if(!S||menu||isolated24)return updateBefore24(dt);
+ if(!owns24()||paused24){pauseConflict24();return}
+ if(held24()||!navigator.locks?.request)return updateBefore24(dt);
+ tickTime24=Math.min(.1,tickTime24+dt);if(queuedTick24)return;
+ const key=SAVE_KEY,world=S.worldId10;queuedTick24=true;
+ locked24(()=>{queuedTick24=false;const elapsed=tickTime24;tickTime24=0;if(current24(key,world)&&!menu)updateBefore24(elapsed)}).catch(e=>{queuedTick24=false;tickTime24=0;error22('storage','simulation24',e.name)});
+};
+// A chest can also be activated by touching the map, outside the simulation tick.
+const treasureBefore24=openTreasure11;const pendingChests24=new Set();
+openTreasure11=function(id,request){if(isolated24||held24()||!navigator.locks?.request)return treasureBefore24(id,request);if(pendingChests24.has(id))return false;const key=SAVE_KEY,world=S?.worldId10;pendingChests24.add(id);return locked24(()=>current24(key,world)&&treasureBefore24(id,request)).finally(()=>pendingChests24.delete(id))};
+// Start/continue, codes, panel closing and manual saves use the same write queue.
+document.addEventListener('click',event=>{if(isolated24||held24()||!navigator.locks?.request)return;const b=event.target?.closest?.('button');if(!b||b.disabled)return;event.preventDefault();event.stopImmediatePropagation();locked24(()=>{if(b.isConnected!==false)b.click()}).catch(e=>{error22('storage','ui24',e.name);logMessage(operationMessage22())})},true);
+window.addEventListener('storage',e=>{if(!S||isolated24||initializing24)return;if(e.key===ownerKey24()&&!owns24()||e.key===SAVE_KEY&&!diskMatches10())pauseConflict24()});
+// Do not lose a save on mobile backgrounding. The owner/snapshot checks still
+// apply; returning to a superseded page opens the same-page handoff immediately.
+window.addEventListener('focus',()=>{if(S&&session23.ready&&!owns24())pauseConflict24()});
+
+if(window.receiveNativeSave)window.receiveNativeSave=async function(text){try{const data=JSON.parse(text);if(!validateSave(data))throw Error();if(S)localStorage.setItem(SAVE_KEY+":before-native24",JSON.stringify(S));if(await begin(data)){closeAllWindows19();logMessage("已导入并核验存档。")}}catch{logMessage("存档格式无效，当前进度未被替换。")}};
 
 v3Ready=true;resizeWorld();intro();requestAnimationFrame(frame);

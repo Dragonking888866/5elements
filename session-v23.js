@@ -1,5 +1,5 @@
 'use strict';
-// V23: authoritative growth rules and a single durable session publication boundary.
+// V24: authoritative growth rules and a single durable session publication boundary.
 const GROWTH_RULES23=Object.freeze({version:1,talentEvery:5,talentLifetime:40,rebirthBonus:1,storyMaps:[5,9],skillLevels:[1,5,50],talentLevels:[5,5,15,30,1,50],talentStages:[0,0,0,1,1,0],prerequisites:[null,null,1,1,3,2]});
 const session23={phase:'idle',ready:false,mode:null,error:null};
 function talentCount23(h){return (h.tree18||[]).reduce((a,b)=>a+b,0)}
@@ -33,7 +33,7 @@ function initializeSession23(mode,data){
  if(initDepth23)return false;session23.phase='loading';session23.ready=false;session23.mode=mode;session23.error=null;
  const prior={state:S,actors,enemies,key:SAVE_KEY},requested=data;let targetKey=SAVE_KEY,raw;
  try{
-  if(typeof executeCode16==='function')targetKey=data?.codes16?.used?(data.branchStorage17?.replace(/^wuxing-codes-v(?:1[789]|2[012]):/,'wuxing-codes-v23:')||'wuxing-codes-v23:'+encodeURIComponent(data.worldId10)):'wuxing-chronicles-v23';
+  if(typeof executeCode16==='function')targetKey=data?.codes16?.used?(data.branchStorage17?.replace(/^wuxing-codes-v(?:1[789]|2[0123]):/,'wuxing-codes-v24:')||'wuxing-codes-v24:'+encodeURIComponent(data.worldId10)):'wuxing-chronicles-v24';
   raw=localStorage.getItem(targetKey);
   // A title/continue snapshot is never allowed to replace a newer version of the same world.
   if(raw&&mode==='CONTINUE_GAME'){const disk=JSON.parse(raw);if(disk.worldId10===data?.worldId10&&disk.revision10>data.revision10&&validateSave(disk))data=disk}
@@ -58,4 +58,4 @@ const killBefore23=kill;kill=function(e,source){if(!e?.boss||e.noRewards)return 
 const panelBefore23=talentPanel;talentPanel=function(tab='attributes'){panelBefore23(tab);if(tab==='tree'){const h=S.heroes[S.active],t=h.talent23;$('#dialog').insertAdjacentHTML('beforeend',`<section class="ledger23"><h3>成长账本</h3><p>累计获得 ${t.earned} = 已投入 ${talentCount23(h)} + 可用 ${t.earned-talentCount23(h)}</p><p>每5级1点 · 每次转职1点 · 第5/9关限定首通各1点 · 新成长终身上限40点。历史已获预算保留。</p><button id="resetTalents23">重置天赋 · 100金币</button></section>`);$('#resetTalents23').onclick=()=>{resetTalents23(S.active,quote10());talentPanel('tree')}}};
 for(const key of ['talent','talent9','talent10','talent18'])panelTargets7[key]=talentPanel;panelTargets7.skills17=()=>talentPanel('tree');$('#trainBtn').onclick=()=>talentPanel();
 const refreshBefore23=refreshBars;refreshBars=function(){const r=refreshBefore23();if(!S||!S.systems23||!actors.length)return r;for(const [id,slot]of [['touchQ',0],['touchE',1],['touchR',2],['action6-0',0],['action6-1',1],['action6-2',2],['action6-ascend',3]]){const b=$('#'+id);if(!b)continue;const reason=skillUnlockReason23(S.active,slot);if(id.startsWith('action6-')&&(slot===2||slot===3)){const cd=$('#cd6-'+(slot===3?'ascend':slot));if(reason&&cd)cd.textContent=''}b.disabled=!!reason;b.classList.toggle('skill-locked23',!!reason);b.setAttribute('aria-disabled',String(!!reason));b.title=reason||'已解锁 · '+(slot===3?CLASSES18[S.active].nodes[4]:HEROES[S.active][['q','e','r'][slot]]);if(reason)b.setAttribute('data-lock23',slot===3?'一转解锁':GROWTH_RULES23.skillLevels[slot]+'级解锁');else b.removeAttribute('data-lock23')}if($('#statusOpen'))$('#statusOpen').onclick=()=>talentPanel();return r};
-const introBefore23=intro;intro=function(){session23.ready=false;session23.phase='title';const r=introBefore23();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 星途初醒 V23';return r};
+const introBefore23=intro;intro=function(){session23.ready=false;session23.phase='title';const r=introBefore23();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 星途初醒 V24';return r};
