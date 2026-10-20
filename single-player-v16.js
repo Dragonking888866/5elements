@@ -93,7 +93,7 @@ function codePanel16(){panelContext7=null;characterSheet13=false;if(!S){showDial
 }
 const menuBeforeCodes16=realmMenuPanel;
 realmMenuPanel=function(){menuBeforeCodes16();const host=$('#dialog').querySelector('.mobile-menu13')||$('#dialog');host.insertAdjacentHTML('afterbegin','<button id="codeMenu16" class="code-entry16"><b>⌨ 单机口令</b><small>输入口令 / 快捷开关</small></button>');$('#codeMenu16').onclick=codePanel16};
-const introBeforeCodes16=intro;intro=function(){introBeforeCodes16();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 星途初醒 V24';$('#dialog').insertAdjacentHTML('beforeend','<button id="introCodes16" class="code-entry16">查看正式单人游戏口令</button>');$('#introCodes16').onclick=codePanel16};
+const introBeforeCodes16=intro;intro=function(){introBeforeCodes16();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 星途初醒 V25';$('#dialog').insertAdjacentHTML('beforeend','<button id="introCodes16" class="code-entry16">查看正式单人游戏口令</button>');$('#introCodes16').onclick=codePanel16};
 window.addEventListener('keydown',e=>{if(!S||e.repeat||e.isComposing||e.target instanceof HTMLInputElement||e.target instanceof HTMLSelectElement||e.target?.isContentEditable)return;if(e.code==='Enter'||e.code==='Backquote'){e.preventDefault();e.stopImmediatePropagation?.();if(menu==='codes16')closeDialog();else codePanel16()}},true);
 $('#realmMenu').onclick=realmMenuPanel;$('#menuBtn').onclick=realmMenuPanel;
 

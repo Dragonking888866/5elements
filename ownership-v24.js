@@ -34,7 +34,7 @@ persistSave22=function(...args){
 const initializeBefore24=initializeSession23;
 initializeSession23=function(mode,data){
  if(!isolated24&&!held24()&&navigator.locks?.request)return locked24(()=>initializeSession23(mode,data));
- let key=SAVE_KEY;if(typeof executeCode16==='function')key=data?.codes16?.used?(data.branchStorage17?.replace(/^wuxing-codes-v(?:1[789]|2[0123]):/,'wuxing-codes-v24:')||'wuxing-codes-v24:'+encodeURIComponent(data.worldId10)):'wuxing-chronicles-v24';
+ let key=SAVE_KEY;if(typeof executeCode16==='function')key=data?.codes16?.used?(data.branchStorage17?.replace(/^wuxing-codes-v(?:1[789]|2[01234]):/,'wuxing-codes-v25:')||'wuxing-codes-v25:'+encodeURIComponent(data.worldId10)):'wuxing-chronicles-v25';
  let oldOwner,oldCheckpoint,claimed=false;
  try{
   oldOwner=localStorage.getItem(ownerKey24(key));oldCheckpoint=checkpoints24.get(key);
@@ -101,4 +101,4 @@ window.addEventListener('storage',e=>{if(!S||isolated24||initializing24)return;i
 // apply; returning to a superseded page opens the same-page handoff immediately.
 window.addEventListener('focus',()=>{if(S&&session23.ready&&!owns24())pauseConflict24()});
 
-if(window.receiveNativeSave)window.receiveNativeSave=async function(text){try{const data=JSON.parse(text);if(!validateSave(data))throw Error();if(S)localStorage.setItem(SAVE_KEY+":before-native24",JSON.stringify(S));if(await begin(data)){closeAllWindows19();logMessage("已导入并核验存档。")}}catch{logMessage("存档格式无效，当前进度未被替换。")}};
+if(window.receiveNativeSave)window.receiveNativeSave=async function(text){try{const data=prepareImport25(JSON.parse(text));if(S)localStorage.setItem(SAVE_KEY+":before-native24",JSON.stringify(S));if(await begin(data)){closeAllWindows19();logMessage("已导入并核验存档。")}}catch{logMessage("存档格式无效，当前进度未被替换。")}};

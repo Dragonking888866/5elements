@@ -10,18 +10,18 @@ if(parts.join('\n').split(initializer).length!==2)throw Error('Expected one init
 const shared=parts.map(s=>s.replace(initializer,'')).join('\n');
 fs.mkdirSync(out,{recursive:true});
 const extension=(codes?fs.readFileSync(path.join(web,'single-player-v16.js'),'utf8'):'')+'\n'+fs.readFileSync(path.join(web,'economy-v17.js'),'utf8');
-fs.writeFileSync(path.join(out,'runtime.js'),shared.replace('__SANDBOX_AVAILABLE15__',String(sandbox))+'\n'+extension+'\n'+fs.readFileSync(path.join(web,'session-v23.js'),'utf8')+'\n'+fs.readFileSync(path.join(web,'ownership-v24.js'),'utf8')+'\n'+initializer+'\n');
+fs.writeFileSync(path.join(out,'runtime.js'),shared.replace('__SANDBOX_AVAILABLE15__',String(sandbox))+'\n'+extension+'\n'+fs.readFileSync(path.join(web,'session-v23.js'),'utf8')+'\n'+fs.readFileSync(path.join(web,'ownership-v24.js'),'utf8')+'\n'+fs.readFileSync(path.join(web,'integrity-v25.js'),'utf8')+'\n'+initializer+'\n');
 if(sandbox){
  let core=shared.replace('__SANDBOX_AVAILABLE15__','false').replace("if(location.protocol==='https:'&&'serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});",'// No service worker in the opaque sandbox.').replace('navigator.locks?.request','false');
  core=core.replace(/SAVE_KEY='[^']+'/,"SAVE_KEY='wuxing-lab-frame-v15'");
  const lab=fs.readFileSync(path.join(web,'developer-sandbox15.js'),'utf8');
- fs.writeFileSync(path.join(out,'runtime-sandbox.js'),core+'\n'+lab+'\n'+fs.readFileSync(path.join(web,'session-v23.js'),'utf8')+'\n'+fs.readFileSync(path.join(web,'ownership-v24.js'),'utf8')+'\nv3Ready=true;resizeWorld();initSandbox15();requestAnimationFrame(frame);\n');
- const frame=fs.readFileSync(path.join(web,'index.html'),'utf8').replace('</head>','<script src="sandbox-shim15.js?v=24.0.0"></script></head>').replace('runtime.js?v=24.0.0','runtime-sandbox.js?v=24.0.0');
+ fs.writeFileSync(path.join(out,'runtime-sandbox.js'),core+'\n'+lab+'\n'+fs.readFileSync(path.join(web,'session-v23.js'),'utf8')+'\n'+fs.readFileSync(path.join(web,'ownership-v24.js'),'utf8')+'\n'+fs.readFileSync(path.join(web,'integrity-v25.js'),'utf8')+'\nv3Ready=true;resizeWorld();initSandbox15();requestAnimationFrame(frame);\n');
+ const frame=fs.readFileSync(path.join(web,'index.html'),'utf8').replace('</head>','<script src="sandbox-shim15.js?v=25.0.0"></script></head>').replace('runtime.js?v=25.0.0','runtime-sandbox.js?v=25.0.0');
  fs.writeFileSync(path.join(out,'sandbox-frame.html'),frame);
  fs.copyFileSync(path.join(web,'sandbox-shell15.html'),path.join(out,'sandbox.html'));
 }else{
  const disabled='<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>体验沙盒已关闭</title><p>此发布版本已禁用体验沙盒。</p><a href="./">返回正式远征</a></html>';
  fs.writeFileSync(path.join(out,'sandbox.html'),disabled);fs.writeFileSync(path.join(out,'sandbox-frame.html'),disabled);fs.writeFileSync(path.join(out,'runtime-sandbox.js'),'"use strict"; // Developer sandbox disabled at build time.\n');
 }
-console.log('Built V24 runtime; isolated sandbox '+(sandbox?'enabled':'disabled')+'.');
+console.log('Built V25 runtime; isolated sandbox '+(sandbox?'enabled':'disabled')+'.');
 
