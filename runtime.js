@@ -3338,6 +3338,10 @@ $('#realmForge').onclick=()=>gemForgePanel21();
 
 $('#helpBtn').onclick=()=>v6Help();
 
+function reconcileGemVitals21(hero){const a=actors[hero];if(!a)return;const st=stats(hero);a.hp=clamp(Number.isFinite(a.hp)?a.hp:0,0,st.hp);a.mp=clamp(Number.isFinite(a.mp)?a.mp:0,0,st.mp);reconcileCooldowns18()}
+const socketBeforeVitals21=socketEquipment9;socketEquipment9=function(...args){const r=socketBeforeVitals21(...args);if(r)reconcileGemVitals21(args[0]);return r};
+const unsocketBeforeVitals21=unsocketGem;unsocketGem=function(...args){const r=unsocketBeforeVitals21(...args);if(r)reconcileGemVitals21(args[0]);return r};
+
 'use strict';
 // Player-owned single-player cheats. This module is deliberately excluded from the isolated lab.
 const CODE_FLAGS16=['enabled','infiniteResources','god','noCooldown','fusion100','mana','oneHit'];
