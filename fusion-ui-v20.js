@@ -107,7 +107,7 @@ function startFusion20(){
   }
   $('#fusionBegin20').disabled=true;
   const result=fusePets(a.id,b.id,cryptoRoll10,fusionChoice20.mode,fusionScreen20.quote);
-  if(!result){fusionMessage20='未结算：请检查材料、存档同步或存储空间。物品与金币已保留。';fusionPanel20();return null;}
+  if(!result){fusionMessage20=operationMessage22();fusionPanel20();return null;}
   fusionMessage20='';fusionResultPanel20(result.receipt20);return result;
 }
 
