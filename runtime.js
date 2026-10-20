@@ -1,7 +1,7 @@
 'use strict';
 // 五行战记：独立浏览器单机 RPG，无网络依赖。
 const $=s=>document.querySelector(s), canvas=$('#world'),mini=$('#minimap'),mg=mini.getContext('2d');let g=canvas.getContext('2d');
-let VW=1280,VH=760;const WW=4800,WH=3200;let SAVE_KEY='wuxing-chronicles-v19';
+let VW=1280,VH=760;const WW=4800,WH=3200;let SAVE_KEY='wuxing-chronicles-v20';
 const HEROES=[
  {name:'凌锋',element:'金',title:'破阵剑卫',color:'#e7c980',icon:'⚔',main:'agi',base:[12,7,13],growth:[2.6,1.4,3],q:'裂金斩',e:'剑影突袭',r:'万剑归宗',desc:'近战爆发 · 敏捷主属性',skills:['135 范围扇形斩击，造成攻击 ×2.1 + 智力伤害。','向目标突进，短暂无敌，造成攻击 ×2.5。','3级解锁：剑雨连续打击周围敌人。']},
  {name:'青萝',element:'木',title:'灵藤游侠',color:'#91c995',icon:'❧',main:'agi',base:[8,11,13],growth:[1.7,2.5,2.8],q:'缠灵箭',e:'回春之种',r:'万木复苏',desc:'远程输出 · 治疗与定身',skills:['远程灵箭造成攻击 ×1.8 + 智力 ×2，定身3秒。','恢复全队 45 + 智力 ×3 生命。','3级解锁：恢复全队生命，击退并缠绕周围敌人。']},
@@ -52,7 +52,7 @@ function baseRefreshBars(){if(!S)return;$('#gold').textContent='◈ '+S.gold;$('
 function showDialog(html,type='panel'){menu=type;keys.clear();destination=null;$('#dialog').innerHTML=html;$('#curtain').classList.remove('hidden');$('#dialog').querySelectorAll('[data-close]').forEach(b=>b.onclick=closeDialog);}
 function closeDialog(){if(menu==='start')return;menu=null;$('#curtain').classList.add('hidden');keys.clear();canvas.focus({preventScroll:true});saveGame(false);refreshBars()}
 function saveGame(announce=true){if(!S)return;S.position={x:active().x,y:active().y};try{localStorage.setItem(SAVE_KEY,JSON.stringify(S));notice='已自动保存';if(announce)logMessage('进度已保存：角色、装备、骑宠与剧情。')}catch{notice='浏览器存储不可用，请导出存档';if(announce)logMessage(notice)}}
-function readSave(){try{let v=JSON.parse(localStorage.getItem(SAVE_KEY)||localStorage.getItem('wuxing-chronicles-v18')||localStorage.getItem('wuxing-chronicles-v17')||localStorage.getItem('wuxing-chronicles-v16')||localStorage.getItem('wuxing-chronicles-v15')||localStorage.getItem('wuxing-chronicles-v14')||localStorage.getItem('wuxing-chronicles-v13')||localStorage.getItem('wuxing-chronicles-v12')||localStorage.getItem('wuxing-chronicles-v11')||localStorage.getItem('wuxing-chronicles-v10')||localStorage.getItem('wuxing-chronicles-v9')||localStorage.getItem('wuxing-chronicles-v8')||localStorage.getItem('wuxing-chronicles-v7')||localStorage.getItem('wuxing-chronicles-v6')||localStorage.getItem('wuxing-chronicles-v5')||localStorage.getItem('wuxing-chronicles-v4')||localStorage.getItem('wuxing-chronicles-v2')||localStorage.getItem('wuxing-chronicles-v1'));return validateSave(v)?v:null}catch{return null}}
+function readSave(){try{let v=JSON.parse(localStorage.getItem(SAVE_KEY)||localStorage.getItem('wuxing-chronicles-v19')||localStorage.getItem('wuxing-chronicles-v18')||localStorage.getItem('wuxing-chronicles-v17')||localStorage.getItem('wuxing-chronicles-v16')||localStorage.getItem('wuxing-chronicles-v15')||localStorage.getItem('wuxing-chronicles-v14')||localStorage.getItem('wuxing-chronicles-v13')||localStorage.getItem('wuxing-chronicles-v12')||localStorage.getItem('wuxing-chronicles-v11')||localStorage.getItem('wuxing-chronicles-v10')||localStorage.getItem('wuxing-chronicles-v9')||localStorage.getItem('wuxing-chronicles-v8')||localStorage.getItem('wuxing-chronicles-v7')||localStorage.getItem('wuxing-chronicles-v6')||localStorage.getItem('wuxing-chronicles-v5')||localStorage.getItem('wuxing-chronicles-v4')||localStorage.getItem('wuxing-chronicles-v2')||localStorage.getItem('wuxing-chronicles-v1'));return validateSave(v)?v:null}catch{return null}}
 function validateSave(v){if(!v||![1,2].includes(v.version)||typeof v.name!=='string'||v.name.length>24||!Number.isInteger(v.active)||v.active<0||v.active>4)return false;
  const num=(n,min,max)=>typeof n==='number'&&Number.isFinite(n)&&n>=min&&n<=max;
  if(!num(v.gold,0,1e9)||!num(v.potions,0,1e5)||!Number.isInteger(v.chapter)||!num(v.chapter,0,4)||!num(v.nextItem,1,1e9)||!num(v.totalKills,0,1e8)||!num(v.death,0,1e7)||!num(v.played,0,1e10))return false;
@@ -1523,9 +1523,10 @@ function petFusionPreview10(a,b,mode='upgrade'){const q=quality8(a),valid=!!a&&!
 fusionOdds=petFusionPreview10;
 fusionCost8=(a,b)=>Math.round((RULES10.pet.costBase+quality8(a)*RULES10.pet.costQuality+(a.lv+b.lv)*RULES10.pet.costLevel)*RULES10.pet.costGrowth**quality8(a));
 function mutationPool10(a,b,q){if(S.secretBossWins9>0&&q===6&&quality8(a)===5&&[a.type,b.type].includes(100)&&[a.type,b.type].includes(PETS.findIndex(p=>p.name==='深渊梦魇')))return [102];const elements=[petElement10(a),petElement10(b)],pool=PETS.map((p,type)=>({p,type})).filter(v=>!v.p.hidden9&&(v.p.minQuality||0)<=q&&v.type!==a.type&&v.type!==b.type),linked=pool.filter(v=>elements.includes(v.p.element)||elements.some(el=>WX.SHENG[el]===v.p.element));return (linked.length?linked:pool).map(v=>v.type)}
-fusePets=function(idA,idB,source=cryptoRoll10,mode='upgrade',request){if(!S||typeof source!=='function')return null;return commit17('pet-fusion',request,()=>{const a=S.pets.find(p=>p.id===idA),b=S.pets.find(p=>p.id===idB),preview=petFusionPreview10(a,b,mode);if(!preview.valid)return false;const random=rolls10(source,2);if(!random)return false;const success=random[0]<preview.success;let pet=null;if(success){const pool=mode==='upgrade'?[a.type]:mutationPool10(a,b,preview.targetQuality);if(!pool.length)return false;const type=pool[Math.floor(random[1]*pool.length)],potential={...preview.potential};for(const key of Object.keys(potential))potential[key]=Math.max(potential[key],Math.min(RULES10.pet.potentialCaps[key],PETS[type][key]||0));pet={...clone10(a),id:mode==='upgrade'?a.id:Math.max(100,...S.pets.map(p=>p.id))+1,type,quality:preview.targetQuality,lv:preview.level,xp:Math.max(a.xp,b.xp),element10:petElement10(a),potential10:potential,skills10:[...new Set([...petSkills10(a),...petSkills10(b)])].slice(0,3),cultivation10:Math.min(1e6,Math.max(a.cultivation10||0,b.cultivation10||0)+1),fusion:{parents:[a.type,b.type],stars:Math.max(1,a.fusion?.stars||0,b.fusion?.stars||0)}}}
+function buildFusionPet10(a,b,preview,type,mode='upgrade'){const potential={...preview.potential};for(const key of Object.keys(potential))potential[key]=Math.max(potential[key],Math.min(RULES10.pet.potentialCaps[key],PETS[type][key]||0));return {...clone10(a),id:mode==='upgrade'?a.id:Math.max(100,...S.pets.map(p=>p.id))+1,type,quality:preview.targetQuality,lv:preview.level,xp:Math.max(a.xp,b.xp),element10:petElement10(a),potential10:potential,skills10:[...new Set([...petSkills10(a),...petSkills10(b)])].slice(0,3),cultivation10:Math.min(1e6,Math.max(a.cultivation10||0,b.cultivation10||0)+1),fusion:{parents:[a.type,b.type],stars:Math.max(1,a.fusion?.stars||0,b.fusion?.stars||0)}}}
+fusePets=function(idA,idB,source=cryptoRoll10,mode='upgrade',request){if(!S||typeof source!=='function')return null;return commit17('pet-fusion',request,()=>{const a=S.pets.find(p=>p.id===idA),b=S.pets.find(p=>p.id===idB),preview=petFusionPreview10(a,b,mode);if(!preview.valid)return false;const random=rolls10(source,2);if(!random)return false;const success=random[0]<preview.success;let pet=null;if(success){const pool=mode==='upgrade'?[a.type]:mutationPool10(a,b,preview.targetQuality);if(!pool.length)return false;const type=pool[Math.floor(random[1]*pool.length)];pet=buildFusionPet10(a,b,preview,type,mode)}
  if(!spendGold10(preview.cost))return false;const consumed=success?[idA,idB]:[idB],riders=S.heroes.map(h=>h.pet);S.pets=S.pets.filter(p=>!consumed.includes(p.id));for(const h of S.heroes)if(consumed.includes(h.pet))h.pet=null;if(pet){S.pets.push(pet);const owner=riders.indexOf(idA)>=0?riders.indexOf(idA):riders.indexOf(idB);if(owner>=0)S.heroes[owner].pet=pet.id;rememberPets8();S.petPity10[preview.quality]=0}else S.petPity10[preview.quality]=Math.min(9999,(S.petPity10[preview.quality]||0)+1);
- const text=success?'灵契升品：'+PETS[a.type].name+' → '+QUALITIES8[pet.quality][0]+' · '+PETS[pet.type].name+' Lv.'+pet.lv:'合契未成：主宠完整保留，副宠与'+preview.cost+'金币已消耗。';audit10('pet-fusion',text+' 成功率'+(preview.success*100).toFixed(2)+'%，全体幸运'+preview.luck,true);logMessage(text);return {success,pet,odds:preview};})||null};
+ const text=success?'灵契升品：'+PETS[a.type].name+' → '+QUALITIES8[pet.quality][0]+' · '+PETS[pet.type].name+' Lv.'+pet.lv:'合契未成：主宠完整保留，副宠与'+preview.cost+'金币已消耗。';audit10('pet-fusion',text+' 成功率'+(preview.success*100).toFixed(2)+'%，全体幸运'+preview.luck,true);logMessage(text);const receipt20=typeof recordFusionReceipt20==='function'?recordFusionReceipt20(a,b,pet,preview,success,mode,consumed):null;return {success,pet,odds:preview,receipt20};})||null};
 function recipeFor10(materials){const sorted=materials.map(g=>g.type).sort((a,b)=>a-b).join(','),levels=materials.map(g=>g.level);return RULES10.recipes.find(r=>r.types.length===materials.length&&r.types.slice().sort((a,b)=>a-b).join(',')===sorted&&Math.min(...levels)>=r.minLevel&&(!r.maxLevel||Math.max(...levels)<=r.maxLevel))||null}
 function countMaterials10(materials){const result=new Map();for(const g of materials){const key=g.type+':'+g.level;result.set(key,(result.get(key)||0)+1)}return [...result].map(([key,count])=>{const[type,level]=key.split(':').map(Number);return {type,level,count}})}
 function gemFusionPreview10(materials){if(!S||!Array.isArray(materials)||![2,3].includes(materials.length)||materials.some(g=>!gemValid(g)))return {valid:false,reason:'请选择两枚宝石，或三枚同类同级宝石／配方材料。'};
@@ -2178,9 +2179,9 @@ function sandboxData15(v){if(!v||typeof v!=='object')return false;const arr=x=>A
 const validateBeforeSeal15=validateSave;
 validateSave=function(v){return !sandboxData15(v)&&validateBeforeSeal15(v)};
 const menuBeforeRelease15=realmMenuPanel;
-realmMenuPanel=function(){menuBeforeRelease15();if(SANDBOX_AVAILABLE15)$('#dialog').insertAdjacentHTML('beforeend','<div class="sandbox-entry15"><a href="sandbox.html?v=19.0.0" target="_blank" rel="noopener">开发者体验沙盒 ↗</a><small>独立测试存档 · 无限资源与高级灵宠 · 不改变正式远征</small></div>')};
+realmMenuPanel=function(){menuBeforeRelease15();if(SANDBOX_AVAILABLE15)$('#dialog').insertAdjacentHTML('beforeend','<div class="sandbox-entry15"><a href="sandbox.html?v=20.0.0" target="_blank" rel="noopener">开发者体验沙盒 ↗</a><small>独立测试存档 · 无限资源与高级灵宠 · 不改变正式远征</small></div>')};
 const introBeforeRelease15=intro;
-intro=function(){introBeforeRelease15();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 循序远征 V19';const f=$('#dialog').querySelector('.intro-feature8');if(f)f.textContent='五行专精 · 星盟救援 · 秘器套装 · 批量交易';if(SANDBOX_AVAILABLE15)$('#dialog').insertAdjacentHTML('beforeend','<div class="sandbox-entry15"><a href="sandbox.html?v=19.0.0" target="_blank" rel="noopener">高级灵宠与无限资源体验 ↗</a><small>测试进度与正式远征隔离</small></div>')};
+intro=function(){introBeforeRelease15();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 万灵合契 V20';const f=$('#dialog').querySelector('.intro-feature8');if(f)f.textContent='五行专精 · 星盟救援 · 秘器套装 · 批量交易';if(SANDBOX_AVAILABLE15)$('#dialog').insertAdjacentHTML('beforeend','<div class="sandbox-entry15"><a href="sandbox.html?v=20.0.0" target="_blank" rel="noopener">高级灵宠与无限资源体验 ↗</a><small>测试进度与正式远征隔离</small></div>')};
 $('#realmMenu').onclick=realmMenuPanel;$('#menuBtn').onclick=realmMenuPanel;
 
 'use strict';
@@ -2210,7 +2211,7 @@ function migrate17(data){const v=clone10(data);if(v.systems17!==1){const remap=q
  v.materials17??={embers:0,cores:0};v.divineForge17??={attempts:0,readyAt:0};v.stock17??={day:0,bought:{}};v.batch17??=null;if(v.batch17?.status==='running'){v.batch17.status='paused';v.batch17.reason='重新载入后已暂停，已结算结果保留'}return v;
 }
 const validateBefore17=validateSave;
-validateSave=function(v){if(!validateBefore17(v))return false;if(v.systems17===undefined)return true;if(v.branchStorage17!==undefined&&(typeof v.branchStorage17!=='string'||!/^wuxing-codes-v1[789]:/.test(v.branchStorage17)||v.branchStorage17.length>250))return false;if(v.systems17!==1||!v.materials17||!int10(v.materials17.embers,0,1e8)||!int10(v.materials17.cores,0,1e8)||!v.divineForge17||!int10(v.divineForge17.attempts,0,1e6)||!finite10(v.divineForge17.readyAt,0,1e14))return false;
+validateSave=function(v){if(!validateBefore17(v))return false;if(v.systems17===undefined)return true;if(v.branchStorage17!==undefined&&(typeof v.branchStorage17!=='string'||!/^wuxing-codes-v(?:1[789]|20):/.test(v.branchStorage17)||v.branchStorage17.length>250))return false;if(v.systems17!==1||!v.materials17||!int10(v.materials17.embers,0,1e8)||!int10(v.materials17.cores,0,1e8)||!v.divineForge17||!int10(v.divineForge17.attempts,0,1e6)||!finite10(v.divineForge17.readyAt,0,1e14))return false;
  const gems=[...(v.gems||[]),...v.heroes.flatMap(h=>[...(h.altar10||[]),...h.gear.filter(Boolean).flatMap(it=>it.sockets||[])]).filter(Boolean)];if(gems.some(g=>!int10(g.quality,0,6)||['locked10','favorite10','bound10'].some(k=>g[k]!==undefined&&typeof g[k]!=='boolean')))return false;
  if([...v.bag,...(v.pendingGear10||[]),...v.heroes.flatMap(h=>h.gear.filter(Boolean))].some(it=>it.enchant17!==undefined&&(!Array.isArray(it.enchant17)||it.enchant17.length!==5||it.enchant17.some(n=>!int10(n,0,RULES17.enchant.cap))||it.enchant17.reduce((a,b)=>a+b,0)>20)))return false;
  if(v.batch17!==null&&v.batch17!==undefined){const b=v.batch17;if(!['running','paused'].includes(b.status)||!batchConfigValid17(b.config)||!int10(b.attempts,0,b.config.count)||!int10(b.successes,0,b.attempts)||!int10(b.failures,0,b.attempts)||b.successes+b.failures!==b.attempts||!int10(b.gold,0,1e12)||!int10(b.iron,0,1e12)||b.world!==v.worldId10||!int10(b.hero,0,4)||!b.results||typeof b.results!=='object'||Array.isArray(b.results)||Object.entries(b.results).some(([k,n])=>k.length>180||!int10(n,1,10000)))return false;}
@@ -2706,6 +2707,499 @@ const shieldLocationBefore19=shield;shield=function(a,...args){if(a.map19!==unde
 refreshResources19();
 
 'use strict';
+
+// Preserve the authoritative probability before optional single-player/lab overrides.
+const probabilityBeforeTrace20 = probability10;
+probability10 = function(...args) {
+  const p = probabilityBeforeTrace20(...args);
+  return {...p, naturalSuccess20:p.success, naturalCap20:p.cap};
+};
+
+const petPreviewBefore20 = petFusionPreview10;
+petFusionPreview10 = function(a, b, mode='upgrade') {
+  const p = petPreviewBefore20(a,b,mode);
+  const reason = !a || !b ? '请选择主灵宠和副灵宠。'
+    : a.id === b.id ? '主宠与副宠必须是两个不同个体。'
+    : quality8(a) !== quality8(b) ? '品质不同，无法融合！'
+    : quality8(a) >= RULES10.pet.maxQuality ? '已达极其稀有品质，不能继续普通融合。'
+    : [a,b].some(pet=>pet.locked10 || pet.favorite10) ? '灵宠已锁定或收藏，请先解除保护。'
+    : !['upgrade','mutation'].includes(mode) ? '请选择有效的合契方式。' : p.reason;
+  const base = RULES10.pet.base[p.quality] || 0;
+  const natural = p.naturalSuccess20 ?? clamp(p.base*p.luckyFactor+p.otherBonus,0,p.cap);
+  const god = p.godstone17 ? Math.max(natural,RULES17.divine.floor) : natural;
+  const luck = p.base*(p.luckyFactor-1);
+  const breakdown20 = {
+    base, relation:p.base-base, luck, phase:p.phaseBonus||0, pity:p.pity||0,
+    cap:natural-(p.base+luck+(p.phaseBonus||0)+(p.pity||0)),
+    godstone:god-natural, experience:p.success-god,
+    natural, final:p.success
+  };
+  return {...p, valid:p.valid && !reason, reason, breakdown20};
+};
+fusionOdds = petFusionPreview10;
+
+const fusePetsBefore20 = fusePets;
+fusePets = function(idA,idB,source=cryptoRoll10,mode='upgrade',request) {
+  if (!S) return null;
+  const a=S.pets.find(p=>p.id===idA), b=S.pets.find(p=>p.id===idB);
+  if (!petFusionPreview10(a,b,mode).valid) return null;
+  return fusePetsBefore20(idA,idB,source,mode,request);
+};
+
+const FUSION_POWER_KEYS20 = ['hp','atk','int','armor','all','speed','crit'];
+function fusionSnapshot20(p) {
+  if (!p) return null;
+  const power=petPower10(p);
+  return {
+    id:p.id, type:p.type, quality:quality8(p), lv:p.lv, element:petElement10(p),
+    score:petScore10(p), power:Object.fromEntries(FUSION_POWER_KEYS20.map(k=>[k,power[k]||0])),
+    skills:petSkills10(p)
+  };
+}
+
+// Called inside the existing transaction, before its validation and durable save.
+function recordFusionReceipt20(a,b,pet,odds,success,mode,consumed) {
+  const free=resourceFree17();
+  const receipt={
+    version:1, at:Date.now(), success, hero:S.active, mode,
+    sources:[fusionSnapshot20(a),fusionSnapshot20(b)], result:fusionSnapshot20(pet),
+    cost:free?0:odds.cost, consumed:free?[]:consumed.slice(),
+    successRate:odds.success, free, world:S.worldId10
+  };
+  S.lastFusion20=receipt;
+  return clone10(receipt);
+}
+
+function fusionSnapshotValid20(p) {
+  return !!p && int10(p.id,1,1e9) && int10(p.type,0,PETS.length-1)
+    && int10(p.quality,0,6) && int10(p.lv,1,150) && int10(p.element,0,4)
+    && finite10(p.score,0,1e9) && p.power && !Array.isArray(p.power)
+    && Object.keys(p.power).length===FUSION_POWER_KEYS20.length
+    && FUSION_POWER_KEYS20.every(k=>finite10(p.power[k],0,1e9))
+    && Array.isArray(p.skills) && p.skills.length<=8
+    && new Set(p.skills).size===p.skills.length
+    && p.skills.every(s=>typeof s==='string' && s.length<=60);
+}
+function fusionReceiptValid20(r,world) {
+  if (r === undefined || r === null) return true;
+  if (!r || r.version!==1 || !finite10(r.at,0,1e14) || typeof r.success!=='boolean'
+    || !int10(r.hero,0,4) || !['upgrade','mutation'].includes(r.mode) || r.world!==world
+    || !int10(r.cost,0,1e9) || !finite10(r.successRate,0,1) || typeof r.free!=='boolean'
+    || !Array.isArray(r.sources) || r.sources.length!==2 || !r.sources.every(fusionSnapshotValid20)
+    || r.sources[0].id===r.sources[1].id || r.sources[0].quality!==r.sources[1].quality
+    || r.sources[0].quality>=6 || !Array.isArray(r.consumed) || r.consumed.length>2
+    || new Set(r.consumed).size!==r.consumed.length
+    || r.consumed.some(id=>!r.sources.some(p=>p.id===id))) return false;
+  if (r.free && (r.cost || r.consumed.length)) return false;
+  if (!r.free && (r.consumed.length!==(r.success?2:1)
+    || !r.consumed.includes(r.sources[1].id)
+    || r.success && !r.consumed.includes(r.sources[0].id))) return false;
+  return r.success ? fusionSnapshotValid20(r.result) && r.result.quality===r.sources[0].quality+1
+    && (r.mode!=='upgrade' || r.result.id===r.sources[0].id && r.result.type===r.sources[0].type)
+    : r.result===null;
+}
+const validateBeforeFusion20=validateSave;
+validateSave=function(v) {
+  return validateBeforeFusion20(v) && fusionReceiptValid20(v.lastFusion20,v.worldId10);
+};
+
+function fusionRateTone20(rate) {
+  return rate>=.8?'high':rate>=.5?'good':rate>=.2?'risk':'low';
+}
+function fusionDuration20(q,success=true,reduced=false) {
+  if (reduced) return 160;
+  return success ? [1600,1800,2100,2500,3200,3800,4400][clamp(q,0,6)] : 2100;
+}
+function fusionPhase20(elapsed,duration) {
+  const t=clamp(elapsed/Math.max(1,duration),0,1);
+  return t<.35?'charge':t<.61?'converge':t<.79?'reveal':'result';
+}
+function fusionProjected20(a,b,p) {
+  if (!a || !b || a.id===b.id || quality8(a)!==quality8(b) || quality8(a)>=6) return null;
+  const pool=p.mode==='upgrade'?[a.type]:mutationPool10(a,b,p.targetQuality);
+  const possibilities=pool.map(type=>fusionSnapshot20(buildFusionPet10(a,b,p,type,p.mode)));
+  if (!possibilities.length) return null;
+  return {
+    possibilities, sample:possibilities[0],
+    power:Object.fromEntries(FUSION_POWER_KEYS20.map(key=>[key,{
+      min:Math.min(...possibilities.map(p=>p.power[key])),
+      max:Math.max(...possibilities.map(p=>p.power[key]))
+    }])),
+    score:{min:Math.min(...possibilities.map(p=>p.score)),max:Math.max(...possibilities.map(p=>p.score))},
+    guaranteedSkills:possibilities[0].skills.filter(s=>possibilities.every(p=>p.skills.includes(s)))
+  };
+}
+
+'use strict';
+
+let fusionFx20={generation:0,raf:0,running:false,receipt:null,start:0,elapsed:0,lastFrame:0,phase:'idle',skip:false};
+let fusionDisplayPet20=null, fusionDisplayOwner20=-1;
+const petLookupBeforeDisplay20=petOf;
+petOf=function(i){return fusionDisplayPet20 && i===fusionDisplayOwner20 ? fusionDisplayPet20 : petLookupBeforeDisplay20(i)};
+
+function fusionReduced20(){return !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches}
+function stopFusionFx20(){
+  fusionFx20.generation++;
+  if(fusionFx20.raf && typeof cancelAnimationFrame==='function')cancelAnimationFrame(fusionFx20.raf);
+  fusionFx20.raf=0;fusionFx20.running=false;
+}
+function fusionCanvas20(canvas,w,h){
+  if(!canvas?.getContext)return null;
+  const density=Math.min(2,window.devicePixelRatio||1);
+  if(canvas.width!==Math.round(w*density)||canvas.height!==Math.round(h*density)){
+    canvas.width=Math.round(w*density);canvas.height=Math.round(h*density);
+  }
+  const ctx=canvas.getContext('2d');ctx.setTransform(density,0,0,density,0,0);ctx.clearRect(0,0,w,h);return ctx;
+}
+function fusionGlow20(ctx,x,y,r,color,strength=.5){
+  const glow=ctx.createRadialGradient(x,y,0,x,y,r);
+  glow.addColorStop(0,color);glow.addColorStop(.25,color+'88');glow.addColorStop(1,color+'00');
+  ctx.save();ctx.globalAlpha=strength;ctx.fillStyle=glow;ctx.fillRect(x-r,y-r,r*2,r*2);ctx.restore();
+}
+function fusionRing20(ctx,x,y,r,t,color,major=false,broken=false){
+  ctx.save();ctx.translate(x,y);ctx.scale(1,.37);ctx.rotate(t);ctx.strokeStyle=color;
+  ctx.lineWidth=major?2.2:1;ctx.globalAlpha=major?.8:.4;
+  for(let j=0;j<(broken?12:1);j++){
+    const start=broken?j*Math.PI/6:0,end=broken?start+.24:Math.PI*2;
+    ctx.beginPath();ctx.arc(0,0,r,start,end);ctx.stroke();
+  }
+  if(major){
+    ctx.beginPath();for(let j=0;j<5;j++){const a=-Math.PI/2+j*Math.PI*.8;const x=Math.cos(a)*r*.82,y=Math.sin(a)*r*.82;j?ctx.lineTo(x,y):ctx.moveTo(x,y)}ctx.closePath();ctx.stroke();
+    for(let j=0;j<16;j++){
+      const a=j*Math.PI/8;ctx.save();ctx.rotate(a);ctx.translate(r+10,0);
+      ctx.beginPath();ctx.moveTo(-3,-6);ctx.lineTo(3,0);ctx.lineTo(-3,6);ctx.lineTo(-3,-6);ctx.stroke();ctx.restore();
+    }
+  }ctx.restore();
+}
+function drawFusionModel20(ctx,snap,x,y,scale,clock,energy=0){
+  if(!snap||!PETS[snap.type])return;
+  const old={g,renderClock,visualClock11,pet:fusionDisplayPet20,owner:fusionDisplayOwner20};
+  g=ctx;renderClock=clock;visualClock11=clock;fusionDisplayOwner20=S.active;
+  fusionDisplayPet20={...snap,element10:snap.element};
+  const air=!!PETS[snap.type].flight;
+  try{
+    ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);
+    const color=QUALITIES8[snap.quality][1];
+    fusionGlow20(ctx,0,-55,84,color,.12+snap.quality*.025);
+    if(snap.quality>=4){fusionRing20(ctx,0,5,45+snap.quality*2,clock*.4,color,true);}
+    const cycle=(clock%4)/4,proxy={i:S.active,x:0,y:0,face:1,motion:air?22:5,gait:clock*2.2,
+      petAnim:cycle<.3?1.1-cycle*3.2:0,petMode:energy>.3?'roar':'idle',petAct11:null};
+    drawMount(snap.type,proxy,false);drawMount(snap.type,proxy,true);
+    ctx.restore();
+  }finally{g=old.g;renderClock=old.renderClock;visualClock11=old.visualClock11;fusionDisplayPet20=old.pet;fusionDisplayOwner20=old.owner}
+}
+function drawFusionScene20(ctx,state,clock){
+  const {a,b,receipt,elapsed,duration}=state;
+  const q=receipt?.result?.quality??(a?Math.min(6,a.quality+1):1);
+  const color=QUALITIES8[q][1],t=receipt?clamp(elapsed/duration,0,1):0;
+  const success=receipt?.success??true,phase=receipt?fusionPhase20(elapsed,duration):'idle';
+  const advanced=q>=4, reduced=fusionReduced20(),cx=320,cy=226;
+  const bg=ctx.createRadialGradient(cx,177,0,cx,177,290);
+  bg.addColorStop(0,'#1f3b43');bg.addColorStop(.6,'#0d1d2c');bg.addColorStop(1,'#07101b');
+  ctx.fillStyle=bg;ctx.fillRect(0,0,640,300);
+  // A bounded star field and three independently rotating rune rings.
+  const stars=reduced?12:advanced?45:26;
+  for(let j=0;j<stars;j++){
+    const x=(j*137+23)%640,y=(j*71+17)%270;
+    ctx.globalAlpha=.12+(.5+.5*Math.sin(clock*1.4+j))*.28;ctx.fillStyle=j%3?color:'#d7eaff';
+    ctx.fillRect(x,y,j%5===0?2:1,j%5===0?2:1);
+  }ctx.globalAlpha=1;
+  fusionGlow20(ctx,cx,cy-10,170,color,phase==='converge'?.62:.2);
+  const broken=!!receipt&&!success&&t>.61;
+  fusionRing20(ctx,cx,cy,128,clock*.22,color,true,broken);
+  fusionRing20(ctx,cx,cy,157,-clock*.17,color,false,broken);
+  fusionRing20(ctx,cx,cy,102,clock*.34,color,false,broken);
+  if(phase==='idle'){
+    fusionGlow20(ctx,cx,168,50,color,.35);
+    ctx.fillStyle='#eddfa9';ctx.textAlign='center';ctx.font='bold 28px serif';ctx.fillText('☯',cx,178);
+    for(let j=0;j<5;j++){
+      const angle=clock*.5+j*Math.PI*2/5,x=cx+Math.cos(angle)*115,y=cy+Math.sin(angle)*40;
+      fusionGlow20(ctx,x,y-7,20,WX.colors[j],.5);
+    }return;
+  }
+  if(t<.61){
+    const merge=clamp((t-.15)/.46,0,1),distance=170*(1-merge),alpha=1-clamp((t-.42)/.19,0,1);
+    ctx.globalAlpha=alpha;
+    drawFusionModel20(ctx,a,cx-distance,223,.82,clock,merge);
+    drawFusionModel20(ctx,b,cx+distance,223,.82,clock+.6,merge);
+    ctx.globalAlpha=1;
+    for(let side=-1;side<=1;side+=2){
+      const el=side<0?a?.element:b?.element,col=WX.colors[el]||color;
+      for(let j=0;j<(reduced?4:20);j++){
+        const travel=(clock*1.2+j/20)%1,x=cx+side*170*(1-travel),y=161+Math.sin(travel*Math.PI*2+j*.3)*22;
+        ctx.beginPath();ctx.strokeStyle=col;ctx.globalAlpha=.25+travel*.5;ctx.lineWidth=1+travel*2;
+        ctx.moveTo(x+side*12,y-3);ctx.lineTo(x,y);ctx.stroke();
+      }
+    }ctx.globalAlpha=1;
+    fusionGlow20(ctx,cx,151,20+merge*80,color,.35+merge*.4);
+    ctx.fillStyle='#fff1c9';ctx.globalAlpha=.65;ctx.beginPath();ctx.arc(cx,151,5+merge*16,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+    return;
+  }
+  const reveal=clamp((t-.61)/.18,0,1);
+  if(success){
+    const beam=ctx.createLinearGradient(0,0,0,cy);beam.addColorStop(0,color+'00');beam.addColorStop(.4,color+'33');beam.addColorStop(1,color+'aa');
+    ctx.save();ctx.globalAlpha=(advanced?.65:.36)*(1-clamp((t-.86)/.14,0,1)*.5);
+    ctx.fillStyle=beam;ctx.beginPath();ctx.moveTo(cx-55,0);ctx.lineTo(cx+55,0);ctx.lineTo(cx+91,cy);ctx.lineTo(cx-91,cy);ctx.closePath();ctx.fill();ctx.restore();
+    const count=reduced?10:Math.min(144,40+q*16);
+    for(let j=0;j<count;j++){
+      const angle=j*2.39996,travel=clamp((t-.61)/.39,0,1),speed=28+(j%11)*14;
+      const x=cx+Math.cos(angle)*speed*travel,y=170+Math.sin(angle)*speed*travel*.6-travel*25;
+      ctx.save();ctx.globalAlpha=(1-travel*.7)*(.4+(j%3)*.2);ctx.fillStyle=j%4?color:'#fff4cf';
+      ctx.translate(x,y);ctx.rotate(clock+j);ctx.fillRect(-1,-3,2,6);ctx.fillRect(-3,-1,6,2);ctx.restore();
+    }
+    if(q>=5)for(let ring=0;ring<3;ring++)fusionRing20(ctx,cx,cy,82+ring*21,clock*(ring%2?-.7:.5),ring%2?'#fff1aa':color,true);
+    ctx.save();ctx.globalAlpha=reveal;const lift=(1-reveal)*30;
+    drawFusionModel20(ctx,receipt.result,cx,230-lift,.9+Math.sin(reveal*Math.PI)*.15,clock,1-reveal);
+    ctx.restore();
+  }else{
+    const fade=1-clamp((t-.61)/.25,0,1);
+    fusionGlow20(ctx,cx,151,90,'#d5a1d7',fade*.5);
+    for(let j=0;j<(reduced?8:30);j++){
+      const angle=j*2.399,travel=clamp((t-.61)/.39,0,1);
+      ctx.globalAlpha=(1-travel)*.55;ctx.strokeStyle='#b7a4b7';ctx.beginPath();
+      ctx.moveTo(cx+Math.cos(angle)*travel*155,177+Math.sin(angle)*travel*60);
+      ctx.lineTo(cx+Math.cos(angle)*(travel*155+6),183+Math.sin(angle)*travel*60);ctx.stroke();
+    }ctx.globalAlpha=1;
+    drawFusionModel20(ctx,a,cx,235,.93,clock,0);
+  }
+}
+
+function revealFusion20(){fusionFx20.skip=true;fusionFx20.elapsed=1e9;updateFusionResult20(true)}
+function updateFusionResult20(force=false){
+  const fx=fusionFx20;if(!fx.receipt)return;
+  const duration=fusionDuration20(fx.receipt.result?.quality??fx.receipt.sources[0].quality,fx.receipt.success,fusionReduced20());
+  const phase=force?'result':fusionPhase20(fx.elapsed,duration);
+  const changed=phase!==fx.phase;fx.phase=phase;
+  const labels={charge:'第一阶段 · 灵契蓄力',converge:'第二阶段 · 五行汇聚',reveal:fx.receipt.success?'第三阶段 · 灵宠新生':'第三阶段 · 灵光消散',result:fx.receipt.success?'融合成功 · 品质进阶':'融合失败 · 主宠归来'};
+  const phaseNode=$('#fusionPhase20');if(phaseNode)phaseNode.textContent=labels[phase]||'';
+  const reveal=phase==='reveal'||phase==='result',node=$('#fusionOutcome20');
+  if(node){node.classList.toggle('revealed20',reveal);node.setAttribute('aria-hidden',String(!reveal));}
+  const stage=$('#fusionScene20');if(stage)stage.dataset.phase=phase;
+  if(changed&&phase==='reveal'){
+    if(fx.receipt.success){tone(523,.13,'triangle');tone(784,.18,'sine');tone(fx.receipt.result.quality>=4?1046:880,.25,'triangle');}
+    else{tone(146,.25,'triangle');tone(98,.17,'sine');}
+    stage?.classList.toggle('fusion-shake20',fx.receipt.success&&fx.receipt.result.quality>=4&&fxPrefs15.shake&&!fusionReduced20());
+  }
+}
+function startFusionFx20(receipt=null,replay=false){
+  stopFusionFx20();const generation=fusionFx20.generation;
+  Object.assign(fusionFx20,{running:true,receipt,start:performance.now(),elapsed:0,lastFrame:0,phase:receipt?'charge':'idle',skip:false});
+  const root=$('#dialog');
+  const paint=now=>{
+    const fx=fusionFx20;if(generation!==fx.generation||!fx.running||!S||!menu||!['petFusion20','petResult20'].includes(panelContext7?.key)){if(generation===fx.generation)fx.running=false;return;}
+    if(document.visibilityState==='hidden'){fx.raf=requestAnimationFrame(paint);return;}
+    const interval=mobileViewport13()?1000/24:1000/30;
+    if(now-fx.lastFrame<interval){fx.raf=requestAnimationFrame(paint);return;}
+    fx.lastFrame=now;fx.elapsed=fx.skip?1e9:Math.max(0,now-fx.start);
+    const clock=now/1000;
+    if(receipt)updateFusionResult20();
+    const a=receipt?.sources[0]||fusionCurrentPet20('main'),b=receipt?.sources[1]||fusionCurrentPet20('sub');
+    for(const [role,pet]of [['main',a],['sub',b]]){
+      const cv=root.querySelector('#fusionPetCanvas20-'+role);
+      if(cv&&pet){const ctx=fusionCanvas20(cv,280,150);if(ctx)drawFusionModel20(ctx,pet,140,145,.8,clock+(role==='sub'?.7:0));}
+    }
+    const arena=root.querySelector('#fusionCanvas20');
+    if(arena){const ctx=fusionCanvas20(arena,640,300);if(ctx)drawFusionScene20(ctx,{a,b,receipt,elapsed:fx.elapsed,duration:fusionDuration20(receipt?.result?.quality??a?.quality??0,receipt?.success??true,fusionReduced20())},clock);}
+    // End expensive ceremony bursts; a calm, throttled creature idle remains after the result.
+    if(receipt&&fx.phase==='result'&&fx.elapsed>6000)fx.lastFrame=now+90;
+    fx.raf=requestAnimationFrame(paint);
+  };
+  fusionFx20.raf=requestAnimationFrame(paint);
+}
+
+'use strict';
+
+let fusionChoice20={main:null,sub:null,mode:'upgrade'};
+let fusionPicker20={role:'main',query:'',quality:-1,move:'all',page:0};
+let fusionScreen20=null, fusionMessage20='';
+const fusionHead20=title=>`<div class="fusion-panel-head20"><div><small>灵契整备 · 远征已暂停</small><h2>${title}</h2></div><button data-close>返回 / Esc</button></div>`;
+const fusionName20=p=>p?PETS[p.type].name:'未选择灵宠';
+const fusionNum20=n=>Number(n||0).toLocaleString('zh-CN',{maximumFractionDigits:1});
+const fusionPct20=n=>(n*100).toFixed(2)+'%';
+const fusionSigned20=n=>(n>=0?'+':'')+(n*100).toFixed(2)+' 个百分点';
+function fusionCurrentPet20(role){const p=S?.pets.find(p=>p.id===fusionChoice20[role]);return p?fusionSnapshot20(p):null}
+function fusionSkill20(p){return PETS[p.type].ability==='breath'?'五行喷息':PETS[p.type].ability==='pulse'?'灵息波动':PETS[p.type].flight?'俯冲扑击':'迅猛扑击'}
+function chooseDefaults20(){
+  const pets=S.pets.filter(p=>!p.locked10&&!p.favorite10).slice().sort((a,b)=>quality8(b)-quality8(a)||b.lv-a.lv);
+  const counts=new Map();for(const p of pets)counts.set(quality8(p),(counts.get(quality8(p))||0)+1);
+  if(!pets.some(p=>p.id===fusionChoice20.main))fusionChoice20.main=(pets.find(p=>quality8(p)<6&&counts.get(quality8(p))>=2)||pets.find(p=>quality8(p)<6)||pets[0])?.id??null;
+  const a=pets.find(p=>p.id===fusionChoice20.main);
+  if(!pets.some(p=>p.id===fusionChoice20.sub&&p.id!==a?.id))fusionChoice20.sub=pets.find(p=>p.id!==a?.id&&quality8(p)===quality8(a))?.id??null;
+}
+function fusionPetCard20(p,role){
+  const source=role==='main'?'主灵宠':'副灵宠',snap=p?fusionSnapshot20(p):null;
+  const owner=p?S.heroes.findIndex(h=>h.pet===p.id):-1;
+  return `<article class="fusion-pet-card20 ${p?'':'empty20'}" style="--pet-quality:${QUALITIES8[snap?.quality||0][1]}">
+    <div class="fusion-card-head20"><b>${source}</b><small>${p?'#'+p.id:'空的灵契槽'}</small></div>
+    <button class="fusion-pet-select20" data-pick-fusion20="${role}" aria-label="选择${source}">
+      <canvas id="fusionPetCanvas20-${role}" width="280" height="150" aria-label="${p?escapeHTML(fusionName20(p))+'动态形象':'选择灵宠'}"></canvas>
+      <span class="fusion-pet-select-label20">${p?'更换灵宠':'点击选择灵宠'}</span>
+    </button>
+    <h3>${escapeHTML(fusionName20(p))}</h3>
+    ${p?`<p class="fusion-quality20">${qualityBadge8(snap.quality)} <span>Lv.${p.lv}</span> <span>${WX.names[snap.element]}行 · ${PETS[p.type].flight?'飞行':'陆地'}</span></p>
+      <b class="fusion-score20">战斗力 ${fusionNum20(snap.score)}</b>
+      <div class="fusion-source-stats20"><span>生命 <b>${fusionNum20(snap.power.hp)}</b></span><span>攻击 <b>${fusionNum20(snap.power.atk)}</b></span><span>智力 <b>${fusionNum20(snap.power.int)}</b></span><span>护甲 <b>${fusionNum20(snap.power.armor)}</b></span></div>
+      <p class="fusion-skills20">主动：${fusionSkill20(p)}<br>被动：${snap.skills.map(escapeHTML).join('、')||'尚未觉醒'}</p>
+      ${owner>=0?`<small class="fusion-owner20">${HEROES[owner].name}的骑宠${role==='sub'?' · 副宠结算后将卸下':''}</small>`:''}`:'<p>同品质的两只不同个体，一级即可融合。</p>'}
+  </article>`;
+}
+function fusionOddsMarkup20(p,legal){
+  const tone=fusionRateTone20(p.success),d=p.breakdown20;
+  return `<section class="fusion-odds20 ${tone}" aria-label="融合成功率与加成来源">
+    <h3>最终融合成功率</h3><strong id="fusionRate20">${legal?fusionPct20(p.success):'—'}</strong>
+    <span>${legal?({high:'成功率较高',good:'成功率适中',risk:'请谨慎合契',low:'高风险合契'})[tone]:'请先放入合法的灵契材料'}</span>
+    <dl><div><dt>基础成功率</dt><dd>${fusionPct20(d.base)}</dd></div>
+      <div><dt>全队共享幸运加成</dt><dd>${fusionSigned20(d.luck)}</dd></div>
+      <div><dt>五行神石保底</dt><dd>${p.godstone17?fusionSigned20(d.godstone):'未生效'}</dd></div></dl>
+    <details><summary>查看完整概率计算</summary><dl>
+      <div><dt>五行${{same:'同源',sheng:'相生',ke:'相克'}[p.relation]}</dt><dd>${fusionSigned20(d.relation)}</dd></div>
+      <div><dt>灵时加成</dt><dd>${fusionSigned20(d.phase)}</dd></div><div><dt>失败保护</dt><dd>${fusionSigned20(d.pity)}</dd></div>
+      <div><dt>阶段上限修正</dt><dd>${fusionSigned20(d.cap)}</dd></div>
+      ${Math.abs(d.experience)>1e-9?`<div><dt>体验模式加成</dt><dd>${fusionSigned20(d.experience)}</dd></div>`:''}
+      </dl><p>共享幸运 ${fusionNum20(p.luck)} · ${p.playerCount}位角色<br>幸运倍率 ×${p.luckyFactor.toFixed(4)}${p.godstone17?' · 当前神石主持，至少70%':''}</p></details>
+  </section>`;
+}
+function fusionTargetMarkup20(a,b,p,projected){
+  if(!projected)return '<section class="fusion-target20"><h3>品质进化预览</h3><p>放入两只同品质灵宠后，显示下一品质及真实属性收益。</p></section>';
+  const before=fusionSnapshot20(a),range=n=>Math.abs(n.max-n.min)<1e-8?fusionNum20(n.min):fusionNum20(n.min)+'—'+fusionNum20(n.max);
+  return `<section class="fusion-target20" style="--target-quality:${QUALITIES8[p.targetQuality][1]}">
+    <small>成功后的品质</small><h3>${QUALITIES8[p.targetQuality][0]}<span>Lv.${p.level}</span></h3>
+    <p>${p.mode==='upgrade'?'保留主宠种族与身份':'异变合体 · '+projected.possibilities.length+'种可能'} · 战力 ${range(projected.score)}</p>
+    <table><thead><tr><th>主要属性</th><th>当前主宠</th><th>成功后${p.mode==='mutation'?'范围':''}</th></tr></thead><tbody>
+      ${[['hp','生命'],['atk','攻击'],['int','智力'],['armor','护甲']].map(([key,name])=>`<tr><td>${name}</td><td>${fusionNum20(before.power[key])}</td><td>${range(projected.power[key])}</td></tr>`).join('')}
+    </tbody></table><p>保证保留／获得：${projected.guaranteedSkills.map(escapeHTML).join('、')||'当前技能传承'}${p.mode==='mutation'?'<br>主动技能随实际新物种确定。':''}</p>
+    ${p.mode==='mutation'?`<details><summary>查看可能的新物种</summary><div class="fusion-pool20">${projected.possibilities.map(p=>`<span>${escapeHTML(fusionName20(p))}</span>`).join('')}</div></details>`:''}
+  </section>`;
+}
+function fusionSignature20(a,b,p){return JSON.stringify([S.worldId10,S.revision10,S.active,a?.id,b?.id,p.mode,p.success,p.cost,quality8(a),quality8(b),a?.lv,b?.lv,p.valid])}
+
+function fusionPanel20(){
+  if(!S)return;
+  chooseDefaults20();characterSheet13=false;
+  panelContext7={key:'petFusion20',args:[]};
+  const a=S.pets.find(p=>p.id===fusionChoice20.main),b=S.pets.find(p=>p.id===fusionChoice20.sub);
+  const p=petFusionPreview10(a,b,fusionChoice20.mode),projected=fusionProjected20(a,b,p);
+  const legal=!!a&&!!b&&a.id!==b.id&&quality8(a)===quality8(b)&&quality8(a)<6&&!a.locked10&&!b.locked10&&!a.favorite10&&!b.favorite10;
+  fusionScreen20={signature:fusionSignature20(a,b,p),quote:quote10()};
+  const free=resourceFree17(),cost=free?0:p.cost;
+  showDialog(fusionHead20('万灵合契 · 灵宠进化')+`
+    <nav class="fusion-nav20"><button id="fusionBag20">灵宠包裹 ${S.pets.length}/1000</button><button id="fusionHistory20">融合记录</button>${S.lastFusion20?'<button id="fusionLast20">最近结果</button>':''}</nav>
+    <div class="fusion-heading20"><div><small>SPIRIT COVENANT</small><h3>同品质相遇，向更高一阶进化</h3></div><div class="fusion-mode20" aria-label="合契方式"><button data-fusion-mode20="upgrade" aria-pressed="${fusionChoice20.mode==='upgrade'}">主宠升品</button><button data-fusion-mode20="mutation" aria-pressed="${fusionChoice20.mode==='mutation'}">异变合体</button></div></div>
+    <div class="fusion-mobile-rate20 ${p.valid?fusionRateTone20(p.success):'low invalid20'}" role="status"><span>${p.valid?'最终融合成功率':'融合条件'}</span><strong>${p.valid?fusionPct20(p.success):escapeHTML(p.reason)}</strong></div>
+    <div class="fusion-layout20"><section class="fusion-workbench20">
+      <div class="fusion-pair20">${fusionPetCard20(a,'main')}<span class="fusion-plus20" aria-hidden="true">＋</span>${fusionPetCard20(b,'sub')}</div>
+      <div class="fusion-direction20" aria-hidden="true">↓</div>
+      <div id="fusionScene20" class="fusion-scene20 idle20"><canvas id="fusionCanvas20" width="640" height="300" aria-label="动态五行融合魔法阵"></canvas><span class="fusion-scene-caption20">五行聚灵 · 万灵合契</span></div>
+    </section><div class="fusion-preview20">
+      ${fusionOddsMarkup20(p,legal)}${fusionTargetMarkup20(a,b,p,projected)}
+      <section class="fusion-payment20"><h3>本次消耗</h3><p><b>${fusionNum20(cost)}</b> 金币 + 副灵宠</p><small>余额 ${fusionNum20(S.gold)} / 储备 ${fusionNum20(S.goldReserve10)}</small>${free?`<p>体验模式免消耗；标准费用 ${fusionNum20(p.cost)} 金币。</p>`:'<p>失败保留主宠，副宠与本次金币消耗。无额外催化材料。</p>'}</section>
+      <p id="fusionWarning20" class="fusion-warning20 ${p.valid?'ready20':''}" role="status">${escapeHTML(p.reason||'材料就绪 · 成功后品质提升一阶')}</p>
+      <button id="fusionBegin20" class="primary fusion-begin20" ${p.valid?'':'disabled'}>支付 ${fusionNum20(cost)} 金币并融合</button>
+      <p id="fusionMessage20" role="status">${escapeHTML(fusionMessage20)}</p>
+    </div></div>`);
+  $('#dialog').classList.add('fusion-dialog20');
+  for(const button of $('#dialog').querySelectorAll('[data-pick-fusion20]'))button.onclick=()=>fusionPickerPanel20(button.dataset.pickFusion20);
+  for(const button of $('#dialog').querySelectorAll('[data-fusion-mode20]'))button.onclick=()=>{fusionChoice20.mode=button.dataset.fusionMode20;fusionMessage20='';fusionPanel20()};
+  $('#fusionBag20').onclick=()=>petsPanel();$('#fusionHistory20').onclick=fusionHistoryPanel20;
+  if(S.lastFusion20)$('#fusionLast20').onclick=()=>fusionResultPanel20(S.lastFusion20,true);
+  $('#fusionBegin20').onclick=startFusion20;
+  startFusionFx20();
+}
+
+function startFusion20(){
+  if(!S||!menu||panelContext7?.key!=='petFusion20'||fusionFx20.receipt)return null;
+  const a=S.pets.find(p=>p.id===fusionChoice20.main),b=S.pets.find(p=>p.id===fusionChoice20.sub);
+  const p=petFusionPreview10(a,b,fusionChoice20.mode);
+  if(!p.valid){fusionMessage20=p.reason;fusionPanel20();return null;}
+  if(!fusionScreen20||fusionScreen20.signature!==fusionSignature20(a,b,p)){
+    fusionMessage20='材料、主持角色或成功率已变化。预览已更新，请再次确认。';fusionPanel20();return null;
+  }
+  $('#fusionBegin20').disabled=true;
+  const result=fusePets(a.id,b.id,cryptoRoll10,fusionChoice20.mode,fusionScreen20.quote);
+  if(!result){fusionMessage20='未结算：请检查材料、存档同步或存储空间。物品与金币已保留。';fusionPanel20();return null;}
+  fusionMessage20='';fusionResultPanel20(result.receipt20);return result;
+}
+
+function fusionPickerPanel20(role='main'){
+  if(!S||!['main','sub'].includes(role))return;
+  fusionPicker20.role=role;panelContext7={key:'fusionPicker20',args:[role]};
+  showDialog(fusionHead20('选择'+(role==='main'?'主灵宠':'副灵宠'))+`
+    <div class="fusion-picker-filters20"><label>名称<input id="fusionSearch20" placeholder="麒麟、神龙、青牛…" value="${escapeHTML(fusionPicker20.query)}"></label><label>品质<select id="fusionQuality20"><option value="-1">全部品质</option>${QUALITIES8.map((q,i)=>`<option value="${i}">${q[0]}</option>`).join('')}</select></label><label>行动<select id="fusionMove20"><option value="all">空陆全部</option><option value="air">飞行</option><option value="land">陆地</option></select></label></div>
+    <p>选择两只同品质、不同个体的灵宠。不同品质仍可查看，但放入后不能执行融合；锁定和收藏的灵宠受到保护。</p><div id="fusionPickerGrid20" class="fusion-picker-grid20"></div>
+    <nav class="fusion-picker-pager20"><button id="fusionPrev20">上一页</button><b id="fusionPage20"></b><button id="fusionNext20">下一页</button><button id="fusionPickBack20">返回合契台</button></nav>`);
+  $('#dialog').classList.add('fusion-dialog20','fusion-picker-dialog20');
+  $('#fusionQuality20').value=String(fusionPicker20.quality);$('#fusionMove20').value=fusionPicker20.move;
+  const render=()=>{
+    const {query,quality,move}=fusionPicker20;
+    const list=S.pets.filter(p=>fusionName20(p).includes(query)&&(quality<0||quality8(p)===quality)&&(move==='all'||(PETS[p.type].flight?'air':'land')===move)).slice().sort((a,b)=>quality8(b)-quality8(a)||b.lv-a.lv||petScore10(b)-petScore10(a));
+    const pages=Math.max(1,Math.ceil(list.length/18));fusionPicker20.page=clamp(fusionPicker20.page,0,pages-1);
+    $('#fusionPickerGrid20').innerHTML=list.slice(fusionPicker20.page*18,fusionPicker20.page*18+18).map(p=>`<button data-pet-choice20="${p.id}" style="--pet-quality:${QUALITIES8[quality8(p)][1]}" ${p.locked10||p.favorite10?'disabled':''}>${petPortrait8(p.type)}<strong>${escapeHTML(fusionName20(p))}</strong><small>${QUALITIES8[quality8(p)][0]} · Lv.${p.lv}</small><small>战力 ${fusionNum20(petScore10(p))} · #${p.id}</small>${p.locked10||p.favorite10?'<span>已保护</span>':''}</button>`).join('')||'<p>没有匹配灵宠，请调整筛选条件或先去收集。</p>';
+    $('#fusionPage20').textContent=(fusionPicker20.page+1)+' / '+pages;
+    $('#fusionPrev20').disabled=fusionPicker20.page===0;$('#fusionNext20').disabled=fusionPicker20.page>=pages-1;
+    for(const button of $('#dialog').querySelectorAll('[data-pet-choice20]'))button.onclick=()=>{
+      const p=S.pets.find(p=>p.id===+button.dataset.petChoice20);if(!p||p.locked10||p.favorite10)return;
+      fusionChoice20[role]=p.id;
+      if(role==='main'&&fusionChoice20.sub===p.id)fusionChoice20.sub=null;
+      fusionMessage20='';fusionPanel20();
+    };
+  };
+  $('#fusionSearch20').oninput=()=>{fusionPicker20.query=$('#fusionSearch20').value.trim();fusionPicker20.page=0;render()};
+  $('#fusionQuality20').onchange=()=>{fusionPicker20.quality=+$('#fusionQuality20').value;fusionPicker20.page=0;render()};
+  $('#fusionMove20').onchange=()=>{fusionPicker20.move=$('#fusionMove20').value;fusionPicker20.page=0;render()};
+  $('#fusionPrev20').onclick=()=>{fusionPicker20.page--;render()};$('#fusionNext20').onclick=()=>{fusionPicker20.page++;render()};$('#fusionPickBack20').onclick=fusionPanel20;render();
+}
+
+function fusionResultPanel20(receipt=S?.lastFusion20,replay=false){
+  if(!S||!receipt||!fusionReceiptValid20(receipt,S.worldId10))return false;
+  const r=clone10(receipt),pet=r.result||r.sources[0],q=pet.quality;
+  panelContext7={key:'petResult20',args:[r,replay]};characterSheet13=false;
+  const newSkills=r.success?r.result.skills.filter(s=>!r.sources[0].skills.includes(s)):[];
+  const kept=S.pets.some(p=>p.id===r.sources[0].id),ownedResult=r.success&&S.pets.some(p=>p.id===r.result.id&&quality8(p)===r.result.quality);
+  const loss=r.free?'本次为体验免消耗：主宠、副宠与金币均未扣除。':r.success?'主副灵契已合成新契，实际消耗 '+fusionNum20(r.cost)+' 金币。':'主灵宠已完整保留，副灵宠及本次 '+fusionNum20(r.cost)+' 金币已消耗。';
+  showDialog(fusionHead20(replay?'最近一次合契 · 演出回顾':'万灵合契 · 命运交汇')+`
+    <section class="fusion-result20 ${r.success?'success20':'failure20'} tier20-${q}" style="--result-quality:${QUALITIES8[q][1]}">
+      <div class="fusion-result-header20"><small>${replay?'已保存结果 · 回顾不再扣费':'结算已保存 · 可随时关闭或跳过演出'}</small><h3 id="fusionPhase20" aria-live="polite">第一阶段 · 灵契蓄力</h3></div>
+      <div id="fusionScene20" class="fusion-scene20" data-phase="charge"><canvas id="fusionCanvas20" width="640" height="300" aria-label="${r.success?'灵宠品质进阶演出':'融合失败、主宠归来演出'}"></canvas><span class="fusion-scene-caption20">${!r.success?'灵契散去 · 主宠归来':q>=6?'天命归一':q>=5?'万象神临':q>=4?'传说降世':'灵契新生'}</span></div>
+      <div id="fusionOutcome20" class="fusion-outcome20" aria-hidden="true" role="status">
+        <h2>${r.success?'✨ 融合成功！':'融合失败！'}</h2>
+        <h3>${r.success?'恭喜获得：'+QUALITIES8[q][0]+'品质灵宠！':'灵光消散 · 主宠安然归来'}</h3>
+        <p class="fusion-result-name20">${escapeHTML(fusionName20(pet))} <span>Lv.${pet.lv} · ${WX.names[pet.element]}行</span></p>
+        <p class="fusion-result-loss20">${loss}</p>
+        ${r.success?`<div class="fusion-result-stats20">${[['hp','生命'],['atk','攻击'],['int','智力'],['armor','护甲']].map(([key,name])=>`<article><small>${name}</small><b>${fusionNum20(pet.power[key])}</b><span>${fusionNum20(r.sources[0].power[key])} → ${fusionNum20(pet.power[key])}</span></article>`).join('')}</div><p class="fusion-result-skills20">新获得技能：${newSkills.map(escapeHTML).join('、')||'已有技能保留，品质与基础能力已提升'}<br>主动：${fusionSkill20(pet)} · 全部被动：${pet.skills.map(escapeHTML).join('、')||'暂无'}</p>`:`<p>保留主宠：${escapeHTML(fusionName20(pet))} · ${QUALITIES8[q][0]} · Lv.${pet.lv}<br>本次真实成功率 ${fusionPct20(r.successRate)}；失败保护已按原规则累计。</p>`}
+        ${replay&&!ownedResult&&r.success?'<small>这是当次获得的形象；该灵宠可能已在后续培养或融合中变化。</small>':''}
+        ${replay&&!kept&&!r.success?'<small>这是当次保留的主宠；当前包裹状态可能已经变化。</small>':''}
+      </div>
+      <nav class="fusion-result-actions20"><button id="fusionSkip20">跳过演出 / 查看结果</button><button id="fusionConfirm20" class="primary">确认 · 查看灵宠包裹</button><button id="fusionAgain20">继续融合</button></nav>
+    </section>`);
+  $('#dialog').classList.add('fusion-dialog20','fusion-result-dialog20');
+  $('#fusionSkip20').onclick=revealFusion20;$('#fusionConfirm20').onclick=()=>petsPanel();$('#fusionAgain20').onclick=()=>{fusionMessage20='';fusionPanel20()};
+  startFusionFx20(r,replay);return true;
+}
+function fusionHistoryPanel20(){
+  panelContext7={key:'fusionHistory20',args:[]};showDialog(panelHead('灵宠合契 · 已保存记录')+historyMarkup10('pet-fusion')+'<button id="fusionHistoryBack20">返回合契台</button>');$('#fusionHistoryBack20').onclick=fusionPanel20;
+}
+
+// All legacy entry points use the same panel; no obsolete dropdown fusion remains reachable.
+fusionPanel17=fusionPanel20;petFusionPanel10=fusionPanel20;fusionPanel=fusionPanel20;fusionPanel8=fusionPanel20;fusionPanel9=fusionPanel20;
+for(const key of ['petFusion20','petFusion17','petFusion10','fusion','fusion8','fusion9'])panelTargets7[key]=fusionPanel20;
+panelTargets7.petResult20=fusionResultPanel20;panelTargets7.fusionPicker20=fusionPickerPanel20;panelTargets7.fusionHistory20=fusionHistoryPanel20;
+
+const showBeforeFusion20=showDialog;
+showDialog=function(...args){stopFusionFx20();const result=showBeforeFusion20(...args);$('#dialog').classList.remove('fusion-dialog20','fusion-result-dialog20','fusion-picker-dialog20');return result};
+const closeTopBeforeFusion20=closeTopWindow19;
+closeTopWindow19=function(){
+  stopFusionFx20();const result=closeTopBeforeFusion20();
+  if(menu&&panelContext7?.key==='petFusion20')startFusionFx20();
+  else if(menu&&panelContext7?.key==='petResult20')startFusionFx20(panelContext7.args[0],true);
+  return result;
+};
+closeDialog=closeTopWindow19;
+const closeAllBeforeFusion20=closeAllWindows19;
+closeAllWindows19=function(){stopFusionFx20();return closeAllBeforeFusion20()};
+const beginBeforeFusion20=begin;
+begin=function(...args){stopFusionFx20();fusionChoice20={main:null,sub:null,mode:'upgrade'};fusionScreen20=null;fusionMessage20='';return beginBeforeFusion20(...args)};
+
+'use strict';
 // Player-owned single-player cheats. This module is deliberately excluded from the isolated lab.
 const CODE_FLAGS16=['enabled','infiniteResources','god','noCooldown','fusion100','mana','oneHit'];
 const codeDefaults16=()=>Object.fromEntries(CODE_FLAGS16.map(k=>[k,false]));
@@ -2800,18 +3294,18 @@ function codePanel16(){panelContext7=null;characterSheet13=false;if(!S){showDial
 }
 const menuBeforeCodes16=realmMenuPanel;
 realmMenuPanel=function(){menuBeforeCodes16();const host=$('#dialog').querySelector('.mobile-menu13')||$('#dialog');host.insertAdjacentHTML('afterbegin','<button id="codeMenu16" class="code-entry16"><b>⌨ 单机口令</b><small>输入口令 / 快捷开关</small></button>');$('#codeMenu16').onclick=codePanel16};
-const introBeforeCodes16=intro;intro=function(){introBeforeCodes16();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 循序远征 V19';$('#dialog').insertAdjacentHTML('beforeend','<button id="introCodes16" class="code-entry16">查看正式单人游戏口令</button>');$('#introCodes16').onclick=codePanel16};
+const introBeforeCodes16=intro;intro=function(){introBeforeCodes16();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 万灵合契 V20';$('#dialog').insertAdjacentHTML('beforeend','<button id="introCodes16" class="code-entry16">查看正式单人游戏口令</button>');$('#introCodes16').onclick=codePanel16};
 window.addEventListener('keydown',e=>{if(!S||e.repeat||e.isComposing||e.target instanceof HTMLInputElement||e.target instanceof HTMLSelectElement||e.target?.isContentEditable)return;if(e.code==='Enter'||e.code==='Backquote'){e.preventDefault();e.stopImmediatePropagation?.();if(menu==='codes16')closeDialog();else codePanel16()}},true);
 $('#realmMenu').onclick=realmMenuPanel;$('#menuBtn').onclick=realmMenuPanel;
 
 'use strict';
 // Cheats remain accessible in the main game, but write only to a separate per-world branch.
 if(typeof executeCode16==='function'){
- const normalKey17='wuxing-chronicles-v19',branchKey17=id=>'wuxing-codes-v19:'+encodeURIComponent(id),pointer17='wuxing-last-codes-v19';
+ const normalKey17='wuxing-chronicles-v20',branchKey17=id=>'wuxing-codes-v20:'+encodeURIComponent(id),pointer17='wuxing-last-codes-v20';
  const beginEconomy17=begin;begin=function(data){const previous=SAVE_KEY;SAVE_KEY=data?.codes16?.used?(data.branchStorage17||branchKey17(data.worldId10)):normalKey17;try{const r=beginEconomy17(data);if(data?.codes16?.used)localStorage.setItem(pointer17,SAVE_KEY);return r}catch(e){SAVE_KEY=previous;throw e}};
  const executeEconomy17=executeCode16;executeCode16=function(raw){const c=String(raw).trim().toLowerCase().replace(/\s+/g,' ');if(!S||['/help','help','帮助','/status'].includes(c))return executeEconomy17(raw);const previous=SAVE_KEY,normal=clone10(S);if(!S.codes16?.used){if(!diskMatches10())return {ok:false,text:'正常存档已在其他标签页更新，请重新载入。'};SAVE_KEY=branchKey17(S.worldId10);if(localStorage.getItem(SAVE_KEY))SAVE_KEY+=':fork:'+session10+'-'+(++quoteSeq10);S.branchStorage17=SAVE_KEY;}let result;try{result=executeEconomy17(raw)}catch(e){SAVE_KEY=previous;throw e}if(result.ok&&S.codes16?.used){if(!normal.codes16?.used){normal.position={x:active().x,y:active().y};try{localStorage.setItem(normalKey17,JSON.stringify(normal))}catch{}}localStorage.setItem(pointer17,SAVE_KEY);result.text+='（已保存至独立口令档）'}else{SAVE_KEY=previous;if(!normal.codes16?.used){S=normal;invalidateLuck10()}}return result};
  const restoreEconomy17=restoreCodeBackup16;restoreCodeBackup16=function(){if(SAVE_KEY===normalKey17)return restoreEconomy17();if(!diskMatches10())return false;let data;try{data=JSON.parse(localStorage.getItem(normalKey17))}catch{}if(!data||data.worldId10!==S.worldId10)data=readCodeBackup16()?.save;if(!data||data.codes16?.used||!validateSave(data))return false;saveGame(false);begin(data);logMessage('已返回正常远征；口令资源仍保留在独立口令档。');return true};
- const introEconomy17=intro;intro=function(){const current=SAVE_KEY;let prior;SAVE_KEY=normalKey17;try{prior=readSave();introEconomy17()}finally{SAVE_KEY=current}if($('#continue'))$('#continue').textContent=prior?.codes16?.used?'迁移旧版口令档':'继续正常远征';const key=(localStorage.getItem(pointer17)||localStorage.getItem('wuxing-last-codes-v18')||localStorage.getItem('wuxing-last-codes-v17'));if(/^wuxing-codes-v1[789]:/.test(key||'')){$('#dialog').insertAdjacentHTML('beforeend','<button id="continueCodes17">继续独立口令档</button>');$('#continueCodes17').onclick=()=>{try{const data=JSON.parse(localStorage.getItem(key));if(data?.codes16?.used&&validateSave(data))begin(data);else logMessage('口令档无法校验，请保留导出文件。')}catch{}}}};
+ const introEconomy17=intro;intro=function(){const current=SAVE_KEY;let prior;SAVE_KEY=normalKey17;try{prior=readSave();introEconomy17()}finally{SAVE_KEY=current}if($('#continue'))$('#continue').textContent=prior?.codes16?.used?'迁移旧版口令档':'继续正常远征';const key=(localStorage.getItem(pointer17)||localStorage.getItem('wuxing-last-codes-v19')||localStorage.getItem('wuxing-last-codes-v18')||localStorage.getItem('wuxing-last-codes-v17'));if(/^wuxing-codes-v(?:1[789]|20):/.test(key||'')){$('#dialog').insertAdjacentHTML('beforeend','<button id="continueCodes17">继续独立口令档</button>');$('#continueCodes17').onclick=()=>{try{const data=JSON.parse(localStorage.getItem(key));if(data?.codes16?.used&&validateSave(data))begin(data);else logMessage('口令档无法校验，请保留导出文件。')}catch{}}}};
  const codePanelEconomy17=codePanel16;codePanel16=function(){codePanelEconomy17();const n=$('#dialog').querySelector('.code-note16');if(n)n.textContent='首次执行资源口令会分出独立口令档。原正常存档不会收到口令金币、宝石或灵宠；可从标题继续口令档，或返回正常远征。';};
  const resourcesEconomy17=executeCode16;executeCode16=function(raw){const r=resourcesEconomy17(raw);if(r.ok&&/^\/(resources|materials) max$/i.test(String(raw).trim())){S.materials17={embers:100000,cores:10000};saveGame(false)}return r};
 }
