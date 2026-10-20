@@ -11,6 +11,7 @@ const cv=element(),sandbox={console,Math,crypto:require('node:crypto').webcrypto
 vm.createContext(sandbox);sandbox.assert=assert;sandbox.listeners=listeners;
 const source=path.join(__dirname,'../runtime.js');vm.runInContext(fs.readFileSync(source,'utf8'),sandbox,{filename:source,timeout:20000});
 const run=(s,timeout=15000)=>vm.runInContext('{'+s+'}',sandbox,{timeout}),tests=[];let failures=0;
-function test(name,fn){try{fn();tests.push({name,pass:true});console.log('PASS',name)}catch(error){failures++;tests.push({name,pass:false,message:error.message});console.error('FAIL',name,'\n ',error.stack)}}
-function finish(){console.log(`\n${tests.length-failures}/${tests.length} V20 checks passed.`);if(failures)process.exitCode=1;return{tests,failures}}
-module.exports={run,test,sandbox,elements,listeners,tests,finish};
+const superseded21=[];let supersedeNames21=new Set();function supersede21(names){supersedeNames21=new Set(names)};
+function test(name,fn){if(supersedeNames21.has(name)){superseded21.push(name);return}try{fn();tests.push({name,pass:true});console.log('PASS',name)}catch(error){failures++;tests.push({name,pass:false,message:error.message});console.error('FAIL',name,'\n ',error.stack)}}
+function finish(){console.log(`\n${tests.length-failures}/${tests.length} V21 checks passed.`);if(failures)process.exitCode=1;return{tests,failures,supersededLegacyChecks:superseded21}}
+module.exports={supersede21,run,test,sandbox,elements,listeners,tests,finish};

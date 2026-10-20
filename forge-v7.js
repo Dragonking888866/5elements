@@ -106,23 +106,23 @@ const damageBeforeForge7=enemyDamage;enemyDamage=function(e,amount,source,elemen
 function equippedSupremeGem7(i){return (S?.heroes[i]?.gear[0]?.sockets||[]).find(gem=>gemValid(gem)&&gem.level===10)||null}
 function summonGemBeast(i=S.active,manual=true){
  if(!S||menu||!Number.isInteger(i)||i<0||i>4||!owned(i))return false;const a=actors[i],gem=equippedSupremeGem7(i);
- if(!gem){if(manual)logMessage('武器镶嵌10级天极宝石后可召唤神兽。');return false}
+ if(!gem){if(manual)logMessage('武器镶嵌极其稀有品质宝石后可召唤神兽。');return false}
  if(a.hp<=0||(a.gemSummonCd||0)>0||a.mp<60)return false;const targets=enemies.filter(e=>!e.dead&&e.map===currentMap()&&dist(e,a)<650);
  if(!targets.length){if(manual)logMessage('神兽召唤需要650范围内有敌人。');return false}
  const element=GEMS[gem.type].element,st=stats(i),power=st.atk*4+st.int*7+800;a.mp-=60;a.gemSummonCd=90;a.anim='cast';a.animT=1.3;
  for(const e of targets)enemyDamage(e,power,i,element);
  gemSummons7.push({i,element,map:currentMap(),x:a.x,y:a.y,t:12,max:12,pulse:3,power:power*.3});gemSummons7=gemSummons7.slice(-5);
- novaFx.push({x:a.x,y:a.y,t:2,max:2,element,r:440,kind:'ultimate'});screenShake=Math.max(screenShake,7);tone(70,.45,'sawtooth');logMessage('天极神契：'+GEM_BEASTS7[element]+'降临，12秒内继续震击敌人！');refreshBars();return true;
+ novaFx.push({x:a.x,y:a.y,t:2,max:2,element,r:440,kind:'ultimate'});screenShake=Math.max(screenShake,7);tone(70,.45,'sawtooth');logMessage('星辉神契：'+GEM_BEASTS7[element]+'降临，12秒内继续震击敌人！');refreshBars();return true;
 }
 const updateBeforeForge7=update;update=function(dt){
  updateBeforeForge7(dt);if(!S||menu)return;
  for(const a of actors)a.gemSummonCd=Math.max(0,(a.gemSummonCd||0)-dt);
  for(const spirit of gemSummons7){spirit.t-=dt;spirit.pulse-=dt;if(spirit.pulse<=0&&spirit.t>0&&spirit.map===currentMap()&&equippedSupremeGem7(spirit.i)&&actors[spirit.i].hp>0){spirit.pulse+=3;const a=actors[spirit.i];spirit.x=a.x;spirit.y=a.y;for(const e of enemies)if(!e.dead&&e.map===spirit.map&&dist(e,spirit)<520)enemyDamage(e,spirit.power,spirit.i,spirit.element);novaFx.push({x:spirit.x,y:spirit.y,t:1,max:1,element:spirit.element,r:300,kind:'spell'})}}
  gemSummons7=gemSummons7.filter(s=>s.t>0&&s.map===currentMap()&&equippedSupremeGem7(s.i)&&actors[s.i].hp>0);
- const button=$('#gemBeast7');if(button){const a=active(),gem=equippedSupremeGem7(S.active);button.disabled=!gem||a.hp<=0||a.mp<60||(a.gemSummonCd||0)>0;button.textContent=gem?'神兽 Y '+((a.gemSummonCd||0)>0?Math.ceil(a.gemSummonCd)+'s':GEM_BEASTS7[GEMS[gem.type].element]):'神兽 Y · 天极宝石'}
+ const button=$('#gemBeast7');if(button){const a=active(),gem=equippedSupremeGem7(S.active);button.disabled=!gem||a.hp<=0||a.mp<60||(a.gemSummonCd||0)>0;button.textContent=gem?'神兽 Y '+((a.gemSummonCd||0)>0?Math.ceil(a.gemSummonCd)+'s':GEM_BEASTS7[GEMS[gem.type].element]):'神兽 Y · 极其稀有'}
 };
 window.addEventListener('keydown',e=>{if(e.code==='KeyY'&&!e.repeat&&!(e.target instanceof HTMLInputElement)&&!(e.target instanceof HTMLSelectElement)){e.preventDefault();summonGemBeast()}});
-const refreshBeforeForge7=refreshBars;refreshBars=function(){refreshBeforeForge7();if(!S)return;const holder=$('#realmSkills');if(holder&&!$('#gemBeast7')){holder.insertAdjacentHTML('beforeend','<button id="gemBeast7" class="gem-summon-button" aria-label="Y 召唤天极神兽">神兽 Y</button>');$('#gemBeast7').onclick=()=>summonGemBeast()}const b=$('#gemBeast7'),gem=equippedSupremeGem7(S.active);if(b){b.hidden=!gem;b.disabled=!gem||(active().gemSummonCd||0)>0;b.textContent='神兽 Y '+((active().gemSummonCd||0)>0?Math.ceil(active().gemSummonCd)+'s':gem?GEM_BEASTS7[GEMS[gem.type].element]:'')}};
+const refreshBeforeForge7=refreshBars;refreshBars=function(){refreshBeforeForge7();if(!S)return;const holder=$('#realmSkills');if(holder&&!$('#gemBeast7')){holder.insertAdjacentHTML('beforeend','<button id="gemBeast7" class="gem-summon-button" aria-label="Y 召唤元素神兽">神兽 Y</button>');$('#gemBeast7').onclick=()=>summonGemBeast()}const b=$('#gemBeast7'),gem=equippedSupremeGem7(S.active);if(b){b.hidden=!gem;b.disabled=!gem||(active().gemSummonCd||0)>0;b.textContent='神兽 Y '+((active().gemSummonCd||0)>0?Math.ceil(active().gemSummonCd)+'s':gem?GEM_BEASTS7[GEMS[gem.type].element]:'')}};
 
 const warriorBeforeForge7=drawWarrior;drawWarrior=function(a,mounted=false){
  const pose=warriorBeforeForge7(a,mounted),gems=(S?.heroes[a.i].gear[0]?.sockets||[]).filter(gemValid),level=Math.max(0,...gems.map(gem=>gem.level));if(level<7||a.hp<=0)return pose;
