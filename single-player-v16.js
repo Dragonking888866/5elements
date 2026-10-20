@@ -69,14 +69,14 @@ function executeCode16(raw){if(typeof raw!=='string'||raw.length>120)return{ok:f
  else if(c==='/rebirth max')action=()=>{for(const a of selectedActors())rebirthCode16(a.i)};
  else if(/^\/pet (legendary|mythic|supreme)( (fire|ice|lightning|metal|wood|earth))?$/.test(c)){const[,rank,theme='fire']=c.split(' ');action=()=>{const p=grantCodePet16({legendary:4,mythic:5,supreme:6}[rank],theme);text=PETS[p.type].name+'已加入当前英雄的正式灵宠包裹。'}}
  else if(c==='/pet all')action=()=>{let count=0;for(let type=0;type<PETS.length&&S.pets.length<1000;type++)if(!S.pets.some(p=>p.type===type)&&addPet(type,false,PETS[type].minQuality||0))count++;if(!count)throw Error('图鉴已齐全或包裹已满。');text='已收集 '+count+' 种灵宠。'};
- else if(c==='/skills unlock')action=()=>{for(const a of selectedActors()){const h=S.heroes[a.i];h.skillsKept10=true;if(h.lv>=100&&h.job<0)h.job=0}};
+ else if(c==='/skills unlock')action=()=>{for(const a of selectedActors()){const h=S.heroes[a.i];h.skillsKept10=true;if(h.skills23)h.skills23.e=h.skills23.r=true;if(h.lv>=100&&h.job<0)h.job=0}};
  else if(/^\/(god|mana) (on|off)$/.test(c))action=()=>{const[,key]=c.match(/^\/(\w+)/);codeState16[key]=c.endsWith(' on');if(key==='god'&&!codeState16.god)codeState16.oneHit=false};
  else if(/^\/cooldown (on|off)$/.test(c))action=()=>{codeState16.noCooldown=c.endsWith(' off')};
  else if(c==='/fusion chance 100'||c==='/fusion reset')action=()=>{codeState16.fusion100=c.endsWith('100')};
  else if(/^\/pet skill (test|fire_breath|flame_storm|ultimate)$/.test(c)){const p=petOf(S.active);if(!p)return{ok:false,text:'请先装备一只灵宠。'};if(c.endsWith('ultimate')&&quality8(p)<6)return{ok:false,text:'终极演出需要最高品质灵宠。'};if(/fire_breath|flame_storm/.test(c)&&petElement10(p)!==3)return{ok:false,text:'该演出需要火行灵宠。'};action=()=>{nextPetStyle15=c.endsWith('flame_storm')?'flame_storm':null;if(!petAbility(S.active,true)){nextPetStyle15=null;throw Error('请靠近可攻击的敌人，并等待当前动作和冷却结束。')}text='灵宠已在当前地图开始实际攻击。'}}
  if(!action)return{ok:false,text:'未识别的口令。输入 /help 查看列表。'};
  const before=clone10(S),flags=codeFlags16(),runtime=actors.map(a=>({hp:a.hp,mp:a.mp,cd:[...a.cd],petCd:a.petCd,petAct11:a.petAct11,petAnim:a.petAnim,petMode:a.petMode}));
- let failure='';let result=transaction10('single-player-code',quote10(),()=>{try{ensureCodeBackup16(before);codeState16.enabled=true;action();clearCodeCooldowns16();recordCode16(c,text);if(!validateSave(S))throw Error('口令结果未通过存档验证。');return{ok:true,text}}catch(error){failure=error.message;throw error}});
+ let failure='';let result=transaction10('single-player-code',quote10(),()=>{try{ensureCodeBackup16(before);codeState16.enabled=true;action();if(typeof syncHeroGrowth23==='function')S.heroes.forEach(syncHeroGrowth23);clearCodeCooldowns16();recordCode16(c,text);if(!validateSave(S))throw Error('口令结果未通过存档验证。');return{ok:true,text}}catch(error){failure=error.message;throw error}});
  if(result){const disk=persistedSystems10();if(!disk||disk.worldId10!==S.worldId10||disk.revision10!==S.revision10){S=before;result=false;failure='浏览器未能保存口令进度，请先导出或释放存储空间。'}}
  if(!result){Object.assign(codeState16,flags);actors.forEach((a,i)=>Object.assign(a,runtime[i]));syncCodes16();return{ok:false,text:staleSave10?'另一标签页已更新存档，请重新载入远征。':failure||'口令未生效：容量、条件或存储检查未通过，原进度保留。'}}
  logMessage(text);return result;
@@ -93,7 +93,7 @@ function codePanel16(){panelContext7=null;characterSheet13=false;if(!S){showDial
 }
 const menuBeforeCodes16=realmMenuPanel;
 realmMenuPanel=function(){menuBeforeCodes16();const host=$('#dialog').querySelector('.mobile-menu13')||$('#dialog');host.insertAdjacentHTML('afterbegin','<button id="codeMenu16" class="code-entry16"><b>⌨ 单机口令</b><small>输入口令 / 快捷开关</small></button>');$('#codeMenu16').onclick=codePanel16};
-const introBeforeCodes16=intro;intro=function(){introBeforeCodes16();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 灵兽试炼 V22';$('#dialog').insertAdjacentHTML('beforeend','<button id="introCodes16" class="code-entry16">查看正式单人游戏口令</button>');$('#introCodes16').onclick=codePanel16};
+const introBeforeCodes16=intro;intro=function(){introBeforeCodes16();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 星途初醒 V23';$('#dialog').insertAdjacentHTML('beforeend','<button id="introCodes16" class="code-entry16">查看正式单人游戏口令</button>');$('#introCodes16').onclick=codePanel16};
 window.addEventListener('keydown',e=>{if(!S||e.repeat||e.isComposing||e.target instanceof HTMLInputElement||e.target instanceof HTMLSelectElement||e.target?.isContentEditable)return;if(e.code==='Enter'||e.code==='Backquote'){e.preventDefault();e.stopImmediatePropagation?.();if(menu==='codes16')closeDialog();else codePanel16()}},true);
 $('#realmMenu').onclick=realmMenuPanel;$('#menuBtn').onclick=realmMenuPanel;
 

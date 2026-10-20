@@ -13,6 +13,6 @@ const source=path.join(__dirname,'../runtime.js');vm.runInContext(fs.readFileSyn
 const run=(s,timeout=15000)=>vm.runInContext('{'+s+'}',sandbox,{timeout}),tests=[];let failures=0;
 const superseded21=[];let supersedeNames21=new Set();function supersede21(names){supersedeNames21=new Set(names)};
 function test(name,fn){if(supersedeNames21.has(name)){superseded21.push(name);return}try{fn();tests.push({name,pass:true});console.log('PASS',name)}catch(error){failures++;tests.push({name,pass:false,message:error.message});console.error('FAIL',name,'\n ',error.stack)}}
-function finish(){console.log(`\n${tests.length-failures}/${tests.length} V22 checks passed.`);if(failures)process.exitCode=1;return{tests,failures,supersededLegacyChecks:superseded21}}
+function finish(){console.log(`\n${tests.length-failures}/${tests.length} V23 checks passed.`);if(failures)process.exitCode=1;return{tests,failures,supersededLegacyChecks:superseded21}}
 module.exports={supersede21,run,test,sandbox,elements,listeners,tests,finish};
 

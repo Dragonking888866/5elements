@@ -15,6 +15,7 @@ const validateBeforeProgress9=validateSave;validateSave=function(v){if(!validate
  if(v.secretBossWins9!==undefined&&!integer(v.secretBossWins9))return false;
  if(v.secretClaims9!==undefined&&(!Array.isArray(v.secretClaims9)||v.secretClaims9.length>2||new Set(v.secretClaims9).size!==v.secretClaims9.length||v.secretClaims9.some(n=>!['sigils','star'].includes(n))))return false;
  if(v.encounters9!==undefined&&(!v.encounters9||typeof v.encounters9!=='object'||Array.isArray(v.encounters9)||Object.keys(v.encounters9).length>1200||Object.entries(v.encounters9).some(([key,r])=>!/^(?:[0-9]|10):[\w-]{1,60}$/.test(key)||!r||!integer(r.kills)||!integer(r.level,1e6))))return false;
+ if(v.systems19===1&&v.map>=7&&v.map<=10)return stageUnlocked19(v.map,v);
  if(v.map>=7&&v.map<=10){if(!v.heroes.every(h=>h.unlocked))return false;if(v.map===8&&!v.journey9?.includes(7)||v.map===9&&!v.journey9?.includes(8)||v.map===10&&(!v.journey9?.includes(9)||v.sigils9?.length!==3))return false}return true;
 };
 const beginBeforeProgress9=begin;begin=function(data){const next=JSON.parse(JSON.stringify(data)),migrating=next.encounters9===undefined;next.encounters9??={};if(migrating)for(let z=0;z<4;z++)if(next.bosses[z])next.encounters9[(z+1)+':'+z+'-99']={kills:1,level:0};next.journey9??=[];next.sigils9??=[];next.secretClaims9??=[];next.secretBossWins9??=0;for(const h of next.heroes)h.rebirths9??=0;lastSocket9=null;beginBeforeProgress9(next);saveGame(false)};

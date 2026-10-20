@@ -15,7 +15,7 @@ test('五种初始英雄均可逐章救齐五人，火土与界外征程不会�
 `,30000));
 test('已通关但漏招募的旧存档只修复伙伴章节，不重复金币装备宠物奖励',()=>run(`
  begin(fresh('旧存档',0));const old=clone10(S);old.bosses=[true,true,true,false,false];old.chapter=1;old.heroes[1].unlocked=old.heroes[2].unlocked=true;old.heroes[0].lv=30;old.heroes[1].lv=30;old.heroes[2].lv=30;
- const resources=JSON.stringify({gold:old.gold,bag:old.bag,pets:old.pets,gems:old.gems});assert(validateSave(old));begin(old);assert.equal(S.chapter,3);assert(S.heroes[3].unlocked);assert(!S.heroes[4].unlocked);assert(mapUnlocked(4));assert(!mapUnlocked(5));assert.equal(JSON.stringify({gold:S.gold,bag:S.bag,pets:S.pets,gems:S.gems}),resources);saveGame(false);begin(readSave());assert.equal(S.heroes.filter(h=>h.unlocked).length,4);assert(validateSave(S));
+ old.heroes.forEach(syncHeroGrowth23);const resources=JSON.stringify({gold:old.gold,bag:old.bag,pets:old.pets,gems:old.gems});assert(validateSave(old));begin(old);assert.equal(S.chapter,3);assert(S.heroes[3].unlocked);assert(!S.heroes[4].unlocked);assert(mapUnlocked(4));assert(!mapUnlocked(5));assert.equal(JSON.stringify({gold:S.gold,bag:S.bag,pets:S.pets,gems:S.gems}),resources);saveGame(false);begin(readSave());assert.equal(S.heroes.filter(h=>h.unlocked).length,4);assert(validateSave(S));
 `));
 test('没有守护者记录时不会凭等级或新地图ID免费招募英雄',()=>run(`begin(fresh('未通关',0));S.heroes[0].lv=150;const v=clone10(S);assert(!syncStory14(v));assert.equal(v.heroes.filter(h=>h.unlocked).length,1);assert.equal(v.chapter,0);assert(!mapUnlocked(4));`));
 test('五章导航始终显示五个入口，第四第五章锁定原因可见且可切换查看',()=>run(`
