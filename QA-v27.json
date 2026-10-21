@@ -1,0 +1,898 @@
+{
+  "version": "27.0.0",
+  "tests": [
+    {
+      "name": "24-01 两个真实独立VM共用存储和异步WebLock：B首次继续可连续开箱加点天赋熔炼",
+      "pass": true
+    },
+    {
+      "name": "24-02 B接管后A后台自动保存及奖励不能覆盖B，资源不变",
+      "pass": true
+    },
+    {
+      "name": "24-03 旧页点击同页接续，直接恢复最新进度并完成交易，不返回标题",
+      "pass": true
+    },
+    {
+      "name": "24-04 排队的旧页自动保存延迟到接管后执行时会被取消",
+      "pass": true
+    },
+    {
+      "name": "24-05 单页实时修订号改变不是他页写入，事务前后仍可继续结算",
+      "pass": true
+    },
+    {
+      "name": "24-06 真正外部修改即使修订号相同仍被拒绝，不能静默覆盖",
+      "pass": true
+    },
+    {
+      "name": "24-07 持有旧标题快照的Continue在锁内重新读取新进度",
+      "pass": true
+    },
+    {
+      "name": "24-08 同源普通档与独立口令档分别拥有，互不抢占",
+      "pass": true
+    },
+    {
+      "name": "24-09 没有WebLocks的浏览器仍由页面身份和存档快照阻止旧页保存",
+      "pass": true
+    },
+    {
+      "name": "24-10 写入拒绝仍回滚交易，随后可正常重试，不关闭校验",
+      "pass": true
+    },
+    {
+      "name": "24-11 交易请求重复提交不重复扣费，连续新请求可继续",
+      "pass": true
+    },
+    {
+      "name": "24-12 旧V23正常档迁入V24，旧数据原样保留且后续旧页面写入不干扰",
+      "pass": true
+    },
+    {
+      "name": "24-13 普通菜单捕获路径实际等待WebLock，点一次保存能完成",
+      "pass": true
+    },
+    {
+      "name": "24-14 地图触摸宝箱排队结算，重复点击不会重复奖励",
+      "pass": true
+    },
+    {
+      "name": "25-01 原故障复现用例：resources max＋level max后首章Boss正常死亡，药剂不过界",
+      "pass": true
+    },
+    {
+      "name": "25-02 满额药剂后普通掉落不会毒化存档，仍可加点、天赋、连续熔炼",
+      "pass": true
+    },
+    {
+      "name": "25-03 普通远征药剂满额同样有边界保护，溢出折为金币储备",
+      "pass": true
+    },
+    {
+      "name": "25-04 金币与储备都满时奖励仍合法，不能因奖励溢出卡死怪物",
+      "pass": true
+    },
+    {
+      "name": "25-05 十张关卡的满资源Boss均归零死亡且不会出现负血活体",
+      "pass": true
+    },
+    {
+      "name": "25-06 同一Boss重复伤害不会重复生成金币、材料、装备或首通奖励",
+      "pass": true
+    },
+    {
+      "name": "25-07 Boss持久化拒写，恢复正生命与护盾，不能留下负血活体或假奖励",
+      "pass": true
+    },
+    {
+      "name": "25-08 普通怪掉落也完整事务保存，拒写不加奖励、不留下死亡假象",
+      "pass": true
+    },
+    {
+      "name": "25-09 已越界药剂在加点前安全修复并备份，不要求返回标题",
+      "pass": true
+    },
+    {
+      "name": "25-10 非法旧存档的已知溢出可读入修复，原始文本和独立口令隔离保留",
+      "pass": true
+    },
+    {
+      "name": "25-11 满级灵宠持续获经验不会越过基础校验上限",
+      "pass": true
+    },
+    {
+      "name": "25-12 任意非法字段仍拒绝；具体诊断显示字段路径和值，不静默改坏装备",
+      "pass": true
+    },
+    {
+      "name": "25-13 同时存在未知非法字段时，不擅自部分修复或扣资源",
+      "pass": true
+    },
+    {
+      "name": "25-14 非有限伤害被拒绝，不把怪物生命写为NaN或Infinity",
+      "pass": true
+    },
+    {
+      "name": "25-15 修复备份写入失败时保留原数据，恢复存储后可重试",
+      "pass": true
+    },
+    {
+      "name": "25-16 资源谷满资源连续刷怪仍有正确死亡状态和有效存档",
+      "pass": true
+    },
+    {
+      "name": "25-17 500次实际普通怪伤害与死亡链、定期加点熔炼、重载后均有效",
+      "pass": true
+    },
+    {
+      "name": "25-18 基础规则恶意结构不抛异常，不接受NaN、负药剂或缺失英雄",
+      "pass": true
+    },
+    {
+      "name": "25-19 口令生成和骑乘灵宠中的嵌套保存只在最终提交写一次",
+      "pass": true
+    },
+    {
+      "name": "25-20 内层要求保存但外层校验失败时，主存档没有被提前写入",
+      "pass": true
+    },
+    {
+      "name": "25-21 故障页导出的越界存档能通过导入入口修复，装备灵宠宝石不丢失",
+      "pass": true
+    },
+    {
+      "name": "25-22 标题继续独立口令档和诊断恢复入口也会修复已知越界",
+      "pass": true
+    },
+    {
+      "name": "26-A01 镶嵌使用同一ID，全部资产仍可见，数量守恒",
+      "pass": true
+    },
+    {
+      "name": "26-A02 拆卸原ID返回可用，不增加总资产，费用为零",
+      "pass": true
+    },
+    {
+      "name": "26-A03 已占用ID不能二次镶嵌，主副槽与其他英雄均拒绝",
+      "pass": true
+    },
+    {
+      "name": "26-A04 三石及批量熔炉只消费可用库存，保留所有已镶嵌ID",
+      "pass": true
+    },
+    {
+      "name": "26-A05 替换旧石完整返还，新石ID占槽，数量不变",
+      "pass": true
+    },
+    {
+      "name": "26-A06 已镶嵌宝石锁定后禁止替换，拆卸保留独立锁定",
+      "pass": true
+    },
+    {
+      "name": "26-A07 锁定单颗不会锁住同种其他库存，熔炼不消费锁定ID",
+      "pass": true
+    },
+    {
+      "name": "26-A08 英雄A和B的宝石可独立反查，不会串槽或重复属性",
+      "pass": true
+    },
+    {
+      "name": "26-A09 保存再载入，身份、装备、品质、属性与总资产原样保留",
+      "pass": true
+    },
+    {
+      "name": "26-A10 老V25存档迁移保留堆叠、装备库及待领取镶孔，重复迁移幂等",
+      "pass": true
+    },
+    {
+      "name": "26-A11 单槽身份被复制到第二槽时，严格拒绝保存",
+      "pass": true
+    },
+    {
+      "name": "26-A12 同一ID同时出现在可用库存与槽位，严格拒绝保存",
+      "pass": true
+    },
+    {
+      "name": "26-A13 库存数量与身份区间不一致时不接受存档",
+      "pass": true
+    },
+    {
+      "name": "26-A14 镶嵌拒写完整回滚，不能假成功或丢失宝石",
+      "pass": true
+    },
+    {
+      "name": "26-A15 拆卸拒写完整回滚，装备槽与属性保持原状",
+      "pass": true
+    },
+    {
+      "name": "26-A16 重复点击同一请求只结算一次；旧槽ID不能误拆新宝石",
+      "pass": true
+    },
+    {
+      "name": "26-A17 装备ID变化后旧预览无权给另一件装备镶嵌",
+      "pass": true
+    },
+    {
+      "name": "26-A18 卸装后资产仍在装备库，属性移除，再穿戴还原",
+      "pass": true
+    },
+    {
+      "name": "26-A19 手动出售镶孔装备，原ID返还；锁定槽位阻止出售",
+      "pass": true
+    },
+    {
+      "name": "26-A20 分解镶孔装备返还同一宝石ID与品质，资产数守恒",
+      "pass": true
+    },
+    {
+      "name": "26-A21 宝石堆叠容量满时拆卸安全拒绝，原槽不变",
+      "pass": true
+    },
+    {
+      "name": "26-A22 100次镶嵌拆卸保持原ID和总量，不重复累加属性",
+      "pass": true
+    },
+    {
+      "name": "26-A23 最高9999单位堆叠用一个身份区间，拆一颗不会展开全部对象",
+      "pass": true
+    },
+    {
+      "name": "26-A24 旧存档同种宝石无ID时不推测丢失，不凭空恢复不存在的数量",
+      "pass": true
+    },
+    {
+      "name": "26-A25 骑宠更换和转交只改归属，不删除灵宠或重复属性",
+      "pass": true
+    },
+    {
+      "name": "26-A26 骑宠保存拒写回滚双方归属，灵宠仍在库存",
+      "pass": true
+    },
+    {
+      "name": "26-A27 口令内部创建骑宠依旧只在外层保存一次且立即骑乘",
+      "pass": true
+    },
+    {
+      "name": "26-U01 完整英雄中心包含实际模型、六装备、核心属性、骑宠与成长",
+      "pass": true
+    },
+    {
+      "name": "26-U02 全部宝石资产页展示真实位置、状态、品质与图标",
+      "pass": true
+    },
+    {
+      "name": "26-U03 装备详情真实镶孔图标、两孔和宝石属性可直接操作",
+      "pass": true
+    },
+    {
+      "name": "26-U04 镶嵌工作台预览真实属性、槽位并在成功后同步UI",
+      "pass": true
+    },
+    {
+      "name": "26-U05 镶嵌拒写不会播放成功动画或显示成功文字",
+      "pass": true
+    },
+    {
+      "name": "26-U06 角色标签切换到装备、技能、天赋、骑宠均保留英雄导航",
+      "pass": true
+    },
+    {
+      "name": "26-U07 宝石资产定位到正确英雄装备，第2孔不会串孔",
+      "pass": true
+    },
+    {
+      "name": "26-U08 镶嵌前后预览无状态写入，不更改宝石身份、属性或存档",
+      "pass": true
+    },
+    {
+      "name": "26-U09 锁定页展示被锁定区间的真实ID，可直接解锁",
+      "pass": true
+    },
+    {
+      "name": "26-A28 V25正常档从旧键迁入V26，旧副本保持原文不变",
+      "pass": true
+    },
+    {
+      "name": "26-A29 V25独立口令档标题入口可迁移，原旧键和普通档不改",
+      "pass": true
+    },
+    {
+      "name": "26-A30 不支持randomUUID的旧浏览器可通过安全随机值生成身份",
+      "pass": true
+    },
+    {
+      "name": "26-A31 非法资产结构有明确诊断，不抛异常或自动删物品",
+      "pass": true
+    },
+    {
+      "name": "26-U10 定位他人装备时导航自动切到真实英雄并选中原孔",
+      "pass": true
+    },
+    {
+      "name": "26-U11 骑乘和随行的角色预览文字与实际战场模式一致",
+      "pass": true
+    },
+    {
+      "name": "26-U12 收藏独立于镶嵌和锁定，单颗收藏可解除且不误耗",
+      "pass": true
+    },
+    {
+      "name": "26-U13 预览动画只有一个RAF，关闭后旧回调不会继续绘制或修改存档",
+      "pass": true
+    },
+    {
+      "name": "26-U14 移动端镶嵌和属性页不改变主画面控制选择或存档资产",
+      "pass": true
+    },
+    {
+      "name": "26-A32 未穿戴或待领取装备也可直接拆石，原ID返还且无实战属性残留",
+      "pass": true
+    },
+    {
+      "name": "27-A01 V26存档迁移保留英雄装备灵宠宝石ID且幂等",
+      "pass": true
+    },
+    {
+      "name": "27-A02 旧已通关记录不被迫重打，最终首领永久封印",
+      "pass": true
+    },
+    {
+      "name": "27-A03 新经济结构拒绝负数、NaN、未知商品与重复图鉴",
+      "pass": true
+    },
+    {
+      "name": "27-A04 V27新命名空间，保留V26回退读取",
+      "pass": true
+    },
+    {
+      "name": "27-B10 长生第1部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B11 长生第2部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B12 长生第3部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B13 长生第4部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B14 长生第5部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B15 长生第6部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B20 玄潮第1部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B21 玄潮第2部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B22 玄潮第3部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B23 玄潮第4部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B24 玄潮第5部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B25 玄潮第6部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B30 梵天第1部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B31 梵天第2部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B32 梵天第3部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B33 梵天第4部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B34 梵天第5部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B35 梵天第6部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B40 镇岳第1部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B41 镇岳第2部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B42 镇岳第3部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B43 镇岳第4部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B44 镇岳第5部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B45 镇岳第6部件可定向打造",
+      "pass": true
+    },
+    {
+      "name": "27-B25 未解锁地图与不足材料不扣资源不造物",
+      "pass": true
+    },
+    {
+      "name": "27-B26 满装备库安全进入待领取区，无自动贱卖套装",
+      "pass": true
+    },
+    {
+      "name": "27-B27 套装打造拒写完全回滚，重复凭证只结算一次",
+      "pass": true
+    },
+    {
+      "name": "27-B28 长生2/4/6真实恢复与汲取，读取不重复叠加",
+      "pass": true
+    },
+    {
+      "name": "27-B29 玄潮冷却与控制真实生效且总冷却封顶40%",
+      "pass": true
+    },
+    {
+      "name": "27-B30 梵天真实提高终极伤害，镇岳非叠加团队护甲",
+      "pass": true
+    },
+    {
+      "name": "27-B31 所有套装各六个独立SVG图标且无失效引用",
+      "pass": true
+    },
+    {
+      "name": "27-C01 淬炼严格按七品质且成本显著非线性",
+      "pass": true
+    },
+    {
+      "name": "27-C02 神话升极其稀有必须有核心、魂、淬炼石、神话宝石",
+      "pass": true
+    },
+    {
+      "name": "27-C03 淬炼失败只扣指定资源，装备ID品质孔位原样保留",
+      "pass": true
+    },
+    {
+      "name": "27-C04 成功更新属性且拒写不会消耗淬炼材料",
+      "pass": true
+    },
+    {
+      "name": "27-C05 资源口令与神石不把装备淬炼改为必成",
+      "pass": true
+    },
+    {
+      "name": "27-C06 淬炼石有真实锻造渠道，拒写回滚",
+      "pass": true
+    },
+    {
+      "name": "27-D01 第1关首领强度、三种预警和独立元素技能",
+      "pass": true
+    },
+    {
+      "name": "27-D02 第2关首领强度、三种预警和独立元素技能",
+      "pass": true
+    },
+    {
+      "name": "27-D03 第3关首领强度、三种预警和独立元素技能",
+      "pass": true
+    },
+    {
+      "name": "27-D04 第4关首领强度、三种预警和独立元素技能",
+      "pass": true
+    },
+    {
+      "name": "27-D05 第5关首领强度、三种预警和独立元素技能",
+      "pass": true
+    },
+    {
+      "name": "27-D06 第6关首领强度、三种预警和独立元素技能",
+      "pass": true
+    },
+    {
+      "name": "27-D07 第7关首领强度、三种预警和独立元素技能",
+      "pass": true
+    },
+    {
+      "name": "27-D08 第8关首领强度、三种预警和独立元素技能",
+      "pass": true
+    },
+    {
+      "name": "27-D10 第10关首领强度、三种预警和独立元素技能",
+      "pass": true
+    },
+    {
+      "name": "27-D11 同一首领不重复放大，攻速和控制不随复活翻倍",
+      "pass": true
+    },
+    {
+      "name": "27-E01 太初三条生命严格1/2/4倍，前两次无奖励最终只结算一次",
+      "pass": true
+    },
+    {
+      "name": "27-E02 复活演出时无敌，第二三阶段解锁更大五行阵",
+      "pass": true
+    },
+    {
+      "name": "27-E03 同地图切换英雄或单人死亡不重置，多人全离开重置",
+      "pass": true
+    },
+    {
+      "name": "27-E04 保存并重新初始化保留阶段、血量，不回第一条生命",
+      "pass": true
+    },
+    {
+      "name": "27-E05 复活拒写完整恢复正生命Boss且不损失奖励",
+      "pass": true
+    },
+    {
+      "name": "27-E06 首领可重复回响收集材料但不重复救援首通",
+      "pass": true
+    },
+    {
+      "name": "27-F01 远程与错误店铺拒绝实际业务，不扣资源",
+      "pass": true
+    },
+    {
+      "name": "27-F02 打开各店仅办理专属业务，关闭/离开/切换位置立即失效",
+      "pass": true
+    },
+    {
+      "name": "27-F03 伪造NPC对象不能取得交易权限",
+      "pass": true
+    },
+    {
+      "name": "27-F04 正常宝石购买与三石熔炼保留资产身份",
+      "pass": true
+    },
+    {
+      "name": "27-F05 正常灵宠购买与同品质融合均可结算",
+      "pass": true
+    },
+    {
+      "name": "27-F06 冶金铺镶嵌与免费拆卸保留V26宝石唯一ID",
+      "pass": true
+    },
+    {
+      "name": "27-F07 从英雄面板远程进入融合只打开寻路说明",
+      "pass": true
+    },
+    {
+      "name": "27-G01 百宝阁真实批量购买，库存与金币同时结算",
+      "pass": true
+    },
+    {
+      "name": "27-G02 购买拒写回滚，重复凭证不重复扣款",
+      "pass": true
+    },
+    {
+      "name": "27-G03 高级商品进度门槛与不可购买首领材料",
+      "pass": true
+    },
+    {
+      "name": "27-G04 英雄经验书只培养指定角色并同步技能天赋",
+      "pass": true
+    },
+    {
+      "name": "27-G05 英雄满级拒绝用书，近上限不突破转职上限",
+      "pass": true
+    },
+    {
+      "name": "27-G06 灵宠经验书只影响目标，不提高品质且150封顶",
+      "pass": true
+    },
+    {
+      "name": "27-G07 用书拒写恢复目标经验、等级与物品",
+      "pass": true
+    },
+    {
+      "name": "27-G08 药剂恢复与攻速幸运等临时强化真实生效且同类不叠加",
+      "pass": true
+    },
+    {
+      "name": "27-G09 护盾、复活、罗盘、灵宠回息道具均有实际作用",
+      "pass": true
+    },
+    {
+      "name": "27-G10 最高资源口令后继续刷怪与使用物品仍可合法保存",
+      "pass": true
+    },
+    {
+      "name": "27-H01 新商店、图鉴、包裹UI可打开且关键按钮都有真实入口",
+      "pass": true
+    },
+    {
+      "name": "27-H02 正常与沙盒运行时各仅一次启动，独立存档键保留",
+      "pass": true
+    },
+    {
+      "name": "27-I01 四个高级地图首领实际掉碎片与魂，强制命中6%套装分支",
+      "pass": true
+    },
+    {
+      "name": "27-I02 高级稀有宝箱套装材料在同笔事务内保存且只开一次",
+      "pass": true
+    },
+    {
+      "name": "27-I03 长老四项悬赏真实发材料、拒绝远程及重复领取",
+      "pass": true
+    },
+    {
+      "name": "27-I04 噩梦碎片与魂比普通更多，套装品质达到神话",
+      "pass": true
+    },
+    {
+      "name": "27-I05 最终回响重载保留三生命阶段，奖励后不复生复制材料",
+      "pass": true
+    },
+    {
+      "name": "27-I06 第三条生命奖励拒写，不通关不发魂，恢复存储可正常击败",
+      "pass": true
+    },
+    {
+      "name": "27-I07 生命小Boss护卫与地面伤害在复活拒写时也恢复",
+      "pass": true
+    },
+    {
+      "name": "27-I08 三种难度重新配置不残留上次增强标志且只放大一次",
+      "pass": true
+    },
+    {
+      "name": "27-I09 主持英雄在NPC旁，管理另一位英雄不丢失店铺资格",
+      "pass": true
+    },
+    {
+      "name": "27-I10 装备强化十重上限，保留品质镶孔且失败回滚",
+      "pass": true
+    },
+    {
+      "name": "27-I11 临时药剂保存后仍生效，过期消失；拒绝非法buff和悬赏数据",
+      "pass": true
+    },
+    {
+      "name": "27-I12 普通怪不直接掉落完整顶级四象套装",
+      "pass": true
+    },
+    {
+      "name": "27-I13 原创五行Boss模型与复活动画绘制不修改战斗状态",
+      "pass": true
+    },
+    {
+      "name": "27-I14 所有28件商品的独立图标都存在且没有相互共享相同ID",
+      "pass": true
+    },
+    {
+      "name": "27-I15 V26口令档经标题入口迁入V27，原键和普通档原样保留",
+      "pass": true
+    },
+    {
+      "name": "27-I16 V26正常存档宝石ID、宠物、五次转职与未完关卡都可迁移",
+      "pass": true
+    },
+    {
+      "name": "27-I17 NPC在模拟帧中打开时，淬炼和镶嵌预览仍重新计算真实属性",
+      "pass": true
+    },
+    {
+      "name": "27-I18 模拟循环结束后Boss血条仍显示第三条生命而非旧刷新轮数",
+      "pass": true
+    },
+    {
+      "name": "27-I19 主画面菜单按钮绑定新版入口，不再捕获旧菜单函数",
+      "pass": true
+    },
+    {
+      "name": "27-I20 灵宠回收只删除所选非骑乘个体并一次性入金币",
+      "pass": true
+    },
+    {
+      "name": "27-I21 骑乘或保护灵宠禁止回收，外店也不能绕过",
+      "pass": true
+    },
+    {
+      "name": "27-I22 灵宠回收拒写与重复收据不会删宠或重复入账",
+      "pass": true
+    },
+    {
+      "name": "27-I23 右上角关闭直接回战场，清理店铺状态，不逐层卡在菜单",
+      "pass": true
+    },
+    {
+      "name": "27-I24 面板换远处英雄时，旧宝石与灵宠交易也使用合法主持者权限",
+      "pass": true
+    }
+  ],
+  "failures": 0,
+  "suites": [
+    "ownership-v24.cjs",
+    "combat-v25.cjs",
+    "assets-v26.cjs",
+    "expansion-v27.cjs"
+  ],
+  "checkedAt": "2026-10-21T14:42:37.050357+00:00",
+  "changedWebFiles": [
+    "atelier-v17.js",
+    "balance-v17.js",
+    "combat-v18.js",
+    "commerce-v27.js",
+    "economy-v17.js",
+    "encounters-v27.js",
+    "expansion-core-v27.js",
+    "expansion-v27.css",
+    "game.js",
+    "index.html",
+    "integrity-v25.js",
+    "ownership-v24.js",
+    "recovery-v22.js",
+    "release-v15.js",
+    "runtime-sandbox.js",
+    "runtime.js",
+    "sandbox-frame.html",
+    "sandbox-shell15.html",
+    "sandbox.html",
+    "session-v23.js",
+    "single-player-v16.js",
+    "sw.js",
+    "upgrade.js",
+    "assets/bosses-v27.png",
+    "assets/expansion-v27.svg",
+    "assets/set-1-0-v27.svg",
+    "assets/set-1-1-v27.svg",
+    "assets/set-1-2-v27.svg",
+    "assets/set-1-3-v27.svg",
+    "assets/set-1-4-v27.svg",
+    "assets/set-1-5-v27.svg",
+    "assets/set-2-0-v27.svg",
+    "assets/set-2-1-v27.svg",
+    "assets/set-2-2-v27.svg",
+    "assets/set-2-3-v27.svg",
+    "assets/set-2-4-v27.svg",
+    "assets/set-2-5-v27.svg",
+    "assets/set-3-0-v27.svg",
+    "assets/set-3-1-v27.svg",
+    "assets/set-3-2-v27.svg",
+    "assets/set-3-3-v27.svg",
+    "assets/set-3-4-v27.svg",
+    "assets/set-3-5-v27.svg",
+    "assets/set-4-0-v27.svg",
+    "assets/set-4-1-v27.svg",
+    "assets/set-4-2-v27.svg",
+    "assets/set-4-3-v27.svg",
+    "assets/set-4-4-v27.svg",
+    "assets/set-4-5-v27.svg"
+  ],
+  "browser": {
+    "viewports": [
+      {
+        "clipped": false,
+        "dialog": {
+          "bottom": 836,
+          "height": 828,
+          "left": 8,
+          "right": 382,
+          "top": 8,
+          "width": 374,
+          "x": 8,
+          "y": 8
+        },
+        "h": 844,
+        "horizontalOverflow": false,
+        "minTouchHeight": 44,
+        "w": 390,
+        "name": "portrait"
+      },
+      {
+        "clipped": false,
+        "dialog": {
+          "bottom": 382,
+          "height": 374,
+          "left": 8,
+          "right": 836,
+          "top": 8,
+          "width": 828,
+          "x": 8,
+          "y": 8
+        },
+        "h": 390,
+        "horizontalOverflow": false,
+        "minTouchHeight": 44,
+        "w": 844,
+        "name": "landscape"
+      },
+      {
+        "clipped": false,
+        "dialog": {
+          "bottom": 560,
+          "height": 552,
+          "left": 8,
+          "right": 312,
+          "top": 8,
+          "width": 304,
+          "x": 8,
+          "y": 8
+        },
+        "h": 568,
+        "horizontalOverflow": false,
+        "minTouchHeight": 44,
+        "w": 320,
+        "name": "small"
+      },
+      {
+        "clipped": false,
+        "dialog": {
+          "bottom": 892,
+          "height": 884,
+          "left": 100,
+          "right": 1180,
+          "top": 8,
+          "width": 1080,
+          "x": 100,
+          "y": 8
+        },
+        "h": 900,
+        "horizontalOverflow": false,
+        "minTouchHeight": 44,
+        "w": 1280,
+        "name": "desktop"
+      }
+    ],
+    "console": [],
+    "interactions": [
+      "百宝阁购买2本初级经验书，指定英雄使用升到6级",
+      "图鉴寻路到冶金铺后自动交互",
+      "实际打造梵天武器，碎片100变88并提示入库",
+      "终极Boss两次复活，进入第3条生命"
+    ],
+    "controlsRestored": {
+      "attack": true,
+      "joystick": true,
+      "selectAll": true,
+      "retreat": true
+    },
+    "finalBossHUD": "太初 · 五劫神皇 第 3/3 条生命 · 属性 ×4\n37,120,000 / 37,120,000 · 正在复活",
+    "finalBossVictory": true
+  },
+  "runtimeSha256": "1e85b990b7d375c781d364f1a811b873b05783b0275e28cfb44be00eda0e1e91",
+  "bossAtlas": {
+    "file": "assets/bosses-v27.png",
+    "gitBlob": "9980605ce6b4c160996b54bf90694e37796df0e5",
+    "sha256": "30428422e2173311b89f0c0811303d07b8d84e7d2c4742f5823e87fb9167a8e7",
+    "bytes": 3235475,
+    "originalGeneration": "built-in image_gen; 10 bosses, transparent RGBA, 1774x887"
+  },
+  "limits": [
+    "2.5D sprite-layer motion and particles, not a complete 3D skeletal model",
+    "Viewport and browser interaction checks, not physical phone certification",
+    "Long-term normal-player economy and boss time-to-kill need real play feedback",
+    "Local single-player NPC restrictions, no trusted multiplayer server"
+  ],
+  "fixturePolicy": "No validation or NPC permission bypass in production. Historical domain fixtures visit a legal NPC. Old one-life Boss helper now defeats all three lives. V17–V23 historical contracts are retained but not counted as current passing checks."
+}

@@ -12,7 +12,8 @@ const statsBefore18=stats;stats=function(i){const st=statsBefore18(i),h=S.heroes
  if(i===2){st.manaRegen18+=r[0]*.002;st.cdr18+=r[3]*.01;st.control18+=r[3]*.08}
  if(i===3){st.skillDamage18+=r[0]*.03;st.rangeBonus18+=r[3]*.04;st.burn18+=r[3]*.1}
  if(i===4){st.armor*=1+r[0]*.05;st.hp*=1+r[0]*.02;st.shieldPower18+=r[3]*.08;st.ward10+=r[3]*.01}
- for(let el=0;el<5;el++)if(sets[el]>=3){if(el===0){st.crit+=.06;st.penetration18+=.1}if(el===1){st.regen10+=.003;st.gemLeech+=.03}if(el===2){st.cdr18+=.08;st.manaRegen18+=.003}if(el===3){st.skillDamage18+=.12;st.rangeBonus18+=.1}if(el===4){st.shieldPower18+=.18;st.ward10+=.04}if(sets[el]>=6){st.ultimateCdr18+=.08;st.elementDamage18+=.08}}
+ // Four advanced sets are calculated once in expansion-core-v27.
+ if(sets[0]>=3){st.crit+=.06;st.penetration18+=.1;if(sets[0]>=6){st.ultimateCdr18+=.08;st.elementDamage18+=.08}}
  let aura=0,nearElements=new Set();if(actors?.[i])for(const a of actors)if(owned(a.i)&&a.hp>0&&dist(a,actors[i])<360){nearElements.add(a.i);let value=0;for(const it of S.heroes[a.i].gear.filter(Boolean))for(const f of it.affixes18||[])if(f.key==='aura')value+=f.value;aura=Math.max(aura,Math.min(.08,value))}
  st.aura18=aura;st.team18=nearElements.size>=3?Math.min(.06,(nearElements.size-2)*.02):0;
  // Team synergy becomes available after investing in one advanced specialization.
