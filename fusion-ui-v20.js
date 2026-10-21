@@ -62,7 +62,7 @@ function fusionTargetMarkup20(a,b,p,projected){
     ${p.mode==='mutation'?`<details><summary>查看可能的新物种</summary><div class="fusion-pool20">${projected.possibilities.map(p=>`<span>${escapeHTML(fusionName20(p))}</span>`).join('')}</div></details>`:''}
   </section>`;
 }
-function fusionSignature20(a,b,p){return JSON.stringify([S.worldId10,S.revision10,S.active,a?.id,b?.id,p.mode,p.success,p.cost,quality8(a),quality8(b),a?.lv,b?.lv,p.valid])}
+function fusionSignature20(a,b,p){return JSON.stringify([S.worldId10,S.revision10,S.active,a?.id,b?.id,p.mode,p.success,p.cost29,quality8(a),quality8(b),a?.lv,b?.lv,p.valid])}
 
 function fusionPanel20(){
   if(!S)return;
@@ -72,7 +72,7 @@ function fusionPanel20(){
   const p=petFusionPreview10(a,b,fusionChoice20.mode),projected=fusionProjected20(a,b,p);
   const legal=!!a&&!!b&&a.id!==b.id&&quality8(a)===quality8(b)&&quality8(a)<6&&!a.locked10&&!b.locked10&&!a.favorite10&&!b.favorite10;
   fusionScreen20={signature:fusionSignature20(a,b,p),quote:quote10()};
-  const free=resourceFree17(),cost=free?0:p.cost;
+  const free=false,cost=p.cost;
   showDialog(fusionHead20('万灵合契 · 灵宠进化')+`
     <nav class="fusion-nav20"><button id="fusionBag20">灵宠包裹 ${S.pets.length}/1000</button><button id="fusionHistory20">融合记录</button>${S.lastFusion20?'<button id="fusionLast20">最近结果</button>':''}</nav>
     <div class="fusion-heading20"><div><small>SPIRIT COVENANT</small><h3>同品质相遇，向更高一阶进化</h3></div><div class="fusion-mode20" aria-label="合契方式"><button data-fusion-mode20="upgrade" aria-pressed="${fusionChoice20.mode==='upgrade'}">主宠升品</button><button data-fusion-mode20="mutation" aria-pressed="${fusionChoice20.mode==='mutation'}">异变合体</button></div></div>
@@ -83,9 +83,9 @@ function fusionPanel20(){
       <div id="fusionScene20" class="fusion-scene20 idle20"><canvas id="fusionCanvas20" width="640" height="300" aria-label="动态五行融合魔法阵"></canvas><span class="fusion-scene-caption20">五行聚灵 · 万灵合契</span></div>
     </section><div class="fusion-preview20">
       ${fusionOddsMarkup20(p,legal)}${fusionTargetMarkup20(a,b,p,projected)}
-      <section class="fusion-payment20"><h3>本次消耗</h3><p><b>${fusionNum20(cost)}</b> 金币 + 副灵宠</p><small>余额 ${fusionNum20(S.gold)} / 储备 ${fusionNum20(S.goldReserve10)}</small>${free?`<p>体验模式免消耗；标准费用 ${fusionNum20(p.cost)} 金币。</p>`:'<p>失败保留主宠，副宠与本次金币消耗。无额外催化材料。</p>'}</section>
+      <section class="fusion-payment20"><h3>本次真实消耗</h3>${cultivationCostHtml29(p.cost29)}<p>副灵宠 ×1；主宠身份与培养保留。成功及随机失败都扣除预览的三类资源。</p></section>
       <p id="fusionWarning20" class="fusion-warning20 ${p.valid?'ready20':''}" role="status">${escapeHTML(p.reason||'材料就绪 · 成功后品质提升一阶')}</p>
-      <button id="fusionBegin20" class="primary fusion-begin20" ${p.valid?'':'disabled'}>支付 ${fusionNum20(cost)} 金币并融合</button>
+      <button id="fusionBegin20" class="primary fusion-begin20" ${p.valid?'':'disabled'}>确认支付并融合</button>
       <p id="fusionMessage20" role="status">${escapeHTML(fusionMessage20)}</p>
     </div></div>`);
   $('#dialog').classList.add('fusion-dialog20');
@@ -146,7 +146,7 @@ function fusionResultPanel20(receipt=S?.lastFusion20,replay=false){
   panelContext7={key:'petResult20',args:[r,replay]};characterSheet13=false;
   const newSkills=r.success?r.result.skills.filter(s=>!r.sources[0].skills.includes(s)):[];
   const kept=S.pets.some(p=>p.id===r.sources[0].id),ownedResult=r.success&&S.pets.some(p=>p.id===r.result.id&&quality8(p)===r.result.quality);
-  const loss=r.free?'本次为体验免消耗：主宠、副宠与金币均未扣除。':r.success?'主副灵契已合成新契，实际消耗 '+fusionNum20(r.cost)+' 金币。':'主灵宠已完整保留，副灵宠及本次 '+fusionNum20(r.cost)+' 金币已消耗。';
+  const loss=r.cost29?(r.success?'副宠已消耗，主宠已进化；实际消耗：':'主宠完整保留，副宠已消耗；实际消耗：')+priceText17(r.cost29):r.free?'本次为体验免消耗：主宠、副宠与金币均未扣除。':r.success?'主副灵契已合成新契，实际消耗 '+fusionNum20(r.cost)+' 金币。':'主灵宠已完整保留，副灵宠及本次 '+fusionNum20(r.cost)+' 金币已消耗。';
   showDialog(fusionHead20(replay?'最近一次合契 · 演出回顾':'万灵合契 · 命运交汇')+`
     <section class="fusion-result20 ${r.success?'success20':'failure20'} tier20-${q}" style="--result-quality:${QUALITIES8[q][1]}">
       <div class="fusion-result-header20"><small>${replay?'已保存结果 · 回顾不再扣费':'结算已保存 · 可随时关闭或跳过演出'}</small><h3 id="fusionPhase20" aria-live="polite">第一阶段 · 灵契蓄力</h3></div>
