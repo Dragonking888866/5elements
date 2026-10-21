@@ -34,7 +34,7 @@ persistSave22=function(...args){
 const initializeBefore24=initializeSession23;
 initializeSession23=function(mode,data){
  if(!isolated24&&!held24()&&navigator.locks?.request)return locked24(()=>initializeSession23(mode,data));
- let key=SAVE_KEY;if(typeof executeCode16==='function')key=data?.codes16?.used?(data.branchStorage17?.replace(/^wuxing-codes-v(?:1[789]|2[01234]):/,'wuxing-codes-v25:')||'wuxing-codes-v25:'+encodeURIComponent(data.worldId10)):'wuxing-chronicles-v25';
+ let key=SAVE_KEY;if(typeof executeCode16==='function')key=data?.codes16?.used?(data.branchStorage17?.replace(/^wuxing-codes-v(?:1[789]|2[012345]):/,'wuxing-codes-v26:')||'wuxing-codes-v26:'+encodeURIComponent(data.worldId10)):'wuxing-chronicles-v26';
  let oldOwner,oldCheckpoint,claimed=false;
  try{
   oldOwner=localStorage.getItem(ownerKey24(key));oldCheckpoint=checkpoints24.get(key);

@@ -1,5 +1,5 @@
 const {run}=require('./v10-harness.cjs');
-run(`
+run(`var fixtureGem26=g=>({...gemProto26(g),asset26:gemId26(newGemRange26(1))});
 var reset10=function(level=150){begin(fresh('V10验收',0));S.chapter=4;S.bosses=[true,true,true,true,true];S.progression19.cleared=[1,2,3,4,5,6];S.won=true;for(let i=0;i<5;i++){const h=S.heroes[i];h.unlocked=true;h.lv=level;h.job=level>=100?0:-1;h.skillsKept10=level>=3;actors[i].hp=stats(i).hp;actors[i].mp=stats(i).mp;actors[i].x=360+i*35;actors[i].y=440}S.gold=50000000;S.ingots=1000000;S.gems=[];closeDialog();invalidateLuck10();S.heroes.forEach(syncHeroGrowth23);assert(validateSave(S));};
 var prepareTeam9=reset10;
 var makeItem10=function(q=0,slot=0,power=10,level=1,flags={}){return {id:S.nextItem++,slot,tier:Math.min(3,q),quality:q,element:0,power,baseLevel10:level,requiredLevel10:1,...flags}};

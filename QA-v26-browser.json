@@ -1,0 +1,110 @@
+{
+  "viewports": [
+    {
+      "closeVisible": true,
+      "dialog": {
+        "height": 552,
+        "width": 304,
+        "x": 8,
+        "y": 8
+      },
+      "horizontalOverflow": false,
+      "tabHeight": 44,
+      "viewport": [
+        320,
+        568
+      ]
+    },
+    {
+      "closeVisible": true,
+      "dialog": {
+        "height": 359.3333435058594,
+        "width": 651.3333740234375,
+        "x": 8,
+        "y": 8
+      },
+      "horizontalOverflow": false,
+      "tabHeight": 44,
+      "viewport": [
+        667,
+        375
+      ]
+    },
+    {
+      "closeVisible": true,
+      "dialog": {
+        "height": 828,
+        "width": 374,
+        "x": 8,
+        "y": 8
+      },
+      "horizontalOverflow": false,
+      "tabHeight": 44,
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "closeVisible": true,
+      "dialog": {
+        "height": 374,
+        "width": 828,
+        "x": 8,
+        "y": 8
+      },
+      "horizontalOverflow": false,
+      "tabHeight": 44,
+      "viewport": [
+        844,
+        390
+      ]
+    },
+    {
+      "dialog": {
+        "height": 783.8333740234375,
+        "width": 1228.791748046875,
+        "x": 25.604167938232425,
+        "y": 58.08333587646485
+      },
+      "horizontalOverflow": false,
+      "tabHeight": 44,
+      "viewport": [
+        1280,
+        900
+      ]
+    },
+    {
+      "dialog": {
+        "height": 618.2396240234375,
+        "width": 1228.791748046875,
+        "x": 25.604167938232425,
+        "y": 50.875
+      },
+      "horizontalOverflow": false,
+      "tabHeight": 44,
+      "viewport": [
+        1280,
+        720
+      ]
+    }
+  ],
+  "console": [],
+  "source": "Isolated localhost, normal UI import of a save created by the unchanged V25 runtime. Synthetic QA player only.",
+  "events": [
+    "Imported V25 with five heroes, 64 gems, two occupied sockets, seven pets; all continued normally",
+    "Opened unified hero center with animated ridden Shenlong",
+    "All / socketed views located the correct hero, weapon and second socket",
+    "Installed an extreme-quality gem into Qingluo weapon first socket; total64 inventory61 socketed3",
+    "Removed it for free; stable ID unchanged and stack count returned to8",
+    "Lock disabled installation; unlock enabled; reinstalled same ID",
+    "Reloaded and continued: total64 inventory61 socketed3 unchanged",
+    "Switched pet follow and ride modes through the hero center; preview caption matched",
+    "Closed mobile panel: movement joystick and attack button became visible again",
+    "No measured horizontal dialog overflow; mobile category tabs 44px tall"
+  ],
+  "limitations": [
+    "Viewport and browser click tests; no physical Android/iOS device or native touch hardware certification",
+    "Safe-area CSS supported but real notch insets not emulated"
+  ]
+}

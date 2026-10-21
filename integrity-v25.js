@@ -55,7 +55,7 @@ const atomicBefore25=atomicOperation22;atomicOperation22=function(kind,...args){
 const persistBefore25=persistSave22;persistSave22=function(...args){if(S&&owns24()&&!ensureIntegrity25('save25'))return false;return persistBefore25(...args)};
 const migrateBefore25=migrate23;migrate23=function(data,...args){const copy=clone10(data);repairOverflows25(copy);return migrateBefore25(copy,...args)};
 const readBefore25=readSave;readSave=function(){
- const keys=[SAVE_KEY,...Array.from({length:9},(_,n)=>'wuxing-chronicles-v'+(24-n))];
+ const keys=[SAVE_KEY,...Array.from({length:10},(_,n)=>'wuxing-chronicles-v'+(25-n))];
  for(const suffix of ['',':backup22'])for(const key of [...new Set(keys)])try{const raw=localStorage.getItem(key+suffix);if(!raw)continue;const original=JSON.parse(raw),candidate=clone10(original),changes=repairOverflows25(candidate);if(!changes.length){if(validateSave(candidate)){loadedSaves23.add(candidate);return candidate}continue}const fixed=migrate23(candidate);if(!validateSave(fixed))continue;backupRepair25(key,original);loadedSaves23.add(fixed);return fixed}catch{}
  return readBefore25();
 };
