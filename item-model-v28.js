@@ -55,7 +55,7 @@ function equipmentComparison28(hero,slot,id=null){
 function statChanges28(a,b){return STAT_FIELDS28.map(([key,label])=>({key,label,before:a[key]||0,after:b[key]||0,delta:(b[key]||0)-(a[key]||0)}))}
 function equipmentBaseRows28(it){const p=it.power,rows=[],add=(label,value,percent=false)=>{if(value)rows.push({label,value:percent?percent28(value):number28(value)})};
  if(it.slot===0){add('基础攻击',p);add('基础攻速增量',p*.0008,true)}if(it.slot===1){add('基础防御',p*.35);add('基础生命',p*6)}if(it.slot===2)add('基础法术',p);if(it.slot===3){add('基础生命',p*4);add('基础法力',p*2)}if(it.slot===4)add('基础防御',p*.5);if(it.slot===5){add('基础移动速度',Math.min(40,p*.8));add('敏捷',Math.floor(p/6));add('基础攻速增量',p*.0005,true)}
- (it.enchant17||[]).forEach((n,el)=>{if(!n)return;if(el===0)add('金锋附魔 · 攻击',n*15);if(el===1){add('木生附魔 · 生命',n*180);add('木生附魔 · 每秒恢复',n*.0005,true)}if(el===2){add('水镜附魔 · 法力',n*60);add('水镜附魔 · 防御',n*2)}if(el===3){add('火曜附魔 · 法术',n*18);add('火曜附魔 · 暴击',n*.003,true)}if(el===4){add('土御附魔 · 生命',n*120);add('土御附魔 · 减伤',n*.002,true)}});
+ (it.enchant17||[]).forEach((n,el)=>{if(!n)return;if(el===0)add('金锋五行强化 · 攻击',n*15);if(el===1){add('木生五行强化 · 生命',n*180);add('木生五行强化 · 每秒恢复',n*.0005,true)}if(el===2){add('水镜五行强化 · 法力',n*60);add('水镜五行强化 · 防御',n*2)}if(el===3){add('火曜五行强化 · 法术',n*18);add('火曜五行强化 · 暴击',n*.003,true)}if(el===4){add('土御五行强化 · 生命',n*120);add('土御五行强化 · 减伤',n*.002,true)}});
  for(const a of it.affixes18||[])if(AFFIXES18[a.key])add(AFFIXES18[a.key][1],a.value,true);
  return rows;
 }

@@ -16,5 +16,5 @@ function closeTopWindow19(){if(menu==='start')return false;if(batchRun17?.runnin
  if(!menu)return false;uiCurrent19=null;closeUiBefore19();uiReleaseHistory19();return true}
 closeDialog=closeTopWindow19;
 function closeAllWindows19(){uiStack19=[];uiCurrent19=null;if(menu!=='start')closeUiBefore19();uiReleaseHistory19()}
-window.addEventListener('keydown',event=>{if(event.code!=='Escape'&&event.key!=='Escape'||event.isComposing)return;event.preventDefault();event.stopImmediatePropagation?.();if(event.repeat||menu==='start')return;if(menu)closeTopWindow19();else if(S)pausePanel()},true);
+window.addEventListener('keydown',event=>{if(event.code!=='Escape'&&event.key!=='Escape'||event.isComposing)return;event.preventDefault();event.stopImmediatePropagation?.();if(event.repeat||menu==='start')return;if(typeof dismissTransient31==='function'&&dismissTransient31())return;if(menu)closeTopWindow19();else if(S)pausePanel()},true);
 window.addEventListener('popstate',()=>{if(uiIgnorePop19){uiIgnorePop19=false;if(uiCurrent19&&menu&&menu!=='start')uiPushHistory19();return}if(!uiHistory19||!uiCurrent19)return;uiHistory19=false;uiFromHistory19=true;try{closeTopWindow19()}finally{uiFromHistory19=false}if(uiCurrent19)uiPushHistory19()});

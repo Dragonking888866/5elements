@@ -34,7 +34,7 @@ persistSave22=function(...args){
 const initializeBefore24=initializeSession23;
 initializeSession23=function(mode,data){
  if(!isolated24&&!held24()&&navigator.locks?.request)return locked24(()=>initializeSession23(mode,data));
- let key=SAVE_KEY;if(typeof executeCode16==='function')key=data?.codes16?.used?(data.branchStorage17?.replace(/^wuxing-codes-v(?:1[789]|2[0123456789]|30):/,'wuxing-codes-v30:')||'wuxing-codes-v30:'+encodeURIComponent(data.worldId10)):'wuxing-chronicles-v30';
+ let key=SAVE_KEY;if(typeof executeCode16==='function')key=data?.codes16?.used?(data.branchStorage17?.replace(/^wuxing-codes-v(?:1[789]|2[0123456789]|3[01]):/,'wuxing-codes-v31:')||'wuxing-codes-v31:'+encodeURIComponent(data.worldId10)):'wuxing-chronicles-v31';
  let oldOwner,oldCheckpoint,claimed=false;
  try{
   oldOwner=localStorage.getItem(ownerKey24(key));oldCheckpoint=checkpoints24.get(key);
@@ -95,7 +95,7 @@ update=function(dt){
 const treasureBefore24=openTreasure11;const pendingChests24=new Set();
 openTreasure11=function(id,request){if(isolated24||held24()||!navigator.locks?.request)return treasureBefore24(id,request);if(pendingChests24.has(id))return false;const key=SAVE_KEY,world=S?.worldId10;pendingChests24.add(id);return locked24(()=>current24(key,world)&&treasureBefore24(id,request)).finally(()=>pendingChests24.delete(id))};
 // Start/continue, codes, panel closing and manual saves use the same write queue.
-document.addEventListener('click',event=>{if(isolated24||held24()||!navigator.locks?.request)return;const b=event.target?.closest?.('button');if(!b||b.disabled)return;event.preventDefault();event.stopImmediatePropagation();locked24(()=>{if(b.isConnected!==false)b.click()}).catch(e=>{error22('storage','ui24',e.name);logMessage(operationMessage22())})},true);
+document.addEventListener('click',event=>{if(isolated24||held24()||!navigator.locks?.request)return;const b=event.target?.closest?.('button');if(!b||b.disabled)return;if(['hudResources19','resourceClose31'].includes(b.id))return;event.preventDefault();event.stopImmediatePropagation();locked24(()=>{if(b.isConnected!==false)b.click()}).catch(e=>{error22('storage','ui24',e.name);logMessage(operationMessage22())})},true);
 window.addEventListener('storage',e=>{if(!S||isolated24||initializing24)return;if(e.key===ownerKey24()&&!owns24()||e.key===SAVE_KEY&&!diskMatches10())pauseConflict24()});
 // Do not lose a save on mobile backgrounding. The owner/snapshot checks still
 // apply; returning to a superseded page opens the same-page handoff immediately.

@@ -8,12 +8,12 @@ registerResource30('iron','灵铁',['ingots'],'▰','资源谷五区，金矿与
 for(let i=0;i<5;i++)registerResource30('essence'+i,ESSENCE_NAMES29[i],['cultivation29','essences',i],['◆','❧','❄','♨','⬟'][i],'资源谷「'+['金之矿脉','木之灵林','水之灵泉','火之熔岩','土之灵脉'][i]+'」采集、妖兽、守卫和宝箱；同系野外怪物','本系装备淬炼、灵宠融合、宝石熔炼',i);
 for(const [id,name,path,icon,source,use]of [
  ['dust','五行源尘',['cultivation29','dust'],'✧','高级首领；冶金铺五行精华各100兑换','五行神炉'],
- ['embers','灵焰',['materials17','embers'],'♨','妖兽、精英、首领；百宝阁','附魔或兑换五行精华'],['cores','星核',['materials17','cores'],'✦','界外首领','附魔或兑换五行精华'],
+ ['embers','灵焰',['materials17','embers'],'♨','妖兽、精英、首领；百宝阁','五行强化或兑换五行精华'],['cores','星核',['materials17','cores'],'✦','界外首领','五行强化或兑换五行精华'],
  ['scrolls','回城卷轴',['scrolls'],'▤','百宝阁购买、任务奖励','回城消耗'],['potions','生命药剂',['potions'],'♜','百宝阁、冒险补给','恢复生命'],
  ['souls','首领魂',['economy27','souls'],'♟','首领战利品','高阶装备锻造'],['primal','太初核心',['economy27','primal'],'✺','终局首领','终局锻造'],['seals','淬炼石',['economy27','seals'],'▣','首领掉落与冶金铺兑换','旧装备强化']
 ])registerResource30(id,name,path,icon,source,use);
 for(let i=0;i<5;i++)registerResource30('shard'+i,WX.names[i]+'系套装碎片',['economy27','shards',i],'▧','本系高级首领、回响、悬赏','套装兑换',i);
-function infiniteResources30(){return !!S&&(typeof codeState16!=='undefined'&&codeState16.enabled&&codeState16.infiniteResources&&S.codes16?.used&&/^wuxing-codes-v30:/.test(SAVE_KEY)||typeof lab15!=='undefined'&&lab15.enabled&&lab15.infiniteResources&&S.sandbox15===true)}
+function infiniteResources30(){return !!S&&(typeof codeState16!=='undefined'&&codeState16.enabled&&codeState16.infiniteResources&&S.codes16?.used&&/^wuxing-codes-v31:/.test(SAVE_KEY)||typeof lab15!=='undefined'&&lab15.enabled&&lab15.infiniteResources&&S.sandbox15===true)}
 function resourceBalance30(id){const r=RESOURCES30.get(id);return !r||!S?0:infiniteResources30()?Infinity:id==='gold'?wallet29().gold:r.get(S)}
 function payResources30(cost){if(!cost||Object.keys(cost).some(id=>!RESOURCES30.has(id)||!int10(cost[id],0,1e9)||resourceBalance30(id)<cost[id]))return false;if(infiniteResources30())return true;if((cost.gold||0)+(cost.reserve||0)>wallet29().gold)return false;S.goldReserve10-=cost.reserve||0;const cash=Math.min(S.gold,cost.gold||0);S.gold-=cash;S.goldReserve10-=(cost.gold||0)-cash;for(const [id,n]of Object.entries(cost))if(!['gold','reserve'].includes(id)){const r=RESOURCES30.get(id);r.set(S,r.get(S)-n)}return true}
 // Retire the old temporary-max-wallet implementation. Real item quantities are never virtual.

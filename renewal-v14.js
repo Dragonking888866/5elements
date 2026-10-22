@@ -70,7 +70,7 @@ const makeWorldBefore14=makeWorld;
 makeWorld=function(){makeWorldBefore14();for(let n=0;n<55;n++)enemies.push(makeFarmEnemy14(n))};
 const killBefore14=kill;
 kill=function(e,source){
- if(e?.farm30)return killValley30(e,source);if(e?.farm14===undefined)return killBefore14(e,source);if(e.dead||e.map!==currentMap())return false;
+ if(e?.map===11)return killValley30(e,source);if(e?.farm14===undefined)return killBefore14(e,source);if(e.dead||e.map!==currentMap())return false;
  const s=FARM_SITES14[e.site14];e.dead=true;e.hp=0;e.deathT=.65;e.wind=null;e.strike=null;e.due8=S.played+20;e.respawn=1e9;S.respawns8[enemyKey8(e)]=e.due8;
  creditGold10(s.gold);S.ingots=Math.min(1e8,(S.ingots||0)+s.iron);S.totalKills=Math.min(1e8,S.totalKills+1);awardXp(12);
  if(s.gem&&!giveGem(e.farm14%18,1))creditGold10(10);
