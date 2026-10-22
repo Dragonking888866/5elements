@@ -4728,9 +4728,9 @@ const COMMON_BOXES32=[[[67,13,154,202],[285,12,163,203],[515,12,160,197],[738,10
 const mix32=(a,b,t)=>a+(b-a)*t,smooth32=t=>(t=clamp(t,0,1),t*t*(3-2*t));
 function rigPoint32(origin,length,angle){return {x:origin.x-Math.sin(angle)*length,y:origin.y+Math.cos(angle)*length}}
 function rigIK32(hip,foot,upper=27,lower=30){const dx=foot.x-hip.x,dy=foot.y-hip.y,d0=Math.hypot(dx,dy),d=clamp(d0,.001,upper+lower-.001),ux=d0?dx/d0:0,uy=d0?dy/d0:1,along=(upper*upper-lower*lower+d*d)/(2*d),height=Math.sqrt(Math.max(0,upper*upper-along*along));const knee={x:hip.x+ux*along+uy*height,y:hip.y+uy*along-ux*height},ankle={x:hip.x+ux*d,y:hip.y+uy*d};return {hip,knee,ankle,upper:Math.atan2(-(knee.x-hip.x),knee.y-hip.y),lower:Math.atan2(-(ankle.x-knee.x),ankle.y-knee.y)}}
-function footfall32(phase,walk=false){const u=((phase/(Math.PI*2))%1+1)%1,reach=walk?15:23,lift=walk?10:22;if(u<.6)return{x:mix32(reach,-reach,u/.6),y:0,stance:true};const t=(u-.6)/.4;return{x:mix32(-reach,reach,smooth32(t)),y:-Math.sin(t*Math.PI)*lift,stance:false}}
+function footfall32(phase,walk=false){const u=((phase/(Math.PI*2))%1+1)%1,reach=23,lift=walk?10:22;if(u<.6)return{x:mix32(reach,-reach,u/.6),y:0,stance:true};const t=(u-.6)/.4;return{x:mix32(-reach,reach,smooth32(t)),y:-Math.sin(t*Math.PI)*lift,stance:false}}
 function heroRig32(a,mounted=false,clock=0){
- const state=heroPose11(a),moving=(a.motion||0)>.5,walk=(a.motion||0)<45,phase=(Number.isFinite(a.gait)?a.gait:0)*(walk&&!mounted?1.53:1),run=moving?1:0,attack=state==='attack',cast=state==='cast'||state==='rebirth',t=clamp(1-(a.animT||0)/.44,0,1),idle=Math.sin(clock*2.2+a.i),swing=Math.sin(phase),pelvis={x:0,y:mounted?0:-57+run*Math.cos(phase*2)*1.7+(1-run)*idle*.45};
+ const state=heroPose11(a),moving=(a.motion||0)>.5,walk=(a.motion||0)<45,phase=Number.isFinite(a.gait)?a.gait:0,run=moving?1:0,attack=state==='attack',cast=state==='cast'||state==='rebirth',t=clamp(1-(a.animT||0)/.44,0,1),idle=Math.sin(clock*2.2+a.i),swing=Math.sin(phase),pelvis={x:0,y:mounted?0:-57+run*Math.cos(phase*2)*1.7+(1-run)*idle*.45};
  let torso=moving?-.10:-.018+idle*.009,shoulder=-.08+swing*.45*run,elbow=-.50-Math.max(0,-swing)*.35*run,wrist=.95,reach=0,stage='idle';
  if(mounted){torso=-.025+Math.sin(phase*2)*.025*run;shoulder=-.72+swing*.04;elbow=.50;wrist=.95}
  if(attack){
@@ -4741,7 +4741,7 @@ function heroRig32(a,mounted=false,clock=0){
  }
  if(cast){shoulder=-1.1;elbow=-.4;wrist=1.65;torso=-.06;stage='cast'}
  if(a.guard>0){shoulder=-.65;elbow=-.8;torso=.06;stage='guard'}
- const legs=[-1,1].map(side=>{const hip={x:side*6.5,y:pelvis.y},f=moving?footfall32(phase+(side<0?Math.PI:0),walk):{x:side<0?-6:10,y:0};if(mounted){const knee={x:hip.x+(side<0?17:24),y:pelvis.y+(side<0?11:17)},ankle={x:knee.x-6,y:knee.y+29};return{hip,knee,ankle,upper:Math.atan2(-(knee.x-hip.x),knee.y-hip.y),lower:Math.atan2(-(ankle.x-knee.x),ankle.y-knee.y),side}}return{...rigIK32(hip,{x:side*6+f.x,y:f.y-6}),side,stance:f.stance??true}});
+ const legs=[-1,1].map(side=>{const hip={x:side*6.5,y:pelvis.y},f=moving?footfall32(phase+(side<0?Math.PI:0),false):{x:side<0?-6:10,y:0};if(moving)f.y*=clamp(.4+(a.motion||0)/110,.4,1);if(mounted){const knee={x:hip.x+(side<0?17:24),y:pelvis.y+(side<0?11:17)},ankle={x:knee.x-6,y:knee.y+29};return{hip,knee,ankle,upper:Math.atan2(-(knee.x-hip.x),knee.y-hip.y),lower:Math.atan2(-(ankle.x-knee.x),ankle.y-knee.y),side}}return{...rigIK32(hip,{x:side*6+f.x,y:f.y-6}),side,stance:f.stance??true}});
  const arm=(side)=>{const upper=side>0?shoulder:-.1-swing*.52*run,lower=side>0?elbow:mounted?-1.05:-.42-Math.max(0,swing)*.3*run,root={x:side*(side>0?18:16)+reach,y:-45},joint=rigPoint32(root,23,upper),hand=rigPoint32(joint,22,upper+lower);return{root,joint,hand,upper,lower:upper+lower,weapon:upper+lower+wrist}};
  return {state,moving,mounted,phase,pelvis,torso,legs,arms:[arm(-1),arm(1)],stage,attackProgress:t,cast,attack,bob:mounted?0:pelvis.y+57,walk};
 }
