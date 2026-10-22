@@ -1,0 +1,4 @@
+const fs=require('fs'),path=require('path'),cp=require('child_process'),crypto=require('crypto');
+for(const file of ['release-v32.cjs','art-v33.cjs']){const r=cp.spawnSync(process.execPath,[path.join(__dirname,file)],{stdio:'inherit'});if(r.status)process.exitCode=1}
+const root=path.join(__dirname,'..'),old=JSON.parse(fs.readFileSync(path.join(root,'QA-v32-automated.json'))),art=JSON.parse(fs.readFileSync(path.join(root,'QA-v33-art.json'))),tests=[...old.tests,...art.tests],failures=tests.filter(t=>!t.pass).length;
+fs.writeFileSync(path.join(root,'QA-v33-automated.json'),JSON.stringify({version:'33.0.0',runtimeSha256:crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'runtime.js'))).digest('hex'),tests,failures,policy:'保留410项历史回归；新测试包含11份真实PNG、全部英雄姿态分派、真实装备数据只读、高攻速进度、统一握点、鞍点锁定及缓存。浏览器截图和录像另外验收；自动测试不证明审美。'},null,2));console.log((tests.length-failures)+'/'+tests.length+' V33 release checks passed');if(failures)process.exitCode=1;

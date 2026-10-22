@@ -1,0 +1,66 @@
+[
+  {
+    "sha": "a6095f879f88560086c0bcaeb2a3fd5499327dad",
+    "date": "2026-10-18T12:59:17Z",
+    "message": "Release V5.0.1: seven realms, RTS hero squads, careers, pet fusion and painted equipment",
+    "files": [
+      {
+        "path": "conquest.js",
+        "sha256": "bc122251648f65f58744d2c84dd4602087e742fc603dde00b12c9c996a580ea6",
+        "matchesLocal": false
+      },
+      {
+        "path": "assets/heroes-v5.png",
+        "sha256": "84f4982fc3e35392dca4ab155d8aa38faf18a32975ae4341cfc7380acbe41525",
+        "matchesLocal": true
+      }
+    ]
+  },
+  {
+    "sha": "2dbc5f95e683ac39ce1334e44f0e780a6d25c3ad",
+    "date": "2026-10-18T20:01:11Z",
+    "message": "Release V11: living camp, original NPC and shop art, companion animation and 2.5D visuals\n\nAdd 18 camp encounters, 15 persistent treasure chests, 8 interactive NPCs, 12 illustrated shop goods and a rewarded exploration quest. Synchronize pet damage with windup/travel/impact, add independent pet following and five-stage class appearance layers. Preserve V10 saves and core systems. Verified 119 checks, 20,000 fusion trials, a 36,000-tick combat soak and 30 FPS low-quality browser sample.",
+    "files": [
+      {
+        "path": "conquest.js",
+        "sha256": "cb935b2955711b927029b66857abb17ccd0e696398ca9e7c6b08a87ddcbae1aa",
+        "matchesLocal": true
+      },
+      {
+        "path": "assets/heroes-v5.png",
+        "sha256": "84f4982fc3e35392dca4ab155d8aa38faf18a32975ae4341cfc7380acbe41525",
+        "matchesLocal": true
+      }
+    ]
+  },
+  {
+    "sha": "360aceed86fe91d8b2de94891aa0426fa7dd995e",
+    "date": "2026-10-22T00:37:43Z",
+    "message": "V30: owner-aware equipment tempering, sustainable five-element economy, isolated infinite overlay and articulated original armour",
+    "files": []
+  },
+  {
+    "sha": "32418cb055d1711ec0e67ee30fdc2edf44171285",
+    "date": "2026-10-22T12:58:52Z",
+    "message": "V32: rebuild articulated running, attacks and seated riding; improve armour and pet silhouettes",
+    "files": [
+      {
+        "path": "motion-rig-v32.js",
+        "sha256": "1d076389cd82b5ced17a2db33a782a8cb5cfb1ef7a98841134a02e640ba9df03",
+        "matchesLocal": false
+      }
+    ]
+  },
+  {
+    "sha": "df5d9636d1b1672bb1dacfe61979c3dcf47b3079",
+    "date": "2026-10-22T13:04:15Z",
+    "message": "V32: keep walking and running gait continuous across speed changes",
+    "files": [
+      {
+        "path": "motion-rig-v32.js",
+        "sha256": "40ccd407fe4b3835817598b92a6d23f533678c7abb79a6a2df37ca963b0932a7",
+        "matchesLocal": true
+      }
+    ]
+  }
+]
