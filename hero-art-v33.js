@@ -52,7 +52,7 @@ function deformHero33(u,v,pose){const p=rawDeformHero33(u,v,pose);if(pose.mounte
 function spriteGeometry33(skin,pose){const scale=pose.height/skin.height,W=skin.width*scale,H=pose.height,origin=pose.mounted?pose.anchors.seat:[.60,1];return {W,H,ox:origin[0]*W,oy:origin[1]*H}}
 function spritePoint33(skin,pose,point){const d=deformHero33(point[0],point[1],pose),r=spriteGeometry33(skin,pose);return{x:d.x*r.W-r.ox,y:d.y*r.H-r.oy}}
 function drawSkin33(skin,pose){
- const r=spriteGeometry33(skin,pose),n=S.fxQuality==='low'?3:pose.moving||pose.attack||pose.cast?5:3;
+ const r=spriteGeometry33(skin,pose),n=S.fxQuality==='low'?3:pose.mounted?5:3;
  const dest=(u,v)=>{const p=deformHero33(u,v,pose);return{x:p.x*r.W-r.ox,y:p.y*r.H-r.oy}},src=(u,v)=>({x:u*skin.width,y:v*skin.height});
  for(let j=0;j<n;j++)for(let i=0;i<n;i++){const u=i/n,v=j/n,U=(i+1)/n,V=(j+1)/n;textureTriangle32(skin.image,[src(u,v),src(U,v),src(U,V)],[dest(u,v),dest(U,v),dest(U,V)]);textureTriangle32(skin.image,[src(u,v),src(U,V),src(u,V)],[dest(u,v),dest(U,V),dest(u,V)])}
 }
@@ -67,13 +67,13 @@ function weapon33(part,pose){
 // Restore the original painted equipment illustrations, with anatomical-sized socket transforms.
 function gearPiece33(part,column,x,y,H,angle=0){if(!part||!gearAtlas.complete||!gearAtlas.naturalWidth)return;const q=part.quality,row=part.set===1?1:part.set===2?2:part.set===3?3:part.set===4?0:q>=5?3:q>=3?2:q>=1?1:0,sw=gearAtlas.naturalWidth/6,sh=gearAtlas.naturalHeight/4,W=H*sw/sh;g.save();g.translate(x,y);g.rotate(angle);g.drawImage(gearAtlas,column*sw,row*sh,sw,sh,-W/2,-H/2,W,H);g.restore()}
 function drawWarrior33(a,mounted=false,layer='all'){
- if(!S?.heroes?.[a.i])return poseFor(a,mounted);
+ if(!S?.heroes?.[a.i])return poseFor(a,mounted);if(mounted&&typeof drawMountedWarrior34==='function')return drawMountedWarrior34(a,layer);
  const clock=Number.isFinite(visualClock11)?visualClock11:time,pose=heroPose33(a,mounted,clock),spec=appearanceSpec29(a.i),requested=outfitKey33(spec.parts[1]);outfitImage33(requested);
  const key=outfitReady33(requested)?requested:outfitReady33('q0')?'q0':null,skin=key&&skin33(key,a.i,pose);
  if(!skin){if(layer!=='far')drawHeroCell(a.i,mounted?5:pose.state==='run'?1+Math.floor(pose.phase*1.5)%2:pose.attack?3:pose.cast?4:0,0,mounted?54:0,mounted?119:142);return poseFor(a,mounted)}
  pose.anchors={...pose.anchors,grip:skin.cell.grip||pose.anchors.grip};
  const geometry=spriteGeometry33(skin,pose),grip=spritePoint33(skin,pose,pose.anchors.grip),head=spritePoint33(skin,pose,pose.anchors.head),off=spritePoint33(skin,pose,pose.anchors.off);
- g.save();if(a.hp<=0){g.globalAlpha*=.55;g.translate(10,7);g.rotate(1.25)}if(a.hitT>0)g.translate(Math.sin(a.hitT*75)*2,0);if(a.guard>0)g.rotate(-.035);if(a.dodge>0)g.rotate(-.15);
+ g.save();if(a.hp<=0){g.globalAlpha*=.55;g.translate(10,7);g.rotate(1.25)}if(a.guard>0)g.rotate(-.035);if(a.dodge>0)g.rotate(-.15);
  if(!mounted)g.translate(0,pose.moving?0:Math.sin(clock*2.1+a.i)*.55);
  if(mounted&&layer!=='all'){const r=geometry,x=(u)=>u*r.W-r.ox,y=(v)=>v*r.H-r.oy;g.beginPath();if(layer==='near')g.rect(-300,-300,600,600);const poly=[[.46,.62],[.64,.61],[.79,.99],[.57,1.02]];poly.forEach(([u,v],i)=>i?g.lineTo(x(u),y(v)):g.moveTo(x(u),y(v)));g.closePath();g.clip(layer==='near'?'evenodd':'nonzero')}
  if(layer!=='far'){
