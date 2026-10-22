@@ -83,7 +83,7 @@ function fusionPanel20(){
       <div id="fusionScene20" class="fusion-scene20 idle20"><canvas id="fusionCanvas20" width="640" height="300" aria-label="动态五行融合魔法阵"></canvas><span class="fusion-scene-caption20">五行聚灵 · 万灵合契</span></div>
     </section><div class="fusion-preview20">
       ${fusionOddsMarkup20(p,legal)}${fusionTargetMarkup20(a,b,p,projected)}
-      <section class="fusion-payment20"><h3>本次真实消耗</h3>${cultivationCostHtml29(p.cost29)}<p>副灵宠 ×1；主宠身份与培养保留。成功及随机失败都扣除预览的三类资源。</p></section>
+      <section class="fusion-payment20"><h3>本次真实消耗</h3>${cultivationCostHtml29(p.cost29)}<p>副灵宠 ×1；主宠身份与培养保留。正常模式成功及随机失败都支付三类资源；独立无限覆盖仅免经济费。</p></section>
       <p id="fusionWarning20" class="fusion-warning20 ${p.valid?'ready20':''}" role="status">${escapeHTML(p.reason||'材料就绪 · 成功后品质提升一阶')}</p>
       <button id="fusionBegin20" class="primary fusion-begin20" ${p.valid?'':'disabled'}>确认支付并融合</button>
       <p id="fusionMessage20" role="status">${escapeHTML(fusionMessage20)}</p>
@@ -146,7 +146,7 @@ function fusionResultPanel20(receipt=S?.lastFusion20,replay=false){
   panelContext7={key:'petResult20',args:[r,replay]};characterSheet13=false;
   const newSkills=r.success?r.result.skills.filter(s=>!r.sources[0].skills.includes(s)):[];
   const kept=S.pets.some(p=>p.id===r.sources[0].id),ownedResult=r.success&&S.pets.some(p=>p.id===r.result.id&&quality8(p)===r.result.quality);
-  const loss=r.cost29?(r.success?'副宠已消耗，主宠已进化；实际消耗：':'主宠完整保留，副宠已消耗；实际消耗：')+priceText17(r.cost29):r.free?'本次为体验免消耗：主宠、副宠与金币均未扣除。':r.success?'主副灵契已合成新契，实际消耗 '+fusionNum20(r.cost)+' 金币。':'主灵宠已完整保留，副灵宠及本次 '+fusionNum20(r.cost)+' 金币已消耗。';
+  const loss=r.economicMode30==='overlay'?'∞ 独立测试覆盖：本次金币、灵铁、精华实际支付均为0；副宠已消耗，主宠按真实成功或失败结果保留。':r.cost29?(r.success?'副宠已消耗，主宠已进化；实际消耗：':'主宠完整保留，副宠已消耗；实际消耗：')+priceText17(r.cost29):r.free?'本次为体验免消耗：主宠、副宠与金币均未扣除。':r.success?'主副灵契已合成新契，实际消耗 '+fusionNum20(r.cost)+' 金币。':'主灵宠已完整保留，副灵宠及本次 '+fusionNum20(r.cost)+' 金币已消耗。';
   showDialog(fusionHead20(replay?'最近一次合契 · 演出回顾':'万灵合契 · 命运交汇')+`
     <section class="fusion-result20 ${r.success?'success20':'failure20'} tier20-${q}" style="--result-quality:${QUALITIES8[q][1]}">
       <div class="fusion-result-header20"><small>${replay?'已保存结果 · 回顾不再扣费':'结算已保存 · 可随时关闭或跳过演出'}</small><h3 id="fusionPhase20" aria-live="polite">第一阶段 · 灵契蓄力</h3></div>

@@ -45,7 +45,7 @@ worldPanel=function(tab='main',chapter=null){
   content='<p class="story-summary14">守护者 '+S.bosses.filter(Boolean).length+'/5 · 队伍 '+S.heroes.filter(h=>h.unlocked).length+'/5 · 待解救：'+nextCompanion14()+'</p><nav class="chapter-tabs14" aria-label="五章主线">'+ZONES.map((n,i)=>`<button data-chapter14="${i}" aria-pressed="${i===z}"><b>${['一','二','三','四','五'][i]}</b><small>${S.bosses[i]?'已通关':mapUnlocked(i+1)?'可进入':'待开启'}</small></button>`).join('')+'</nav>'+
    `<article class="chapter-card14" style="--map:${m.accent}"><small>第${z+1}章 · ${S.bosses[z]?'已通关':mapUnlocked(z+1)?'已开放':'尚未开放'}</small><h3>${m.name}</h3><p>${ZONES[z].story}</p><p class="chapter-goal14">${chapterHelp14(z)}</p><div class="actions"><button data-map9="${z+1}" ${mapUnlocked(z+1)?'':'disabled'}>进入第${z+1}章</button><button id="chapterTrack14" ${currentMap()===z+1?'':'disabled'}>追踪守护者</button><button id="chapterSide14" ${currentMap()===S.chapter+1&&!S.won?'':'disabled'}>当前场景支线</button></div></article><p class="story-foot14">第三章救出下一位伙伴，第四章后可集齐五行。五位战士全部解封后开启界外征程。章节按钮只切换查看，点击「进入」才传送。</p>`;
  }else if(worldTab14==='farm'){
-  content='<p class="story-summary14">所有角色1级可进 · 固定低强度 · 20秒刷新 · 不累计变强</p><div class="farm-sites14">'+FARM_SITES14.map((s,i)=>`<article style="--map:${s.color}"><h3>${s.name}</h3><p>每只 ${s.gold}金币 / ${s.iron}灵铁${s.gem?' / 1级基础宝石':''}</p><button data-farm14="${i}">${currentMap()===FARM_MAP14?'追踪矿区':'进入资源谷'}</button></article>`).join('')+'</div><p>击败资源妖兽才能领取掉落，没有挂机结算。刷新计时按游玩时间，站在出生点120范围内会延后刷新；不会刷新首领，不掉高级宝石。</p><p>灵铁用于冶金和转职，一级宝石可镶嵌或合成。回营仍需1张回城卷轴；入口可打开商会补给。</p>';
+  content='<p class="story-summary14">所有角色1级可进 · 普通25秒 · 精英65秒 · 守卫180秒 · 不累计变强</p><div class="farm-sites14">'+FARM_SITES14.map((s,i)=>`<article style="--map:${s.color}"><h3>${s.name}</h3><p>每只 ${s.gold}金币 / ${s.iron}灵铁${s.gem?' / 1级基础宝石':''}</p><button data-farm14="${i}">${currentMap()===FARM_MAP14?'追踪矿区':'进入资源谷'}</button></article>`).join('')+'</div><p>击败资源妖兽才能领取掉落，没有挂机结算。刷新计时按游玩时间，站在出生点120范围内会延后刷新；不会刷新首领，不掉高级宝石。</p><p>灵铁用于冶金和转职，一级宝石可镶嵌或合成。回营仍需1张回城卷轴；入口可打开商会补给。</p>';
  }else{
   content='<p class="story-summary14">'+(allHeroes9()?'五行齐聚，新的征程已经开启。':'需解救全部五行战士；请先完成主线章节。')+'</p><div class="realm-list14">'+[6,7,8,9,...(mapUnlocked(10)?[10]:[])].map(i=>`<article><div><h3>${MAPS[i].name}</h3><small>建议 Lv.${MAPS[i].level} · ${mapUnlocked(i)?'已开放':i===6?'任一角色30级或主线完成':'五行齐聚并通关前一界'}</small></div><button data-map9="${i}" ${mapUnlocked(i)?'':'disabled'}>前往</button></article>`).join('')+'</div><button id="beyondClues14">征程与隐藏线索</button>';
  }
@@ -67,10 +67,10 @@ function makeFarmEnemy14(n){
  const due=S.respawns8[enemyKey8(e)];if(due>S.played){e.dead=true;e.deathT=0;e.due8=due}return e;
 }
 const makeWorldBefore14=makeWorld;
-makeWorld=function(){makeWorldBefore14();for(let n=0;n<24;n++)enemies.push(makeFarmEnemy14(n))};
+makeWorld=function(){makeWorldBefore14();for(let n=0;n<55;n++)enemies.push(makeFarmEnemy14(n))};
 const killBefore14=kill;
 kill=function(e,source){
- if(e?.farm14===undefined)return killBefore14(e,source);if(e.dead||e.map!==currentMap())return false;
+ if(e?.farm30)return killValley30(e,source);if(e?.farm14===undefined)return killBefore14(e,source);if(e.dead||e.map!==currentMap())return false;
  const s=FARM_SITES14[e.site14];e.dead=true;e.hp=0;e.deathT=.65;e.wind=null;e.strike=null;e.due8=S.played+20;e.respawn=1e9;S.respawns8[enemyKey8(e)]=e.due8;
  creditGold10(s.gold);S.ingots=Math.min(1e8,(S.ingots||0)+s.iron);S.totalKills=Math.min(1e8,S.totalKills+1);awardXp(12);
  if(s.gem&&!giveGem(e.farm14%18,1))creditGold10(10);
@@ -90,7 +90,7 @@ drawMap=function(){
  for(const [i,s]of FARM_SITES14.entries()){
   if(!seen11(s,550))continue;const grad=g.createRadialGradient(s.x,s.y,30,s.x,s.y,450);grad.addColorStop(0,s.color+'30');grad.addColorStop(1,s.color+'00');ellipse(s.x,s.y,440,300,grad);
   for(let j=0;j<9;j++){const x=s.x-260+j%3*240,y=s.y-260+Math.floor(j/3)*235;if(i===2){poly([[x-16,y],[x-22,y-32],[x,y-70],[x+22,y-32],[x+16,y]],['#89c9de','#b5a4ec','#b3ddc0'][j%3]);glow11(x,y-25,50,s.color,.14)}else{rock(x,y,1.2+j%3*.2,i?'#738b8e':'#8a8063');for(let k=0;k<4;k++)line(x-12+k*7,y-24,x-7+k*6,y-30,i?'#aad2d1':'#e8c575',3)}}
-  label(s.name,s.x,s.y-335,s.color,22);label('固定低强度 · 20秒刷新',s.x,s.y-310,'#c7d4bf',12);
+  label(s.name,s.x,s.y-335,s.color,22);label('普通25秒 · 精英65秒 · 守卫180秒',s.x,s.y-310,'#c7d4bf',12);
  }
  drawCamp();for(const p of mapPortals()){floorRing11(p.x,p.y,42,'#e4d399');label('回营 · 消耗卷轴',p.x,p.y-95,'#eee0b9',13)}
 };

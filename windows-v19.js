@@ -1,10 +1,11 @@
 'use strict';
 // One mounted dialog, detached parent frames, one Escape owner, one optional browser-back marker.
+const uiOwner30='ui30:'+session10;
 let uiStack19=[],uiCurrent19=null,uiRestoring19=false,uiHistory19=false,uiIgnorePop19=false,uiFromHistory19=false;
 function uiKey19(html,type,context){const title=String(html).match(/<h2[^>]*>([\s\S]*?)<\/h2>/)?.[1]?.replace(/<[^>]+>/g,'')||type;if(/确认|载入这份|开始新的|恢复口令前/.test(title))return 'confirm:'+title;return context?.key||type+':'+title}
 function uiCapture19(){const root=$('#dialog'),handlers=Array.from(root.querySelectorAll('button,input,select')).map(n=>({n,id:n.id||n.getAttribute('id'),html:n.outerHTML,click:n.onclick,change:n.onchange,input:n.oninput}));return {...uiCurrent19,type:menu,nodes:Array.from(root.childNodes||[]),html:root.innerHTML,className:root.className,scroll:root.scrollTop||0,hero:S?.active,revision:uiCurrent19?.renderRevision??S?.revision10,context:uiCurrent19?.context?{key:uiCurrent19.context.key,args:[...uiCurrent19.context.args]}:null,character:characterSheet13,characterTab:characterTab13,focus:document.activeElement,handlers}}
-function uiPushHistory19(){if(uiHistory19||!window.history?.pushState)return;try{window.history.pushState({wuxingUi19:true},'');uiHistory19=true}catch{}}
-function uiReleaseHistory19(){if(!uiHistory19)return;uiHistory19=false;if(!uiFromHistory19&&window.history?.back){uiIgnorePop19=true;window.history.back()}}
+function uiPushHistory19(){if(uiHistory19||uiIgnorePop19||!window.history?.pushState)return;try{window.history.pushState({wuxingUi19:true,ownerUi30:uiOwner30},'');uiHistory19=true}catch{}}
+function uiReleaseHistory19(){if(!uiHistory19)return;uiHistory19=false;if(!uiFromHistory19&&window.history?.state?.wuxingUi19===true&&window.history.state.ownerUi30===uiOwner30&&window.history?.back){uiIgnorePop19=true;window.history.back()}}
 function resetWindows19(){stopHold18();uiStack19=[];uiCurrent19=null;uiReleaseHistory19()}
 const showUiBefore19=showDialog;showDialog=function(html,type='panel',...args){const previousMenu=menu,context=panelContext7?{key:panelContext7.key,args:[...panelContext7.args]}:null,key=uiKey19(html,type,context);if(!uiRestoring19){if(type==='start'||!S){resetWindows19()}else if(previousMenu&&previousMenu!=='start'&&uiCurrent19){if(uiCurrent19.key!==key){const ancestor=uiStack19.findIndex(frame=>frame.key===key);if(ancestor>=0)uiStack19.splice(ancestor);else{uiStack19.push(uiCapture19());if(uiStack19.length>12)uiStack19.shift()}}}else uiStack19=[]}
  const result=showUiBefore19(html,type,...args);if(S&&type!=='start'){uiCurrent19={key,context,type,renderRevision:S?.revision10};uiPushHistory19();}else uiCurrent19=null;return result};
@@ -16,4 +17,4 @@ function closeTopWindow19(){if(menu==='start')return false;if(batchRun17?.runnin
 closeDialog=closeTopWindow19;
 function closeAllWindows19(){uiStack19=[];uiCurrent19=null;if(menu!=='start')closeUiBefore19();uiReleaseHistory19()}
 window.addEventListener('keydown',event=>{if(event.code!=='Escape'&&event.key!=='Escape'||event.isComposing)return;event.preventDefault();event.stopImmediatePropagation?.();if(event.repeat||menu==='start')return;if(menu)closeTopWindow19();else if(S)pausePanel()},true);
-window.addEventListener('popstate',()=>{if(uiIgnorePop19){uiIgnorePop19=false;return}if(!uiHistory19||!uiCurrent19)return;uiHistory19=false;uiFromHistory19=true;try{closeTopWindow19()}finally{uiFromHistory19=false}if(uiCurrent19)uiPushHistory19()});
+window.addEventListener('popstate',()=>{if(uiIgnorePop19){uiIgnorePop19=false;if(uiCurrent19&&menu&&menu!=='start')uiPushHistory19();return}if(!uiHistory19||!uiCurrent19)return;uiHistory19=false;uiFromHistory19=true;try{closeTopWindow19()}finally{uiFromHistory19=false}if(uiCurrent19)uiPushHistory19()});
