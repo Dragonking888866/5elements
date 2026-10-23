@@ -1,0 +1,68 @@
+[
+  {
+    "file": "assets/ascended-pet-0-v36.png",
+    "sha256": "7d19fd4ddc4634d980544217d1f127881bea51d6fbda758ac95f1166d455b217",
+    "bytes": 3146577,
+    "origin": "OpenAI imagegen, original generated sprite sheet"
+  },
+  {
+    "file": "assets/ascended-pet-1-v36.png",
+    "sha256": "6c6640ab9a3b2134c4d03ce64b02f9f33eb2c542a9f15760b8f7d246f8f17ed3",
+    "bytes": 3233692,
+    "origin": "OpenAI imagegen, original generated sprite sheet"
+  },
+  {
+    "file": "assets/ascended-pet-2-v36.png",
+    "sha256": "970fe5f8fd76df1961d8aeafc81becc7ceccb9a3d26875e0c99156b79a06ff6e",
+    "bytes": 3684420,
+    "origin": "OpenAI imagegen, original generated sprite sheet"
+  },
+  {
+    "file": "assets/ascended-pet-3-v36.png",
+    "sha256": "c5bddb16ba9be581a2cc5d60cd704570b08cc35302d91c386a6106d89251f4b9",
+    "bytes": 3064677,
+    "origin": "OpenAI imagegen, original generated sprite sheet"
+  },
+  {
+    "file": "assets/ascended-pet-4-v36.png",
+    "sha256": "b4586027931d15c847a0f7602948c700b790d87a6de89f3983ffcd503d544d8e",
+    "bytes": 4017124,
+    "origin": "OpenAI imagegen, original generated sprite sheet"
+  },
+  {
+    "file": "assets/ascended-pet-5-v36.png",
+    "sha256": "ceb744ee01de218285f763cde65f3f1aa5479d5d4f242a354b1f2124c88436a2",
+    "bytes": 3398738,
+    "origin": "OpenAI imagegen, original generated sprite sheet"
+  },
+  {
+    "file": "assets/ascended-pet-6-v36.png",
+    "sha256": "8e27b0b22b88ea7c864a15155948fab37eeae599f0a8dbfb286d2dd43ba02283",
+    "bytes": 3466306,
+    "origin": "OpenAI imagegen, original generated sprite sheet"
+  },
+  {
+    "file": "assets/ascended-pet-7-v36.png",
+    "sha256": "0f0e161c29ebd2dbb262508c2e6c645b9ba28142a143589c9cd63e7cb8a5bdd9",
+    "bytes": 2930335,
+    "origin": "OpenAI imagegen, original generated sprite sheet"
+  },
+  {
+    "file": "assets/ascended-pet-8-v36.png",
+    "sha256": "c6b32c1358bca368139a05f09b04d1eaa7fd577708aafe650729fe71bfea70cc",
+    "bytes": 3216136,
+    "origin": "OpenAI imagegen, original generated sprite sheet"
+  },
+  {
+    "file": "assets/ascended-pet-9-v36.png",
+    "sha256": "104018ad692004dff707e7c4dda8ab2e91cb39e31e8c2ceeedb458ae9f3a7eeb",
+    "bytes": 2937450,
+    "origin": "OpenAI imagegen, original generated sprite sheet"
+  },
+  {
+    "file": "assets/ultimate-pet-10-v36.png",
+    "sha256": "b219fd0f0e2b3124388d00c8312184cbf1dac5d54bc3e48df624e7d9846f067a",
+    "bytes": 3380952,
+    "origin": "OpenAI imagegen, original generated sprite sheet"
+  }
+]

@@ -1,0 +1,4 @@
+const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),crypto=require('node:crypto');
+for(const name of ['release-v35.cjs','ancestry-v36.cjs']){const r=cp.spawnSync(process.execPath,[path.join(__dirname,name)],{stdio:'inherit'});if(r.status)process.exitCode=1}
+const root=path.join(__dirname,'..'),reports=['QA-v35-automated.json','QA-v36-ancestry.json'].map(name=>JSON.parse(fs.readFileSync(path.join(root,name)))),tests=reports.flatMap(x=>x.tests),failures=tests.filter(t=>!t.pass).length;
+fs.writeFileSync(path.join(root,'QA-v36-automated.json'),JSON.stringify({version:'36.0.0',runtimeSha256:crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'runtime.js'))).digest('hex'),tests,failures},null,2));console.log((tests.length-failures)+'/'+tests.length+' V36 checks passed');if(failures)process.exitCode=1;
