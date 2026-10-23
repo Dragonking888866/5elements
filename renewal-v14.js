@@ -101,7 +101,7 @@ drawMini=function(){miniBefore14();if(currentMap()!==FARM_MAP14)return;for(const
 const damageBefore14=actorDamage;
 actorDamage=function(a,amount,from){
  const boss=from?.boss||from?.rank8>=1,hazard=from?.hazard;
- if(boss||hazard){const st=stats(a.i),cap=from?.ultimateHit14?.65:from?.skillHit14?.42:hazard?.16:.24;
+ if(boss||hazard){const st=stats(a.i),cap=from?.judgementHit35?1.35:from?.ultimateHit14?.65:from?.skillHit14?.42:hazard?.16:.24;
   amount=Math.min(amount,st.hp*cap*(1+.055*st.armor)/1.3);
  }
  const hp=a.hp,shield=a.shield;const result=damageBefore14(a,amount,from);

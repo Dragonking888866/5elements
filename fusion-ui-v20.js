@@ -75,7 +75,7 @@ function fusionPanel20(){
   const free=false,cost=p.cost;
   showDialog(fusionHead20('万灵合契 · 灵宠进化')+`
     <nav class="fusion-nav20"><button id="fusionBag20">灵宠包裹 ${S.pets.length}/1000</button><button id="fusionHistory20">融合记录</button>${S.lastFusion20?'<button id="fusionLast20">最近结果</button>':''}</nav>
-    <div class="fusion-heading20"><div><small>SPIRIT COVENANT</small><h3>同品质相遇，向更高一阶进化</h3></div><div class="fusion-mode20" aria-label="合契方式"><button data-fusion-mode20="upgrade" aria-pressed="${fusionChoice20.mode==='upgrade'}">主宠升品</button><button data-fusion-mode20="mutation" aria-pressed="${fusionChoice20.mode==='mutation'}">异变合体</button></div></div>
+    <div class="fusion-heading20"><div><small>SPIRIT COVENANT</small><h3>同品质相遇，向更高一阶进化</h3></div><div class="fusion-mode20" aria-label="合契方式"><button data-fusion-mode20="upgrade" aria-pressed="${fusionChoice20.mode==='upgrade'}">主宠升品 / 神话冲究极</button><button data-fusion-mode20="mutation" aria-pressed="${fusionChoice20.mode==='mutation'}">异变合体</button></div></div>
     <div class="fusion-mobile-rate20 ${p.valid?fusionRateTone20(p.success):'low invalid20'}" role="status"><span>${p.valid?'最终融合成功率':'融合条件'}</span><strong>${p.valid?fusionPct20(p.success):escapeHTML(p.reason)}</strong></div>
     <div class="fusion-layout20"><section class="fusion-workbench20">
       <div class="fusion-pair20">${fusionPetCard20(a,'main')}<span class="fusion-plus20" aria-hidden="true">＋</span>${fusionPetCard20(b,'sub')}</div>
