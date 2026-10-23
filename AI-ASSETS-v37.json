@@ -1,0 +1,50 @@
+[
+  {
+    "file": "assets/support-deer-v37.png",
+    "width": 1312,
+    "height": 1199,
+    "mode": "RGBA",
+    "bytes": 2468054,
+    "sha256": "2fd97d97e46bf4abe5bad5e8ebc64e5b4cd2f96855a21eff5a3063e602323628"
+  },
+  {
+    "file": "assets/support-dragon-v37.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "bytes": 2548459,
+    "sha256": "3b1f684896cc363a0a5fa30ab618530dcc8b03e16bb9ed251e25e30d311cbe5d"
+  },
+  {
+    "file": "assets/support-fox-v37.png",
+    "width": 1448,
+    "height": 1086,
+    "mode": "RGBA",
+    "bytes": 2445397,
+    "sha256": "0a6f83359c9ec03fb83611903b30e91ee5534ef4b5af7a8f91b8cf9989e8c143"
+  },
+  {
+    "file": "assets/support-moth-v37.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "bytes": 2452328,
+    "sha256": "63ce7ec5068db067b3fad08b029200d71ef770b3bb0918819624ce96aa4e1d5e"
+  },
+  {
+    "file": "assets/support-turtle-v37.png",
+    "width": 1536,
+    "height": 1024,
+    "mode": "RGBA",
+    "bytes": 2687810,
+    "sha256": "f2807f5332e521ab32ae630d4f6eb14f01f36d09a1b5cd1fdf70fa94e15ed2b3"
+  },
+  {
+    "file": "assets/support-water-v37.png",
+    "width": 1448,
+    "height": 1086,
+    "mode": "RGBA",
+    "bytes": 2424321,
+    "sha256": "03fdfc7fdbc3a959288be107616bc23c16817a4a493ba5fb6436bb41a9a89cbb"
+  }
+]
