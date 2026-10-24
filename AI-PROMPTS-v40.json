@@ -1,0 +1,101 @@
+[
+  {
+    "type": 103,
+    "name": "鸿蒙刃寅",
+    "source": "ascended-pet-0-v36.png",
+    "target": "assets/divine-pet-0-v40.png",
+    "mode": "built-in imagegen edit",
+    "originalGeneratedPath": "C:\\Users\\shang\\.codex\\generated_images\\01a14c3b-c9c1-7f50-90a8-4ce4e9ea05a6\\exec-68cc2804-cbde-4a77-bd7e-21a1f31f2508.png",
+    "prompt": "Use case: identity-preserve. Edit target: the attached original 4 by 4 animation sprite sheet for 鸿蒙刃寅. This is a production texture REPAINT, not a redesign. Preserve all sixteen original creature poses, their facing, silhouette, anatomy, armor shapes, exact sprite positions, row/column layout, per-frame scale, feet and saddle position. Keep the same square canvas and all existing spacing, do not crop or move anything. Change ONLY surface color, material response and tiny localized emissive details across every frame consistently. Main body: silken sacred ivory-white and pale platinum gold fur, NOT yellow fur. Secondary materials: dark gold and cool silvery gunmetal armour, pale gold engraved scar-like stripes. Localized highlights: warm white-gold eyes, pale gold claw tips, restrained gold forehead seal and a faint tail-tip trace. Preserve fine original fur/scale/engraving texture; balanced shadows, midtones and crisp material highlights. Keep source pose/attack effects in their existing positions but recolor them to the new palette. Remove stray colored fringe contamination outside the original silhouette. True transparent alpha background. Do not add any creature, items, new armor, halo, backdrop, ground, text, labels, grid lines or extra cells. Avoid: no ochre/orange tiger, no all-gold body, no huge glow. The output must remain a fully usable 16-frame game animation sheet."
+  },
+  {
+    "type": 104,
+    "name": "太初罡猊",
+    "source": "ascended-pet-1-v36.png",
+    "target": "assets/divine-pet-1-v40.png",
+    "mode": "built-in imagegen edit",
+    "originalGeneratedPath": "C:\\Users\\shang\\.codex\\generated_images\\01a14c3b-c9c1-7f50-90a8-4ce4e9ea05a6\\exec-b2fd0e6d-9a67-4f6a-878a-326d4b1fee63.png",
+    "prompt": "Use case: identity-preserve. Edit target: the attached original 4 by 4 animation sprite sheet for 太初罡猊. This is a production texture REPAINT, not a redesign. Preserve all sixteen original creature poses, their facing, silhouette, anatomy, armor shapes, exact sprite positions, row/column layout, per-frame scale, feet and saddle position. Keep the same square canvas and all existing spacing, do not crop or move anything. Change ONLY surface color, material response and tiny localized emissive details across every frame consistently. Main body: deep sacred antique gold and luminous bronze-gold, clearly brighter and richer than dirty dark brown. Secondary materials: warm platinum trim, dark bronze and black gold recessed armour, dense luxurious mane. Localized highlights: restrained golden mane edges, warm white-gold forehead seal and chest carving, pale platinum fangs. Preserve fine original fur/scale/engraving texture; balanced shadows, midtones and crisp material highlights. Keep source pose/attack effects in their existing positions but recolor them to the new palette. Remove stray colored fringe contamination outside the original silhouette. True transparent alpha background. Do not add any creature, items, new armor, halo, backdrop, ground, text, labels, grid lines or extra cells. Avoid: no ordinary yellow lion, no muddy brown or turquoise patina. The output must remain a fully usable 16-frame game animation sheet."
+  },
+  {
+    "type": 105,
+    "name": "太易苍虬",
+    "source": "ascended-pet-2-v36.png",
+    "target": "assets/divine-pet-2-v40.png",
+    "mode": "built-in imagegen edit",
+    "originalGeneratedPath": "C:\\Users\\shang\\.codex\\generated_images\\01a14c3b-c9c1-7f50-90a8-4ce4e9ea05a6\\exec-22379d5a-4f81-4e79-8777-ee7125c529a4.png",
+    "prompt": "Use case: identity-preserve. Edit target: attached original 4 by 4 animation sprite sheet for 太易苍虬. This is a production surface REPAINT, never a redesign. Preserve all sixteen original poses and the original distinct shape, facing, anatomy, armor, exact positions, scale, 4 rows and 4 columns, cell spacing, feet and saddle anchors. Change ONLY surface colors, material response and tiny localized emissive details, consistent in all frames. Body: ancient rich cyan-jade and deep emerald-celadon scales with translucent nephrite material, luminous but not neon. Secondary: forest teal, jade green and near-black green scale shadows, antler-like ancient spirit-wood horns, cyan-white whiskers. Local highlights: delicate jade-cyan horn light, scale rim light and flowing wood-spirit veins, pale green breath charge. Fine fur/scale/feather/engraving textures must remain, with readable shadows, midtones and crisp material highlights. Keep existing attack/cast shapes at original positions and recolor them into this palette. True transparent alpha, remove stray colored fringes outside the creature and effects. No new objects, halos, background, ground, text, grid or additional cells. Avoid: no dirty grey-green, no plastic green or fluorescent lime. Deliver usable 16-frame game animation sheet retaining original pixel alignment."
+  },
+  {
+    "type": 106,
+    "name": "青冥九尾",
+    "source": "ascended-pet-3-v36.png",
+    "target": "assets/divine-pet-3-v40.png",
+    "mode": "built-in imagegen edit",
+    "originalGeneratedPath": "C:\\Users\\shang\\.codex\\generated_images\\01a14c3b-c9c1-7f50-90a8-4ce4e9ea05a6\\exec-269c4a12-0b04-422e-b723-55e21bc92ffc.png",
+    "prompt": "Use case: identity-preserve. Edit target: the attached original 4 by 4 animation sprite sheet for 青冥九尾. This is a production texture REPAINT, not a redesign. Preserve all sixteen original creature poses, their facing, silhouette, anatomy, armor shapes, exact sprite positions, row/column layout, per-frame scale, feet and saddle position. Keep the same square canvas and all existing spacing, do not crop or move anything. Change ONLY surface color, material response and tiny localized emissive details across every frame consistently. Main body: cyan-jade-white, moon celadon white and soft pale emerald fur with clearly defined elegant strands. Secondary materials: spirit emerald and blue-green-grey shadows, nine tails with jade-green rather than navy-blue tips, tiny pale gold ancient markings. Localized highlights: cyan-white small tail-tip spirit flames, cold jade eyes and soft ear rims; subtle, no broad aura. Preserve fine original fur/scale/engraving texture; balanced shadows, midtones and crisp material highlights. Keep source pose/attack effects in their existing positions but recolor them to the new palette. Remove stray colored fringe contamination outside the original silhouette. True transparent alpha background. Do not add any creature, items, new armor, halo, backdrop, ground, text, labels, grid lines or extra cells. Avoid: no navy/royal-blue tails, no pink, no cartoon or washed-out featureless white. The output must remain a fully usable 16-frame game animation sheet."
+  },
+  {
+    "type": 107,
+    "name": "混沌玄鼋",
+    "source": "ascended-pet-4-v36.png",
+    "target": "assets/divine-pet-4-v40.png",
+    "mode": "built-in imagegen edit",
+    "originalGeneratedPath": "C:\\Users\\shang\\.codex\\generated_images\\01a14c3b-c9c1-7f50-90a8-4ce4e9ea05a6\\exec-85f0fa8e-0c49-4fb8-a61b-59f7f3c48921.png",
+    "prompt": "Use case: identity-preserve. Edit target: attached original 4 by 4 animation sprite sheet for 混沌玄鼋. This is a production surface REPAINT, never a redesign. Preserve all sixteen original poses and the original distinct shape, facing, anatomy, armor, exact positions, scale, 4 rows and 4 columns, cell spacing, feet and saddle anchors. Change ONLY surface colors, material response and tiny localized emissive details, consistent in all frames. Body: deep ocean blue and abyssal blue-black ancient tortoise shell, rich cold sapphire substance with readable sculpted details. Secondary: glacial blue, dark marine teal and stone-blue shell plates, subtle silver-blue engraved lines and faint violet frost accents. Local highlights: cold ice-white blue eyes, fine glacial blue fissures along shell rims and glyphs, restrained frost at joints and mouth. Fine fur/scale/feather/engraving textures must remain, with readable shadows, midtones and crisp material highlights. Keep existing attack/cast shapes at original positions and recolor them into this palette. True transparent alpha, remove stray colored fringes outside the creature and effects. No new objects, halos, background, ground, text, grid or additional cells. Avoid: no light blue baby turtle, no featureless pure black, no bright cyan neon wash. Deliver usable 16-frame game animation sheet retaining original pixel alignment."
+  },
+  {
+    "type": 108,
+    "name": "归墟溟鹏",
+    "source": "ascended-pet-5-v36.png",
+    "target": "assets/divine-pet-5-v40.png",
+    "mode": "built-in imagegen edit",
+    "originalGeneratedPath": "C:\\Users\\shang\\.codex\\generated_images\\01a14c3b-c9c1-7f50-90a8-4ce4e9ea05a6\\exec-b106ae9c-6fe5-46b3-8006-a2f2ab0c1b8d.png",
+    "prompt": "Use case: identity-preserve. Edit target: attached original 4 by 4 animation sprite sheet for 归墟溟鹏. This is a production surface REPAINT, never a redesign. Preserve all sixteen original poses and the original distinct shape, facing, anatomy, armor, exact positions, scale, 4 rows and 4 columns, cell spacing, feet and saddle anchors. Change ONLY surface colors, material response and tiny localized emissive details, consistent in all frames. Body: abyssal indigo-blue and deep ocean blue-teal, grand layered feathers retaining each feather's detailed ridges. Secondary: moon-white blue, muted silver-blue edge feathers, deep sea grey-blue shadows and tiny sparse silver specks. Local highlights: subtle glacial blue wing edges and tidal feather veins, mysterious deep blue eyes and a trace of dark violet in tail. Fine fur/scale/feather/engraving textures must remain, with readable shadows, midtones and crisp material highlights. Keep existing attack/cast shapes at original positions and recolor them into this palette. True transparent alpha, remove stray colored fringes outside the creature and effects. No new objects, halos, background, ground, text, grid or additional cells. Avoid: no ordinary blue bird, no grey dull plumage, no neon electric blue. Deliver usable 16-frame game animation sheet retaining original pixel alignment."
+  },
+  {
+    "type": 109,
+    "name": "劫烬朱凰",
+    "source": "ascended-pet-6-v36.png",
+    "target": "assets/divine-pet-6-v40.png",
+    "mode": "built-in imagegen edit",
+    "originalGeneratedPath": "C:\\Users\\shang\\.codex\\generated_images\\01a14c3b-c9c1-7f50-90a8-4ce4e9ea05a6\\exec-6c7fc94e-a398-489e-97c8-bc3e36a6ae58.png",
+    "prompt": "Use case: identity-preserve. Production sprite texture recolor only. Edit the ORIGINAL attached 4x4 sixteen-frame phoenix animation sheet. Preserve EXACT original alpha silhouette, positions, anatomy, feather edges, armor and poses in every cell; canvas1254 square, same four rows. Subject 劫烬朱凰: VERMILION and RED-GOLD layered feathers, deep crimson feather shadows, elegant gold-tipped flight feathers; warm ivory glowing eye and SMALL warm-white breast mark, refined molten-gold feather shafts. Important correction: KEEP THE BODY FEATHERS MOSTLY NON-EMISSIVE, maintain readable opaque feather texture and deep shadows. Only tiny eye, breast, feather-tip local light. Less bloom than the original, not more. Existing attack fire in bottom rows remains in its original location but no new haze. DO NOT make every feather fluorescent red. No red aura, no neon outline, no enlarged glow silhouette. Keep all 16 source poses and anchors unchanged, preserve original transparency. No labels/background/extra cells. Refined sacred phoenix, not a glowing blob."
+  },
+  {
+    "type": 110,
+    "name": "烛幽赤螭",
+    "source": "ascended-pet-7-v36.png",
+    "target": "assets/divine-pet-7-v40.png",
+    "mode": "built-in imagegen edit",
+    "originalGeneratedPath": "C:\\Users\\shang\\.codex\\generated_images\\01a14c3b-c9c1-7f50-90a8-4ce4e9ea05a6\\exec-6b506a73-c911-4344-a10e-2a53cc0b616a.png",
+    "prompt": "Use case: identity-preserve. Edit target: attached original 4 by 4 animation sprite sheet for 烛幽赤螭. This is a production surface REPAINT, never a redesign. Preserve all sixteen original poses and the original distinct shape, facing, anatomy, armor, exact positions, scale, 4 rows and 4 columns, cell spacing, feet and saddle anchors. Change ONLY surface colors, material response and tiny localized emissive details, consistent in all frames. Body: molten crimson, dark gold-red and volcanic red-black dragon scales, rugged lava-shell material distinct from elegant phoenix feathers. Secondary: red copper, magma orange and deep ember crimson, local violet-black flame edges. Local highlights: white-hot small mouth core, narrow magma fissures between scales, dark gold-red horn highlights and pulsing back ridges. Fine fur/scale/feather/engraving textures must remain, with readable shadows, midtones and crisp material highlights. Keep existing attack/cast shapes at original positions and recolor them into this palette. True transparent alpha, remove stray colored fringes outside the creature and effects. No new objects, halos, background, ground, text, grid or additional cells. Avoid: no pure black dragon, no chaotic giant flames covering anatomy, no phoenix-like decorative gold plumage. Deliver usable 16-frame game animation sheet retaining original pixel alignment."
+  },
+  {
+    "type": 111,
+    "name": "玄黄岳麟",
+    "source": "ascended-pet-8-v36.png",
+    "target": "assets/divine-pet-8-v40.png",
+    "mode": "built-in imagegen edit",
+    "originalGeneratedPath": "C:\\Users\\shang\\.codex\\generated_images\\01a14c3b-c9c1-7f50-90a8-4ce4e9ea05a6\\exec-a1f2cf77-ed41-452e-86c3-dc330f0099fc.png",
+    "prompt": "Use case: identity-preserve. Edit target: attached original 4 by 4 animation sprite sheet for 玄黄岳麟. This is a production surface REPAINT, never a redesign. Preserve all sixteen original poses and the original distinct shape, facing, anatomy, armor, exact positions, scale, 4 rows and 4 columns, cell spacing, feet and saddle anchors. Change ONLY surface colors, material response and tiny localized emissive details, consistent in all frames. Body: sacred warm earth-gold, jade ochre gold and ancient mountain brown-gold, dignified luminous stone and jade scale material. Secondary: warm sandstone, jade-rock ivory, antique bronze gold, tiny cyan-jade engravings and gold-brown natural striations. Local highlights: gentle ivory-jade horn highlights, warm earth-gold guardian chest seal, restrained scale etchings and subtle hoof glow. Fine fur/scale/feather/engraving textures must remain, with readable shadows, midtones and crisp material highlights. Keep existing attack/cast shapes at original positions and recolor them into this palette. True transparent alpha, remove stray colored fringes outside the creature and effects. No new objects, halos, background, ground, text, grid or additional cells. Avoid: no dirty yellow or grey mud, no ordinary yellow deer, no garish gold. Deliver usable 16-frame game animation sheet retaining original pixel alignment."
+  },
+  {
+    "type": 112,
+    "name": "太荒镇獬",
+    "source": "ascended-pet-9-v36.png",
+    "target": "assets/divine-pet-9-v40.png",
+    "mode": "built-in imagegen edit",
+    "originalGeneratedPath": "C:\\Users\\shang\\.codex\\generated_images\\01a14c3b-c9c1-7f50-90a8-4ce4e9ea05a6\\exec-4e8fa4cc-ceca-43a0-a20b-dda425d31154.png",
+    "prompt": "Use case: identity-preserve. Edit target: attached original 4 by 4 animation sprite sheet for 太荒镇獬. This is a production surface REPAINT, never a redesign. Preserve all sixteen original poses and the original distinct shape, facing, anatomy, armor, exact positions, scale, 4 rows and 4 columns, cell spacing, feet and saddle anchors. Change ONLY surface colors, material response and tiny localized emissive details, consistent in all frames. Body: obsidian rock-black gold and deep mountain brown-black with readable grey-gold rock armour planes, austere divine judge. Secondary: antique bronze, stone-grey and dark jade-yellow armour seams, sparse red-copper law inscriptions and pale stone edge highlights. Local highlights: one restrained gold-lit judgment horn, warm amber forehead seal and thin law glyphs along shoulder/back armour. Fine fur/scale/feather/engraving textures must remain, with readable shadows, midtones and crisp material highlights. Keep existing attack/cast shapes at original positions and recolor them into this palette. True transparent alpha, remove stray colored fringes outside the creature and effects. No new objects, halos, background, ground, text, grid or additional cells. Avoid: no generic grey rock monster, no pure black silhouette, no colorful or flamboyant decoration. Deliver usable 16-frame game animation sheet retaining original pixel alignment."
+  },
+  {
+    "type": 113,
+    "name": "混沌祖兽",
+    "source": "ultimate-pet-10-v36.png",
+    "target": "assets/divine-pet-10-v40.png",
+    "mode": "built-in imagegen edit",
+    "originalGeneratedPath": "C:\\Users\\shang\\.codex\\generated_images\\01a14c3b-c9c1-7f50-90a8-4ce4e9ea05a6\\exec-5276799d-3c3f-42a7-8315-62e01a8c0ad0.png",
+    "prompt": "Use case: identity-preserve. Edit target: attached original 4 by 4 animation sprite sheet for 混沌祖兽. This is a production surface REPAINT, never a redesign. Preserve all sixteen original poses and the original distinct shape, facing, anatomy, armor, exact positions, scale, 4 rows and 4 columns, cell spacing, feet and saddle anchors. Change ONLY surface colors, material response and tiny localized emissive details, consistent in all frames. Body: primordial grey-gold, deep charcoal, muted dark violet and abyssal blue-black, mysterious regal ancient source material with readable sculptural details. Secondary: subtle aged metallic grey-gold ridges and dark teal-black recesses; reserve five elemental colors for very sparse thin veins. Local highlights: small chaos-white eyes and chest core, tiny gold/celadon/blue/vermilion/ochre hairline veins, extremely restrained ancestral energy. Fine fur/scale/feather/engraving textures must remain, with readable shadows, midtones and crisp material highlights. Keep existing attack/cast shapes at original positions and recolor them into this palette. True transparent alpha, remove stray colored fringes outside the creature and effects. No new objects, halos, background, ground, text, grid or additional cells. Avoid: no rainbow patchwork, no evenly spread five colors, no featureless black, no huge glowing halo. Deliver usable 16-frame game animation sheet retaining original pixel alignment."
+  }
+]

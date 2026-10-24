@@ -2171,9 +2171,9 @@ function sandboxData15(v){if(!v||typeof v!=='object')return false;const arr=x=>A
 const validateBeforeSeal15=validateSave;
 validateSave=function(v){return !sandboxData15(v)&&validateBeforeSeal15(v)};
 const menuBeforeRelease15=realmMenuPanel;
-realmMenuPanel=function(){menuBeforeRelease15();if(SANDBOX_AVAILABLE15)$('#dialog').insertAdjacentHTML('beforeend','<div class="sandbox-entry15"><a href="sandbox.html?v=39.0.0" target="_blank" rel="noopener">开发者体验沙盒 ↗</a><small>独立测试存档 · 无限资源与高级灵宠 · 不改变正式远征</small></div>')};
+realmMenuPanel=function(){menuBeforeRelease15();if(SANDBOX_AVAILABLE15)$('#dialog').insertAdjacentHTML('beforeend','<div class="sandbox-entry15"><a href="sandbox.html?v=40.0.0" target="_blank" rel="noopener">开发者体验沙盒 ↗</a><small>独立测试存档 · 无限资源与高级灵宠 · 不改变正式远征</small></div>')};
 const introBeforeRelease15=intro;
-intro=function(){introBeforeRelease15();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 动作重铸 V32';const f=$('#dialog').querySelector('.intro-feature8');if(f)f.textContent='五行专精 · 星盟救援 · 秘器套装 · 批量交易';if(SANDBOX_AVAILABLE15)$('#dialog').insertAdjacentHTML('beforeend','<div class="sandbox-entry15"><a href="sandbox.html?v=39.0.0" target="_blank" rel="noopener">高级灵宠与无限资源体验 ↗</a><small>测试进度与正式远征隔离</small></div>')};
+intro=function(){introBeforeRelease15();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 动作重铸 V32';const f=$('#dialog').querySelector('.intro-feature8');if(f)f.textContent='五行专精 · 星盟救援 · 秘器套装 · 批量交易';if(SANDBOX_AVAILABLE15)$('#dialog').insertAdjacentHTML('beforeend','<div class="sandbox-entry15"><a href="sandbox.html?v=40.0.0" target="_blank" rel="noopener">高级灵宠与无限资源体验 ↗</a><small>测试进度与正式远征隔离</small></div>')};
 $('#realmMenu').onclick=realmMenuPanel;$('#menuBtn').onclick=realmMenuPanel;
 
 'use strict';
@@ -3681,7 +3681,7 @@ const killBefore23=kill;kill=function(e,source){if(!e||e.noRewards)return killBe
 const panelBefore23=talentPanel;talentPanel=function(tab='attributes'){panelBefore23(tab);if(tab==='tree'){const h=S.heroes[S.active],t=h.talent23;$('#dialog').insertAdjacentHTML('beforeend',`<section class="ledger23"><h3>成长账本</h3><p>累计获得 ${t.earned} = 已投入 ${talentCount23(h)} + 可用 ${t.earned-talentCount23(h)}</p><p>每5级1点 · 每次转职1点 · 第5/9关限定首通各1点 · 新成长终身上限40点。历史已获预算保留。</p><button id="resetTalents23">重置天赋 · 100金币</button></section>`);$('#resetTalents23').onclick=()=>{resetTalents23(S.active,quote10());talentPanel('tree')}}};
 for(const key of ['talent','talent9','talent10','talent18'])panelTargets7[key]=talentPanel;panelTargets7.skills17=()=>talentPanel('tree');$('#trainBtn').onclick=()=>talentPanel();
 const refreshBefore23=refreshBars;refreshBars=function(){const r=refreshBefore23();if(!S||!S.systems23||!actors.length)return r;for(const [id,slot]of [['touchQ',0],['touchE',1],['touchR',2],['action6-0',0],['action6-1',1],['action6-2',2],['action6-ascend',3]]){const b=$('#'+id);if(!b)continue;const reason=skillUnlockReason23(S.active,slot);if(id.startsWith('action6-')&&(slot===2||slot===3)){const cd=$('#cd6-'+(slot===3?'ascend':slot));if(reason&&cd)cd.textContent=''}b.disabled=!!reason;b.classList.toggle('skill-locked23',!!reason);b.setAttribute('aria-disabled',String(!!reason));b.title=reason||'已解锁 · '+(slot===3?CLASSES18[S.active].nodes[4]:HEROES[S.active][['q','e','r'][slot]]);if(reason)b.setAttribute('data-lock23',slot===3?'一转解锁':GROWTH_RULES23.skillLevels[slot]+'级解锁');else b.removeAttribute('data-lock23')}if($('#statusOpen'))$('#statusOpen').onclick=()=>talentPanel();return r};
-const introBefore23=intro;intro=function(){session23.ready=false;session23.phase='title';const r=introBefore23();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 神兽天象 V39';return r};
+const introBefore23=intro;intro=function(){session23.ready=false;session23.phase='title';const r=introBefore23();const h=$('#dialog').querySelector('h2');if(h)h.textContent='五行战记 · 神兽灵材 V40';return r};
 
 'use strict';
 // A save has one active page. Compare against the last durable snapshot, never
@@ -48362,5 +48362,172 @@ const updateBeforeCompositor39=update;update=function(dt){updateBeforeCompositor
 // Gate the complete existing draw chain so terrain, actors, hazards and translucent FX refresh together.
 const sceneDrawBefore39=draw;
 draw=function(){const now=performance.now(),interval=1000/settings11().fps;if(lastRender11&&now-lastRender11<interval-1)return;return sceneDrawBefore39()};
+
+'use strict';
+// Surface-only resource mapping. Never modify instance IDs, poses, saddle anchors,
+// fusion pools, skills, actor transforms or save data here. All consumers resolve
+// ultimatePet35().art, including map mounts, companions, codex and V39 projections.
+const DIVINE_MATERIALS40=Object.freeze([
+  {
+    "type": 103,
+    "name": "鸿蒙刃寅",
+    "art": "assets/divine-pet-0-v40.png",
+    "previousArt": "assets/ascended-pet-0-v36.png",
+    "colors": [
+      "#eee8d5",
+      "#cbbf9b",
+      "#443e31",
+      "#fff3d2"
+    ],
+    "finish": "圣金白 · 玄金甲 · 淡金刀纹",
+    "emissive": "warm white-gold eyes, pale gold claw tips, restrained gold forehead seal and a faint tail-tip trace"
+  },
+  {
+    "type": 104,
+    "name": "太初罡猊",
+    "art": "assets/divine-pet-1-v40.png",
+    "previousArt": "assets/ascended-pet-1-v36.png",
+    "colors": [
+      "#c2a164",
+      "#806039",
+      "#302c26",
+      "#f0d7a0"
+    ],
+    "finish": "深圣金 · 古铜金 · 白金银边",
+    "emissive": "restrained golden mane edges, warm white-gold forehead seal and chest carving, pale platinum fangs"
+  },
+  {
+    "type": 105,
+    "name": "太易苍虬",
+    "art": "assets/divine-pet-2-v40.png",
+    "previousArt": "assets/ascended-pet-2-v36.png",
+    "colors": [
+      "#3c9880",
+      "#246558",
+      "#13392f",
+      "#cce8d4"
+    ],
+    "finish": "苍青玉鳞 · 灵木角 · 青白龙须",
+    "emissive": "delicate jade-cyan horn light, scale rim light and flowing wood-spirit veins, pale green breath charge"
+  },
+  {
+    "type": 106,
+    "name": "青冥九尾",
+    "art": "assets/divine-pet-3-v40.png",
+    "previousArt": "assets/ascended-pet-3-v36.png",
+    "colors": [
+      "#e3eee1",
+      "#63a58d",
+      "#365b59",
+      "#cbf5df"
+    ],
+    "finish": "青玉白绒 · 灵翠尾焰 · 月白眼光",
+    "emissive": "cyan-white small tail-tip spirit flames, cold jade eyes and soft ear rims; subtle, no broad aura"
+  },
+  {
+    "type": 107,
+    "name": "混沌玄鼋",
+    "art": "assets/divine-pet-4-v40.png",
+    "previousArt": "assets/ascended-pet-4-v36.png",
+    "colors": [
+      "#18394e",
+      "#27597a",
+      "#101e32",
+      "#c2e8ed"
+    ],
+    "finish": "玄黑海蓝 · 玄冰甲纹 · 银蓝寒辉",
+    "emissive": "cold ice-white blue eyes, fine glacial blue fissures along shell rims and glyphs, restrained frost at joints and mouth"
+  },
+  {
+    "type": 108,
+    "name": "归墟溟鹏",
+    "art": "assets/divine-pet-5-v40.png",
+    "previousArt": "assets/ascended-pet-5-v36.png",
+    "colors": [
+      "#214c69",
+      "#718e9e",
+      "#172a42",
+      "#c7e2ed"
+    ],
+    "finish": "溟渊靛蓝 · 银蓝羽片 · 幽海星纹",
+    "emissive": "subtle glacial blue wing edges and tidal feather veins, mysterious deep blue eyes and a trace of dark violet in tail"
+  },
+  {
+    "type": 109,
+    "name": "劫烬朱凰",
+    "art": "assets/divine-pet-6-v40.png",
+    "previousArt": "assets/ascended-pet-6-v36.png",
+    "colors": [
+      "#b83f27",
+      "#d78c37",
+      "#491f25",
+      "#ffdb99"
+    ],
+    "finish": "朱红赤金 · 深赤羽影 · 暖白焰心",
+    "emissive": "small warm-white flame core at breast mark, gold feather-tip highlights, red-gold crown and flowing wing/tail rims"
+  },
+  {
+    "type": 110,
+    "name": "烛幽赤螭",
+    "art": "assets/divine-pet-7-v40.png",
+    "previousArt": "assets/ascended-pet-7-v36.png",
+    "colors": [
+      "#a73f29",
+      "#712d27",
+      "#281d24",
+      "#ffd0a0"
+    ],
+    "finish": "熔火赤鳞 · 赤铜甲壳 · 白焰裂隙",
+    "emissive": "white-hot small mouth core, narrow magma fissures between scales, dark gold-red horn highlights and pulsing back ridges"
+  },
+  {
+    "type": 111,
+    "name": "玄黄岳麟",
+    "art": "assets/divine-pet-8-v40.png",
+    "previousArt": "assets/ascended-pet-8-v36.png",
+    "colors": [
+      "#b59a64",
+      "#d0b981",
+      "#4e4436",
+      "#e8dcc0"
+    ],
+    "finish": "玄黄玉金 · 古岳鳞甲 · 青玉圣纹",
+    "emissive": "gentle ivory-jade horn highlights, warm earth-gold guardian chest seal, restrained scale etchings and subtle hoof glow"
+  },
+  {
+    "type": 112,
+    "name": "太荒镇獬",
+    "art": "assets/divine-pet-9-v40.png",
+    "previousArt": "assets/ascended-pet-9-v36.png",
+    "colors": [
+      "#3e3e37",
+      "#827456",
+      "#20272b",
+      "#c8ad72"
+    ],
+    "finish": "岩黑金甲 · 灰金棱面 · 赤铜法纹",
+    "emissive": "one restrained gold-lit judgment horn, warm amber forehead seal and thin law glyphs along shoulder/back armour"
+  },
+  {
+    "type": 113,
+    "name": "混沌祖兽",
+    "art": "assets/divine-pet-10-v40.png",
+    "previousArt": "assets/ultimate-pet-10-v36.png",
+    "colors": [
+      "#736b5b",
+      "#32343b",
+      "#202d30",
+      "#e3d9bf"
+    ],
+    "finish": "混沌灰金 · 深渊青黑 · 稀疏五行祖纹",
+    "emissive": "small chaos-white eyes and chest core, tiny gold/celadon/blue/vermilion/ochre hairline veins, extremely restrained ancestral energy"
+  }
+].map(d=>Object.freeze({...d,colors:Object.freeze(d.colors)})));
+for(const material of DIVINE_MATERIALS40){
+ const definition=ultimatePet35(material.type);
+ if(!definition||definition.name!==material.name)throw Error('V40 material identity mismatch: '+material.type);
+ definition.art=material.art;
+ definition.material40=material;
+}
 
 v3Ready=true;resizeWorld();intro();requestAnimationFrame(frame);

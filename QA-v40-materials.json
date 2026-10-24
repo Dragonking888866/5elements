@@ -1,0 +1,71 @@
+{
+  "version": "40.0.0",
+  "tests": [
+    {
+      "name": "40-MATERIAL-103 鸿蒙刃寅独立透明材质及旧资源保留",
+      "pass": true
+    },
+    {
+      "name": "40-MATERIAL-104 太初罡猊独立透明材质及旧资源保留",
+      "pass": true
+    },
+    {
+      "name": "40-MATERIAL-105 太易苍虬独立透明材质及旧资源保留",
+      "pass": true
+    },
+    {
+      "name": "40-MATERIAL-106 青冥九尾独立透明材质及旧资源保留",
+      "pass": true
+    },
+    {
+      "name": "40-MATERIAL-107 混沌玄鼋独立透明材质及旧资源保留",
+      "pass": true
+    },
+    {
+      "name": "40-MATERIAL-108 归墟溟鹏独立透明材质及旧资源保留",
+      "pass": true
+    },
+    {
+      "name": "40-MATERIAL-109 劫烬朱凰独立透明材质及旧资源保留",
+      "pass": true
+    },
+    {
+      "name": "40-MATERIAL-110 烛幽赤螭独立透明材质及旧资源保留",
+      "pass": true
+    },
+    {
+      "name": "40-MATERIAL-111 玄黄岳麟独立透明材质及旧资源保留",
+      "pass": true
+    },
+    {
+      "name": "40-MATERIAL-112 太荒镇獬独立透明材质及旧资源保留",
+      "pass": true
+    },
+    {
+      "name": "40-MATERIAL-113 混沌祖兽独立透明材质及旧资源保留",
+      "pass": true
+    },
+    {
+      "name": "40-POOL 公开十兽、隐藏祖兽与五行数量不变",
+      "pass": true
+    },
+    {
+      "name": "40-RIG 四行动作选择与朝向根节点不被材质模块修改",
+      "pass": true
+    },
+    {
+      "name": "40-STATS 外观切换不改变战力、伤害半径或实例ID，存档可往返",
+      "pass": true
+    },
+    {
+      "name": "40-NORENDER 每帧无新增滤镜、画布、粒子或根节点操作",
+      "pass": true
+    },
+    {
+      "name": "40-BOTH 正式与沙盒均接入新材质且保留V39分层",
+      "pass": true
+    }
+  ],
+  "failures": 0,
+  "supersededLegacyChecks": []
+}

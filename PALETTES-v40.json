@@ -1,0 +1,365 @@
+[
+  {
+    "type": 103,
+    "index": 0,
+    "name": "鸿蒙刃寅",
+    "source": "ascended-pet-0-v36.png",
+    "body": "silken sacred ivory-white and pale platinum gold fur, NOT yellow fur",
+    "secondary": "dark gold and cool silvery gunmetal armour, pale gold engraved scar-like stripes",
+    "light": "warm white-gold eyes, pale gold claw tips, restrained gold forehead seal and a faint tail-tip trace",
+    "avoid": "no ochre/orange tiger, no all-gold body, no huge glow",
+    "colors": [
+      "#eee8d5",
+      "#cbbf9b",
+      "#443e31",
+      "#fff3d2"
+    ],
+    "glow": [
+      [
+        0.26,
+        -0.66,
+        4
+      ],
+      [
+        0.37,
+        -0.12,
+        3
+      ],
+      [
+        -0.05,
+        -0.6,
+        5
+      ]
+    ]
+  },
+  {
+    "type": 104,
+    "index": 1,
+    "name": "太初罡猊",
+    "source": "ascended-pet-1-v36.png",
+    "body": "deep sacred antique gold and luminous bronze-gold, clearly brighter and richer than dirty dark brown",
+    "secondary": "warm platinum trim, dark bronze and black gold recessed armour, dense luxurious mane",
+    "light": "restrained golden mane edges, warm white-gold forehead seal and chest carving, pale platinum fangs",
+    "avoid": "no ordinary yellow lion, no muddy brown or turquoise patina",
+    "colors": [
+      "#c2a164",
+      "#806039",
+      "#302c26",
+      "#f0d7a0"
+    ],
+    "glow": [
+      [
+        0.3,
+        -0.67,
+        4
+      ],
+      [
+        0.12,
+        -0.39,
+        5
+      ],
+      [
+        -0.02,
+        -0.75,
+        5
+      ]
+    ]
+  },
+  {
+    "type": 105,
+    "index": 2,
+    "name": "太易苍虬",
+    "source": "ascended-pet-2-v36.png",
+    "body": "ancient rich cyan-jade and deep emerald-celadon scales with translucent nephrite material, luminous but not neon",
+    "secondary": "forest teal, jade green and near-black green scale shadows, antler-like ancient spirit-wood horns, cyan-white whiskers",
+    "light": "delicate jade-cyan horn light, scale rim light and flowing wood-spirit veins, pale green breath charge",
+    "avoid": "no dirty grey-green, no plastic green or fluorescent lime",
+    "colors": [
+      "#3c9880",
+      "#246558",
+      "#13392f",
+      "#cce8d4"
+    ],
+    "glow": [
+      [
+        0.26,
+        -0.75,
+        4
+      ],
+      [
+        0.1,
+        -0.52,
+        4
+      ],
+      [
+        0.36,
+        -0.57,
+        3
+      ]
+    ]
+  },
+  {
+    "type": 106,
+    "index": 3,
+    "name": "青冥九尾",
+    "source": "ascended-pet-3-v36.png",
+    "body": "cyan-jade-white, moon celadon white and soft pale emerald fur with clearly defined elegant strands",
+    "secondary": "spirit emerald and blue-green-grey shadows, nine tails with jade-green rather than navy-blue tips, tiny pale gold ancient markings",
+    "light": "cyan-white small tail-tip spirit flames, cold jade eyes and soft ear rims; subtle, no broad aura",
+    "avoid": "no navy/royal-blue tails, no pink, no cartoon or washed-out featureless white",
+    "colors": [
+      "#e3eee1",
+      "#63a58d",
+      "#365b59",
+      "#cbf5df"
+    ],
+    "glow": [
+      [
+        0.36,
+        -0.55,
+        3
+      ],
+      [
+        -0.3,
+        -0.78,
+        4
+      ],
+      [
+        -0.36,
+        -0.6,
+        4
+      ]
+    ]
+  },
+  {
+    "type": 107,
+    "index": 4,
+    "name": "混沌玄鼋",
+    "source": "ascended-pet-4-v36.png",
+    "body": "deep ocean blue and abyssal blue-black ancient tortoise shell, rich cold sapphire substance with readable sculpted details",
+    "secondary": "glacial blue, dark marine teal and stone-blue shell plates, subtle silver-blue engraved lines and faint violet frost accents",
+    "light": "cold ice-white blue eyes, fine glacial blue fissures along shell rims and glyphs, restrained frost at joints and mouth",
+    "avoid": "no light blue baby turtle, no featureless pure black, no bright cyan neon wash",
+    "colors": [
+      "#18394e",
+      "#27597a",
+      "#101e32",
+      "#c2e8ed"
+    ],
+    "glow": [
+      [
+        0.37,
+        -0.37,
+        4
+      ],
+      [
+        -0.02,
+        -0.61,
+        5
+      ],
+      [
+        0.12,
+        -0.51,
+        4
+      ]
+    ]
+  },
+  {
+    "type": 108,
+    "index": 5,
+    "name": "归墟溟鹏",
+    "source": "ascended-pet-5-v36.png",
+    "body": "abyssal indigo-blue and deep ocean blue-teal, grand layered feathers retaining each feather's detailed ridges",
+    "secondary": "moon-white blue, muted silver-blue edge feathers, deep sea grey-blue shadows and tiny sparse silver specks",
+    "light": "subtle glacial blue wing edges and tidal feather veins, mysterious deep blue eyes and a trace of dark violet in tail",
+    "avoid": "no ordinary blue bird, no grey dull plumage, no neon electric blue",
+    "colors": [
+      "#214c69",
+      "#718e9e",
+      "#172a42",
+      "#c7e2ed"
+    ],
+    "glow": [
+      [
+        -0.31,
+        -0.66,
+        5
+      ],
+      [
+        0.29,
+        -0.64,
+        5
+      ],
+      [
+        0.22,
+        -0.76,
+        3
+      ]
+    ]
+  },
+  {
+    "type": 109,
+    "index": 6,
+    "name": "劫烬朱凰",
+    "source": "ascended-pet-6-v36.png",
+    "body": "sacred vermilion and red-gold phoenix plumage with warm orange-red divine flame feathers, luxurious sculpted feather layers clearly visible",
+    "secondary": "deep crimson shadows, fire-feather gold and sunset orange, tiny violet along selected flame edges",
+    "light": "small warm-white flame core at breast mark, gold feather-tip highlights, red-gold crown and flowing wing/tail rims",
+    "avoid": "no monotonous dark-red bird, no solid glowing orange blob or overexposed feathers",
+    "colors": [
+      "#b83f27",
+      "#d78c37",
+      "#491f25",
+      "#ffdb99"
+    ],
+    "glow": [
+      [
+        0.2,
+        -0.73,
+        4
+      ],
+      [
+        0.03,
+        -0.48,
+        5
+      ],
+      [
+        -0.35,
+        -0.55,
+        4
+      ]
+    ]
+  },
+  {
+    "type": 110,
+    "index": 7,
+    "name": "烛幽赤螭",
+    "source": "ascended-pet-7-v36.png",
+    "body": "molten crimson, dark gold-red and volcanic red-black dragon scales, rugged lava-shell material distinct from elegant phoenix feathers",
+    "secondary": "red copper, magma orange and deep ember crimson, local violet-black flame edges",
+    "light": "white-hot small mouth core, narrow magma fissures between scales, dark gold-red horn highlights and pulsing back ridges",
+    "avoid": "no pure black dragon, no chaotic giant flames covering anatomy, no phoenix-like decorative gold plumage",
+    "colors": [
+      "#a73f29",
+      "#712d27",
+      "#281d24",
+      "#ffd0a0"
+    ],
+    "glow": [
+      [
+        0.34,
+        -0.61,
+        5
+      ],
+      [
+        0.02,
+        -0.65,
+        4
+      ],
+      [
+        -0.22,
+        -0.54,
+        4
+      ]
+    ]
+  },
+  {
+    "type": 111,
+    "index": 8,
+    "name": "玄黄岳麟",
+    "source": "ascended-pet-8-v36.png",
+    "body": "sacred warm earth-gold, jade ochre gold and ancient mountain brown-gold, dignified luminous stone and jade scale material",
+    "secondary": "warm sandstone, jade-rock ivory, antique bronze gold, tiny cyan-jade engravings and gold-brown natural striations",
+    "light": "gentle ivory-jade horn highlights, warm earth-gold guardian chest seal, restrained scale etchings and subtle hoof glow",
+    "avoid": "no dirty yellow or grey mud, no ordinary yellow deer, no garish gold",
+    "colors": [
+      "#b59a64",
+      "#d0b981",
+      "#4e4436",
+      "#e8dcc0"
+    ],
+    "glow": [
+      [
+        0.2,
+        -0.76,
+        4
+      ],
+      [
+        0.17,
+        -0.42,
+        4
+      ],
+      [
+        0.28,
+        -0.12,
+        3
+      ]
+    ]
+  },
+  {
+    "type": 112,
+    "index": 9,
+    "name": "太荒镇獬",
+    "source": "ascended-pet-9-v36.png",
+    "body": "obsidian rock-black gold and deep mountain brown-black with readable grey-gold rock armour planes, austere divine judge",
+    "secondary": "antique bronze, stone-grey and dark jade-yellow armour seams, sparse red-copper law inscriptions and pale stone edge highlights",
+    "light": "one restrained gold-lit judgment horn, warm amber forehead seal and thin law glyphs along shoulder/back armour",
+    "avoid": "no generic grey rock monster, no pure black silhouette, no colorful or flamboyant decoration",
+    "colors": [
+      "#3e3e37",
+      "#827456",
+      "#20272b",
+      "#c8ad72"
+    ],
+    "glow": [
+      [
+        0.33,
+        -0.77,
+        4
+      ],
+      [
+        0.22,
+        -0.58,
+        3
+      ],
+      [
+        -0.06,
+        -0.51,
+        4
+      ]
+    ]
+  },
+  {
+    "type": 113,
+    "index": 10,
+    "name": "混沌祖兽",
+    "source": "ultimate-pet-10-v36.png",
+    "body": "primordial grey-gold, deep charcoal, muted dark violet and abyssal blue-black, mysterious regal ancient source material with readable sculptural details",
+    "secondary": "subtle aged metallic grey-gold ridges and dark teal-black recesses; reserve five elemental colors for very sparse thin veins",
+    "light": "small chaos-white eyes and chest core, tiny gold/celadon/blue/vermilion/ochre hairline veins, extremely restrained ancestral energy",
+    "avoid": "no rainbow patchwork, no evenly spread five colors, no featureless black, no huge glowing halo",
+    "colors": [
+      "#736b5b",
+      "#32343b",
+      "#202d30",
+      "#e3d9bf"
+    ],
+    "glow": [
+      [
+        0.28,
+        -0.65,
+        4
+      ],
+      [
+        0.13,
+        -0.45,
+        5
+      ],
+      [
+        -0.09,
+        -0.66,
+        4
+      ]
+    ]
+  }
+]

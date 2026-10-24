@@ -1,0 +1,1388 @@
+[
+  {
+    "type": 103,
+    "name": "鸿蒙刃寅",
+    "size": [
+      1254,
+      1254
+    ],
+    "rgba": true,
+    "transparentPixels": 537231,
+    "originalSHA256": "7d19fd4ddc4634d980544217d1f127881bea51d6fbda758ac95f1166d455b217",
+    "editedSHA256": "3d62a35178873968764ec8a27a8f51a204ae16d442fcd48973988677e92fd726",
+    "frames": [
+      {
+        "row": 0,
+        "frame": 0,
+        "sourceBodyRetained": 0.9983536613643742,
+        "opaqueIoU": 0.9087167581257914,
+        "centroidShiftPx": 1.524320384458145
+      },
+      {
+        "row": 0,
+        "frame": 1,
+        "sourceBodyRetained": 0.9990374897733288,
+        "opaqueIoU": 0.8967557993865826,
+        "centroidShiftPx": 2.3330056447388885
+      },
+      {
+        "row": 0,
+        "frame": 2,
+        "sourceBodyRetained": 0.9991831971995333,
+        "opaqueIoU": 0.9033462739471685,
+        "centroidShiftPx": 2.5366555077300212
+      },
+      {
+        "row": 0,
+        "frame": 3,
+        "sourceBodyRetained": 0.9994542261876512,
+        "opaqueIoU": 0.9102480982019364,
+        "centroidShiftPx": 1.8945883023826458
+      },
+      {
+        "row": 1,
+        "frame": 0,
+        "sourceBodyRetained": 0.9989411266412537,
+        "opaqueIoU": 0.8904410203166663,
+        "centroidShiftPx": 2.7628294074315396
+      },
+      {
+        "row": 1,
+        "frame": 1,
+        "sourceBodyRetained": 0.9981915896181962,
+        "opaqueIoU": 0.8995959966945184,
+        "centroidShiftPx": 2.662611087449447
+      },
+      {
+        "row": 1,
+        "frame": 2,
+        "sourceBodyRetained": 0.9974811083123426,
+        "opaqueIoU": 0.894620417000047,
+        "centroidShiftPx": 2.236910406023458
+      },
+      {
+        "row": 1,
+        "frame": 3,
+        "sourceBodyRetained": 0.9986907634645993,
+        "opaqueIoU": 0.8894960673129687,
+        "centroidShiftPx": 3.299676009627803
+      },
+      {
+        "row": 2,
+        "frame": 0,
+        "sourceBodyRetained": 0.9994426852438252,
+        "opaqueIoU": 0.9023810068388188,
+        "centroidShiftPx": 2.2986725815563087
+      },
+      {
+        "row": 2,
+        "frame": 1,
+        "sourceBodyRetained": 0.9956195727795099,
+        "opaqueIoU": 0.8235080988917306,
+        "centroidShiftPx": 4.750224072379874
+      },
+      {
+        "row": 2,
+        "frame": 2,
+        "sourceBodyRetained": 0.99206855038595,
+        "opaqueIoU": 0.8762013968518712,
+        "centroidShiftPx": 3.6794032363703573
+      },
+      {
+        "row": 2,
+        "frame": 3,
+        "sourceBodyRetained": 0.9948186528497409,
+        "opaqueIoU": 0.8851615892505502,
+        "centroidShiftPx": 4.25400473702829
+      },
+      {
+        "row": 3,
+        "frame": 0,
+        "sourceBodyRetained": 0.9961454917160015,
+        "opaqueIoU": 0.9107671339563863,
+        "centroidShiftPx": 1.0712122326266134
+      },
+      {
+        "row": 3,
+        "frame": 1,
+        "sourceBodyRetained": 0.9986948176583493,
+        "opaqueIoU": 0.9204316292234211,
+        "centroidShiftPx": 2.5828010058924527
+      },
+      {
+        "row": 3,
+        "frame": 2,
+        "sourceBodyRetained": 0.9926449887387387,
+        "opaqueIoU": 0.91747983346344,
+        "centroidShiftPx": 1.594087600353243
+      },
+      {
+        "row": 3,
+        "frame": 3,
+        "sourceBodyRetained": 0.9976310840843041,
+        "opaqueIoU": 0.894675748483322,
+        "centroidShiftPx": 3.255985102367838
+      }
+    ]
+  },
+  {
+    "type": 104,
+    "name": "太初罡猊",
+    "size": [
+      1254,
+      1254
+    ],
+    "rgba": true,
+    "transparentPixels": 407743,
+    "originalSHA256": "6c6640ab9a3b2134c4d03ce64b02f9f33eb2c542a9f15760b8f7d246f8f17ed3",
+    "editedSHA256": "82c3870f7260951fbba58c4d3bc2ae1dd5ba09e15fa2e579c315846564229705",
+    "frames": [
+      {
+        "row": 0,
+        "frame": 0,
+        "sourceBodyRetained": 0.9988908255427033,
+        "opaqueIoU": 0.9003999238240336,
+        "centroidShiftPx": 3.1453368927995666
+      },
+      {
+        "row": 0,
+        "frame": 1,
+        "sourceBodyRetained": 0.9991118058762923,
+        "opaqueIoU": 0.8987392339527972,
+        "centroidShiftPx": 2.98576310206903
+      },
+      {
+        "row": 0,
+        "frame": 2,
+        "sourceBodyRetained": 0.998352610678551,
+        "opaqueIoU": 0.9059751050403638,
+        "centroidShiftPx": 3.0484815416690743
+      },
+      {
+        "row": 0,
+        "frame": 3,
+        "sourceBodyRetained": 0.998748094927063,
+        "opaqueIoU": 0.9032390391178787,
+        "centroidShiftPx": 2.658477335850746
+      },
+      {
+        "row": 1,
+        "frame": 0,
+        "sourceBodyRetained": 0.9981220282095337,
+        "opaqueIoU": 0.8855800762208632,
+        "centroidShiftPx": 2.921110263142557
+      },
+      {
+        "row": 1,
+        "frame": 1,
+        "sourceBodyRetained": 0.9991010766175394,
+        "opaqueIoU": 0.8977046470566137,
+        "centroidShiftPx": 2.676334024735933
+      },
+      {
+        "row": 1,
+        "frame": 2,
+        "sourceBodyRetained": 0.9987415579512563,
+        "opaqueIoU": 0.8845339376602147,
+        "centroidShiftPx": 3.4023242130034395
+      },
+      {
+        "row": 1,
+        "frame": 3,
+        "sourceBodyRetained": 0.9984821707038154,
+        "opaqueIoU": 0.8770500785330753,
+        "centroidShiftPx": 4.89584748200944
+      },
+      {
+        "row": 2,
+        "frame": 0,
+        "sourceBodyRetained": 0.9982356437114628,
+        "opaqueIoU": 0.8846698268483771,
+        "centroidShiftPx": 1.9560744809987278
+      },
+      {
+        "row": 2,
+        "frame": 1,
+        "sourceBodyRetained": 0.9972309917282491,
+        "opaqueIoU": 0.8841594996090696,
+        "centroidShiftPx": 2.2840655597879205
+      },
+      {
+        "row": 2,
+        "frame": 2,
+        "sourceBodyRetained": 0.9970044932601099,
+        "opaqueIoU": 0.8959978463747308,
+        "centroidShiftPx": 2.978810210212029
+      },
+      {
+        "row": 2,
+        "frame": 3,
+        "sourceBodyRetained": 0.9991328978553674,
+        "opaqueIoU": 0.9041640510567064,
+        "centroidShiftPx": 2.877881974194332
+      },
+      {
+        "row": 3,
+        "frame": 0,
+        "sourceBodyRetained": 0.9992924399934687,
+        "opaqueIoU": 0.8952167341167292,
+        "centroidShiftPx": 1.4889041374966354
+      },
+      {
+        "row": 3,
+        "frame": 1,
+        "sourceBodyRetained": 0.998572091528933,
+        "opaqueIoU": 0.8742655331916489,
+        "centroidShiftPx": 2.3338682165442712
+      },
+      {
+        "row": 3,
+        "frame": 2,
+        "sourceBodyRetained": 0.9976467378329525,
+        "opaqueIoU": 0.8912314910730608,
+        "centroidShiftPx": 3.025469167455633
+      },
+      {
+        "row": 3,
+        "frame": 3,
+        "sourceBodyRetained": 0.9982438810229393,
+        "opaqueIoU": 0.8825241776368988,
+        "centroidShiftPx": 2.055945818894181
+      }
+    ]
+  },
+  {
+    "type": 105,
+    "name": "太易苍虬",
+    "size": [
+      1254,
+      1254
+    ],
+    "rgba": true,
+    "transparentPixels": 445292,
+    "originalSHA256": "970fe5f8fd76df1961d8aeafc81becc7ceccb9a3d26875e0c99156b79a06ff6e",
+    "editedSHA256": "172a162bb64feada2ffd74640f542358c60844c13b958dd22168e2d5830939ae",
+    "frames": [
+      {
+        "row": 0,
+        "frame": 0,
+        "sourceBodyRetained": 0.9917336453352324,
+        "opaqueIoU": 0.8500512328587935,
+        "centroidShiftPx": 4.899386040007531
+      },
+      {
+        "row": 0,
+        "frame": 1,
+        "sourceBodyRetained": 0.9882872810520151,
+        "opaqueIoU": 0.8498569302964404,
+        "centroidShiftPx": 3.9956582571189427
+      },
+      {
+        "row": 0,
+        "frame": 2,
+        "sourceBodyRetained": 0.9877758209882938,
+        "opaqueIoU": 0.8526525228588675,
+        "centroidShiftPx": 4.645660640788123
+      },
+      {
+        "row": 0,
+        "frame": 3,
+        "sourceBodyRetained": 0.9879560750974141,
+        "opaqueIoU": 0.8433037167976927,
+        "centroidShiftPx": 5.13287724107077
+      },
+      {
+        "row": 1,
+        "frame": 0,
+        "sourceBodyRetained": 0.9870475210156116,
+        "opaqueIoU": 0.844199354396948,
+        "centroidShiftPx": 1.2897237497544818
+      },
+      {
+        "row": 1,
+        "frame": 1,
+        "sourceBodyRetained": 0.986469864698647,
+        "opaqueIoU": 0.8247594329227982,
+        "centroidShiftPx": 2.0409569497559046
+      },
+      {
+        "row": 1,
+        "frame": 2,
+        "sourceBodyRetained": 0.9834638099162203,
+        "opaqueIoU": 0.8550991163123955,
+        "centroidShiftPx": 2.9061988218112704
+      },
+      {
+        "row": 1,
+        "frame": 3,
+        "sourceBodyRetained": 0.9919906293529188,
+        "opaqueIoU": 0.8271738556570403,
+        "centroidShiftPx": 2.974599857571628
+      },
+      {
+        "row": 2,
+        "frame": 0,
+        "sourceBodyRetained": 0.9933000934870676,
+        "opaqueIoU": 0.8634896268370319,
+        "centroidShiftPx": 2.7639057614890343
+      },
+      {
+        "row": 2,
+        "frame": 1,
+        "sourceBodyRetained": 0.9874793070484273,
+        "opaqueIoU": 0.8354440367696374,
+        "centroidShiftPx": 0.6013722430778631
+      },
+      {
+        "row": 2,
+        "frame": 2,
+        "sourceBodyRetained": 0.981938038287277,
+        "opaqueIoU": 0.8393315074228495,
+        "centroidShiftPx": 1.0412467265420884
+      },
+      {
+        "row": 2,
+        "frame": 3,
+        "sourceBodyRetained": 0.9921688712632715,
+        "opaqueIoU": 0.8197465834387507,
+        "centroidShiftPx": 3.284191529199119
+      },
+      {
+        "row": 3,
+        "frame": 0,
+        "sourceBodyRetained": 0.9829032696929845,
+        "opaqueIoU": 0.8549901380670611,
+        "centroidShiftPx": 2.91788579632831
+      },
+      {
+        "row": 3,
+        "frame": 1,
+        "sourceBodyRetained": 0.9889520714865963,
+        "opaqueIoU": 0.8360607487638333,
+        "centroidShiftPx": 2.031747787783949
+      },
+      {
+        "row": 3,
+        "frame": 2,
+        "sourceBodyRetained": 0.9911278743329833,
+        "opaqueIoU": 0.8501966984080297,
+        "centroidShiftPx": 2.3202311833441196
+      },
+      {
+        "row": 3,
+        "frame": 3,
+        "sourceBodyRetained": 0.9746605207424941,
+        "opaqueIoU": 0.8378418899526655,
+        "centroidShiftPx": 2.9015932734104353
+      }
+    ]
+  },
+  {
+    "type": 106,
+    "name": "青冥九尾",
+    "size": [
+      1254,
+      1254
+    ],
+    "rgba": true,
+    "transparentPixels": 513654,
+    "originalSHA256": "c5bddb16ba9be581a2cc5d60cd704570b08cc35302d91c386a6106d89251f4b9",
+    "editedSHA256": "e9883096a53c85dc097ec7d3b96c190aab1678df7bf51f205f29953f5aa6a43b",
+    "frames": [
+      {
+        "row": 0,
+        "frame": 0,
+        "sourceBodyRetained": 0.9932372345045809,
+        "opaqueIoU": 0.918507468395586,
+        "centroidShiftPx": 1.871462725076394
+      },
+      {
+        "row": 0,
+        "frame": 1,
+        "sourceBodyRetained": 0.9890297885080085,
+        "opaqueIoU": 0.9127508831481518,
+        "centroidShiftPx": 2.429093394669237
+      },
+      {
+        "row": 0,
+        "frame": 2,
+        "sourceBodyRetained": 0.9929057174040803,
+        "opaqueIoU": 0.9166585928265545,
+        "centroidShiftPx": 1.7151858051010809
+      },
+      {
+        "row": 0,
+        "frame": 3,
+        "sourceBodyRetained": 0.9868585071095054,
+        "opaqueIoU": 0.9076405891725934,
+        "centroidShiftPx": 1.9537349963504105
+      },
+      {
+        "row": 1,
+        "frame": 0,
+        "sourceBodyRetained": 0.9909848799807444,
+        "opaqueIoU": 0.9231161207476407,
+        "centroidShiftPx": 1.4068539250947334
+      },
+      {
+        "row": 1,
+        "frame": 1,
+        "sourceBodyRetained": 0.9928985058265615,
+        "opaqueIoU": 0.9225063655485443,
+        "centroidShiftPx": 1.2952548715283227
+      },
+      {
+        "row": 1,
+        "frame": 2,
+        "sourceBodyRetained": 0.9940800554839988,
+        "opaqueIoU": 0.9251924938909124,
+        "centroidShiftPx": 1.7340140718658745
+      },
+      {
+        "row": 1,
+        "frame": 3,
+        "sourceBodyRetained": 0.991632472443479,
+        "opaqueIoU": 0.9108713324957505,
+        "centroidShiftPx": 2.485308521502655
+      },
+      {
+        "row": 2,
+        "frame": 0,
+        "sourceBodyRetained": 0.995785820525533,
+        "opaqueIoU": 0.9293917213528521,
+        "centroidShiftPx": 0.9846713752226822
+      },
+      {
+        "row": 2,
+        "frame": 1,
+        "sourceBodyRetained": 0.9957835116425425,
+        "opaqueIoU": 0.9187666937637905,
+        "centroidShiftPx": 2.5245396842155725
+      },
+      {
+        "row": 2,
+        "frame": 2,
+        "sourceBodyRetained": 0.9715499027257704,
+        "opaqueIoU": 0.8646027254449327,
+        "centroidShiftPx": 4.56724127790035
+      },
+      {
+        "row": 2,
+        "frame": 3,
+        "sourceBodyRetained": 0.9948088432881398,
+        "opaqueIoU": 0.9127535582203294,
+        "centroidShiftPx": 3.0487456130414783
+      },
+      {
+        "row": 3,
+        "frame": 0,
+        "sourceBodyRetained": 0.9905807484828051,
+        "opaqueIoU": 0.917768102926534,
+        "centroidShiftPx": 1.3493951010176266
+      },
+      {
+        "row": 3,
+        "frame": 1,
+        "sourceBodyRetained": 0.9846397108651457,
+        "opaqueIoU": 0.9019412362213611,
+        "centroidShiftPx": 2.0527268952538984
+      },
+      {
+        "row": 3,
+        "frame": 2,
+        "sourceBodyRetained": 0.9839680941380876,
+        "opaqueIoU": 0.9113634701192305,
+        "centroidShiftPx": 2.1259583960705983
+      },
+      {
+        "row": 3,
+        "frame": 3,
+        "sourceBodyRetained": 0.9943419237459263,
+        "opaqueIoU": 0.9219561026249444,
+        "centroidShiftPx": 1.6297014651433812
+      }
+    ]
+  },
+  {
+    "type": 107,
+    "name": "混沌玄鼋",
+    "size": [
+      1254,
+      1254
+    ],
+    "rgba": true,
+    "transparentPixels": 313555,
+    "originalSHA256": "b4586027931d15c847a0f7602948c700b790d87a6de89f3983ffcd503d544d8e",
+    "editedSHA256": "bda14b4fcdf15ef2b931170f19d0b2568043cdccf8882d83c580b3bd91c2c17b",
+    "frames": [
+      {
+        "row": 0,
+        "frame": 0,
+        "sourceBodyRetained": 0.9936120496915293,
+        "opaqueIoU": 0.9512520921848848,
+        "centroidShiftPx": 1.6983134706813843
+      },
+      {
+        "row": 0,
+        "frame": 1,
+        "sourceBodyRetained": 0.9948195159329035,
+        "opaqueIoU": 0.9553838524419702,
+        "centroidShiftPx": 1.0947609999625456
+      },
+      {
+        "row": 0,
+        "frame": 2,
+        "sourceBodyRetained": 0.99536876802637,
+        "opaqueIoU": 0.9520611649720186,
+        "centroidShiftPx": 1.4891866226125543
+      },
+      {
+        "row": 0,
+        "frame": 3,
+        "sourceBodyRetained": 0.9919804921608023,
+        "opaqueIoU": 0.9436884321957754,
+        "centroidShiftPx": 2.1442938785654246
+      },
+      {
+        "row": 1,
+        "frame": 0,
+        "sourceBodyRetained": 0.9893196405648267,
+        "opaqueIoU": 0.9303534638166366,
+        "centroidShiftPx": 0.8612638114554005
+      },
+      {
+        "row": 1,
+        "frame": 1,
+        "sourceBodyRetained": 0.9877153558052435,
+        "opaqueIoU": 0.9146305512684898,
+        "centroidShiftPx": 1.4624802239137449
+      },
+      {
+        "row": 1,
+        "frame": 2,
+        "sourceBodyRetained": 0.9810774553413825,
+        "opaqueIoU": 0.9190726593246684,
+        "centroidShiftPx": 1.320638931844084
+      },
+      {
+        "row": 1,
+        "frame": 3,
+        "sourceBodyRetained": 0.9898193313731155,
+        "opaqueIoU": 0.9231525219541579,
+        "centroidShiftPx": 1.3912126032506722
+      },
+      {
+        "row": 2,
+        "frame": 0,
+        "sourceBodyRetained": 0.9939315712414272,
+        "opaqueIoU": 0.9305257462350076,
+        "centroidShiftPx": 2.423200332801437
+      },
+      {
+        "row": 2,
+        "frame": 1,
+        "sourceBodyRetained": 0.9669240187742331,
+        "opaqueIoU": 0.898303210313448,
+        "centroidShiftPx": 2.413937981514408
+      },
+      {
+        "row": 2,
+        "frame": 2,
+        "sourceBodyRetained": 0.9740578722793933,
+        "opaqueIoU": 0.9103109711145365,
+        "centroidShiftPx": 1.3122014826365545
+      },
+      {
+        "row": 2,
+        "frame": 3,
+        "sourceBodyRetained": 0.9928035639492823,
+        "opaqueIoU": 0.9286604694233714,
+        "centroidShiftPx": 1.8330301762205663
+      },
+      {
+        "row": 3,
+        "frame": 0,
+        "sourceBodyRetained": 0.9792788166895798,
+        "opaqueIoU": 0.9220955440834724,
+        "centroidShiftPx": 2.24737277686808
+      },
+      {
+        "row": 3,
+        "frame": 1,
+        "sourceBodyRetained": 0.9801802400984337,
+        "opaqueIoU": 0.9283172183553274,
+        "centroidShiftPx": 1.8325162046937467
+      },
+      {
+        "row": 3,
+        "frame": 2,
+        "sourceBodyRetained": 0.9723920907070674,
+        "opaqueIoU": 0.9067354378110205,
+        "centroidShiftPx": 0.20362297961809359
+      },
+      {
+        "row": 3,
+        "frame": 3,
+        "sourceBodyRetained": 0.9801528667067987,
+        "opaqueIoU": 0.9239115482495357,
+        "centroidShiftPx": 0.8882558540791539
+      }
+    ]
+  },
+  {
+    "type": 108,
+    "name": "归墟溟鹏",
+    "size": [
+      1254,
+      1254
+    ],
+    "rgba": true,
+    "transparentPixels": 423858,
+    "originalSHA256": "ceb744ee01de218285f763cde65f3f1aa5479d5d4f242a354b1f2124c88436a2",
+    "editedSHA256": "fc71a6385ce0da2586187c5ad9c6545050604e5705c5f78a4c6ff91eb284462f",
+    "frames": [
+      {
+        "row": 0,
+        "frame": 0,
+        "sourceBodyRetained": 0.9948012783004005,
+        "opaqueIoU": 0.8918368170446291,
+        "centroidShiftPx": 1.7661154176888916
+      },
+      {
+        "row": 0,
+        "frame": 1,
+        "sourceBodyRetained": 0.9975232467193882,
+        "opaqueIoU": 0.9047450145818554,
+        "centroidShiftPx": 1.4716402580036902
+      },
+      {
+        "row": 0,
+        "frame": 2,
+        "sourceBodyRetained": 0.9956692186120975,
+        "opaqueIoU": 0.9013377926421404,
+        "centroidShiftPx": 2.678726157052827
+      },
+      {
+        "row": 0,
+        "frame": 3,
+        "sourceBodyRetained": 0.9945580784387315,
+        "opaqueIoU": 0.8895042692009146,
+        "centroidShiftPx": 2.3711119010961474
+      },
+      {
+        "row": 1,
+        "frame": 0,
+        "sourceBodyRetained": 0.9846389841702707,
+        "opaqueIoU": 0.8816145892945709,
+        "centroidShiftPx": 2.159091004819079
+      },
+      {
+        "row": 1,
+        "frame": 1,
+        "sourceBodyRetained": 0.9931059506531205,
+        "opaqueIoU": 0.90876953125,
+        "centroidShiftPx": 3.4916895837945927
+      },
+      {
+        "row": 1,
+        "frame": 2,
+        "sourceBodyRetained": 0.9899713467048711,
+        "opaqueIoU": 0.900076970139533,
+        "centroidShiftPx": 2.706399441410782
+      },
+      {
+        "row": 1,
+        "frame": 3,
+        "sourceBodyRetained": 0.9914651493598862,
+        "opaqueIoU": 0.876158836337516,
+        "centroidShiftPx": 2.531358676316375
+      },
+      {
+        "row": 2,
+        "frame": 0,
+        "sourceBodyRetained": 0.9900845914980191,
+        "opaqueIoU": 0.9014545879967243,
+        "centroidShiftPx": 1.854815969129315
+      },
+      {
+        "row": 2,
+        "frame": 1,
+        "sourceBodyRetained": 0.9910050840829097,
+        "opaqueIoU": 0.8913119943721421,
+        "centroidShiftPx": 2.3578941131956803
+      },
+      {
+        "row": 2,
+        "frame": 2,
+        "sourceBodyRetained": 0.9840988616733845,
+        "opaqueIoU": 0.8717556353363546,
+        "centroidShiftPx": 1.5173407956745881
+      },
+      {
+        "row": 2,
+        "frame": 3,
+        "sourceBodyRetained": 0.994004690057962,
+        "opaqueIoU": 0.8622502830605078,
+        "centroidShiftPx": 1.9545593072529028
+      },
+      {
+        "row": 3,
+        "frame": 0,
+        "sourceBodyRetained": 0.9841185207754123,
+        "opaqueIoU": 0.8845982677758378,
+        "centroidShiftPx": 1.1880410604018636
+      },
+      {
+        "row": 3,
+        "frame": 1,
+        "sourceBodyRetained": 0.9862881567500095,
+        "opaqueIoU": 0.8766158449461245,
+        "centroidShiftPx": 0.9422583011826222
+      },
+      {
+        "row": 3,
+        "frame": 2,
+        "sourceBodyRetained": 0.9843365813678171,
+        "opaqueIoU": 0.8894100222167366,
+        "centroidShiftPx": 2.556156765987458
+      },
+      {
+        "row": 3,
+        "frame": 3,
+        "sourceBodyRetained": 0.9769745434088124,
+        "opaqueIoU": 0.8786750754440811,
+        "centroidShiftPx": 2.9882703523924534
+      }
+    ]
+  },
+  {
+    "type": 109,
+    "name": "劫烬朱凰",
+    "size": [
+      1254,
+      1254
+    ],
+    "rgba": true,
+    "transparentPixels": 347082,
+    "originalSHA256": "8e27b0b22b88ea7c864a15155948fab37eeae599f0a8dbfb286d2dd43ba02283",
+    "editedSHA256": "5935f35ced27150daa83800acb7d956f3cf13df3850074de0237f76088e77842",
+    "frames": [
+      {
+        "row": 0,
+        "frame": 0,
+        "sourceBodyRetained": 0.9614806410438236,
+        "opaqueIoU": 0.8608980545537664,
+        "centroidShiftPx": 2.9579748975836795
+      },
+      {
+        "row": 0,
+        "frame": 1,
+        "sourceBodyRetained": 0.9669640774434336,
+        "opaqueIoU": 0.8693703140565197,
+        "centroidShiftPx": 1.8148058223667913
+      },
+      {
+        "row": 0,
+        "frame": 2,
+        "sourceBodyRetained": 0.9638797440834834,
+        "opaqueIoU": 0.8485072178477691,
+        "centroidShiftPx": 3.014005642754392
+      },
+      {
+        "row": 0,
+        "frame": 3,
+        "sourceBodyRetained": 0.9609082813891362,
+        "opaqueIoU": 0.86199275748216,
+        "centroidShiftPx": 1.4785031078612763
+      },
+      {
+        "row": 1,
+        "frame": 0,
+        "sourceBodyRetained": 0.9750123410357068,
+        "opaqueIoU": 0.9165598621116365,
+        "centroidShiftPx": 1.9730059272246332
+      },
+      {
+        "row": 1,
+        "frame": 1,
+        "sourceBodyRetained": 0.9518950117409529,
+        "opaqueIoU": 0.8769712899312576,
+        "centroidShiftPx": 3.008136679505063
+      },
+      {
+        "row": 1,
+        "frame": 2,
+        "sourceBodyRetained": 0.9536706435600453,
+        "opaqueIoU": 0.893211802369446,
+        "centroidShiftPx": 2.818160781332968
+      },
+      {
+        "row": 1,
+        "frame": 3,
+        "sourceBodyRetained": 0.9599213516541302,
+        "opaqueIoU": 0.9000793191416383,
+        "centroidShiftPx": 3.1181158899206287
+      },
+      {
+        "row": 2,
+        "frame": 0,
+        "sourceBodyRetained": 0.9563505648750428,
+        "opaqueIoU": 0.9015237085359951,
+        "centroidShiftPx": 1.9373140795737847
+      },
+      {
+        "row": 2,
+        "frame": 1,
+        "sourceBodyRetained": 0.9119471644810934,
+        "opaqueIoU": 0.8703319124130142,
+        "centroidShiftPx": 2.581809732284702
+      },
+      {
+        "row": 2,
+        "frame": 2,
+        "sourceBodyRetained": 0.9081135774362866,
+        "opaqueIoU": 0.857262252999821,
+        "centroidShiftPx": 5.184196392986998
+      },
+      {
+        "row": 2,
+        "frame": 3,
+        "sourceBodyRetained": 0.9692911392405064,
+        "opaqueIoU": 0.9141199503390316,
+        "centroidShiftPx": 0.9912944080163606
+      },
+      {
+        "row": 3,
+        "frame": 0,
+        "sourceBodyRetained": 0.9436898113034085,
+        "opaqueIoU": 0.8895508806898196,
+        "centroidShiftPx": 2.651060464450197
+      },
+      {
+        "row": 3,
+        "frame": 1,
+        "sourceBodyRetained": 0.8937380598599024,
+        "opaqueIoU": 0.8489565480391168,
+        "centroidShiftPx": 4.8013950272759285
+      },
+      {
+        "row": 3,
+        "frame": 2,
+        "sourceBodyRetained": 0.8351082563268318,
+        "opaqueIoU": 0.8162044322056123,
+        "centroidShiftPx": 4.909550645998683
+      },
+      {
+        "row": 3,
+        "frame": 3,
+        "sourceBodyRetained": 0.9396282987887585,
+        "opaqueIoU": 0.8840281198226839,
+        "centroidShiftPx": 4.561452529463839
+      }
+    ]
+  },
+  {
+    "type": 110,
+    "name": "烛幽赤螭",
+    "size": [
+      1254,
+      1254
+    ],
+    "rgba": true,
+    "transparentPixels": 572260,
+    "originalSHA256": "0f0e161c29ebd2dbb262508c2e6c645b9ba28142a143589c9cd63e7cb8a5bdd9",
+    "editedSHA256": "d509339d1f5ff09ea6483c47f2dd3aa7f31de0275c2d1dbf2b7e3a553f9b9f59",
+    "frames": [
+      {
+        "row": 0,
+        "frame": 0,
+        "sourceBodyRetained": 0.9966438227562899,
+        "opaqueIoU": 0.8646739019771538,
+        "centroidShiftPx": 1.9526242967476797
+      },
+      {
+        "row": 0,
+        "frame": 1,
+        "sourceBodyRetained": 0.9988223418573351,
+        "opaqueIoU": 0.8560746508466197,
+        "centroidShiftPx": 3.4415941190756225
+      },
+      {
+        "row": 0,
+        "frame": 2,
+        "sourceBodyRetained": 0.9982138546946657,
+        "opaqueIoU": 0.8420752565564424,
+        "centroidShiftPx": 3.517688067464042
+      },
+      {
+        "row": 0,
+        "frame": 3,
+        "sourceBodyRetained": 0.997248184049384,
+        "opaqueIoU": 0.8487930452397029,
+        "centroidShiftPx": 2.7640246625080325
+      },
+      {
+        "row": 1,
+        "frame": 0,
+        "sourceBodyRetained": 0.982612499316529,
+        "opaqueIoU": 0.8109291096972159,
+        "centroidShiftPx": 2.823286650235905
+      },
+      {
+        "row": 1,
+        "frame": 1,
+        "sourceBodyRetained": 0.9958672105021474,
+        "opaqueIoU": 0.852813952950429,
+        "centroidShiftPx": 2.8197524069422655
+      },
+      {
+        "row": 1,
+        "frame": 2,
+        "sourceBodyRetained": 0.9896801120608331,
+        "opaqueIoU": 0.8371418208197315,
+        "centroidShiftPx": 4.6301081553682115
+      },
+      {
+        "row": 1,
+        "frame": 3,
+        "sourceBodyRetained": 0.988198096669171,
+        "opaqueIoU": 0.8249359744943292,
+        "centroidShiftPx": 1.0902840489316081
+      },
+      {
+        "row": 2,
+        "frame": 0,
+        "sourceBodyRetained": 0.989603514612383,
+        "opaqueIoU": 0.8582652940480416,
+        "centroidShiftPx": 1.182479509020282
+      },
+      {
+        "row": 2,
+        "frame": 1,
+        "sourceBodyRetained": 0.9845381399550429,
+        "opaqueIoU": 0.8479283517278813,
+        "centroidShiftPx": 2.987245619741802
+      },
+      {
+        "row": 2,
+        "frame": 2,
+        "sourceBodyRetained": 0.9722772277227723,
+        "opaqueIoU": 0.6697408334860238,
+        "centroidShiftPx": 4.11061944851539
+      },
+      {
+        "row": 2,
+        "frame": 3,
+        "sourceBodyRetained": 0.9826102027846785,
+        "opaqueIoU": 0.8440694789081886,
+        "centroidShiftPx": 3.116171677654928
+      },
+      {
+        "row": 3,
+        "frame": 0,
+        "sourceBodyRetained": 0.9911513223304832,
+        "opaqueIoU": 0.8333890653736833,
+        "centroidShiftPx": 1.9156300048589856
+      },
+      {
+        "row": 3,
+        "frame": 1,
+        "sourceBodyRetained": 0.9905321354526607,
+        "opaqueIoU": 0.8099265398380109,
+        "centroidShiftPx": 1.615364205013574
+      },
+      {
+        "row": 3,
+        "frame": 2,
+        "sourceBodyRetained": 0.9911012700534759,
+        "opaqueIoU": 0.7822273514137335,
+        "centroidShiftPx": 5.070219658017365
+      },
+      {
+        "row": 3,
+        "frame": 3,
+        "sourceBodyRetained": 0.9938928344433083,
+        "opaqueIoU": 0.7748120381740236,
+        "centroidShiftPx": 6.141020705601058
+      }
+    ]
+  },
+  {
+    "type": 111,
+    "name": "玄黄岳麟",
+    "size": [
+      1254,
+      1254
+    ],
+    "rgba": true,
+    "transparentPixels": 462360,
+    "originalSHA256": "c6b32c1358bca368139a05f09b04d1eaa7fd577708aafe650729fe71bfea70cc",
+    "editedSHA256": "cb49d4f871c77403c577167acb6b84c69fb99ff4aef35ce1aa0f7fda8733a49f",
+    "frames": [
+      {
+        "row": 0,
+        "frame": 0,
+        "sourceBodyRetained": 0.9956905637398412,
+        "opaqueIoU": 0.8986999260120495,
+        "centroidShiftPx": 2.070775348937648
+      },
+      {
+        "row": 0,
+        "frame": 1,
+        "sourceBodyRetained": 0.9983630411058567,
+        "opaqueIoU": 0.890402903664051,
+        "centroidShiftPx": 1.6157466693209646
+      },
+      {
+        "row": 0,
+        "frame": 2,
+        "sourceBodyRetained": 0.9985946503021502,
+        "opaqueIoU": 0.8900812125514103,
+        "centroidShiftPx": 1.9790844689126836
+      },
+      {
+        "row": 0,
+        "frame": 3,
+        "sourceBodyRetained": 0.9984568967502706,
+        "opaqueIoU": 0.8915945128848487,
+        "centroidShiftPx": 2.157848743134679
+      },
+      {
+        "row": 1,
+        "frame": 0,
+        "sourceBodyRetained": 0.9971302981301386,
+        "opaqueIoU": 0.8823078938352713,
+        "centroidShiftPx": 2.5879431926679337
+      },
+      {
+        "row": 1,
+        "frame": 1,
+        "sourceBodyRetained": 0.9982165236672129,
+        "opaqueIoU": 0.8760337570591594,
+        "centroidShiftPx": 4.187672514303048
+      },
+      {
+        "row": 1,
+        "frame": 2,
+        "sourceBodyRetained": 0.9980467301273335,
+        "opaqueIoU": 0.8629823623730626,
+        "centroidShiftPx": 4.5676945728903595
+      },
+      {
+        "row": 1,
+        "frame": 3,
+        "sourceBodyRetained": 0.9939198503347775,
+        "opaqueIoU": 0.850615151259796,
+        "centroidShiftPx": 4.472110811938126
+      },
+      {
+        "row": 2,
+        "frame": 0,
+        "sourceBodyRetained": 0.997137242533783,
+        "opaqueIoU": 0.9015749758708432,
+        "centroidShiftPx": 2.35186374946375
+      },
+      {
+        "row": 2,
+        "frame": 1,
+        "sourceBodyRetained": 0.9951030583626408,
+        "opaqueIoU": 0.8699357851722125,
+        "centroidShiftPx": 0.4756904104172176
+      },
+      {
+        "row": 2,
+        "frame": 2,
+        "sourceBodyRetained": 0.9950335421222342,
+        "opaqueIoU": 0.8775680313802403,
+        "centroidShiftPx": 2.3880696193768896
+      },
+      {
+        "row": 2,
+        "frame": 3,
+        "sourceBodyRetained": 0.9946534653465346,
+        "opaqueIoU": 0.8758670128259775,
+        "centroidShiftPx": 3.1786701836825237
+      },
+      {
+        "row": 3,
+        "frame": 0,
+        "sourceBodyRetained": 0.9904450590897661,
+        "opaqueIoU": 0.8356927943218639,
+        "centroidShiftPx": 3.006548638533939
+      },
+      {
+        "row": 3,
+        "frame": 1,
+        "sourceBodyRetained": 0.989541639767592,
+        "opaqueIoU": 0.8294222687180968,
+        "centroidShiftPx": 1.8229908305314468
+      },
+      {
+        "row": 3,
+        "frame": 2,
+        "sourceBodyRetained": 0.9948383777758724,
+        "opaqueIoU": 0.8613296908869554,
+        "centroidShiftPx": 3.872793610890608
+      },
+      {
+        "row": 3,
+        "frame": 3,
+        "sourceBodyRetained": 0.9908924505558284,
+        "opaqueIoU": 0.8738533013110752,
+        "centroidShiftPx": 3.930334172256781
+      }
+    ]
+  },
+  {
+    "type": 112,
+    "name": "太荒镇獬",
+    "size": [
+      1254,
+      1254
+    ],
+    "rgba": true,
+    "transparentPixels": 573550,
+    "originalSHA256": "104018ad692004dff707e7c4dda8ab2e91cb39e31e8c2ceeedb458ae9f3a7eeb",
+    "editedSHA256": "b81867edfdba2dc369d9ece1c7d2c68862c952f7d702fe1d28c6d8e6f985d143",
+    "frames": [
+      {
+        "row": 0,
+        "frame": 0,
+        "sourceBodyRetained": 0.9998388223284801,
+        "opaqueIoU": 0.8487640244458634,
+        "centroidShiftPx": 4.50433863659796
+      },
+      {
+        "row": 0,
+        "frame": 1,
+        "sourceBodyRetained": 0.9998408023561252,
+        "opaqueIoU": 0.8410820703970716,
+        "centroidShiftPx": 4.987021190759766
+      },
+      {
+        "row": 0,
+        "frame": 2,
+        "sourceBodyRetained": 0.9991574734735789,
+        "opaqueIoU": 0.8419452887537994,
+        "centroidShiftPx": 5.301570474076564
+      },
+      {
+        "row": 0,
+        "frame": 3,
+        "sourceBodyRetained": 0.9993208296327256,
+        "opaqueIoU": 0.8414939949848225,
+        "centroidShiftPx": 4.835126524542387
+      },
+      {
+        "row": 1,
+        "frame": 0,
+        "sourceBodyRetained": 0.9981180539660741,
+        "opaqueIoU": 0.8311872590961075,
+        "centroidShiftPx": 5.485296138355564
+      },
+      {
+        "row": 1,
+        "frame": 1,
+        "sourceBodyRetained": 0.9878103837471783,
+        "opaqueIoU": 0.8259720649301623,
+        "centroidShiftPx": 7.05903087004072
+      },
+      {
+        "row": 1,
+        "frame": 2,
+        "sourceBodyRetained": 0.9913563639485962,
+        "opaqueIoU": 0.8244352938376217,
+        "centroidShiftPx": 8.353130161943646
+      },
+      {
+        "row": 1,
+        "frame": 3,
+        "sourceBodyRetained": 0.9950518710112739,
+        "opaqueIoU": 0.8305486459848876,
+        "centroidShiftPx": 5.97787664313002
+      },
+      {
+        "row": 2,
+        "frame": 0,
+        "sourceBodyRetained": 0.999531149270351,
+        "opaqueIoU": 0.8215713666361578,
+        "centroidShiftPx": 5.938196430229189
+      },
+      {
+        "row": 2,
+        "frame": 1,
+        "sourceBodyRetained": 0.9763859162217466,
+        "opaqueIoU": 0.7939297735618115,
+        "centroidShiftPx": 2.3774339300919722
+      },
+      {
+        "row": 2,
+        "frame": 2,
+        "sourceBodyRetained": 0.9920136593963428,
+        "opaqueIoU": 0.7976527900797166,
+        "centroidShiftPx": 3.0201606607087403
+      },
+      {
+        "row": 2,
+        "frame": 3,
+        "sourceBodyRetained": 0.9947236375863229,
+        "opaqueIoU": 0.8110804141974397,
+        "centroidShiftPx": 6.153862098220468
+      },
+      {
+        "row": 3,
+        "frame": 0,
+        "sourceBodyRetained": 0.9993070820988245,
+        "opaqueIoU": 0.8157720215339003,
+        "centroidShiftPx": 4.377264250179683
+      },
+      {
+        "row": 3,
+        "frame": 1,
+        "sourceBodyRetained": 0.9831179979310193,
+        "opaqueIoU": 0.7993199713672154,
+        "centroidShiftPx": 1.9285481148740407
+      },
+      {
+        "row": 3,
+        "frame": 2,
+        "sourceBodyRetained": 0.9961100486787204,
+        "opaqueIoU": 0.8013881846950015,
+        "centroidShiftPx": 3.251375438020886
+      },
+      {
+        "row": 3,
+        "frame": 3,
+        "sourceBodyRetained": 0.9892731990476955,
+        "opaqueIoU": 0.7898255131025351,
+        "centroidShiftPx": 5.470710722164061
+      }
+    ]
+  },
+  {
+    "type": 113,
+    "name": "混沌祖兽",
+    "size": [
+      1254,
+      1254
+    ],
+    "rgba": true,
+    "transparentPixels": 478003,
+    "originalSHA256": "b219fd0f0e2b3124388d00c8312184cbf1dac5d54bc3e48df624e7d9846f067a",
+    "editedSHA256": "59833acb1b73195408e6dd7f5ac21663230d54f8c75c843672f4724b91492a6e",
+    "frames": [
+      {
+        "row": 0,
+        "frame": 0,
+        "sourceBodyRetained": 0.9972873353764599,
+        "opaqueIoU": 0.873352071810681,
+        "centroidShiftPx": 2.251520902017421
+      },
+      {
+        "row": 0,
+        "frame": 1,
+        "sourceBodyRetained": 0.9964516670865877,
+        "opaqueIoU": 0.8771485602336155,
+        "centroidShiftPx": 2.2337395668376034
+      },
+      {
+        "row": 0,
+        "frame": 2,
+        "sourceBodyRetained": 0.9975212687742884,
+        "opaqueIoU": 0.8788355479883037,
+        "centroidShiftPx": 2.4186900793053825
+      },
+      {
+        "row": 0,
+        "frame": 3,
+        "sourceBodyRetained": 0.9966587311531554,
+        "opaqueIoU": 0.8757546286951575,
+        "centroidShiftPx": 2.444450077527505
+      },
+      {
+        "row": 1,
+        "frame": 0,
+        "sourceBodyRetained": 0.998890286306133,
+        "opaqueIoU": 0.8627476038338658,
+        "centroidShiftPx": 1.4583785345056093
+      },
+      {
+        "row": 1,
+        "frame": 1,
+        "sourceBodyRetained": 0.9989731002354355,
+        "opaqueIoU": 0.8671406209235586,
+        "centroidShiftPx": 3.5662796787492375
+      },
+      {
+        "row": 1,
+        "frame": 2,
+        "sourceBodyRetained": 0.999331186524647,
+        "opaqueIoU": 0.8699486781386122,
+        "centroidShiftPx": 2.1165087772333897
+      },
+      {
+        "row": 1,
+        "frame": 3,
+        "sourceBodyRetained": 0.9976657688854688,
+        "opaqueIoU": 0.8461103376261747,
+        "centroidShiftPx": 1.8536456443848006
+      },
+      {
+        "row": 2,
+        "frame": 0,
+        "sourceBodyRetained": 0.9959836333057208,
+        "opaqueIoU": 0.870205066344994,
+        "centroidShiftPx": 2.901045205440414
+      },
+      {
+        "row": 2,
+        "frame": 1,
+        "sourceBodyRetained": 0.997689616476335,
+        "opaqueIoU": 0.8485767222502948,
+        "centroidShiftPx": 1.5751347370717304
+      },
+      {
+        "row": 2,
+        "frame": 2,
+        "sourceBodyRetained": 0.9972283563928073,
+        "opaqueIoU": 0.8543931115701682,
+        "centroidShiftPx": 4.244442396303752
+      },
+      {
+        "row": 2,
+        "frame": 3,
+        "sourceBodyRetained": 0.9966883786214006,
+        "opaqueIoU": 0.8695469156589621,
+        "centroidShiftPx": 1.5641685270510737
+      },
+      {
+        "row": 3,
+        "frame": 0,
+        "sourceBodyRetained": 0.9979789103690685,
+        "opaqueIoU": 0.865707479752263,
+        "centroidShiftPx": 2.083534349366447
+      },
+      {
+        "row": 3,
+        "frame": 1,
+        "sourceBodyRetained": 0.9945757629211501,
+        "opaqueIoU": 0.8337523105360444,
+        "centroidShiftPx": 2.733501300779646
+      },
+      {
+        "row": 3,
+        "frame": 2,
+        "sourceBodyRetained": 0.9964885436283741,
+        "opaqueIoU": 0.7924772617357525,
+        "centroidShiftPx": 12.107501238546124
+      },
+      {
+        "row": 3,
+        "frame": 3,
+        "sourceBodyRetained": 0.9979475589788529,
+        "opaqueIoU": 0.8684500993397419,
+        "centroidShiftPx": 1.6987754781434996
+      }
+    ]
+  }
+]

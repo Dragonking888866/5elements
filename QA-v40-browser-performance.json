@@ -1,0 +1,74 @@
+[
+  {
+    "palette": "V39",
+    "quality": "high",
+    "viewport": [
+      1280,
+      720
+    ],
+    "visibility": "visible",
+    "elapsedMs": 8004.60000000149,
+    "paintFps": 51.595332683697265,
+    "p95FrameMs": 33.20000000298023,
+    "drawMeanMs": 5.774334140419599,
+    "drawP95Ms": 9.800000000745058,
+    "heapBefore": 13928303,
+    "heapAfter": 17543710,
+    "saveValid": true,
+    "cameraShake": 0
+  },
+  {
+    "palette": "V40",
+    "quality": "high",
+    "viewport": [
+      1280,
+      720
+    ],
+    "visibility": "visible",
+    "elapsedMs": 8009.300000000745,
+    "paintFps": 51.31534591037441,
+    "p95FrameMs": 34.70000000298023,
+    "drawMeanMs": 5.929197080188642,
+    "drawP95Ms": 10.699999999254942,
+    "heapBefore": 16708651,
+    "heapAfter": 19370080,
+    "saveValid": true,
+    "cameraShake": 0
+  },
+  {
+    "palette": "V39",
+    "quality": "medium",
+    "viewport": [
+      844,
+      390
+    ],
+    "visibility": "visible",
+    "elapsedMs": 8029.39999999851,
+    "paintFps": 50.06600742273079,
+    "p95FrameMs": 30.399999998509884,
+    "drawMeanMs": 4.564179104451664,
+    "drawP95Ms": 6.099999997764826,
+    "heapBefore": 15758965,
+    "heapAfter": 19356481,
+    "saveValid": true,
+    "cameraShake": 0
+  },
+  {
+    "palette": "V40",
+    "quality": "medium",
+    "viewport": [
+      844,
+      390
+    ],
+    "visibility": "visible",
+    "elapsedMs": 8009.5,
+    "paintFps": 52.06317497971159,
+    "p95FrameMs": 33.399999998509884,
+    "drawMeanMs": 3.991606714655098,
+    "drawP95Ms": 6.299999997019768,
+    "heapBefore": 19422492,
+    "heapAfter": 21833312,
+    "saveValid": true,
+    "cameraShake": 0
+  }
+]
