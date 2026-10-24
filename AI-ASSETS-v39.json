@@ -1,0 +1,134 @@
+{
+  "generator": "builtin image_gen.imagegen",
+  "purpose": "Original animated VFX atlases; not concept screenshots",
+  "columns": 4,
+  "rows": 4,
+  "assets": [
+    {
+      "name": "fx-bell-v39.png",
+      "bytes": 3145980,
+      "sha256": "c149d21ad214cb6bab477d7b20f7cd3df3a56741cac920e3782ef5c224c85401",
+      "mode": "RGBA",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        0,
+        253
+      ]
+    },
+    {
+      "name": "fx-chaos-v39.png",
+      "bytes": 2650168,
+      "sha256": "ca680c3764676c88a251d083f19f9d771ffe5609f5353926eb5f0a1559bf5cb6",
+      "mode": "RGBA",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        0,
+        253
+      ]
+    },
+    {
+      "name": "fx-claw-v39.png",
+      "bytes": 3075237,
+      "sha256": "64d29c203254f9e92654e8ae1d4813c65416cc501194e1807bd68fda1134f0ec",
+      "mode": "RGBA",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        0,
+        253
+      ]
+    },
+    {
+      "name": "fx-cyclone-v39.png",
+      "bytes": 2457140,
+      "sha256": "5856923569f3bb1a66ee4a5ef31b1706224bb9644b1e8b794fdc45ddc1ec92e1",
+      "mode": "RGBA",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        0,
+        253
+      ]
+    },
+    {
+      "name": "fx-dragonfire-v39.png",
+      "bytes": 2414239,
+      "sha256": "c7c647b25563c580e96a0950265c7d25fc29962102424d543d5af435021a7a4d",
+      "mode": "RGBA",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        0,
+        253
+      ]
+    },
+    {
+      "name": "fx-earth-v39.png",
+      "bytes": 3044171,
+      "sha256": "a52fa17f4c0e3882d9a2dc93cbf4a074c7da5d447409df9024e9d92d2fade6d4",
+      "mode": "RGBA",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        0,
+        254
+      ]
+    },
+    {
+      "name": "fx-glacier-v39.png",
+      "bytes": 2784597,
+      "sha256": "db5ffb4ee4877a0bccd021385afe079413dfdb16979efae2dbd8947d810e5134",
+      "mode": "RGBA",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        0,
+        253
+      ]
+    },
+    {
+      "name": "fx-ocean-v39.png",
+      "bytes": 3204920,
+      "sha256": "15975ebb496e704debee42e83baf9ec979e3b649880783c8072f1ed446e7bcf6",
+      "mode": "RGBA",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        0,
+        253
+      ]
+    },
+    {
+      "name": "fx-tree-v39.png",
+      "bytes": 3079242,
+      "sha256": "0c3dd6006ed420b45a2fa7697178a4a80ea7256055e87c6be95d5afc7b4041f6",
+      "mode": "RGBA",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        0,
+        253
+      ]
+    }
+  ]
+}

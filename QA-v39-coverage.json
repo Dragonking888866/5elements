@@ -1,0 +1,341 @@
+{
+  "grades": [
+    {
+      "q": 0,
+      "quality": "普通",
+      "coverage": 0.020147569444444444,
+      "core": 0.004913194444444445,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 48,
+      "scene": "inferno",
+      "age": 0.6904920573932148
+    },
+    {
+      "q": 1,
+      "quality": "精品",
+      "coverage": 0.06167100694444445,
+      "core": 0.014466145833333333,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 72,
+      "scene": "inferno",
+      "age": 1.005492057393215
+    },
+    {
+      "q": 2,
+      "quality": "稀有",
+      "coverage": 0.09544704861111111,
+      "core": 0.029730902777777776,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 104,
+      "scene": "inferno",
+      "age": 1.2004920573932147
+    },
+    {
+      "q": 3,
+      "quality": "史诗",
+      "coverage": 0.14694444444444443,
+      "core": 0.04453559027777778,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 148,
+      "scene": "inferno",
+      "age": 1.395492057393215
+    },
+    {
+      "q": 4,
+      "quality": "传说",
+      "coverage": 0.21657118055555555,
+      "core": 0.08641927083333334,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 205,
+      "scene": "inferno",
+      "age": 1.4704920573932152
+    },
+    {
+      "q": 5,
+      "quality": "神话",
+      "coverage": 0.30173177083333336,
+      "core": 0.12,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 280,
+      "scene": "inferno",
+      "age": 1.5454920573932154
+    },
+    {
+      "q": 6,
+      "quality": "极其稀有",
+      "coverage": 0.3667708333333333,
+      "core": 0.14846354166666667,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 360,
+      "scene": "inferno",
+      "age": 1.6204920573932151
+    }
+  ],
+  "ultimates": [
+    {
+      "type": 103,
+      "pet": "鸿蒙刃寅",
+      "skill": "鸿蒙裂天斩",
+      "coverage": 0.3648958333333333,
+      "core": 0.2926779513888889,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 360,
+      "scene": "claw",
+      "age": 1.3
+    },
+    {
+      "type": 104,
+      "pet": "太初罡猊",
+      "skill": "万罡镇世吼",
+      "coverage": 0.3632942708333333,
+      "core": 0.24749565972222223,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 360,
+      "scene": "bell",
+      "age": 1.3
+    },
+    {
+      "type": 105,
+      "pet": "太易苍虬",
+      "skill": "太易万木龙息",
+      "coverage": 0.39510416666666665,
+      "core": 0.3105642361111111,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 360,
+      "scene": "tree",
+      "age": 2
+    },
+    {
+      "type": 106,
+      "pet": "青冥九尾",
+      "skill": "九曜青冥幻界",
+      "coverage": 0.35457899305555557,
+      "core": 0.18668836805555555,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 360,
+      "scene": "fox",
+      "age": 1.3
+    },
+    {
+      "type": 107,
+      "pet": "混沌玄鼋",
+      "skill": "玄冥万载冰封",
+      "coverage": 0.38372829861111113,
+      "core": 0.3135894097222222,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 360,
+      "scene": "glacier",
+      "age": 1.3
+    },
+    {
+      "type": 108,
+      "pet": "归墟溟鹏",
+      "skill": "北冥吞天潮",
+      "coverage": 0.4056857638888889,
+      "core": 0.3311458333333333,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 360,
+      "scene": "ocean",
+      "age": 3
+    },
+    {
+      "type": 109,
+      "pet": "劫烬朱凰",
+      "skill": "朱凰焚天劫",
+      "coverage": 0.39901909722222223,
+      "core": 0.316796875,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 360,
+      "scene": "phoenix",
+      "age": 1.3
+    },
+    {
+      "type": 110,
+      "pet": "烛幽赤螭",
+      "skill": "烛幽灭世龙炎",
+      "coverage": 0.3703125,
+      "core": 0.20926215277777777,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 360,
+      "scene": "inferno",
+      "age": 1.3
+    },
+    {
+      "type": 111,
+      "pet": "玄黄岳麟",
+      "skill": "玄黄万岳镇",
+      "coverage": 0.4059375,
+      "core": 0.29686631944444447,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 360,
+      "scene": "mountains",
+      "age": 1.6
+    },
+    {
+      "type": 112,
+      "pet": "太荒镇獬",
+      "skill": "太荒神狱",
+      "coverage": 0.3508767361111111,
+      "core": 0.18472222222222223,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 360,
+      "scene": "prison",
+      "age": 1.3
+    },
+    {
+      "type": 113,
+      "pet": "混沌祖兽",
+      "skill": "鸿蒙归墟",
+      "coverage": 0.5175130208333333,
+      "core": 0.464609375,
+      "threshold": 12,
+      "maskResolution": [
+        640,
+        360
+      ],
+      "viewport": [
+        1800,
+        1013
+      ],
+      "damageRadius": 396.00000000000006,
+      "scene": "chaos",
+      "age": 2.5
+    }
+  ]
+}

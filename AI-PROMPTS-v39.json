@@ -1,0 +1,52 @@
+{
+  "mode": "builtin-imagegen",
+  "transparent": true,
+  "generatedAt": "2026-10-24",
+  "assets": [
+    {
+      "name": "dragonfire",
+      "path": "web/assets/fx-dragonfire-v39.png",
+      "prompt": "A single production game VFX sprite atlas, 4 columns by 4 rows, 16 evenly sized cells with generous transparent gutters. Each cell is one sequential animation frame of ONE massive horizontal dragon fire breath, flowing from narrow LEFT origin to broad RIGHT explosion, consistent fixed orthographic camera and scale. Frame 1-4 ignition, 5-12 rolling sustained fire, 13-16 receding embers. Visually dense, physically rich billowing orange-red combustion, white yellow inner core, turbulent curling tongues, dark vermilion edges, branching terminal fireball and sparse incandescent sparks. AAA fantasy game rendered VFX, textured volumetric flame not flat geometric flames, no creature, no scene, no text, no borders or numbers. Genuine alpha transparency, no black rectangle, no checkerboard drawn into image. No flame can cross a cell boundary. Landscape atlas, 1536x1024 preferred."
+    },
+    {
+      "name": "ocean",
+      "path": "web/assets/fx-ocean-v39.png",
+      "prompt": "A single production game VFX sprite atlas, 4 columns by 4 rows, 16 evenly sized cells with generous transparent gutters. Each cell is one sequential animation frame of ONE enormous curling ocean tsunami crest, sweeping from LEFT to RIGHT in a fixed 35 degree isometric game camera. First frames rising teal wall of water, middle frames broad arched curling cobalt turquoise wave with translucent layered liquid body, intricate WHITE FOAM crest and splashing filaments, final frames crashing foamy wash. Consistent position and scale. Rich refraction, spray, immense curved rolling mass, premium realtime fantasy VFX, no boat, no creature, no terrain, no scene. Genuine alpha transparency, not blue fog, no black or white background, no text, no numbers, no tile lines. Keep each complete wave within its own cell, identical cell size. Landscape atlas 1536x1024 preferred."
+    },
+    {
+      "name": "glacier",
+      "path": "web/assets/fx-glacier-v39.png",
+      "prompt": "A single production game VFX sprite atlas, 4 columns by 4 rows, 16 evenly sized cells with generous transparent gutters. Each cell is one sequential animation frame of ONE magnificent isometric semicircular glacier rampart rising from a spreading frost floor. Fixed 35 degree isometric camera, no camera motion. Frames 1-4 crystallizing freezing water vapor, 5-10 layered colossal translucent BLUE ICE buttresses with sharp natural irregular profiles, detailed internal fracturing, crystal facets, wisps of cold white fog and snow, 11-16 dissipating hoarfrost. A crown of ancient ice walls with clear central gap, visually powerful, not a few simple triangle crystals. Highly detailed 3D rendered fantasy game VFX. No creature or terrain, no black rectangle, genuine transparent background, no text or numbers or visible cell dividers. Every effect contained in own cell, consistent origin and scale. Landscape 1536x1024 preferred."
+    },
+    {
+      "name": "cyclone",
+      "path": "web/assets/fx-cyclone-v39.png",
+      "prompt": "A single production game VFX sprite atlas, 4 columns by 4 rows, 16 evenly sized cells with generous transparent gutters. Sequential animation frames of ONE enormous realistic tornado in a fixed 35 degree isometric game camera. Narrow twisting ground vortex, tall dense translucent jade-grey rotating cloud funnel widening at the top, multiple helical fluid cloud bands, hanging vapor shreds and very sparse leaves. Volumetric body with light and shadow, not a wireframe or concentric thin rings. Frames 1-4 gathering vortex, 5-12 sustained violent rotation with evolving turbulent form, 13-16 torn cloud dissipation. Premium realtime fantasy VFX, consistent scale/position. No creature, no scene, no sky background, no text, no labels, no tile borders, no black rectangle. Genuine transparent alpha background. Effect never crosses its cell. Landscape atlas 1536x1024 preferred."
+    },
+    {
+      "name": "claw",
+      "path": "web/assets/fx-claw-v39.png",
+      "prompt": "Production original fantasy game animated VFX sprite atlas, 4 columns and 4 rows, 16 sequential animation cells, all cells identical size, consistent fixed isometric 35 degree camera, orthographic, generous transparent gutters. three enormous parallel curved tiger claw slashes of solid antique gold edged energy, ripping dark space into jagged black glass fractures, a coherent diagonal sweeping attack shape, sharp tapered blades with intricate striations, metallic hot white core and molten golden dust, NOT a tiger creature. Frames 1-4 gathering and emergence, 5-12 fully developed evolving sustained effect with coherent spatial silhouette, 13-16 dissolving fragments and residual energy. AAA Chinese primordial mythology action RPG VFX, rich sculptural 3D rendered material depth and lighting, highly detailed surface texture, restrained localized glow, genuine alpha transparent background. No text, no labels, no borders, no black rectangle, no terrain or scene around the effect. Keep every effect wholly within its own cell, never overlapping cells. Landscape 1536x1024 preferred."
+    },
+    {
+      "name": "bell",
+      "path": "web/assets/fx-bell-v39.png",
+      "prompt": "Production original fantasy game animated VFX sprite atlas, 4 columns and 4 rows, 16 sequential animation cells, all cells identical size, consistent fixed isometric 35 degree camera, orthographic, generous transparent gutters. ONE majestic ancient Chinese bronze ritual bell made from translucent divine gold and engraved relief, massive vertical silhouette, energy sound pressure rippling from the heavy bronze lip, ancient intricate relief patterns and weathered sculpted bronze, small descending spectral swords, NOT modern shiny cartoon bell. Frames 1-4 gathering and emergence, 5-12 fully developed evolving sustained effect with coherent spatial silhouette, 13-16 dissolving fragments and residual energy. AAA Chinese primordial mythology action RPG VFX, rich sculptural 3D rendered material depth and lighting, highly detailed surface texture, restrained localized glow, genuine alpha transparent background. No text, no labels, no borders, no black rectangle, no terrain or scene around the effect. Keep every effect wholly within its own cell, never overlapping cells. Landscape 1536x1024 preferred."
+    },
+    {
+      "name": "tree",
+      "path": "web/assets/fx-tree-v39.png",
+      "prompt": "Production original fantasy game animated VFX sprite atlas, 4 columns and 4 rows, 16 sequential animation cells, all cells identical size, consistent fixed isometric 35 degree camera, orthographic, generous transparent gutters. ONE colossal gnarled primordial Chinese sacred tree of translucent emerald jade and dark ancient bark, elaborate spiralling roots erupting outward and luminous leaves opening, enormous central twisted trunk with intricate weathered wood grain, lifelike branches and elegant clusters of small glowing leaves, no creature. Frames 1-4 gathering and emergence, 5-12 fully developed evolving sustained effect with coherent spatial silhouette, 13-16 dissolving fragments and residual energy. AAA Chinese primordial mythology action RPG VFX, rich sculptural 3D rendered material depth and lighting, highly detailed surface texture, restrained localized glow, genuine alpha transparent background. No text, no labels, no borders, no black rectangle, no terrain or scene around the effect. Keep every effect wholly within its own cell, never overlapping cells. Landscape 1536x1024 preferred."
+    },
+    {
+      "name": "earth",
+      "path": "web/assets/fx-earth-v39.png",
+      "prompt": "Production original fantasy game animated VFX sprite atlas, 4 columns and 4 rows, 16 sequential animation cells, all cells identical size, consistent fixed isometric 35 degree camera, orthographic, generous transparent gutters. ONE colossal mountain ridge erupting from a layered fractured earth platform, three irregular monumental rocky peaks with ornate ancient Chinese weathered sandstone relief, streaming dust and falling stone shards, dark shadows and warm amber illuminated faultlines, realistic eroded stone textures, no creature. Frames 1-4 gathering and emergence, 5-12 fully developed evolving sustained effect with coherent spatial silhouette, 13-16 dissolving fragments and residual energy. AAA Chinese primordial mythology action RPG VFX, rich sculptural 3D rendered material depth and lighting, highly detailed surface texture, restrained localized glow, genuine alpha transparent background. No text, no labels, no borders, no black rectangle, no terrain or scene around the effect. Keep every effect wholly within its own cell, never overlapping cells. Landscape 1536x1024 preferred."
+    },
+    {
+      "name": "chaos",
+      "path": "web/assets/fx-chaos-v39.png",
+      "prompt": "Production original fantasy game animated VFX sprite atlas, 4 columns and 4 rows, 16 sequential animation cells, all cells identical size, consistent fixed isometric 35 degree camera, orthographic, generous transparent gutters. ONE vertical cosmic wound opening in reality, enormous asymmetrical black obsidian rift with torn sculpted edges, inward swirling primordial nebula, five subtly iridescent rivers of antique gold jade azure vermilion ochre coiling into an impossible central dark abyss, carved ancient sealing fragments suspended in broken layers around the wound, magnificent mysterious divine artifact atmosphere, NOT a round portal, NOT an eye or creature, NOT generic concentric glowing circles. Frames 1-4 gathering and emergence, 5-12 fully developed evolving sustained effect with coherent spatial silhouette, 13-16 dissolving fragments and residual energy. AAA Chinese primordial mythology action RPG VFX, rich sculptural 3D rendered material depth and lighting, highly detailed surface texture, restrained localized glow, genuine alpha transparent background. No text, no labels, no borders, no black rectangle, no terrain or scene around the effect. Keep every effect wholly within its own cell, never overlapping cells. Landscape 1536x1024 preferred."
+    }
+  ]
+}
